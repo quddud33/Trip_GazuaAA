@@ -18,23 +18,11 @@ import service.ReviewService;
 @Controller
 public class MyController {
 	@Autowired
-	private APIService service;
-	
-	@Autowired
 	private LoginService lService;
 	
 	@Autowired
 	private ReviewService rService;
 	
-	@RequestMapping("index.do")
-	public ModelAndView getFestvalInfo() throws Exception {
-		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("festvalInfo", service.getFestivalInfo());
-		mav.setViewName("index");
-		
-		return mav;
-	}
 	@RequestMapping("main.do")
 	public ModelAndView getTopList() {
 		ModelAndView mav = new ModelAndView();
