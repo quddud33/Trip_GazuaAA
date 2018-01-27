@@ -56,4 +56,5 @@ public class MyController {
 		return "redirect:main.do";
 	}
 	
+	
 }
