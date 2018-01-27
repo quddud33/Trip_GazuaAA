@@ -47,8 +47,15 @@ public class APIController {
 		mav.setViewName("contentView");
 		return mav;
 	}
-	
-
+	//추천하기 리스트 api 연동
+	@RequestMapping("main.do")
+	public ModelAndView image(@RequestParam(defaultValue = "")String contentTypeId,
+			@RequestParam(defaultValue = "")String contentId) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("image", service.image(contentTypeId, contentId));
+		mav.setViewName("main");
+		return mav;
+	}
 
 
 
