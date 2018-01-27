@@ -37,4 +37,8 @@ public class LoginService {
     	lDao.createUser(params);
     	}
     }
+    
+    public int checkID(String userID) {
+    	return lDao.checkID(userID);
+    }
 }

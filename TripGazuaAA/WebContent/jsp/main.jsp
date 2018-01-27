@@ -56,7 +56,7 @@
 	<!--javascript써서 로그인폼 뛰우기-->
 	<a href="createUserForm.do">회원가입</a>
 
-	<table border="1">
+	<%-- <table border="1">
 		<c:forEach var="content" items="${topListFestival }">
 			<tr>
 				<th>${content.contentId}</th>
@@ -72,7 +72,7 @@
 				<th>${content.contentId}</th>
 			</tr>
 		</c:forEach>
-	</table>
+	</table> --%>
 
 	<!--<a href="logout.do">로그아웃</a> 로그인시 태그 생성하게 처리-->
 
@@ -83,10 +83,10 @@
 				<dl>
 
 					<dd>
-						<input type="text" name="userid" placeholder="아이디" />
+						<input type="text" name="userID" placeholder="아이디" />
 					</dd>
 					<dd>
-						<input type="text" name="password" placeholder="비밀번호" />
+						<input type="password" name="password" placeholder="비밀번호" />
 					</dd>
 					<dd>
 						<button>로그인</button>
@@ -96,6 +96,11 @@
 			</div>
 		</div>
 	</form>
+	<%if(!session.getAttribute("msg").equals("")) {%>
+		<script>
+			alert('${msg}');
+		</script>
+	<%session.setAttribute("msg", "");	} %>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 	$(".login").on("click", function(){
