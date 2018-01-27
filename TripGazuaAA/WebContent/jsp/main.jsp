@@ -6,6 +6,43 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+
+        #bg {
+            width:100%;
+            height:100%;
+            position:fixed;
+            left:0;
+            top:0;
+            background-color: rgba(0,0,0,.7);
+            display: none;
+        }
+
+        #loginBox {
+            width:400px;
+            height:300px;
+            position:absolute;
+            left:50%;
+            top:50%;
+            margin:-150px 0 0 -200px;
+            background: #fff;
+        }
+        .title {
+            text-align: center;
+            color:#03A9F4;
+        }
+        #loginBox dt {
+            text-indent: 10px;
+            margin:5px;
+            font-size:21px;
+            color:#29B6F6;
+        }
+        #loginBox dd {
+            text-indent: 10px;
+            margin:5px;
+        }
+
+</style>
 </head>
 <body>
 	<a href="chat.do">채팅방</a>
@@ -15,7 +52,7 @@
 	<a href="locationView.do">지도/컨텐츠 리스트</a>
 	<a href="myPage.do">마이페이지</a>
 	<!--로그인 시에만 보이게 처리(userID,nickName)-->
-	<a href="#">로그인</a>
+	<a href="#" class="login">로그인</a>
 	<!--javascript써서 로그인폼 뛰우기-->
 	<a href="createUserForm.do">회원가입</a>
 
@@ -38,5 +75,40 @@
 	</table>
 
 	<!--<a href="logout.do">로그아웃</a> 로그인시 태그 생성하게 처리-->
+
+	<form action="login.do">
+		<div id="bg">
+			<div id="loginBox">
+				<h2 class="title">Trip GazuaAA</h2>
+				<dl>
+
+					<dd>
+						<input type="text" name="userid" placeholder="아이디" />
+					</dd>
+					<dd>
+						<input type="text" name="password" placeholder="비밀번호" />
+					</dd>
+					<dd>
+						<button>로그인</button>
+					</dd>
+
+				</dl>
+			</div>
+		</div>
+	</form>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+	$(".login").on("click", function(){
+		$("#bg").css("display", "block");
+	});
+	
+    $("#loginBox").on("click",function (e) {                                                              //상세정보를 보여주는 박스 클릭이벤트
+	        e.stopPropagation();                                                                        //부모로의 이벤트 전파를 중지시킴 (이걸 하지 않을시 박스를 클릭했는데 뒷배경의 이벤트까지
+	    });//click end                                                                                  //함께 발생하는일이 일어나게됨.
+	    $("#bg").on("click",function () {                                                                    //뒷배경 박스 클릭이벤트
+	        $("#bg").css("display","none");                                                                  //상세정보 창을 안보이게 변경
+	    });//click end
+
+</script>
 </body>
 </html>
