@@ -57,19 +57,26 @@
 	<a href="createUserForm.do">회원가입</a>
 
 	<table border="1">
-		<c:forEach var="content" items="${topListFestival }">
+		<c:forEach var="main" items="${topListFestival }"><!-- 12, 15 -->
 			<tr>
-				<th>${content.contentId}</th>
+				<th>${main.contentId}</th>
+				<th>${main.title }</th>
+				<th>${main.addr1 }</th>
 			</tr>
 		</c:forEach>
-			<c:forEach var="content" items="${topListCountry }">
+			<c:forEach var="main" items="${topListCountry }"><!-- 숙박 -->
 			<tr>
-				<th>${content.contentId}</th>
+				<th>${main.contentId}</th>
+				<th>${main.title }</th>
+				<th>${main.addr1 }</th>
+				<th>${main.roomimg1 }</th>
 			</tr>
 		</c:forEach>
-			<c:forEach var="content" items="${topListRestaurant }">
+			<c:forEach var="main" items="${topListRestaurant }">
 			<tr>
-				<th>${content.contentId}</th>
+				<th>${main.contentId}</th>
+				<th>${main.title}</th>
+				<th>${main.addr1}</th>
 			</tr>
 		</c:forEach>
 	</table>

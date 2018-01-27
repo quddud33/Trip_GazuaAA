@@ -52,7 +52,7 @@ public class APIController {
 	public ModelAndView image(@RequestParam(defaultValue = "")String contentTypeId,
 			@RequestParam(defaultValue = "")String contentId) throws Exception{
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("image", service.image(contentTypeId, contentId));
+		mav.addObject("main", service.image(contentTypeId, contentId));
 		mav.setViewName("main");
 		return mav;
 	}
