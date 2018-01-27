@@ -56,20 +56,32 @@
 	<!--javascript써서 로그인폼 뛰우기-->
 	<a href="createUserForm.do">회원가입</a>
 
+<!-- <<<<<<< HEAD -->
 	<%-- <table border="1">
 		<c:forEach var="content" items="${topListFestival }">
+=======
+	<table border="1">
+		<c:forEach var="main" items="${topListFestival }"><!-- 12, 15 -->
+>>>>>>> branch 'master' of https://github.com/quddud33/Trip_GazuaAA.git
 			<tr>
-				<th>${content.contentId}</th>
+				<th>${main.contentId}</th>
+				<th>${main.title }</th>
+				<th>${main.addr1 }</th>
 			</tr>
 		</c:forEach>
-			<c:forEach var="content" items="${topListCountry }">
+			<c:forEach var="main" items="${topListCountry }"><!-- 숙박 -->
 			<tr>
-				<th>${content.contentId}</th>
+				<th>${main.contentId}</th>
+				<th>${main.title }</th>
+				<th>${main.addr1 }</th>
+				<th>${main.roomimg1 }</th>
 			</tr>
 		</c:forEach>
-			<c:forEach var="content" items="${topListRestaurant }">
+			<c:forEach var="main" items="${topListRestaurant }">
 			<tr>
-				<th>${content.contentId}</th>
+				<th>${main.contentId}</th>
+				<th>${main.title}</th>
+				<th>${main.addr1}</th>
 			</tr>
 		</c:forEach>
 	</table> --%>

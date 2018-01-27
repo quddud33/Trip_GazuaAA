@@ -1,5 +1,7 @@
 package controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +16,7 @@ public class APIController {
 	@Autowired
 	private APIService service;
 	
-	//메인페이지
+	//硫붿씤�럹�씠吏�
 	@RequestMapping("index.do")
 	public ModelAndView getFestvalInfo() throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -25,7 +27,7 @@ public class APIController {
 		return mav;
 	}
 	
-	//숙소,맛집,축제 검색페이지
+	//�닕�냼,留쏆쭛,異뺤젣 寃��깋�럹�씠吏�
 	@RequestMapping("contentList.do")
 	public ModelAndView getSearch(@RequestParam(defaultValue = "") String search, 
 			@RequestParam(defaultValue="") String contentTypeId, 
@@ -38,7 +40,7 @@ public class APIController {
 		return mav;
 	}
 	
-	//상세정보(관광지, 숙박)
+	//�긽�꽭�젙蹂�(愿�愿묒�, �닕諛�)
 	@RequestMapping("contentView.do")
 	public ModelAndView roomDetail(@RequestParam String contentid, @RequestParam String contenttypeid) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -47,12 +49,13 @@ public class APIController {
 		mav.setViewName("contentView");
 		return mav;
 	}
-	//추천하기 리스트 api 연동
+	//異붿쿇�븯湲� 由ъ뒪�듃 api �뿰�룞
 	@RequestMapping("main.do")
-	public ModelAndView image(@RequestParam(defaultValue = "")String contentTypeId,
+	public ModelAndView image(HttpSession session, @RequestParam(defaultValue = "")String contentTypeId,
 			@RequestParam(defaultValue = "")String contentId) throws Exception{
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("image", service.image(contentTypeId, contentId));
+		session.setAttribute("msg", "");
+		mav.addObject("main", service.image(contentTypeId, contentId));
 		mav.setViewName("main");
 		return mav;
 	}
