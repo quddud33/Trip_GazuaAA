@@ -23,16 +23,7 @@ public class MyController {
 	@Autowired
 	private ReviewService rService;
 	
-	@RequestMapping("main.do")
-	public ModelAndView getTopList() {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("topListFestival",rService.topSelectFestival());
-		mav.addObject("topListCountry",rService.topSelectCountry());
-		mav.addObject("topListRestaurant",rService.topSelectRestaurant());
-		mav.setViewName("main");
-		return mav;
-	}
-	
+
 	//=================================회원가입,로그인단================================//
 	@RequestMapping("createUserForm.do")
 	public void createUserForm() {}
