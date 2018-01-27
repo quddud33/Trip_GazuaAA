@@ -19,6 +19,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class TempaeratureAPI {
+	
+	public static void main(String[] args) {
+		
+		System.out.println("abc2".compareTo("abc10"));
+		
+	}
+	
    public List<HashMap<String, String>> getTemperature() throws IOException, XmlPullParserException {
       Date today = new Date();
       String[] middleWeatherCodeList = { "11B10101", "11D20501", "11D10401", "11C20401", "11C10301", "11F20501",
@@ -74,11 +81,12 @@ public class TempaeratureAPI {
          rd.close();
          conn.disconnect();
          
-         System.out.println(temp.get("taMin3"));
-         System.out.println(temp.get("taMax3"));
+        
 
       }
       
+      for(HashMap<String, String> v : tempList)
+    	  System.out.println(v);
       
       return tempList;
    }

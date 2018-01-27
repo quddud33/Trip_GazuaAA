@@ -76,7 +76,16 @@
 <title>Daum 지도 시작하기</title>
 </head>
 <body>
-   
+   <select id="test">
+   		<option>3</option>
+   		<option>4</option>
+   		<option>5</option>
+   		<option>6</option>
+   		<option>7</option>
+   		<option>8</option>
+   		<option>9</option>
+   		<option>10</option>
+   </select>
    <div id="map" style="width: 1000px; height: 1200px;"></div>
    <script type="text/javascript"
       src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%=key%>"></script>
@@ -125,46 +134,89 @@
        //마커가 있을 지도를 설정
        $.each(markers, function(i, v) { v.setMap(map) });
    
+       function openInfoWindows() {
+		   // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+		   
+           //locations는 daum.maps.LatLng객체들이 담길 배열
+           $.each(locations, function(i, v) {
+
+               //infoWindow를 설정
+               //content는 구조
+               //position은 위치(daum.maps.LatLng)
+               //removable은 닫기 버튼의 존재여부
+               //console.log(i);
+
+               var infoWindow = new daum.maps.InfoWindow({
+                   content : '<div style="padding:5px;"><p style="font-size:3px;">오전 : '+weather[i][0]+' 최저 기온 :'+Tempaerature[i][0]+' <br>오후 : '+weather[i][1]+' 최고 기온 : '+Tempaerature[i][1]+'</p></div>',
+                   position : v,
+                   removable : true
+               });
+               
+               //map의 markers[i] 마커에 infoWindow를 띄우기
+               infoWindow.open(map, markers[i]);
+
+               //맵을 축소시 infoWindow를 닫기 위해 infoWindows에 담아둠
+               infoWindows.push(infoWindow);
+
+           });
+	   }
+	   
+	   function closeInfoWindows() {
+		 //infoWindows를 전부 닫기
+           $.each(infoWindows, function(i, v) { v.close(); })
+	   }
+       
        //daum.maps.InfoWindow객체들이 담길 배열
        var infoWindows = [];
        daum.maps.event.addListener(map, 'zoom_changed', function() {
    
+    	  
+    	   
            // 지도의 현재 레벨을 얻어옵니다
            if(this.getLevel() == 10) {
    
-               // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-   
-               //locations는 daum.maps.LatLng객체들이 담길 배열
-               $.each(locations, function(i, v) {
-   
-                   //infoWindow를 설정
-                   //content는 구조
-                   //position은 위치(daum.maps.LatLng)
-                   //removable은 닫기 버튼의 존재여부
-                   console.log(i);
-
-                   var infoWindow = new daum.maps.InfoWindow({
-                       content : '<div style="padding:5px;"><p style="font-size:3px;">오전 : '+weather[i][0]+' 최저 기온 :'+Tempaerature[i][0]+' <br>오후 : '+weather[i][1]+' 최고 기온 : '+Tempaerature[i][1]+'</p></div>',
-                       position : v,
-                       removable : true
-                   });
-                   
-                   //map의 markers[i] 마커에 infoWindow를 띄우기
-                   infoWindow.open(map, markers[i]);
-   
-                   //맵을 축소시 infoWindow를 닫기 위해 infoWindows에 담아둠
-                   infoWindows.push(infoWindow);
-   
-               });
+              openInfoWindows();
    
            }else if(infoWindows.length > 0) {
    
-               //infoWindows를 전부 닫기
-               $.each(infoWindows, function(i, v) { v.close(); })
+               closeInfoWindows();
    
            } //else if() end
    
        }); //daum.maps.event.addListener() end
+       
+       $("#test").change(function() {
+    	   console.log($(this).val());
+    	   switch($(this).val()) {
+    	   case '3':
+    		   <% for(int i = 0; i < 10; i++) {tempMin[i] = tempList.get(i).get("taMin3");} %>
+    		   break;
+    	   case '4':
+    		   <% for(int i = 0; i < 10; i++) {tempMin[i] = tempList.get(i).get("taMin4");} %>
+    		   break;
+    	   case '5':
+    		   <% for(int i = 0; i < 10; i++) {tempMin[i] = tempList.get(i).get("taMin5");} %>
+    		   break;
+    	   case '6':
+    		   <% for(int i = 0; i < 10; i++) {tempMin[i] = tempList.get(i).get("taMin6");} %>
+    		   break;
+    	   case '7':
+    		   <% for(int i = 0; i < 10; i++) {tempMin[i] = tempList.get(i).get("taMin7");} %>
+    		   break;
+    	   case '8':
+    		   <% for(int i = 0; i < 10; i++) {tempMin[i] = tempList.get(i).get("taMin8");} %>
+    		   break;
+    	   case '9':
+    		   <% for(int i = 0; i < 10; i++) {tempMin[i] = tempList.get(i).get("taMin9");} %>
+    		   break;
+    	   case '10':
+    		   <% for(int i = 0; i < 10; i++) {tempMin[i] = tempList.get(i).get("taMin10");} %>
+    		   break;
+    	   }
+    	   Tempaerature = [<%for(int i = 0; i < 10; i++) { if(i != 0) {%>, <%}%>['<%=tempMin[i]%>', '<%=tempMax[i]%>']<%}%>,];
+    	   closeInfoWindows();
+    	   openInfoWindows();
+       });
 
 </script>
 </body>
