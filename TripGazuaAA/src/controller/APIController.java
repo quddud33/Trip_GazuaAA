@@ -54,7 +54,9 @@ public class APIController {
 	@RequestMapping("main.do")
 	public ModelAndView festival() throws Exception{
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("main", service.festival());
+		mav.addObject("topListFestival", service.festival("Festival"));
+		mav.addObject("topListCountry", service.festival("Country"));
+		mav.addObject("topListRestaurant", service.festival("Restaurant"));
 		mav.setViewName("main");
 		return mav;
 	}

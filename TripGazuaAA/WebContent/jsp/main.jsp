@@ -57,27 +57,31 @@
 	<a href="createUserForm.do">회원가입</a>
 
 	<table border="1">
-		<c:forEach var="topListFestival" items="${main }" end="0"><!-- 12, 15 -->
+		<c:forEach var="topListFestival" items="${topListFestival }"><!-- 12, 14, 15, 28 -->
 			<tr>
 				<th>${topListFestival.contentid}</th>
+				<th>${topListFestival.contenttypeid}</th>
 				<th>${topListFestival.title }</th>
 				<th>${topListFestival.addr1 }</th>
-				<th><img src="${topListFestival.originimgurl }" style="width: 300px; height: 250px"></th>
+				<th><img src="${topListFestival.firstimage }" style="width: 300px; height: 250px"></th>
 			</tr>
 		</c:forEach>
-			<c:forEach var="topListCountry" items="${main }"><!-- 숙박 -->
+			<c:forEach var="topListCountry" items="${topListCountry }"><!-- 숙박 32-->
 			<tr>
 				<th>${topListCountry.contentid}</th>
+				<th>${topListCountry.contenttypeid}</th>
 				<th>${topListCountry.title }</th>
 				<th>${topListCountry.addr1 }</th>
-				<th>${topListCountry.roomimg1 }</th>
+				<th><img src="${topListCountry.firstimage }" style="width: 300px; height: 250px"></th>
 			</tr>
 		</c:forEach>
-			<c:forEach var="topListRestaurant" items="${main }">
+			<c:forEach var="topListRestaurant" items="${topListRestaurant }"><!-- 39 음식점 -->
 			<tr>
 				<th>${topListRestaurant.contentid}</th>
+				<th>${topListRestaurant.contenttypeid}</th>
 				<th>${topListRestaurant.title}</th>
 				<th>${topListRestaurant.addr1}</th>
+				<th><img src="${topListRestaurant.firstimage }" style="width: 300px; height: 250px"></th>
 			</tr>
 		</c:forEach>
 	</table> 

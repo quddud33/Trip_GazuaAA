@@ -8,14 +8,16 @@
   FROM review
   WHERE contentTypeID = '12' or contentTypeID = '14' or contentTypeID = '15' or contentTypeID = '28'
   GROUP BY contentID 
-  ORDER BY AVG(score) DESC;
+  ORDER BY AVG(score) DESC 
+  LIMIT 6;
   </select>
    <select id="topSelectCountry" resultType="java.util.HashMap">
   SELECT contentID,contentTypeID
   FROM review
   WHERE contentTypeID = '32'
   GROUP BY contentID 
-  ORDER BY AVG(score) DESC;
+  ORDER BY AVG(score) DESC
+  LIMIT 6;
   </select>
   
    <select id="topSelectRestaurant" resultType="java.util.HashMap">
@@ -23,7 +25,8 @@
   FROM review
   WHERE contentTypeID = '39'
   GROUP BY contentID 
-  ORDER BY AVG(score) DESC;
+  ORDER BY AVG(score) DESC
+  LIMIT 6;
   </select>
   
   </mapper>
