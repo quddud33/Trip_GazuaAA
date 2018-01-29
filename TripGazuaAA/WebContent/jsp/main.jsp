@@ -108,11 +108,11 @@
 			</div>
 		</div>
 	</form>
-	<%if(!session.getAttribute("msg").equals("")) {%>
+	<%if(session.getAttribute("msg") != null) {%>
 		<script>
 			alert('${msg}');
 		</script>
-	<%session.setAttribute("msg", "");	} %>
+	<%session.removeAttribute("msg");}%>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 	$(".login").on("click", function(){

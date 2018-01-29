@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -21,6 +22,7 @@ import dao.IReviewDao;
 @Service
 public class APIService {
 	String contentid2;
+	@Autowired
 	private IReviewDao rDao;
 
 	// 축제
