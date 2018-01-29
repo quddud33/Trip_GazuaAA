@@ -56,35 +56,31 @@
 	<!--javascript써서 로그인폼 뛰우기-->
 	<a href="createUserForm.do">회원가입</a>
 
-<!-- <<<<<<< HEAD -->
-	<%-- <table border="1">
-		<c:forEach var="content" items="${topListFestival }">
-=======
 	<table border="1">
-		<c:forEach var="main" items="${topListFestival }"><!-- 12, 15 -->
->>>>>>> branch 'master' of https://github.com/quddud33/Trip_GazuaAA.git
+		<c:forEach var="topListFestival" items="${main }" end="0"><!-- 12, 15 -->
 			<tr>
-				<th>${main.contentId}</th>
-				<th>${main.title }</th>
-				<th>${main.addr1 }</th>
+				<th>${topListFestival.contentid}</th>
+				<th>${topListFestival.title }</th>
+				<th>${topListFestival.addr1 }</th>
+				<th><img src="${topListFestival.originimgurl }" style="width: 300px; height: 250px"></th>
 			</tr>
 		</c:forEach>
-			<c:forEach var="main" items="${topListCountry }"><!-- 숙박 -->
+			<c:forEach var="topListCountry" items="${main }"><!-- 숙박 -->
 			<tr>
-				<th>${main.contentId}</th>
-				<th>${main.title }</th>
-				<th>${main.addr1 }</th>
-				<th>${main.roomimg1 }</th>
+				<th>${topListCountry.contentid}</th>
+				<th>${topListCountry.title }</th>
+				<th>${topListCountry.addr1 }</th>
+				<th>${topListCountry.roomimg1 }</th>
 			</tr>
 		</c:forEach>
-			<c:forEach var="main" items="${topListRestaurant }">
+			<c:forEach var="topListRestaurant" items="${main }">
 			<tr>
-				<th>${main.contentId}</th>
-				<th>${main.title}</th>
-				<th>${main.addr1}</th>
+				<th>${topListRestaurant.contentid}</th>
+				<th>${topListRestaurant.title}</th>
+				<th>${topListRestaurant.addr1}</th>
 			</tr>
 		</c:forEach>
-	</table> --%>
+	</table> 
 
 	<!--<a href="logout.do">로그아웃</a> 로그인시 태그 생성하게 처리-->
 

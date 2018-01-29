@@ -256,7 +256,7 @@ public class APIService {
 		List<HashMap<String, String>> result = new ArrayList();// 검색값을 담아줄 HashMap선언
 		HashMap<String, String> value = null;
 		List<HashMap<String, String>> festivalList = rDao.topSelectFestival();
-		for (int i = 0; festivalList.size() < i; i++) {
+		for (int i = 0; i < festivalList.size(); i++) {
 			StringBuilder urlBuilder = new StringBuilder(
 					"http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage"); /* URL */
 			urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8")
