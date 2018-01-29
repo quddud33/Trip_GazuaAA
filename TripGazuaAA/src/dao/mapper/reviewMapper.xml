@@ -4,25 +4,25 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="dao.IReviewDao">
   <select id="topSelectFestival" resultType="java.util.HashMap">
-  SELECT contentId,contentTypeId
+  SELECT contentID,contentTypeID
   FROM review
-  WHERE contentTypeId = '12' or contentTypeId = '14' or contentTypeId = '15' or contentTypeId = '28'
-  GROUP BY contentId 
+  WHERE contentTypeID = '12' or contentTypeID = '14' or contentTypeID = '15' or contentTypeID = '28'
+  GROUP BY contentID 
   ORDER BY AVG(score) DESC;
   </select>
    <select id="topSelectCountry" resultType="java.util.HashMap">
-  SELECT contentId,contentTypeId
+  SELECT contentID,contentTypeID
   FROM review
-  WHERE contentTypeId = '32'
-  GROUP BY contentId 
+  WHERE contentTypeID = '32'
+  GROUP BY contentID 
   ORDER BY AVG(score) DESC;
   </select>
   
    <select id="topSelectRestaurant" resultType="java.util.HashMap">
-  SELECT contentId,contentTypeId
+  SELECT contentID,contentTypeID
   FROM review
-  WHERE contentTypeId = '39'
-  GROUP BY contentId 
+  WHERE contentTypeID = '39'
+  GROUP BY contentID 
   ORDER BY AVG(score) DESC;
   </select>
   
