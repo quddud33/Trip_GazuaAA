@@ -1,8 +1,5 @@
 package controller;
 
-import java.util.HashMap;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,37 +13,41 @@ import service.APIService;
 public class APIController {
 	@Autowired
 	private APIService service;
-	
-	//메인페이지
-	@RequestMapping("index.do")
-	public ModelAndView getFestvalInfo() throws Exception {
-		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("festvalInfo", service.getFestivalInfo());
-		mav.setViewName("index");
-		
-		return mav;
-	}
-	
-	//숙소,맛집,축제 검색페이지
-	@RequestMapping("contentList.do")
+
+	//숙소, 맛집, 축제 검색페이지[contentList]
+	@RequestMapping(value="contentList.do", params="search")
 	public ModelAndView getSearch(@RequestParam(defaultValue = "") String search, 
 			@RequestParam(defaultValue="") String contentTypeId, 
 			@RequestParam(defaultValue="") String areaCode) throws Exception {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("searchInfo", service.searchAPIInfo(search, contentTypeId, areaCode));
+		mav.addObject("contentList", service.searchAPIInfo(search, contentTypeId, areaCode));
+		mav.setViewName("contentList");
+		return mav;
+	}
+
+	//숙소, 맛집, 축제  리스트(검색전) [contentList]
+	@RequestMapping("contentList.do")
+	public ModelAndView contentList(@RequestParam(defaultValue="1") String areacode, 
+			@RequestParam(defaultValue="") String contentid) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("contentList",service.areaBased(contentid, areacode));
 		mav.setViewName("contentList");
 		return mav;
 	}
 	
-	//상세정보(관광지, 숙박)
+	//상세정보(관광지, 숙박, 축제 등) [contentView]
 	@RequestMapping("contentView.do")
 	public ModelAndView roomDetail(@RequestParam String contentid, @RequestParam String contenttypeid) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("detail",service.Detail(contentid, contenttypeid));
+		if(contenttypeid.equals("32") || contenttypeid.equals("12")) {
+			mav.addObject("detail",service.detailInfo(contentid, contenttypeid));
+		}
+		else if(contenttypeid.equals("15")){
+			mav.addObject("commonInfo", service.commonInfo(contentid, contenttypeid));
+		}
 		mav.setViewName("contentView");
 		return mav;
 	}
@@ -60,9 +61,5 @@ public class APIController {
 		mav.setViewName("main");
 		return mav;
 	}
-
-
-
-
 
 }

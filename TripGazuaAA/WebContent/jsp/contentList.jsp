@@ -20,9 +20,8 @@ table, #map {
 		<select name="contentTypeId">
 			<option value="32">숙박</option>
 			<option value="12">관광지</option>
-			<option value="24">행사/축제</option>
+			<option value="15">행사/축제</option>
 			<option value="39">맛집</option>
-			<option value="14">문화시설</option>
 			<option value="28">레포츠</option>
 		</select> 
 		
@@ -36,7 +35,6 @@ table, #map {
 			<option value="7">부산</option>
 			<option value="8">울산</option>
 		</select>
-
 		
 		<input type="text" name="search" />
 		<input type="submit" value="검색" />
@@ -48,7 +46,7 @@ table, #map {
 			<th>주소</th>
 			<th>ID</th>
 		</tr>
-		<c:forEach var="searchTest" items="${searchInfo }">
+		<c:forEach var="searchTest" items="${contentList }">
 			<tr>
 				<td class="mapCursor"><a onclick="setMap('${searchTest.mapy}', '${searchTest.mapx }', '${searchTest.title }')">${searchTest.title }</a></td>
 				<td>${searchTest.addr1 }</td>
@@ -56,6 +54,9 @@ table, #map {
 			</tr>
 		</c:forEach>
 	</table>
+	
+	
+	
 		<!-- 지도를 표시할 div 입니다 -->
 	<div id="map" style="width: 500px; height: 500px;"></div>
 

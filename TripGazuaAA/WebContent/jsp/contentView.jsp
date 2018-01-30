@@ -65,7 +65,40 @@
 				</c:forEach>
 			</table>
 		</c:when>
+		<c:when test="${param.contenttypeid == '15' }">
+			<table border="1">
+				<tr>
+					<th>행사명</th>
+					<th>내용</th>
+					<th>주소</th>
+					<th>시작일</th>
+					<th>종료일</th>
+					<th>사진</th>
+				</tr>
+				<c:forEach var="commonInfo" items="${commonInfo}">
+					<tr>
+						<td>${commonInfo.title }</td>
+						<td>${commonInfo.overview }</td>
+						<td>${commonInfo.addr1 }, ${test.addr2 }</td>
+						<td>${commonInfo.firstimage }</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</c:when>
+		<c:when test="${param.contenttypeid == '28' }">
+			<table border="1">
+				<tr>
+					<th>됨?</th>
+				</tr>
+				<c:forEach var="commonInfo" items="${commonInfo}">
+					<tr>
+						<td>${commonInfo.title }</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</c:when>
 		<c:otherwise>
+		<br>
 			안되요
 		</c:otherwise>
 	</c:choose>
