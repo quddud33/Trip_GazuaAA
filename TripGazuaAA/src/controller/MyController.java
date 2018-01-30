@@ -34,7 +34,7 @@ public class MyController {
 	public String login(HttpSession session,String userID,String password) {
 		if(lService.login(userID, password)) {
 			session.setAttribute("userID", userID);
-			return "main";
+			return "redirect:main.do";
 		}
 		else {
 			session.setAttribute("msg", "아이디 또는 비밀번호가 틀렸습니다.");

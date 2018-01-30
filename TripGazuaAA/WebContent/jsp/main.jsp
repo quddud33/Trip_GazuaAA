@@ -55,7 +55,7 @@
 	<a href="#" class="login">로그인</a>
 	<!--javascript써서 로그인폼 뛰우기-->
 	<a href="createUserForm.do">회원가입</a>
-
+<%=session.getAttribute("userID") %>
 	<table border="1">
 		<c:forEach var="topListFestival" items="${topListFestival }"><!-- 12, 14, 15, 28 -->
 			<tr>
