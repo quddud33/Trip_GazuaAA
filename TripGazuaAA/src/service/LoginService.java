@@ -41,4 +41,8 @@ public class LoginService {
     public int checkID(String userID) {
     	return lDao.checkID(userID);
     }
+    
+    public HashMap<String, String> getUserInfo(String userID) {
+    	return lDao.login(userID);
+    }
 }

@@ -33,7 +33,7 @@ public class MyController {
 	@RequestMapping("login.do")
 	public String login(HttpSession session,String userID,String password) {
 		if(lService.login(userID, password)) {
-			session.setAttribute("userID", userID);
+			session.setAttribute("user", lService.getUserInfo(userID));
 			return "redirect:main.do";
 		}
 		else {
@@ -42,6 +42,13 @@ public class MyController {
 		}
 		
 	}
+	
+	@RequestMapping("logout.do")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:main.do";
+	}
+	
 	@RequestMapping(value = "checkID.do", method = { RequestMethod.GET, RequestMethod.POST})
     public @ResponseBody int checkID(String userID, Model model) {
         return lService.checkID(userID);

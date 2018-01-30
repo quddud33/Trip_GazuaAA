@@ -52,10 +52,17 @@
 	<a href="locationView.do">지도/컨텐츠 리스트</a>
 	<a href="myPage.do">마이페이지</a>
 	<!--로그인 시에만 보이게 처리(userID,nickName)-->
-	<a href="#" class="login">로그인</a>
-	<!--javascript써서 로그인폼 뛰우기-->
-	<a href="createUserForm.do">회원가입</a>
-<%=session.getAttribute("userID") %>
+	<c:if test="${user == null}">
+		<a href="#" class="login">로그인</a>
+		<!--javascript써서 로그인폼 띄우기-->
+		<a href="createUserForm.do">회원가입</a>
+	</c:if>
+	<c:if test="${user != null }">
+		<a href="logout.do">로그아웃</a>
+		${user.userID }, 
+		${user.nickname }, 
+		${user.regDate }
+	</c:if>
 	<table border="1">
 		<c:forEach var="topListFestival" items="${topListFestival }"><!-- 12, 14, 15, 28 -->
 			<tr>
