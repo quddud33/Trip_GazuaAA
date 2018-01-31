@@ -47,14 +47,19 @@ table, #map {
 			<th>ID</th>
 		</tr>
 		<c:forEach var="searchTest" items="${contentList }">
-			<tr>
-				<td class="mapCursor"><a onclick="setMap('${searchTest.mapy}', '${searchTest.mapx }', '${searchTest.title }')">${searchTest.title }</a></td>
-				<td>${searchTest.addr1 }</td>
-				<td><a href="contentView.do?contentid=${searchTest.contentid }&contenttypeid=${searchTest.contenttypeid}">바로가기</td>
-			</tr>
+			<c:if test="${searchTest.totalCount eq null }">
+				<tr>
+					<td class="mapCursor"><a onclick="setMap('${searchTest.mapy}', '${searchTest.mapx }', '${searchTest.title }')">${searchTest.title }</a></td>
+					<td>${searchTest.addr1 }</td>
+					<td><a href="contentView.do?contentid=${searchTest.contentid }&contenttypeid=${searchTest.contenttypeid}">바로가기</td>
+				</tr>
+			</c:if>
+			<c:if test="${searchTest.totalCount ne null }">
+				<c:set var="totalCount" value="${searchTest.totalCount }"/>
+			</c:if>
 		</c:forEach>
 	</table>
-	
+	<p>totalCount : ${totalCount }</p>
 	
 	
 		<!-- 지도를 표시할 div 입니다 -->

@@ -198,6 +198,12 @@ public class APIService {
 	        			}
     				result.add(value);
     				value = new HashMap<String, String>(); //초기화 안하면 같은값만 들어감
+
+    	        	if(eventType == XmlPullParser.START_TAG && parser.getName().equals("totalCount")) {
+    	        	    	value.put(parser.getName(), parser.nextText());
+    	        	    	result.add(value);
+    	        	    	value = new HashMap<String, String>();
+    	        	}
 	        	}
 	        }
 			return result;
@@ -244,7 +250,7 @@ public class APIService {
 
         for(int eventType = parser.getEventType(); eventType != XmlPullParser.END_DOCUMENT; eventType = parser.next()) {
 
-        	if(eventType == XmlPullParser.START_TAG && (parser.getName().equals("item"))) {
+        	if(eventType == XmlPullParser.START_TAG && parser.getName().equals("item")) {
 
         		for(eventType = parser.next(); eventType != XmlPullParser.END_TAG || !parser.getName().equals("item"); eventType = parser.next()) {
 
@@ -253,6 +259,12 @@ public class APIService {
         			}
         			result.add(value);
         			value = new HashMap<String, String>();
+        	}
+        	
+        	if(eventType == XmlPullParser.START_TAG && parser.getName().equals("totalCount")) {
+        	    	value.put(parser.getName(), parser.nextText());
+        	    	result.add(value);
+        	    	value = new HashMap<String, String>();
         	}
 
         }
