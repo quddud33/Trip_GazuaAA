@@ -95,7 +95,7 @@ public class APIService {
 	}
 	
 	//키워드 검색
-	public List<HashMap<String, String>> searchAPIInfo(String search, String contenttypeid, String areaCode) throws Exception {
+	public List<HashMap<String, String>> searchAPIInfo(String search, String contenttypeid, String areaCode,String page) throws Exception {
 		List<HashMap<String, String>> result = new ArrayList<>();
 		HashMap<String, String> value = new HashMap<>(); //검색값을 담아줄 HashMap선언
 	
@@ -104,7 +104,7 @@ public class APIService {
         urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + URLEncoder.encode("SERVICE_KEY", "UTF-8")); /*공공데이터에서 받은 인증키*/
         urlBuilder.append("&" + URLEncoder.encode("MobileApp","UTF-8") + "=" + URLEncoder.encode("sample", "UTF-8")); /*서비스명*/
         urlBuilder.append("&" + URLEncoder.encode("MobileOS","UTF-8") + "=" + URLEncoder.encode("ETC", "UTF-8")); /*AND(안드로이드),IOS,ETC(web)*/
-        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
+        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode(page, "UTF-8")); /*페이지번호*/
         urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("15", "UTF-8")); /*표출건수*/
         urlBuilder.append("&" + URLEncoder.encode("keyword","UTF-8") + "=" + URLEncoder.encode(search, "UTF-8")); /*키워드*/
         urlBuilder.append("&" + URLEncoder.encode("areaCode","UTF-8") + "=" + URLEncoder.encode(areaCode, "UTF-8")); /*지역코드(areaCode 없을때), 시군구코드(areaCode=1)*/
@@ -210,7 +210,7 @@ public class APIService {
 	}
 	
 	//위치기반 정보조회(숙소, 맛집, 축제 등)
-	public List<HashMap<String, String>> areaBased(String areacode, String contentid) throws Exception {
+	public List<HashMap<String, String>> areaBased(String areacode, String contentid,String page) throws Exception {
 		List<HashMap<String, String>> result = new ArrayList<>();
 		HashMap<String, String> value = new HashMap<>();
 		
@@ -218,7 +218,7 @@ public class APIService {
         urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=" +constant.Constant.TOURKEY); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + URLEncoder.encode("SERVICE_KEY", "UTF-8")); /*공공데이터포털에서 받은 인증키*/
         urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과수*/
-        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*현재 페이지 번호*/
+        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode(page, "UTF-8")); /*현재 페이지 번호*/
         urlBuilder.append("&" + URLEncoder.encode("MobileOS","UTF-8") + "=" + URLEncoder.encode("ETC", "UTF-8")); /*IOS(아이폰), AND(안드로이드), WIN(원도우폰), ETC*/
         urlBuilder.append("&" + URLEncoder.encode("MobileApp","UTF-8") + "=" + URLEncoder.encode("AppTest", "UTF-8")); /*서비스명=어플명*/
         urlBuilder.append("&" + URLEncoder.encode("contentTypeId","UTF-8") + "=" + URLEncoder.encode("32", "UTF-8")); /*관광타입(관광지, 숙박 등) ID*/

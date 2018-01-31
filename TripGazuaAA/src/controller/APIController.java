@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +21,11 @@ public class APIController {
 	@RequestMapping(value="contentList.do", params="search")
 	public ModelAndView getSearch(@RequestParam(defaultValue = "") String search, 
 			@RequestParam(defaultValue="") String contentTypeId, 
-			@RequestParam(defaultValue="") String areaCode) throws Exception {
-		
+			@RequestParam(defaultValue="") String areaCode,
+			@RequestParam(defaultValue="1") String page) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("contentList", service.searchAPIInfo(search, contentTypeId, areaCode));
+		mav.addObject("contentList", service.searchAPIInfo(search, contentTypeId, areaCode,page));
+		mav.addObject("page",page);
 		mav.setViewName("contentList");
 		return mav;
 	}
@@ -30,10 +33,11 @@ public class APIController {
 	//숙소, 맛집, 축제  리스트(검색전) [contentList]
 	@RequestMapping("contentList.do")
 	public ModelAndView contentList(@RequestParam(defaultValue="1") String areacode, 
-			@RequestParam(defaultValue="") String contentid) throws Exception {
+			@RequestParam(defaultValue="") String contentid,
+			@RequestParam(defaultValue="1") String page) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("contentList",service.areaBased(contentid, areacode));
+		mav.addObject("contentList",service.areaBased(contentid, areacode,page));
+		mav.addObject("page",page);
 		mav.setViewName("contentList");
 		return mav;
 	}
