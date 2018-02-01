@@ -1,0 +1,1 @@
+<%@ page language="java" contentType="application/json; charset=EUC-KR" pageEncoding="EUC-KR" import="api.WeatherAPI"%><%=WeatherAPI.getWeather(3)%>
