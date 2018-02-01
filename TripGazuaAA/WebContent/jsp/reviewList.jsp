@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div>
+	<textarea rows="100" cols="10" name="review"></textarea>
+</div>
 <a href="reviewWriteForm.jsp"></a> <!--contentID-->
 <a href="reviewUpdateForm.jsp"></a><!--num,contentID,userID-->
 <a href="reviewDelete.do">삭제하기</a><!-- num,contentID,userID-->

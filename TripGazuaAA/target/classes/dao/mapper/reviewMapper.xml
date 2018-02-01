@@ -20,7 +20,7 @@
   LIMIT 6;
   </select>
   
-   <select id="topSelectRestaurant" resultType="java.util.HashMap">
+  <select id="topSelectRestaurant" resultType="java.util.HashMap">
   SELECT contentID,contentTypeID
   FROM review
   WHERE contentTypeID = '39'
@@ -28,5 +28,19 @@
   ORDER BY AVG(score) DESC
   LIMIT 6;
   </select>
-  
+  <select id="reviewList" resultType="java.util.HashMap" parameterType="String">
+  SELECT num,nickname,content,writeDate,score,likeCount
+  FROM review WHERE contentID=#{contentID}
+  </select>
+  <insert id="insertReview" parameterType="java.util.HashMap">
+  INSERT INTO review 
+  VALUES (0,#{userID},#{contentID},#{contentTypeID},#{nickname},#{content},
+  			now(),#{score},0)
+  </insert>
+  <delete id="deleteReview" parameterType="int">
+  DELETE FROM review WHERE num = #{num} 
+  </delete>
+  <update id="updateReview" parameterType="java.util.HashMap">
+  UPDATE review SET content=#{content} WHERE num = #{num}	
+  </update>
   </mapper>

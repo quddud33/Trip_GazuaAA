@@ -62,5 +62,34 @@ public class MyController {
 		return "redirect:main.do";
 	}
 	
+	//리뷰작성
+	@RequestMapping("reviewWrite.do")
+	public String reviewWrite(@RequestParam HashMap<String, String> params) {
+		rService.insertReview(params);
+		System.out.println(params);
+		return "redirect:contentView.do?contentid="+params.get("contentID")+"&contenttypeid="+params.get("contentTypeID");
+	}
+	
+	//리뷰리스트
+	@RequestMapping("reviewList.do")
+	public String reviewList(Model model,@RequestParam String contentID) {
+		model.addAttribute("reivewL",rService.reivewList(contentID));
+		return "redirect:contentView?contentid="+contentID;
+	}
+	
+	//리뷰업데이트
+	@RequestMapping("reviewUpdateForm.do")
+	public String reivewUpdate(Model model,@RequestParam HashMap<String, String>params) {
+		model.addAttribute(rService.updateReview(params));
+		return "redirect:contentView.do?contentid="+params.get("contentID");
+	}
+	
+	//리뷰삭제
+	@RequestMapping("reviewDelete.do")
+	public String reviewDelete(@RequestParam int num) {
+		rService.deleteReview(num);
+		return "redirect:contentView.do?contentid="+num;
+	}
+	
 	
 }
