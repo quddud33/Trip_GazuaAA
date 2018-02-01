@@ -57,7 +57,7 @@ table, #map {
 						onclick="setMap('${searchTest.mapy}', '${searchTest.mapx }', '${searchTest.title }')">${searchTest.title }</a></td>
 					<td>${searchTest.addr1 }</td>
 					<td><a
-						href="contentView.do?contentid=${searchTest.contentid }&contenttypeid=${searchTest.contenttypeid}">바로가기</td>
+						href="contentView.do?contentid=${searchTest.contentid }&contenttypeid=${searchTest.contenttypeid}">바로가기</a></td>
 				</tr>
 			</c:if>
 			<c:if test="${searchTest.totalCount ne null }">

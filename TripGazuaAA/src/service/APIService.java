@@ -147,10 +147,12 @@ public class APIService {
         		result.add(value); //result안에 HashMap담기
         		
         		value = new HashMap<String, String>(); //HashMap값 초기화(다른값을 다시 담으려고)
-
         	}
-        	
-
+        	if(eventType == XmlPullParser.START_TAG && parser.getName().equals("totalCount")) {
+    	    	value.put(parser.getName(), parser.nextText());
+    	    	result.add(value);
+    	    	value = new HashMap<String, String>();
+    		}
         }
 
  
