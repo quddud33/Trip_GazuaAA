@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import service.LoginService;
 import service.APIService;
+import service.BoardService;
 import service.ReviewService;
 
 @Controller
@@ -25,6 +26,9 @@ public class MyController {
 	
 	@Autowired
 	private ReviewService rService;
+	
+	@Autowired
+	private BoardService bService;
 	
 
 	//=================================여기서부터 로그인단================================//
@@ -62,6 +66,8 @@ public class MyController {
 		}
 		return "redirect:main.do";
 	}
+	
+	//====================================리뷰==================================================
 	
 	//리뷰작성
 	@RequestMapping("reviewWrite.do")
@@ -114,9 +120,55 @@ public class MyController {
 		rService.likeMinus(num);
 		return "redirect:contentView.do?contentid="+params.get("contentid")+"&contenttypeid="+params.get("contenttypeid")+"&num="+params.get("num");
 	}
-	//============================소켓=================================================
+	
+//============================소켓=================================================
 		@RequestMapping("chat.do")
 		public String chat() {
 			return "chat";
-}
+		}
+		
+//==================================게시판=============================================
+		
+		//게시판 메인페이지(selectAll)
+		@RequestMapping("tripBoard.do")
+		public ModelAndView tripBoard() {
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("board", bService.selectAll());
+			mav.setViewName("tripBoard");
+			
+			return mav;
+		}
+		
+		//글 쓰기 폼
+		@RequestMapping("tripBoardWriteForm.do")
+		public String tripBoardUpdateForm() {
+			
+			return "tripBoardWriteForm";
+		}
+		
+		//글 쓰기
+		@RequestMapping("tripBoardWrite.do")
+		public String tripBoardWrite(@RequestParam HashMap<String, Object> params) {
+			bService.insertBoard(params);
+			
+			return "redirect:tripBoard.do";
+		}
+		
+		//게시글  보기(selectOne)
+		@RequestMapping("tripBoardView.do")
+		public ModelAndView tripBoardView(@RequestParam int num) {
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("view",bService.selectOne(num));
+			mav.setViewName("tripBoardView");
+			
+			return mav;
+		}
+		
+		//글 삭제
+		@RequestMapping("tripBoardDelete.do")
+		public String tripBoardDelete(@RequestParam int num) {
+			bService.deleteBoard(num);
+			
+			return "redirect:tripBoard.do";
+		}
 }

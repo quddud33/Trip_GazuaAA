@@ -33,8 +33,12 @@
 		<property name="mapperInterface" value="dao.IReviewDao"/>
 	</bean>
 	<bean id="loginDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
-		<property name="mapperInterface" value="dao.ILoginDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		<property name="mapperInterface" value="dao.ILoginDao"/>
+	</bean>
+	<bean id="boardDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		<property name="mapperInterface" value="dao.IBoardDao"/>
 	</bean>
 		<bean id="txManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

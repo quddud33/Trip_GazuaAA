@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.IBoardDao">
+	
+	<insert id="insertBoard" parameterType="java.util.HashMap">
+		insert into tripboard(num, userID, nickname, title, content, image, wDate, uDate) 
+		values(0, #{userID}, #{nickname}, #{title}, #{content}, #{image}, now(), now())
+	</insert>
+	
+	<update id="updateBoard" parameterType="java.util.HashMap">
+		update tripboard
+		set title = #{title}, content = #{content}, image = #{image}, uDate = now()
+		where num = #{num}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="int">
+		delete from tripboard
+		where num = #{num}
+	</delete>
+	
+	<select id="selectOne" parameterType="int" resultType="java.util.HashMap">
+		select *
+		from tripboard
+		where num = #{num}
+	</select>
+	
+	<select id="selectAll" resultType="java.util.HashMap">
+		select *
+		from tripboard
+	</select>
+	
+</mapper>

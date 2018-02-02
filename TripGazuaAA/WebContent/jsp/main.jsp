@@ -50,6 +50,7 @@
 	<a href="serviceCenter.do">서비스 센터</a>
 	<!--userID,nickName-->
 	<a href="locationView.do">지도/컨텐츠 리스트</a>
+	<a href="tripBoard.do">게시판</a>
 	<a href="myPage.do">마이페이지</a>
 	<!--로그인 시에만 보이게 처리(userID,nickName)-->
 	<c:if test="${user == null}">
