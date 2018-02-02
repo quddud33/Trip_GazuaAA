@@ -92,4 +92,11 @@ public class MyController {
 	}
 	
 	
+	//============================소켓=================================================
+	@RequestMapping("chat.do")
+	public String chat() {
+		return "chat";
+	}
+	
+	
 }
