@@ -1,4 +1,5 @@
-   package controller;
+package controller;
+   
 
 import java.util.HashMap;
 
@@ -66,37 +67,56 @@ public class MyController {
 	@RequestMapping("reviewWrite.do")
 	public String reviewWrite(@RequestParam HashMap<String, String> params) {
 		rService.insertReview(params);
-		System.out.println(params);
+		System.out.println("입력 : "+params);
 		return "redirect:contentView.do?contentid="+params.get("contentID")+"&contenttypeid="+params.get("contentTypeID");
 	}
 	
 	//리뷰리스트
 	@RequestMapping("reviewList.do")
 	public String reviewList(Model model,@RequestParam String contentID) {
-		model.addAttribute("reivewL",rService.reivewList(contentID));
+		model.addAttribute("reviewL",rService.reviewList(contentID));
 		return "redirect:contentView?contentid="+contentID;
 	}
 	
 	//리뷰업데이트
 	@RequestMapping("reviewUpdateForm.do")
-	public String reivewUpdate(Model model,@RequestParam HashMap<String, String>params) {
-		model.addAttribute(rService.updateReview(params));
-		return "redirect:contentView.do?contentid="+params.get("contentID");
+	public String reivewUpdate(Model model,@RequestParam HashMap<String, String>params, @RequestParam String num) {
+		model.addAttribute("reviewInfo",rService.reviewNum(num));
+		System.out.println(rService.reviewNum(num));
+		System.out.println("업데이트 : "+params);
+		return "reviewUpdateForm";
+	}
+	@RequestMapping("reviewUpdate.do")
+	public String reviewUpdate(@RequestParam HashMap<String, String> params) {
+		System.out.println(params);
+		rService.updateReview(params);
+		return "redirect:contentView.do?contentid="+params.get("contentID")+"&contenttypeid="+params.get("contentTypeID")+"&num="+params.get("num");
 	}
 	
 	//리뷰삭제
 	@RequestMapping("reviewDelete.do")
-	public String reviewDelete(@RequestParam int num) {
-		rService.deleteReview(num);
-		return "redirect:contentView.do?contentid="+num;
+	public String reviewDelete(@RequestParam HashMap<String, String>params) {
+		rService.deleteReview(params);
+		System.out.println("삭제 : "+params);
+		return "redirect:contentView.do?contentid="+params.get("contentid")+"&contenttypeid="+params.get("contenttypeid")+"&num="+params.get("num");
 	}
 	
+	//좋아용+1
+	@RequestMapping("likeSum.do")
+	public String likeSum(@RequestParam String num,@RequestParam HashMap<String, String >params) {
+		rService.likeSum(num);
+		return "redirect:contentView.do?contentid="+params.get("contentid")+"&contenttypeid="+params.get("contenttypeid")+"&num="+params.get("num");
+	}
 	
+	//좋아용-1
+	@RequestMapping("likeMinus.do")
+	public String likeMinus(@RequestParam String num,@RequestParam HashMap<String, String >params) {
+		rService.likeMinus(num);
+		return "redirect:contentView.do?contentid="+params.get("contentid")+"&contenttypeid="+params.get("contenttypeid")+"&num="+params.get("num");
+	}
 	//============================소켓=================================================
-	@RequestMapping("chat.do")
-	public String chat() {
-		return "chat";
-	}
-	
-	
+		@RequestMapping("chat.do")
+		public String chat() {
+			return "chat";
+}
 }

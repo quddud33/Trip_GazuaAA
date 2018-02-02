@@ -1,5 +1,6 @@
 package service;
 
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,13 +26,25 @@ public class ReviewService {
 	public int insertReview(HashMap<String, String>params){
 		return rDao.insertReview(params);
 	}
-	public int deleteReview(int num) {
-		return rDao.deleteReview(num);
+	public int deleteReview(HashMap<String, String>params) {
+		return rDao.deleteReview(params);
 	}
 	public int updateReview(HashMap<String, String>params) {
 		return rDao.updateReview(params);
 	}
-	public List<HashMap<String, String>> reivewList(String contentID){
+	public List<HashMap<String, String>> reviewList(String contentID){
 		return rDao.reviewList(contentID);
+	}
+	public List<HashMap<String, String>> reviewNum(String num){
+		return rDao.reviewNum(num);
+	}
+	public int likeSum(String num) {
+		return rDao.likeSum(num);
+	}
+	public int likeMinus(String num) {
+		return rDao.likeMinus(num);
+	}
+	public int likeInsert(HashMap<String, String>params){
+		return rDao.likeInsert(params);
 	}
 }

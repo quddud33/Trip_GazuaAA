@@ -13,8 +13,8 @@
 .star-input>.input>input:checked+label{
     display: inline-block;
     vertical-align: top;
-    background: url("image/star.png") no-repeat;
-}	
+  	background: url("image/star.png") no-repeat;
+}
 .star-input{
     white-space: nowrap;
 }
@@ -105,6 +105,7 @@
     font:bold 18px Helvetica, Arial, sans-serif;
     vertical-align: middle;
 }
+
 </style>
 </head>
 <body>
@@ -202,6 +203,7 @@
 			안되요
 		</c:otherwise>
 	</c:choose>
+	<c:if test="${user ne null }" >
 	<form action="reviewWrite.do">
 				<textarea rows="5" cols="30" name="content"></textarea>
 				<input type="submit" value="입력">
@@ -225,6 +227,28 @@
 				  <output for="star-input"><b>0</b>점</output>
 				</span>
 		</form>
+		</c:if>
+			<table border="1">
+				<c:forEach items="${reviewL }" var="reviewL">
+				<tr>
+					<th>${reviewL.nickname }</th>			
+					<th>${reviewL.content }</th>			
+					<th>${reviewL.score }</th>
+					<th>${reviewL.likeCount }</th>
+					<th>${reviewL.userID  }</th>
+					<c:if test="${user.userid eq reviewL.userID }">
+					<th>
+					<a href="reviewDelete.do?num=${reviewL.num }&content=${reviewL.content}&contenttypeid=${param.contenttypeid }&contentid=<%=request.getParameter("contentid")%>">삭제</a>
+					<a href="reviewUpdateForm.do?num=${reviewL.num }&content=${reviewL.content}&contenttypeid=${param.contenttypeid }&contentid=<%=request.getParameter("contentid")%>">수정</a>
+					</th>
+					</c:if>
+					<c:if test="${user ne null}">
+					<th><button onclick="location.href='likeSum.do?likeCount=${reviewL.likeCount }&num=${reviewL.num }&content=${reviewL.content}&contenttypeid=${param.contenttypeid }&contentid=<%=request.getParameter("contentid")%>'">좋아요</button></th>
+					<th><button onclick="location.href='likeMinus.do?likeCount=${reviewL.likeCount }&num=${reviewL.num }&content=${reviewL.content}&contenttypeid=${param.contenttypeid }&contentid=<%=request.getParameter("contentid")%>'">좋아요취소</button></th>
+					</c:if>
+				</tr>	
+				</c:forEach>
+			</table>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 //star rating
