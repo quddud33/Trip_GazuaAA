@@ -144,12 +144,17 @@ public class APIService {
         				value.put(parser.getName(), parser.nextText()); //HashMap안에 값을 담아줌
 
         			}
+        		
+        		if(contenttypeid.equals("32"))
+        			value.put("price", String.valueOf((int) (Math.random() * 1000) * 100));
+        		
         		result.add(value); //result안에 HashMap담기
         		
         		value = new HashMap<String, String>(); //HashMap값 초기화(다른값을 다시 담으려고)
         	}
         	if(eventType == XmlPullParser.START_TAG && parser.getName().equals("totalCount")) {
     	    	value.put(parser.getName(), parser.nextText());
+    	    	
     	    	result.add(value);
     	    	value = new HashMap<String, String>();
     		}

@@ -1,3 +1,4 @@
+<%@page import="java.util.Enumeration"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="util.PaginateUtil"%>
@@ -48,6 +49,7 @@ table, #map {
 		<tr>
 			<th>이름</th>
 			<th>주소</th>
+			<th>가격</th>
 			<th>ID</th>
 		</tr>
 		<c:forEach var="searchTest" items="${contentList }">
@@ -56,8 +58,11 @@ table, #map {
 					<td class="mapCursor"><a
 						onclick="setMap('${searchTest.mapy}', '${searchTest.mapx }', '${searchTest.title }')">${searchTest.title }</a></td>
 					<td>${searchTest.addr1 }</td>
+					<c:if test="${searchTest.price ne null }">
+						<td>${searchTest.price }</td>
+					</c:if>
 					<td><a
-						href="contentView.do?contentid=${searchTest.contentid }&contenttypeid=${searchTest.contenttypeid}">바로가기</a></td>
+						href="contentView.do?contentid=${searchTest.contentid }&contenttypeid=${searchTest.contenttypeid}&price=${searchTest.price }">바로가기</a></td>
 				</tr>
 			</c:if>
 			<c:if test="${searchTest.totalCount ne null }">
@@ -77,7 +82,7 @@ table, #map {
 	} //if end
 
 	//한 페이지당 보여질 방명록 갯수
-	int numPage = 10;
+	int numPage = 15;
 
 	//페이징의 블록갯수
 	int numBlock = 5;
@@ -85,11 +90,23 @@ table, #map {
 	String url = "contentList.do";
 	String param = "page=";
 	
+	Enumeration params = request.getParameterNames();
+	String strParam = "";
+	
+	while(params.hasMoreElements()) {
+		String name = (String)params.nextElement();
+		if(!name.equals("page")){
+			String value = request.getParameter(name);
+			strParam += name + "=" + value + "&";
+		}
+	}
+	
+	param = strParam + param;
+	
 	int total = Integer.parseInt((String)pageContext.getAttribute("totalCount"));
 	//페이징 마크업(문자열)
 	String paginate =
 	   PaginateUtil.getPaginate(nowPage, total, numPage , numBlock, url, param);
-	
 	%>
 	<%=paginate%>
 	<p>totalCount : ${totalCount }</p>
