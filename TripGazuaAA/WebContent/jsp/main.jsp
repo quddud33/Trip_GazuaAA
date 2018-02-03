@@ -47,7 +47,7 @@
 <body>
 	<a href="chat.do">채팅방</a>
 	<!--userID,nickName-->
-	<a href="serviceCenter.do">서비스 센터</a>
+	<a href="http://vpa.danbee.Ai/#/chats?chatbotId=054d0e31-3af2-4e4e-a930-8fa4462da027">서비스 센터</a>
 	<!--userID,nickName-->
 	<a href="locationView.do">지도/컨텐츠 리스트</a>
 	<a href="tripBoard.do">게시판</a>
