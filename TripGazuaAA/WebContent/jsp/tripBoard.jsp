@@ -31,5 +31,12 @@
 	
 	<input type="button" 
 		onclick="location.href='tripBoardWriteForm.do'" value="글쓰기"/>
+		
+	<c:if test="${msg ne null }">
+		<script>
+			alert('${msg}');
+		</script>
+		<%session.invalidate(); %>
+	</c:if>
 </body>
 </html>

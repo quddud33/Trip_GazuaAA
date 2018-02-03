@@ -33,4 +33,9 @@ public class BoardService {
 	public void deleteBoard(int num) {
 		bDao.deleteBoard(num);
 	}
+	
+	//글 수정
+	public void updateBoard(HashMap<String, Object> params) {
+		bDao.updateBoard(params);
+	}
 }

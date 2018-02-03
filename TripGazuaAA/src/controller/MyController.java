@@ -141,9 +141,14 @@ public class MyController {
 		
 		//글 쓰기 폼
 		@RequestMapping("tripBoardWriteForm.do")
-		public String tripBoardUpdateForm() {
+		public String tripBoardUpdateForm(HttpSession session) {
 			
-			return "tripBoardWriteForm";
+			if(session.getAttribute("user") == null) {
+				session.setAttribute("msg","로그인 후 이용해주세요");
+				return "redirect:tripBoard.do";
+			} else {
+				return "tripBoardWriteForm";
+			}
 		}
 		
 		//글 쓰기
@@ -166,9 +171,29 @@ public class MyController {
 		
 		//글 삭제
 		@RequestMapping("tripBoardDelete.do")
-		public String tripBoardDelete(@RequestParam int num) {
+		public String tripBoardDelete(@RequestParam int num, HttpSession session) {
+			session.setAttribute("msg", "삭제하시겠습니까?");
 			bService.deleteBoard(num);
 			
 			return "redirect:tripBoard.do";
 		}
+		
+		//글 수정폼
+		@RequestMapping("tripBoardUpdateForm.do")
+		public ModelAndView tripBoardUpdateForm(int num) {
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("update",bService.selectOne(num));
+			mav.setViewName("tripBoardUpdateForm");
+			
+			return mav;
+		}
+		
+		//글 수정 
+		@RequestMapping("tripBoardUpdate.do")
+		public String tripBoardUpdate(@RequestParam HashMap<String, Object> params) {
+//			System.out.println(params);
+			bService.updateBoard(params);
+			return "redirect:tripBoard.do";
+		}
+		
 }
