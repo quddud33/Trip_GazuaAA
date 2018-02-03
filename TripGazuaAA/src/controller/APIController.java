@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import service.APIService;
+import service.ReviewService;
 
 @Controller
 public class APIController {
 	@Autowired
 	private APIService service;
+	@Autowired
+	private ReviewService Rservice; 
 
 	//숙소, 맛집, 축제 검색페이지[contentList]
 	@RequestMapping(value="contentList.do", params="search")
@@ -52,6 +55,7 @@ public class APIController {
 		else if(contenttypeid.equals("15")){
 			mav.addObject("commonInfo", service.commonInfo(contentid, contenttypeid));
 		}
+		mav.addObject("reviewL",Rservice.reviewList(contentid));
 		mav.setViewName("contentView");
 		return mav;
 	}

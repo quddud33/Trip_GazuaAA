@@ -109,15 +109,23 @@ public class MyController {
 	
 	//좋아용+1
 	@RequestMapping("likeSum.do")
-	public String likeSum(@RequestParam String num,@RequestParam HashMap<String, String >params) {
+	public String likeSum(@RequestParam String num,@RequestParam HashMap<String, String >params,HttpSession session) {
 		rService.likeSum(num);
+		HashMap map = (HashMap)session.getAttribute("user");
+		params.put("userID", (String) map.get("userID"));
+		rService.userLikeReviewInsert(params);
 		return "redirect:contentView.do?contentid="+params.get("contentid")+"&contenttypeid="+params.get("contenttypeid")+"&num="+params.get("num");
 	}
 	
 	//좋아용-1
 	@RequestMapping("likeMinus.do")
-	public String likeMinus(@RequestParam String num,@RequestParam HashMap<String, String >params) {
+	public String likeMinus(@RequestParam String num,@RequestParam HashMap<String, String >params,HttpSession session) {
 		rService.likeMinus(num);
+		HashMap map = (HashMap)session.getAttribute("user");
+		System.out.println("saddsa"+map.get("userID"));
+		params.put("userID", (String) map.get("userID"));
+		System.out.println(params);
+		rService.userlikeReviewDelete(params);
 		return "redirect:contentView.do?contentid="+params.get("contentid")+"&contenttypeid="+params.get("contenttypeid")+"&num="+params.get("num");
 	}
 	

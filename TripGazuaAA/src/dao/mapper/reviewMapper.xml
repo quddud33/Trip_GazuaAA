@@ -28,37 +28,58 @@
   ORDER BY AVG(score) DESC
   LIMIT 6;
   </select>
+  
+  
   <select id="reviewList" resultType="java.util.HashMap" parameterType="String">
-  SELECT num,nickname,content,writeDate,score,likeCount,userID
-  FROM review WHERE contentID=#{contentID}
+  SELECT num, nickname, content, writeDate, score, likeCount, userID, contentID, contentTypeID
+  FROM review WHERE contentID = #{contentID}
   </select>
+  
    <select id="reviewNum" resultType="java.util.HashMap" parameterType="String">
-  SELECT num,nickname,content,writeDate,score,likeCount
+  SELECT num,nickname,content,writeDate,score,likeCount,userID,contentID,contentTypeID
   FROM review WHERE num=#{num}
   </select>
+  
   <insert id="insertReview" parameterType="java.util.HashMap">
   INSERT INTO review 
   VALUES (0,#{userID},#{contentID},#{contentTypeID},#{nickname},#{content},
   			now(),#{score},0)
   </insert>
+  
   <delete id="deleteReview" parameterType="java.util.HashMap">
   DELETE FROM review WHERE num = #{num} 
   </delete>
+  
   <update id="updateReview" parameterType="java.util.HashMap">
   UPDATE review SET content=#{content} WHERE num = #{num}	
   </update>
+  
   <update id="likeSum" parameterType="String" >
   	UPDATE review
   	 SET likeCount = likeCount +1
   	  WHERE num = #{num}  
   </update>
+  
   <update id="likeMinus" parameterType="String" >
   	UPDATE review
   	 SET likeCount = likeCount -1
   	  WHERE num = #{num}
   </update>
+  
   <insert id="likeInsert" parameterType="java.util.HashMap" >
   INSERT INTO userLikeContent
   VALUES (#{userID}, #{likeCheck))
   </insert>
+  
+  <insert id="userLikeReviewInsert" parameterType="java.util.HashMap">
+  INSERT INTO userlikereview
+  VALUES (#{userID},#{num})
+  </insert>
+  
+  <delete id="userLikeReviewDelete" parameterType="java.util.HashMap">
+ 	DELETE FROM userlikereview
+ 	 WHERE userID = #{userID} and num = #{num} 
+  </delete>
+  
+  
   </mapper>

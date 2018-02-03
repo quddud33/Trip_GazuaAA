@@ -47,4 +47,11 @@ public class ReviewService {
 	public int likeInsert(HashMap<String, String>params){
 		return rDao.likeInsert(params);
 	}
+	
+	public int userLikeReviewInsert(HashMap<String, String> params) {
+		return rDao.userLikeReviewInsert(params);
+	}
+	public int userlikeReviewDelete(HashMap<String, String>params) {
+		return rDao.userLikeReviewDelete(params);
+	}
 }
