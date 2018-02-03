@@ -264,6 +264,9 @@ public class APIService {
         			if(eventType == XmlPullParser.START_TAG)
         				value.put(parser.getName(), parser.nextText());
         			}
+
+       				value.put("price", String.valueOf((int) (Math.random() * 1000) * 100));
+        			
         			result.add(value);
         			value = new HashMap<String, String>();
         	}

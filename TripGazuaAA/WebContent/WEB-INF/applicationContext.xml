@@ -20,7 +20,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost/trip_gazuaaa" />
 		<property name="username" value="root" />
-		<property name="password" value="mysql" />
+		<property name="password" value="apmsetup" />
 	</bean>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -39,6 +39,10 @@
 	<bean id="boardDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 		<property name="mapperInterface" value="dao.IBoardDao"/>
+	</bean>
+	<bean id="reservationDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		<property name="mapperInterface" value="dao.IReservationDao"/>
 	</bean>
 		<bean id="txManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

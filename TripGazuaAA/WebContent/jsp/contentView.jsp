@@ -115,7 +115,7 @@
 	<a href="myPage.jsp">마이페이지</a><!--로그인 시에만 보이게 처리(userID,nickName)-->
 	<a href="#">로그인</a><!--javascript써서 로그인폼 띄우기-->
 	<a href="createUserForm.jsp">회원가입</a>
-	<a href="reservationView.jsp">예약하기</a>
+	<a href="reservationView.do?contentID=<%=request.getParameter("contentid")%>&contentTypeID=<%=request.getParameter("contenttypeid")%>&price=<%=request.getParameter("price")%>">예약하기</a>
 	<a href="reviewList.jsp">리뷰 더보기</a><!-- contentID -->
 	<!--<a href="logout.do">로그아웃</a> 로그인시 태그 생성하게 처리-->
 <c:set var='param' value='<%=request.getParameter("contenttypeid") %>'/>

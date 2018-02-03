@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import service.LoginService;
+import service.ReservationService;
 import service.APIService;
 import service.BoardService;
 import service.ReviewService;
@@ -29,7 +30,12 @@ public class MyController {
 	
 	@Autowired
 	private BoardService bService;
+
+	@Autowired
+	private ReservationService resService;
 	
+	@Autowired
+	private APIService aService;
 
 	//=================================여기서부터 로그인단================================//
 	@RequestMapping("createUserForm.do")
@@ -204,4 +210,17 @@ public class MyController {
 			return "redirect:tripBoard.do";
 		}
 		
+//====================================예약관련=================================
+		
+		@RequestMapping("reservationView.do")
+		public String reservationView(Model model, @RequestParam HashMap<String, String> params) throws Exception {
+			model.addAttribute("detail", aService.detailInfo(params.get("contentID"), params.get("contentTypeID")));
+			return "reservationView";
+		}
+				
+		@RequestMapping("reservation.do")
+		public String reservation(Model model, @RequestParam HashMap<String, String> params) {
+			resService.insertReservation(params);
+			return "redirect:main.do";
+		}
 }
