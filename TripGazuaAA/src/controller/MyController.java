@@ -18,6 +18,7 @@ import service.LoginService;
 import service.ReservationService;
 import service.APIService;
 import service.BoardService;
+import service.CommentService;
 import service.ReviewService;
 
 @Controller
@@ -36,6 +37,9 @@ public class MyController {
 	
 	@Autowired
 	private APIService aService;
+	
+	@Autowired 
+	private CommentService cService;
 
 	//=================================여기서부터 로그인단================================//
 	@RequestMapping("createUserForm.do")
@@ -173,11 +177,12 @@ public class MyController {
 			return "redirect:tripBoard.do";
 		}
 		
-		//게시글  보기(selectOne)
+		//게시글  보기(selectOne), 댓글
 		@RequestMapping("tripBoardView.do")
 		public ModelAndView tripBoardView(@RequestParam int num) {
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("view",bService.selectOne(num));
+			mav.addObject("comment",cService.selectAll(num));
 			mav.setViewName("tripBoardView");
 			
 			return mav;
@@ -185,8 +190,7 @@ public class MyController {
 		
 		//글 삭제
 		@RequestMapping("tripBoardDelete.do")
-		public String tripBoardDelete(@RequestParam int num, HttpSession session) {
-			session.setAttribute("msg", "삭제하시겠습니까?");
+		public String tripBoardDelete(@RequestParam int num) {
 			bService.deleteBoard(num);
 			
 			return "redirect:tripBoard.do";
@@ -223,4 +227,14 @@ public class MyController {
 			resService.insertReservation(params);
 			return "redirect:main.do";
 		}
+		
+//=================================댓글======================================
+		
+		@RequestMapping("tripCommentInsert.do")
+		public String tripCommentInsert(@RequestParam HashMap<String, Object> params) {
+			cService.insertComment(params);
+			return "redirect:tripBoardView.do?num=" + params.get("num");
+		}
+		
+		
 }

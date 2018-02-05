@@ -32,6 +32,9 @@
 	<input type="button" 
 		onclick="location.href='tripBoardWriteForm.do'" value="글쓰기"/>
 		
+	<input type="button"
+		onclick="location.href='main.do'" value="메인으로"/>
+		
 	<c:if test="${msg ne null }">
 		<script>
 			alert('${msg}');
