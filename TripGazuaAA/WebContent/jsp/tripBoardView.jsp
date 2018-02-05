@@ -25,6 +25,11 @@
 				<td>${comment.nickname }</td>
 				<td>${comment.content }</td>
 				<td>${comment.wDate }</td>
+				<td>
+					<input type="button"
+						onclick="location.href='tripCommentDelete.do?commentNum=${comment.commentNum}&num=${comment.num }'"
+						value="삭제" >
+				</td>
 			</tr>
 		</c:forEach>
 	</table>

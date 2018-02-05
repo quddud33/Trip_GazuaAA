@@ -230,11 +230,18 @@ public class MyController {
 		
 //=================================댓글======================================
 		
+		//댓글 입력
 		@RequestMapping("tripCommentInsert.do")
 		public String tripCommentInsert(@RequestParam HashMap<String, Object> params) {
 			cService.insertComment(params);
 			return "redirect:tripBoardView.do?num=" + params.get("num");
 		}
 		
+		//댓글 삭제
+		@RequestMapping("tripCommentDelete.do")
+		public String tripCommentDelete(@RequestParam int commentNum, @RequestParam int num) {
+			cService.deleteComment(commentNum);
+			return "redirect:tripBoardView.do?num=" + num;
+		}
 		
 }
