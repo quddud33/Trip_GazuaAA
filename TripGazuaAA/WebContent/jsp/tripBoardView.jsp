@@ -6,6 +6,43 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+
+        #bg {
+            width:100%;
+            height:100%;
+            position:fixed;
+            left:0;
+            top:0;
+            background-color: rgba(0,0,0,.7);
+            display: none;
+        }
+
+        #updateBox {
+            width:600px;
+            height:200px;
+            position:absolute;
+            left:50%;
+            top:50%;
+            margin:-150px 0 0 -300px;
+            background: #fff;
+        }
+        .title {
+            text-align: center;
+            color:#03A9F4;
+        }
+        #updateBox dt {
+            text-indent: 10px;
+            margin:5px;
+            font-size:21px;
+            color:#29B6F6;
+        }
+        #updateBox dd {
+            text-indent: 10px;
+            margin:5px;
+        }
+
+</style>
 </head>
 <body>
 
@@ -23,13 +60,16 @@
 		<c:forEach var="comment" items="${comment }">
 			<tr>
 				<td>${comment.nickname }</td>
-				<td>${comment.content }</td>
+				<td class="commentContent">${comment.content }</td>
 				<td>${comment.wDate }</td>
-				<td>
-					<input type="button"
-						onclick="location.href='tripCommentDelete.do?commentNum=${comment.commentNum}&num=${comment.num }'"
-						value="삭제" >
-				</td>
+				<c:if test="${user.userID eq comment.userID}">
+					<td>	
+						<a class="delComment" href="#" commentNum="${comment.commentNum }">삭제하기</a>
+					</td>
+					<td>
+						<a class="updateComment" href="#">수정하기</a>
+					</td>
+				</c:if>
 			</tr>
 		</c:forEach>
 	</table>
@@ -52,6 +92,21 @@
 	</c:if>
 	<a href="tripBoardLike.do">좋아요</a><!-- boardNum -->
 	
+	<form action="tripCommentUpdate.do">
+		<div id="bg">
+			<div id="updateBox">
+				<h2 class="title">수정</h2>
+					<input type="hidden" name="userID" value="${user.userID}"/>
+				<input type="hidden" name="num" value="${view.num }">
+				<input type="hidden" name="commentNum" id="commentNum">
+				<input type="hidden" name="nickname" value="${user.nickname }">
+				<textarea rows="5" cols="80" name="content" id="commentContent"
+					style="resize: none; overflow: hidden;" placeholder="댓글을 입력해주세요"></textarea>
+			<button>등록</button>	
+			</div>
+		</div>
+	</form>
+	
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script>
 		$('#del').click(function(e) {
@@ -60,6 +115,26 @@
 			else
 				e.preventDefault();
 		});
+		
+		$('.delComment').click(function(e) {
+			if(confirm("정말로 삭제하시겠습니까?"))
+				location.href = "tripCommentDelete.do?commentNum=" + $(this).attr("commentNum") + "&num=${view.num }";
+			else
+				e.preventDefault();
+		});
+		
+		$(".updateComment").on("click", function(){
+			$("#bg").css("display", "block");
+			$("#commentNum").val($(this).parent().prev().children(".delComment").attr("commentNum"));
+			$("#commentContent").val($(this).parent().parent().children(".commentContent").text());
+		});
+		
+	    $("#updateBox").on("click",function (e) {                                                             
+		        e.stopPropagation();                                                                       
+		    });//click end                                                                                
+		    $("#bg").on("click",function () {                                                                 
+		        $("#bg").css("display","none");                                
+		    });//click end
 	</script>
 </body>
 </html>

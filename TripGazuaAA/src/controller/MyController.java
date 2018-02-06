@@ -244,4 +244,11 @@ public class MyController {
 			return "redirect:tripBoardView.do?num=" + num;
 		}
 		
+		//댓글 수정
+		@RequestMapping("tripCommentUpdate.do")
+		public String tripCommentUpdate(@RequestParam HashMap<String, Object> params) {
+			cService.updateComment(params);
+			return "redirect:tripBoardView.do?num=" + params.get("num"); 
+		}
+		
 }

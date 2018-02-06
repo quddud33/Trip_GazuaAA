@@ -13,7 +13,7 @@
 	<update id="updateComment" parameterType="java.util.HashMap">
 		update tripcomment 
 		set content = #{content}, uDate = now()
-		where = commentNum = #{commentNum}
+		where commentNum = #{commentNum}
 	</update>
 	
 	<delete id="deleteComment" parameterType="int">
