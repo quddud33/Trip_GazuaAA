@@ -58,8 +58,9 @@ table, #map {
 					<td class="mapCursor"><a
 						onclick="setMap('${searchTest.mapy}', '${searchTest.mapx }', '${searchTest.title }')">${searchTest.title }</a></td>
 					<td>${searchTest.addr1 }</td>
-					<c:if test="${searchTest.price ne null }">
-						<td>${searchTest.price }</td>
+					<td><c:if test="${searchTest.price ne null }">${searchTest.price }</c:if></td>
+					<c:if test="${searchTest.contenttypeid eq '39' }">
+					<td><button onclick="location.href='restaurantWish.do?userID=${user.userID}&contentID=${searchTest.contentid }&contentTypeID=${searchTest.contenttypeid }'">찜하기</button></td>
 					</c:if>
 					<td><a
 						href="contentView.do?contentid=${searchTest.contentid }&contenttypeid=${searchTest.contenttypeid}&price=${searchTest.price }">바로가기</a></td>

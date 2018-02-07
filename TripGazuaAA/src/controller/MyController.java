@@ -182,7 +182,6 @@ public class MyController {
 		public ModelAndView tripBoardView(@RequestParam int num) {
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("view",bService.selectOne(num));
-			mav.addObject("comment",cService.selectAll(num));
 			mav.setViewName("tripBoardView");
 			
 			return mav;
@@ -228,27 +227,57 @@ public class MyController {
 			return "redirect:main.do";
 		}
 		
-//=================================댓글======================================
-		
-		//댓글 입력
-		@RequestMapping("tripCommentInsert.do")
-		public String tripCommentInsert(@RequestParam HashMap<String, Object> params) {
-			cService.insertComment(params);
-			return "redirect:tripBoardView.do?num=" + params.get("num");
+		@RequestMapping("wish.do")
+		public void wish(String contentTypeID, String contentID) {
+			
 		}
 		
-		//댓글 삭제
-		@RequestMapping("tripCommentDelete.do")
-		public String tripCommentDelete(@RequestParam int commentNum, @RequestParam int num) {
-			cService.deleteComment(commentNum);
-			return "redirect:tripBoardView.do?num=" + num;
+		@RequestMapping("festvalWish.do")
+		public String festvalWish(@RequestParam HashMap<String, String> params) {
+			resService.insertFestval(params);
+			return "redirect:myPage.do";
 		}
 		
-		//댓글 수정
-		@RequestMapping("tripCommentUpdate.do")
-		public String tripCommentUpdate(@RequestParam HashMap<String, Object> params) {
-			cService.updateComment(params);
-			return "redirect:tripBoardView.do?num=" + params.get("num"); 
+		@RequestMapping("restaurantWish.do")
+		public String restaurantWish(@RequestParam HashMap<String, String> params) {
+			resService.insertRestaurant(params);
+			return "redirect:myPage.do";
+		}
+		
+	//=================================댓글======================================
+		
+			//댓글 입력
+			@RequestMapping("tripCommentInsert.do")
+			public String tripCommentInsert(@RequestParam HashMap<String, Object> params) {					cService.insertComment(params);
+					return "redirect:tripBoardView.do?num=" + params.get("num");
+			}
+			
+			//댓글 삭제
+			@RequestMapping("tripCommentDelete.do")
+			public String tripCommentDelete(@RequestParam int commentNum, @RequestParam int num) {
+				cService.deleteComment(commentNum);
+				return "redirect:tripBoardView.do?num=" + num;
+			}
+			
+			//댓글 수정
+			@RequestMapping("tripCommentUpdate.do")
+			public String tripCommentUpdate(@RequestParam HashMap<String, Object> params) {
+				cService.updateComment(params);
+				return "redirect:tripBoardView.do?num=" + params.get("num"); 
+			}
+	
+//====================================마이페이지==================================
+		
+		@RequestMapping("myPage.do")
+		public String myPage(Model model, HttpSession session) {
+			String userID = ((HashMap<String, String>)session.getAttribute("user")).get("userID");
+			model.addAttribute("reservation", resService.selectReservation(userID));
+			model.addAttribute("festval", resService.selectFestval(userID));
+			System.out.println(resService.selectFestval(userID));
+			System.out.println("=========================");
+			System.out.println(resService.selectRestaurant(userID));
+			model.addAttribute("restaurant", resService.selectRestaurant(userID));
+			return "myPage";
 		}
 		
 }
