@@ -44,6 +44,7 @@ table, #map {
 			<option value="8">울산</option>
 		</select> <input type="text" name="search" /> <input type="submit" value="검색" />
 	</form>
+	<input type="radio" >
 	<br />
 	<table border="1">
 		<tr>
@@ -168,6 +169,27 @@ table, #map {
 
 			map.panTo(markerPosition);
 		}
+		var $contenttypeid = $('input[name=contenttypeid]'),
+		$areacodeBox = $('#areacodeBox');
+	
+		$contenttypeid.change(getContentList);
+		$areacodeBox.change(getContentList);
+	
+	function getContentList(){
+		console.log($(this).val());
+		$.ajax("contentList.do", {
+			type : "POST",
+			dataType : "json",
+			data : {
+				contenttypeid : $contenttypeid.val(),
+				areacode : $areacodeBox.val()
+			},
+			success : function(data){
+				alert(data);
+			}
+		});
+		
+	}
 	</script>
 </body>
 </html>
