@@ -15,8 +15,8 @@ public class BoardService {
 	private IBoardDao bDao;
 	
 	//전체 글 출력
-	public List<HashMap<String, Object>> selectAll() {
-		return bDao.selectAll();
+	public List<HashMap<String, Object>> selectAll(int start) {
+		return bDao.selectAll(start);
 	}
 	
 	//글 쓰기
@@ -38,4 +38,16 @@ public class BoardService {
 	public void updateBoard(HashMap<String, Object> params) {
 		bDao.updateBoard(params);
 	}
+	
+	//조회수
+	public void views(int num) {
+		bDao.views(num);
+	}
+	
+	//글 개수
+	public int count() {
+		return bDao.count();
+	}
+	
+	
 }

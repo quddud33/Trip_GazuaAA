@@ -18,18 +18,14 @@ public interface IBoardDao {
 	public HashMap<String, Object> selectOne(int num);
 	
 	//글 전체 보기
-	public List<HashMap<String, Object>> selectAll();
+	public List<HashMap<String, Object>> selectAll(int start);
 	
 	//조회수
-	public void readCountPlus(int num);
-	
-	//검색
-	public List<HashMap<String, Object>> searchBoard(HashMap<String, Object> params);
+	public void views(int num);
 	
 	//글 개수
-	public void count();
+	public int count();
 	
-	//검색 결과 개수
-	public void searchCount(HashMap<String, Object> params);
+	
 	
 }

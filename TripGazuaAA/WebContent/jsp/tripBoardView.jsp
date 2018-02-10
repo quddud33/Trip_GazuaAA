@@ -78,19 +78,20 @@
 			<input type="hidden" name="userID" value="${user.userID}"/>
 			<input type="hidden" name="num" value="${view.num }">
 			<input type="hidden" name="nickname" value="${user.nickname }">
+			<input type="hidden" name="page" value="${page }">
 			<textarea rows="5" cols="100" name="content"
 				style="resize: none; overflow: hidden;" placeholder="댓글을 입력해주세요"></textarea>
 			<button>등록</button>
 	</form>
 	<br>
 	
-	<a href="tripBoard.do">뒤로가기</a>
+	<a href="tripBoard.do?page=${page }">뒤로가기</a>
 
 	<c:if test="${user.userID eq view.userID}">
-		<a href="tripBoardUpdateForm.do?num=${view.num }">수정하기</a>
+		<a href="tripBoardUpdateForm.do?num=${view.num }&page=${page}">수정하기</a>
 		<a id="del" href="#">삭제하기</a><!-- boardNum,userID -->
 	</c:if>
-	<a href="tripBoardLike.do">좋아요</a><!-- boardNum -->
+	<a href="tripBoardLike.do?num=${view.num }&userID=${user.userID}&page=${page}">좋아요</a><!-- boardNum -->
 	
 	<form action="tripCommentUpdate.do">
 		<div id="bg">
@@ -100,9 +101,10 @@
 				<input type="hidden" name="num" value="${view.num }">
 				<input type="hidden" name="commentNum" id="commentNum">
 				<input type="hidden" name="nickname" value="${user.nickname }">
+				<input type="hidden" name="page" value="${page }">
 				<textarea rows="5" cols="80" name="content" id="commentContent"
 					style="resize: none; overflow: hidden;" placeholder="댓글을 입력해주세요"></textarea>
-			<button>등록</button>	
+			<button>수정</button>	
 			</div>
 		</div>
 	</form>

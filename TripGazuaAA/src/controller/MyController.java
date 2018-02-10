@@ -149,9 +149,13 @@ public class MyController {
 		
 		//게시판 메인페이지(selectAll)
 		@RequestMapping("tripBoard.do")
-		public ModelAndView tripBoard() {
+		public ModelAndView tripBoard(@RequestParam(defaultValue="1") int page) {
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("board", bService.selectAll());
+			int start = (page - 1) * 7;
+			mav.addObject("total", bService.count());
+			mav.addObject("page", page);
+
+			mav.addObject("board", bService.selectAll(start));
 			mav.setViewName("tripBoard");
 			
 			return mav;
@@ -179,9 +183,12 @@ public class MyController {
 		
 		//게시글  보기(selectOne), 댓글
 		@RequestMapping("tripBoardView.do")
-		public ModelAndView tripBoardView(@RequestParam int num) {
+		public ModelAndView tripBoardView(@RequestParam int num, @RequestParam int page) {
 			ModelAndView mav = new ModelAndView();
+			bService.views(num);
+			mav.addObject("page",page);
 			mav.addObject("view",bService.selectOne(num));
+			mav.addObject("comment",cService.selectAll(num));
 			mav.setViewName("tripBoardView");
 			
 			return mav;
@@ -197,8 +204,9 @@ public class MyController {
 		
 		//글 수정폼
 		@RequestMapping("tripBoardUpdateForm.do")
-		public ModelAndView tripBoardUpdateForm(int num) {
+		public ModelAndView tripBoardUpdateForm(int num, @RequestParam int page) {
 			ModelAndView mav = new ModelAndView();
+			mav.addObject("page",page);
 			mav.addObject("update",bService.selectOne(num));
 			mav.setViewName("tripBoardUpdateForm");
 			
@@ -207,10 +215,10 @@ public class MyController {
 		
 		//글 수정 
 		@RequestMapping("tripBoardUpdate.do")
-		public String tripBoardUpdate(@RequestParam HashMap<String, Object> params) {
+		public String tripBoardUpdate(@RequestParam HashMap<String, Object> params, @RequestParam int page) {
 //			System.out.println(params);
 			bService.updateBoard(params);
-			return "redirect:tripBoard.do";
+			return "redirect:tripBoard.do?page="+  page;
 		}
 		
 //====================================예약관련=================================
@@ -246,26 +254,27 @@ public class MyController {
 		
 	//=================================댓글======================================
 		
-			//댓글 입력
-			@RequestMapping("tripCommentInsert.do")
-			public String tripCommentInsert(@RequestParam HashMap<String, Object> params) {					cService.insertComment(params);
-					return "redirect:tripBoardView.do?num=" + params.get("num");
-			}
-			
-			//댓글 삭제
-			@RequestMapping("tripCommentDelete.do")
-			public String tripCommentDelete(@RequestParam int commentNum, @RequestParam int num) {
-				cService.deleteComment(commentNum);
-				return "redirect:tripBoardView.do?num=" + num;
-			}
-			
-			//댓글 수정
-			@RequestMapping("tripCommentUpdate.do")
-			public String tripCommentUpdate(@RequestParam HashMap<String, Object> params) {
-				cService.updateComment(params);
-				return "redirect:tripBoardView.do?num=" + params.get("num"); 
-			}
-	
+		//댓글 입력
+		@RequestMapping("tripCommentInsert.do")
+		public String tripCommentInsert(@RequestParam HashMap<String, Object> params, @RequestParam int page) {
+			cService.insertComment(params);
+			return "redirect:tripBoardView.do?num=" + params.get("num") + "&page=" + page;
+		}
+		
+		//댓글 삭제
+		@RequestMapping("tripCommentDelete.do")
+		public String tripCommentDelete(@RequestParam int commentNum, @RequestParam int num) {
+			cService.deleteComment(commentNum);
+			return "redirect:tripBoardView.do?num=" + num;
+		}
+		
+		//댓글 수정
+		@RequestMapping("tripCommentUpdate.do")
+		public String tripCommentUpdate(@RequestParam HashMap<String, Object> params, @RequestParam int page) {
+			cService.updateComment(params);
+			return "redirect:tripBoardView.do?num=" + params.get("num") +"&page="+ page; 
+		}
+		
 //====================================마이페이지==================================
 		
 		@RequestMapping("myPage.do")

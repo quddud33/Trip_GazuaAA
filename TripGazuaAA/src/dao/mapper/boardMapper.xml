@@ -6,8 +6,8 @@
 <mapper namespace="dao.IBoardDao">
 	
 	<insert id="insertBoard" parameterType="java.util.HashMap">
-		insert into tripboard(num, userID, nickname, title, content, image, wDate, uDate) 
-		values(0, #{userID}, #{nickname}, #{title}, #{content}, #{image}, now(), now())
+		insert into tripboard(num, userID, nickname, title, content, image, wDate, uDate, views) 
+		values(0, #{userID}, #{nickname}, #{title}, #{content}, #{image}, now(), now(), 1)
 	</insert>
 	
 	<update id="updateBoard" parameterType="java.util.HashMap">
@@ -30,6 +30,22 @@
 	<select id="selectAll" resultType="java.util.HashMap">
 		select *
 		from tripboard
+		order by num desc
+		limit #{start}, 7
 	</select>
+	
+	<!-- 게시글 개수 -->
+	<select id="count" resultType="int">
+		select count(*)
+		from tripboard
+	</select>
+
+	<!-- 조회수 -->
+	<update id="views">
+		update tripboard
+		set views = views + 1
+		where num = #{num}
+	</update>
+
 	
 </mapper>

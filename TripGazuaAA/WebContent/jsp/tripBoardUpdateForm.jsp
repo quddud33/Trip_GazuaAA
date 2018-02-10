@@ -18,6 +18,7 @@
 				<td>
 					<input name="userID" value="${update.userID }" readonly="readonly" />
 					<input name="num" type="hidden" value="${update.num }">
+					<input type="hidden" name="page" value="${page }">
 				</td>
 			</tr>
 			<tr>
@@ -38,7 +39,7 @@
 		</table>
 		<br>
 		<button>수정</button>
-		<button type="button" onclick="location.href='tripBoardView.do?num=${update.num}'">뒤로가기</button>
+		<button type="button" onclick="location.href='tripBoardView.do?num=${update.num}&page=${page }'">뒤로가기</button>
 	</form>
 </body>
 </html>
