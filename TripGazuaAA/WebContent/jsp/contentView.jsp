@@ -5,8 +5,60 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style>
+
+
+        #bg {
+            width:100%;
+            height:100%;
+            position:fixed;
+            left:0;
+            top:0;
+            background-color: rgba(0,0,0,.7);
+            display: none;
+        }
+
+        #loginBox {
+            width:400px;
+            height:300px;
+            position:absolute;
+            left:50%;
+            top:50%;
+            margin:-150px 0 0 -200px;
+            background: #fff;
+        }
+        .title {
+            text-align: center;
+            color:#03A9F4;
+        }
+        #loginBox dt {
+            text-indent: 10px;
+            margin:5px;
+            font-size:21px;
+            color:#29B6F6;
+        }
+        #loginBox dd {
+            text-indent: 10px;
+            margin:5px;
+        }
+        
+        
+#nickname{
+    text-align: right;
+    position:relative;
+    clear: both;
+    display: inline;
+    margin-left: 1000px;
+    margin-top: -50px;
+}
+
 .star-input>.input,
 .star-input>.input>label:hover,
 .star-input>.input>input:focus+label,
@@ -109,6 +161,32 @@
 </style>
 </head>
 <body>
+
+<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapsed" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="http://vpa.danbee.Ai/#/chats?chatbotId=054d0e31-3af2-4e4e-a930-8fa4462da027">고객센터</a>
+				<a class="navbar-brand" href="chat.do">채팅방</a>
+				<a class="navbar-brand" href="contentList.do">지도/컨텐츠 리스트</a>
+				<a class="navbar-brand" href="tripBoard.do">게시판</a>
+				<a class="navbar-brand" href="myPage.do">마이페이지</a>
+				<a class="navbar-brand" href="reservationView.do">예약하기</a>
+				<a class="navbar-brand" href="reviewList.jsp">리뷰 더보기</a><!-- contentID -->
+				<a class="navbar-brand login" href="#">로그인</a> 
+				<a class="navbar-brand" href="createUserForm.do">회원가입</a>
+				<a id="nickname" class="navbar-brand" href=""><small>님 환영합니다.</small></a>
+			</div>
+		</div>
+	</nav>
+
+
+
 	<a href="chat.jsp">채팅방</a><!--userID,nickName-->
 	<a href="serviceCenter.jsp">서비스 센터</a><!--userID,nickName-->
 	<a href="locationView.jsp">지도/컨텐츠 리스트</a>
@@ -252,6 +330,27 @@
 				</tr>	
 				</c:forEach>
 			</table>
+			
+				<form action="login.do">
+		<div id="bg">
+			<div id="loginBox">
+				<h2 class="title">Trip GazuaAA</h2>
+				<dl>
+
+					<dd>
+						<input type="text" name="userID" placeholder="아이디" />
+					</dd>
+					<dd>
+						<input type="password" name="password" placeholder="비밀번호" />
+					</dd>
+					<dd>
+						<button>로그인</button>
+					</dd>
+
+				</dl>
+			</div>
+		</div>
+	</form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 //star rating
@@ -286,6 +385,19 @@ var starRating = function(){
   });
 };
 starRating();
+
+
+$(".login").on("click", function(){
+	$("#bg").css("display", "block");
+});
+
+$("#loginBox").on("click",function (e) {                                                              //상세정보를 보여주는 박스 클릭이벤트
+        e.stopPropagation();                                                                        //부모로의 이벤트 전파를 중지시킴 (이걸 하지 않을시 박스를 클릭했는데 뒷배경의 이벤트까지
+    });//click end                                                                                  //함께 발생하는일이 일어나게됨.
+    $("#bg").on("click",function () {                                                                    //뒷배경 박스 클릭이벤트
+        $("#bg").css("display","none");                                                                  //상세정보 창을 안보이게 변경
+    });//click end
+
 </script>
 </body>
 </html>
