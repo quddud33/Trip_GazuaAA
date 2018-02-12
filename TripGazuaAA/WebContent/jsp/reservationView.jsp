@@ -131,7 +131,7 @@ padding: 20px;
 			</tr>
 		</tbody>
 	</table>
-		<p><button class="btn btn-info btn-lg" disabled="disabled">예약하기</button></p>
+		<p><button class="btn btn-info btn-lg" >예약하기</button></p>
 	</form>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>

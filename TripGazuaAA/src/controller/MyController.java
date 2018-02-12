@@ -226,6 +226,7 @@ public class MyController {
 		@RequestMapping("reservationView.do")
 		public String reservationView(Model model, @RequestParam HashMap<String, String> params) throws Exception {
 			model.addAttribute("detail", aService.detailInfo(params.get("contentID"), params.get("contentTypeID")));
+			System.out.println( aService.detailInfo(params.get("contentID"), params.get("contentTypeID")));
 			return "reservationView";
 		}
 				

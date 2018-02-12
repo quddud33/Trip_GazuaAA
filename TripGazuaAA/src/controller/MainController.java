@@ -11,11 +11,11 @@ import api.TourAPI;
 @Controller
 public class MainController {
 	
-	@RequestMapping(value = "ajax/touristInfo", params = { "contentTypeId", "areaCode", "page" })
+	@RequestMapping(value = "ajax/touristInfo.do", params = { "contentTypeId", "areaCode", "page" })
 	public ResponseEntity<String> touristInfo(int contentTypeId, String areaCode, int page) {
 		
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("content-type", "application/json");
+		headers.add("content-type", "application/json;charset=\"UTF-8\"");
 		
 		return new ResponseEntity<>(TourAPI.getTouristInformation(contentTypeId, areaCode, page).toString(), headers, HttpStatus.OK);
 		

@@ -28,7 +28,6 @@ public class APIController {
 			@RequestParam(defaultValue="") String contentTypeId, 
 			@RequestParam(defaultValue="") String areaCode,
 			@RequestParam(defaultValue="1") String page) throws Exception {
-		System.out.println("이새키 호출 x");
 		ModelAndView mav = new ModelAndView();
 //		mav.addObject("contentList", service.searchAPIInfo(search, contentTypeId, areaCode,page));
 		mav.addObject("page",page);
@@ -48,16 +47,6 @@ public class APIController {
 		mav.setViewName("contentList");
 		return mav;
 	}
-	//리스트 ajax 처리
-	@RequestMapping(value = "contentList.do", method = { RequestMethod.GET, RequestMethod.POST})
-    public @ResponseBody List<HashMap<String, String>> listAjax(@RequestParam(defaultValue = "32")String contenttypeid,
-    		@RequestParam(defaultValue="1")String areacode,
-    		@RequestParam(defaultValue="")String contentid,
-    		@RequestParam(defaultValue="1")String page) throws Exception {
-		System.out.println("ajax");
-		return service.areaBased(areacode, contentid, page, contenttypeid);
-    }//
-	
 	//상세정보(관광지, 숙박, 축제 등) [contentView]
 	@RequestMapping("contentView.do")
 	public ModelAndView roomDetail(@RequestParam String contentid, @RequestParam String contenttypeid) throws Exception {
