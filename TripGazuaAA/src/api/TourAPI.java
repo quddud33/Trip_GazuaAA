@@ -44,14 +44,20 @@ public class TourAPI {
 				items.add(item);
 				
 				item.put("no", Integer.parseInt(itemElement.select("contentid").text()));
+				item.put("contenttypeid", itemElement.select("contenttypeid").text());
 				item.put("title", itemElement.select("title").text());
 				item.put("addr", itemElement.select("addr1").text());
+				
+				if(itemElement.select("contenttypeid").text().equals("32")) {
+					item.put("price", String.valueOf((int) (Math.random() * 1000) * 100));
+				}
 				
 				Elements image;
 				if((image = itemElement.select("firstimage")).size() != 0)
 					item.put("img", image.text());
 				
 			}
+			
 			
 		}catch (IOException e) { e.printStackTrace(); }
 		
