@@ -114,10 +114,8 @@ table, #map {
 
 		// 		var page = new PaginateUtil();
 		function showSearchTest() {
-			$searchTest.show;
+			$searchTest.show();
 		}
-		
-
 		$('[name=contentTypeIdVal], [name=areaCodeVal]').change(function() {
 
 			$.ajax('ajax/touristInfo.do', {
