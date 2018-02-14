@@ -69,23 +69,25 @@ table, #map {
 	<br />
 	<table border="1">
 		<tr>
+			<th>바로가기</th>
 			<th>이름</th>
 			<th>주소</th>
 			<th>가격</th>
-			<th>ID</th>
 		</tr>
 
 		<c:forEach var="searchTest" items="${contentList }">
 			<c:if test="${searchTest.totalCount eq null }">
 				<tr id="searchTest">
+					<td><a
+						href="contentView.do?contentid=${searchTest.contentid }&contenttypeid=${searchTest.contenttypeid}&price=${searchTest.price }">바로가기</a></td>
+					<td>${searchTest.title}</td>
 					<td>${searchTest.addr1 }</td>
 					<td><c:if test="${searchTest.price ne null }">${searchTest.price }</c:if></td>
 					<c:if test="${searchTest.contenttypeid eq '39' }">
 						<td><button
 								onclick="location.href='restaurantWish.do?userID=${user.userID}&contentID=${searchTest.contentid }&contentTypeID=${searchTest.contenttypeid }'">찜하기</button></td>
 					</c:if>
-					<td><a
-						href="contentView.do?contentid=${searchTest.contentid }&contenttypeid=${searchTest.contenttypeid}&price=${searchTest.price }">바로가기</a></td>
+
 				</tr>
 			</c:if>
 			<c:if test="${searchTest.totalCount ne null }">
@@ -99,7 +101,8 @@ table, #map {
 				<th scope="row"><a href="contentView.do?contentid=<\%=this.no%>&contenttypeid=<\%=this.contenttypeid%>&price"><\%=this.no%></a></th>
 				<td><\%=this.title%></td>
 				<td><\%=this.addr%></td>
-				<td><\%if(this.contenttypeid == 39) {%><button onclick="location.href='restaurantWish.do?userID=${user.userID}&contentID=<\%=this.contentid%>&contentTypeID=<\%=this.contenttypeid%>'">찜하기</button><\%}%></td>
+				<td><\%if(this.contenttypeid == 39) {%><button onclick="location.href='restaurantWish.do?userID=${user.userID}&contentID=<\%=this.no%>&contentTypeID=<\%=this.contenttypeid%>'">찜하기</button><\%}%></td>
+				<td><\%if(this.price != 0) {%><\%=this.price%><\%}%></td>
 				<td><\%if(this.img != undefined) {%><img width="160" src="<\%=this.img%>"><\%}%></td>
 			</tr>
 		<\%})%>
@@ -110,7 +113,6 @@ table, #map {
 	<script>
 		var touristTable = _.template($('#touristTable').html()), $areaCode = $('[name=areaCodeVal]')
 		var $searchTest = $("#searchTest");
-		
 
 		// 		var page = new PaginateUtil();
 		function showSearchTest() {

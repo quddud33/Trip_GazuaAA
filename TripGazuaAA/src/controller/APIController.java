@@ -29,7 +29,7 @@ public class APIController {
 			@RequestParam(defaultValue="") String areaCode,
 			@RequestParam(defaultValue="1") String page) throws Exception {
 		ModelAndView mav = new ModelAndView();
-//		mav.addObject("contentList", service.searchAPIInfo(search, contentTypeId, areaCode,page));
+		mav.addObject("contentList", service.searchAPIInfo(search, contentTypeId, areaCode,page));
 		mav.addObject("page",page);
 		mav.setViewName("contentList");
 		return mav;
