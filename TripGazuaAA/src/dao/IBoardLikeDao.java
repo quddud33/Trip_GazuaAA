@@ -4,8 +4,8 @@ import java.util.HashMap;
 
 public interface IBoardLikeDao {
 	
-	public int likeCount(int num);
+	public void likeInsert(HashMap<String, Object> params);
 	
-	public void boardLike(HashMap<String, Object> params);
+	public void likeDelete(HashMap<String, Object> params);
 	
 }

@@ -5,17 +5,16 @@
 
 <mapper namespace="dao.IBoardLikeDao">
 
-	<!-- 좋아요 개수 -->
-	<select id="likeCount" resultType="int" parameterType="int">
-		select count(*)
-		from tripBoardLike
-		where num = #{num}
-	</select>
-               
 	<!-- 좋아요 -->
-	<insert id="boardLike" parameterType="java.util.HashMap">
+	<insert id="likeInsert" parameterType="java.util.HashMap">
 		insert into tripBoardLike
 		values(#{num}, #{userID})
 	</insert>
+
+	<!-- 좋아요취소 -->
+	<delete id="likeDelete" parameterType="java.util.HashMap">
+		delete from tripboardlike
+		where num = #{num} and userID = #{userID}
+	</delete>
 
 </mapper>

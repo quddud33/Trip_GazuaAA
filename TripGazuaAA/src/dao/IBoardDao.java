@@ -26,6 +26,15 @@ public interface IBoardDao {
 	//글 개수
 	public int count();
 	
+	//검색
+	public List<HashMap<String, Object>> selectSearch(HashMap<String, Object> params);
+	
+	//검색 개수
+	public int searchCount(HashMap<String, Object> params);
+	
+	//좋아요 개수
+	public int likeCount(int num);
+	
 	
 	
 }

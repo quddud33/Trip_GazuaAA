@@ -43,6 +43,7 @@
 				<th>제목</th>
 				<th>글쓴이</th>
 				<th>등록일</th>
+				<th>좋아요</th>
 				<th>조회수</th>
 			</tr>
 		</thead>
@@ -53,6 +54,7 @@
 					<td><a href="tripBoardView.do?num=${board.num}&page=${page}">${board.title }</a></td>
 					<td>${board.nickname }</td>
 					<td>${board.wDate }</td>
+					<td>${board.likeCount }</td>
 					<td>${board.views }</td>
 				</tr>
 			</c:forEach>

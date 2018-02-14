@@ -6,8 +6,8 @@
 <mapper namespace="dao.IBoardDao">
 	
 	<insert id="insertBoard" parameterType="java.util.HashMap">
-		insert into tripboard(num, userID, nickname, title, content, image, wDate, uDate, views) 
-		values(0, #{userID}, #{nickname}, #{title}, #{content}, #{image}, now(), now(), 1)
+		insert into tripboard
+		values(0, #{userID}, #{nickname}, #{title}, #{content}, #{image}, now(), now(), 1, 0)
 	</insert>
 	
 	<update id="updateBoard" parameterType="java.util.HashMap">
@@ -44,6 +44,63 @@
 	<update id="views">
 		update tripboard
 		set views = views + 1
+		where num = #{num}
+	</update>
+	
+	<!-- 검색 -->
+	<select id="selectSearch" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		select *
+		from tripboard
+		where 1 = 0
+		<if test="board == 'title'.toString()">
+			OR
+			title LIKE '%${search}%'
+		</if>
+		<if test="board == 'content'.toString()">
+			OR
+			content LIKE '%${search}%'
+		</if>
+		<if test="board == 'nickname'.toString()">
+			OR
+			nickname LIKE '%${search}%'
+		</if>
+		<if test="boardList == 'TC'.toString()">
+			OR
+			title LIKE '%${search}%'||content LIKE '%${search}%'
+		</if>
+		order by num desc 
+  		limit #{start}, 7
+	</select>
+
+	<!-- 검색 개수 -->
+		<select id="searchCount" resultType="int" parameterType="java.util.HashMap">
+		select count(*)
+		from tripboard
+		where 1 = 0
+		<if test="board == 'title'.toString()">
+			OR
+			title LIKE '%${search}%'
+		</if>
+		<if test="board == 'content'.toString()">
+			OR
+			content LIKE '%${search}%'
+		</if>
+		<if test="board == 'nickname'.toString()">
+			OR
+			nickname LIKE '%${search}%'
+		</if>
+		<if test="boardList == 'TC'.toString()">
+			OR
+			title LIKE '%${search}%'||content LIKE '%${search}%'
+		</if>
+		order by num desc 
+  		limit #{start}, 7
+	</select>
+
+	<!-- 좋아요 개수 -->
+	<update id="likeCount">
+		update tripboard
+		set likeCount = likeCount + 1
 		where num = #{num}
 	</update>
 

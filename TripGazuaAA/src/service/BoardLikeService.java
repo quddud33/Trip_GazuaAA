@@ -13,14 +13,11 @@ public class BoardLikeService {
 	@Autowired
 	private IBoardLikeDao dao;
 	
-	//좋아요 개수
-	public int likeCount(int num) {
-		return dao.likeCount(num);
+	public void likeInsert(HashMap<String, Object> params) {
+		dao.likeInsert(params);
 	}
 	
-	//좋아요
-	public void boardLike(HashMap<String, Object> params) {
-		dao.boardLike(params);
+	public void likeDelete(HashMap<String, Object> params) {
+		dao.likeDelete(params);
 	}
-	
 }

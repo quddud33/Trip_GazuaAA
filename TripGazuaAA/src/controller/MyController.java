@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import service.LoginService;
 import service.ReservationService;
 import service.APIService;
+import service.BoardLikeService;
 import service.BoardService;
 import service.CommentService;
 import service.ReviewService;
@@ -40,6 +41,9 @@ public class MyController {
 	
 	@Autowired 
 	private CommentService cService;
+	
+	@Autowired
+	private BoardLikeService blService;
 
 	//=================================여기서부터 로그인단================================//
 	@RequestMapping("createUserForm.do")
@@ -147,6 +151,7 @@ public class MyController {
 		
 //==================================게시판=============================================
 		
+
 		//게시판 메인페이지(selectAll)
 		@RequestMapping("tripBoard.do")
 		public ModelAndView tripBoard(@RequestParam(defaultValue="1") int page) {
@@ -181,15 +186,17 @@ public class MyController {
 			return "redirect:tripBoard.do";
 		}
 		
-		//게시글  보기(selectOne), 댓글
+		//게시글  보기(selectOne), 댓글, 좋아요
 		@RequestMapping("tripBoardView.do")
 		public ModelAndView tripBoardView(@RequestParam int num, @RequestParam int page) {
 			ModelAndView mav = new ModelAndView();
-			bService.views(num);
+			
 			mav.addObject("page",page);
 			mav.addObject("view",bService.selectOne(num));
 			mav.addObject("comment",cService.selectAll(num));
+//			mav.addObject("like", bService.likeCount(num));
 			mav.setViewName("tripBoardView");
+			bService.views(num);
 			
 			return mav;
 		}
@@ -221,6 +228,42 @@ public class MyController {
 			return "redirect:tripBoard.do?page="+  page;
 		}
 		
+		//검색
+		@RequestMapping("tripBoardSearch.do")
+		public ModelAndView tripBoardSearch(@RequestParam int page, String search, String board) {
+			ModelAndView mav = new ModelAndView();
+			int start = (page - 1) * 7;
+			
+			HashMap<String, Object> params = new HashMap<>();
+			params.put("search", search);
+			params.put("board", board);
+			params.put("start", start);
+//			System.out.println(params);
+			
+			mav.addObject("board", bService.selectSearch(params));
+			mav.addObject("total",bService.searchCount(params));
+			mav.setViewName("tripBoard");
+//			System.out.println(mav);
+			return mav;
+		}
+		
+		
+//================================게시글 좋아요=====================================
+
+		//좋아요++
+		@RequestMapping("tripBoardLike.do")
+		public String tripBoardLike(@RequestParam HashMap<String, Object> params, @RequestParam int page, HttpSession session, int num) {
+			if(session.getAttribute("user") == null) {
+				session.setAttribute("msg","로그인 후 이용해주세요");
+				return "redirect:tripBoardView.do?num=" + params.get("num") +"&page="+ page;
+			} else {
+				blService.likeInsert(params);
+				bService.likeCount(num);
+				return "redirect:tripBoardView.do?num=" + params.get("num") +"&page="+ page;
+			}
+		}
+
+				
 //====================================예약관련=================================
 		
 		@RequestMapping("reservationView.do")
