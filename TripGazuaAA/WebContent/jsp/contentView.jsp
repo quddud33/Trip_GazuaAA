@@ -286,7 +286,7 @@
 	</c:choose>
 	<c:if test="${user ne null }" >
 	<form action="reviewWrite.do">
-				<textarea rows="5" cols="30" name="content"></textarea>
+				<textarea rows="5" cols="30" name="content" class="form-control" placeholder="리뷰를 남겨주세요"></textarea>
 				<input type="submit" value="입력">
 				<input type="hidden" name="contentID" value="<%=request.getParameter("contentid")%>">
 				<input type="hidden" name="contentTypeID" value="${param.contenttypeid }">
