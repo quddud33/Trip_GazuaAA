@@ -26,7 +26,7 @@ table, #map {
 </style>
 </head>
 <body>
-	<form action="contentList.do">
+	<form action="contentList.do" onsubmit="showSearchTest()">
 		<select name="contentTypeId">
 			<option value="32">숙박</option>
 			<option value="12">관광지</option>
@@ -110,8 +110,13 @@ table, #map {
 	<script>
 		var touristTable = _.template($('#touristTable').html()), $areaCode = $('[name=areaCodeVal]')
 		var $searchTest = $("#searchTest");
+		
 
 		// 		var page = new PaginateUtil();
+		function showSearchTest() {
+			$searchTest.show;
+		}
+		
 
 		$('[name=contentTypeIdVal], [name=areaCodeVal]').change(function() {
 
