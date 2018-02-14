@@ -117,6 +117,7 @@ table, #map {
 		// 		var page = new PaginateUtil();
 		function showSearchTest() {
 			$searchTest.show();
+			console.log("쇼 성공");
 		}
 		$('[name=contentTypeIdVal], [name=areaCodeVal]').change(function() {
 
