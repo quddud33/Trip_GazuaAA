@@ -1,12 +1,4 @@
-<%@page import="constant.Key"%>
-<%@page import="api.TempaeratureAPI"%>
-<%@page import="java.util.HashMap"%>
-<%@page import="java.util.List"%>
-<%@page import="api.WeatherAPI"%>
-<%@page import="constant.Constant"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
-<%! private String key = "70d78e61bdb96cf13e612f9908e948d0"; %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,10 +28,7 @@
     {
         var FORMAT = "-";
 
-
-
         // FORMAT을 포함한 길이 체크
-
 
         if (val1.length != 10 || val2.length != 10)
             return null;
@@ -49,12 +38,9 @@
             return null;
 
 
-
         // 년도, 월, 일로 분리
         var start_dt = val1.split(FORMAT);
         var end_dt = val2.split(FORMAT);
-
-
 
         // 월 - 1(자바스크립트는 월이 0부터 시작하기 때문에...)
         // Number()를 이용하여 08, 09월을 10진수로 인식하게 함.
@@ -125,7 +111,7 @@
     //$.each 는 jquery foreach문
     //$.each(array, function) array를 function에 맞게 처리
     //function(i, v) 에서 i는 index v는 value
-    $.each(LatLngs, function(i, v) {
+       $.each(LatLngs, function(i, v) {
         locations.push(new daum.maps.LatLng(v[0], v[1]))
     });
 
@@ -175,6 +161,8 @@
         if(map.getLevel() == 10){
             // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
             //locations는 daum.maps.LatLng객체들이 담길 배열
+
+
             $.each(locations, function(i, v) {
                 //infoWindow를 설정
                 //content는 구조
