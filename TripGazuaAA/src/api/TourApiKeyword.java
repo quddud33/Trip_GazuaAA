@@ -48,8 +48,9 @@ public class TourApiKeyword {
 
 			}
 			
-			new ObjectMapper().writeValueAsString(Collections.singletonMap("positions", festivalList));
+			System.out.println(new ObjectMapper().writeValueAsString(Collections.singletonMap("positions", festivalList)));  
 			
+		
 		
 	}
 

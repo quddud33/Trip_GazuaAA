@@ -4,10 +4,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../Bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="../Bootstrap/css/nav.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-
+		.jumbotron{
+				text-shadow: black 0.2em 0.2em 0.2em;
+				background-image:  url('imgs/mainjumbotron.jpg');
+				background-size: cover;
+				color: white;
+				
+			}
+		
         #bg {
             width:100%;
             height:100%;
@@ -44,26 +56,132 @@
 
 </style>
 </head>
-<body>
-	<a href="chat.do">채팅방</a>
-	<!--userID,nickName-->
-	<a href="http://vpa.danbee.Ai/#/chats?chatbotId=054d0e31-3af2-4e4e-a930-8fa4462da027">서비스 센터</a>
-	<!--userID,nickName-->
-	<a href="contentList.do">컨텐츠 리스트</a>
-	<a href="tripBoard.do">게시판</a>
-	<a href="myPage.do">마이페이지</a>
-	<!--로그인 시에만 보이게 처리(userID,nickName)-->
-	<c:if test="${user == null}">
-		<a href="#" class="login">로그인</a>
-		<!--javascript써서 로그인폼 띄우기-->
-		<a href="createUserForm.do">회원가입</a>
-	</c:if>
-	<c:if test="${user != null }">
-		<a href="logout.do">로그아웃</a>
-		${user.userID }, 
-		${user.nickname }, 
-		${user.regDate }
-	</c:if>
+
+	<div class ="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapsed"
+					data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="main.do" >Trip_GazuaAA</a>
+			 </div>
+			 <div class="colapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
+			 		<ul class="nav navbar-nav">
+			 			<li class="active"><a href="chat.do">채팅방<span class="sr-only"></span></a></li>
+			 			<!--userID,nickName-->
+			 			
+			 			<li class="active"><a href="http://vpa.danbee.Ai/#/chats?chatbotId=054d0e31-3af2-4e4e-a930-8fa4462da027">서비스 센터<span class="sr-only"></span></a></li>
+			 			<!--userID,nickName-->
+			 			<li class="active"><a href="contentList.do">컨텐츠 리스트<span class="sr-only"></span></a></li>
+			 			<li class="active"><a href="tripBoard.do">게시판<span class="sr-only"></span></a></li>
+			 			<li class="active"><a href="myPage.do">마이페이지<span class="sr-only"></span></a></li>
+			 				<!--로그인 시에만 보이게 처리(userID,nickName)-->
+						<c:if test="${user == null}">
+						<li class="active"><a href="#" class="login">로그인<span class="sr-only"></span></a></li>
+							<!--javascript써서 로그인폼 띄우기-->
+						<li class="active"><a href="createUserForm.do">회원가입<span class="sr-only"></span></a></li>
+						</c:if>
+						<c:if test="${user != null }">
+						<li class="active"><a href="logout.do">로그아웃<span class="sr-only"></span></a></li>
+							${user.userID }, 
+							${user.nickname }, 
+							${user.regDate }
+						</c:if>
+			 			
+			 		</ul>
+			 </div>
+		</div>
+	</div>
+	
+	<div id="myCarousel" class="carousel slide" data-ride="carousel"> 
+	
+	<!--페이지-->
+	<ol class="carousel-indicators">
+		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		<li data-target="#myCarousel" data-slide-to="1"></li>
+		<li data-target="#myCarousel" data-slide-to="2"></li>
+		<li data-target="#myCarousel" data-slide-to="3"></li>
+		<li data-target="#myCarousel" data-slide-to="4"></li>
+	</ol>
+	<!--페이지-->
+
+	<div class="carousel-inner">
+		<!--슬라이드1-->
+		<div class="item active"> 
+			<img src="http://tong.visitkorea.or.kr/cms/resource/00/2522700_image2_1.jpeg" style="width:100%; height:600px;" alt="First slide">
+			<div class="container">
+				<div class="carousel-caption">
+					<h1>Slide 1</h1>
+					<p>텍스트 1</p>
+				</div>
+			</div>
+		</div>
+		<!--슬라이드1-->
+
+		<!--슬라이드2-->
+		<div class="item"> 
+			<img src="http://tong.visitkorea.or.kr/cms/resource/10/2531710_image2_1.jpg" style="width:100%; height:600px;" data-src="" alt="Second slide">
+			<div class="container">
+				<div class="carousel-caption">
+					<h1>Slide 2</h1>
+					<p>텍스트 2</p>
+				</div>
+			</div>
+		</div>
+		<!--슬라이드2-->
+		
+		<!--슬라이드3-->
+		<div class="item"> 
+			<img src="http://tong.visitkorea.or.kr/cms/resource/29/2530329_image2_1.jpg" style="width:100%; height:600px;" data-src="" alt="Third slide">
+			<div class="container">
+				<div class="carousel-caption">
+					<h1>Slide 3</h1>
+					<p>텍스트 3</p>
+				</div>
+			</div>
+		</div>
+		<!--슬라이드3-->
+		
+		<!--슬라이드4-->
+		<div class="item"> 
+			<img src="http://tong.visitkorea.or.kr/cms/resource/52/2535452_image2_1.JPG" style="width:100%; height:600px;" data-src="" alt="Third slide">
+			<div class="container">
+				<div class="carousel-caption">
+					<h1>Slide 3</h1>
+					<p>텍스트 3</p>
+				</div>
+			</div>
+		</div>
+		<!--슬라이드4-->
+		
+		
+		
+		<!--슬라이드5-->
+		<div class="item"> 
+			<img src="http://tong.visitkorea.or.kr/cms/resource/47/2516847_image2_1.jpg" style="width:100%; height:600px;"  data-src="" alt="Third slide">
+			<div class="container">
+				<div class="carousel-caption">
+					<h1>Slide 3</h1>
+					<p>텍스트 3</p>
+				</div>
+			</div>
+		</div>
+		<!--슬라이드5-->
+		
+		
+		
+		
+	</div>
+	
+	<!--이전, 다음 버튼-->
+	<a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> 
+	<a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a> 
+</div>
+	
 	<table border="1">
 		<c:forEach var="topListFestival" items="${topListFestival }"><!-- 12, 14, 15, 28 -->
 			<tr>
