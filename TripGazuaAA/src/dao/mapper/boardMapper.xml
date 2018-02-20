@@ -97,12 +97,24 @@
   		limit #{start}, 7
 	</select>
 
-	<!-- 좋아요 개수 -->
-	<update id="likeCount">
+	<!-- 좋아요 카운트 업 -->
+	<update id="likeCountUp" parameterType="int">
 		update tripboard
 		set likeCount = likeCount + 1
 		where num = #{num}
 	</update>
-
+	
+	<!-- 좋아요 카운트 다운 -->
+	<update id="likeCountDown" parameterType="int">
+		update tripboard
+		set likeCount = likeCount - 1
+		where num = #{num}
+	</update>
+	
+	<select id="likeCount" parameterType="int" resultType="int">
+	  select likeCount
+	  from tripboard
+	  where num = #{num}
+   </select>
 	
 </mapper>

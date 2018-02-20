@@ -3,9 +3,12 @@ package controller;
 
 import java.util.HashMap;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -188,17 +191,34 @@ public class MyController {
 		
 		//게시글  보기(selectOne), 댓글, 좋아요
 		@RequestMapping("tripBoardView.do")
-		public ModelAndView tripBoardView(@RequestParam int num, @RequestParam int page) {
+		public ModelAndView tripBoardView(@RequestParam int num, @RequestParam int page, HttpServletRequest request) {
 			ModelAndView mav = new ModelAndView();
-			
-			mav.addObject("page",page);
-			mav.addObject("view",bService.selectOne(num));
-			mav.addObject("comment",cService.selectAll(num));
-//			mav.addObject("like", bService.likeCount(num));
-			mav.setViewName("tripBoardView");
-			bService.views(num);
-			
-			return mav;
+			HashMap<String, Object> params = new HashMap<>();
+			HttpSession session = request.getSession();
+			if(session.getAttribute("user") == null) {
+				mav.addObject("page",page);
+				mav.addObject("view",bService.selectOne(num));
+				mav.addObject("comment",cService.selectAll(num));
+	            mav.addObject("like",bService.likeCount(num));
+				mav.setViewName("tripBoardView");
+				return mav;
+			} else {
+				HashMap<String, String> user = (HashMap<String, String>)session.getAttribute("user");
+				String userID = user.get("userID");
+				params.put("num", num);
+				params.put("userID",userID);
+				if(userID.equals(blService.likeCheck(params))) {
+					mav.addObject("likeCheck",1);
+				}
+				mav.addObject("page",page);
+				mav.addObject("view",bService.selectOne(num));
+				mav.addObject("comment",cService.selectAll(num));
+	            mav.addObject("like",bService.likeCount(num));
+				mav.setViewName("tripBoardView");
+				bService.views(num);
+				
+				return mav;
+			}
 		}
 		
 		//글 삭제
@@ -223,7 +243,6 @@ public class MyController {
 		//글 수정 
 		@RequestMapping("tripBoardUpdate.do")
 		public String tripBoardUpdate(@RequestParam HashMap<String, Object> params, @RequestParam int page) {
-//			System.out.println(params);
 			bService.updateBoard(params);
 			return "redirect:tripBoard.do?page="+  page;
 		}
@@ -238,12 +257,10 @@ public class MyController {
 			params.put("search", search);
 			params.put("board", board);
 			params.put("start", start);
-//			System.out.println(params);
 			
 			mav.addObject("board", bService.selectSearch(params));
 			mav.addObject("total",bService.searchCount(params));
 			mav.setViewName("tripBoard");
-//			System.out.println(mav);
 			return mav;
 		}
 		
@@ -257,9 +274,23 @@ public class MyController {
 				session.setAttribute("msg","로그인 후 이용해주세요");
 				return "redirect:tripBoardView.do?num=" + params.get("num") +"&page="+ page;
 			} else {
-				blService.likeInsert(params);
-				bService.likeCount(num);
+					blService.likeInsert(params);
+					bService.likeCountUp(num);
 				return "redirect:tripBoardView.do?num=" + params.get("num") +"&page="+ page;
+			}
+		}
+		
+		//조아요--
+		@RequestMapping("tripBoardLikeDelete.do")
+		public String tripBoardLikeDelete(@RequestParam HashMap<String, Object> params,@RequestParam int page, HttpSession session,int num) {
+			if(session.getAttribute("user") == null) {
+				session.setAttribute("msg","로그인 후 이용해주세요");
+				return "redirect:tripBoardView.do?num="+params.get("num")+"&page="+page;
+			} else {
+				bService.likeCountDown(num);
+				blService.likeDelete(params);
+
+				return "redirect:tripBoardView.do?num="+params.get("num")+"&page="+page;
 			}
 		}
 
@@ -300,7 +331,11 @@ public class MyController {
 		
 		//댓글 입력
 		@RequestMapping("tripCommentInsert.do")
-		public String tripCommentInsert(@RequestParam HashMap<String, Object> params, @RequestParam int page) {
+		public String tripCommentInsert(@RequestParam HashMap<String, Object> params, @RequestParam int page, HttpSession session) {
+			if(session.getAttribute("user") == null) {
+				session.setAttribute("msg","로그인 후 이용해주세요");
+				return "redirect:tripBoardView.do?num=" + params.get("num") + "&page=" + page;
+			}
 			cService.insertComment(params);
 			return "redirect:tripBoardView.do?num=" + params.get("num") + "&page=" + page;
 		}

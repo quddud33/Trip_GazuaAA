@@ -32,7 +32,13 @@ public interface IBoardDao {
 	//검색 개수
 	public int searchCount(HashMap<String, Object> params);
 	
-	//좋아요 개수
+	//좋아요 개수 증가
+	public int likeCountUp(int num);
+	
+	//좋아요 개수 차감
+	public int likeCountDown(int num);
+	
+	//좋아요 개수 출력
 	public int likeCount(int num);
 	
 	

@@ -91,8 +91,17 @@
 		<a href="tripBoardUpdateForm.do?num=${view.num }&page=${page}">수정하기</a>
 		<a id="del" href="#">삭제하기</a><!-- boardNum,userID -->
 	</c:if>
-	<a href="tripBoardLike.do?num=${view.num }&userID=${user.userID}&page=${page}">좋아요</a><!-- boardNum -->
-	
+	<c:choose>
+		<c:when  test="${likeCheck eq 1}">
+		<a href="tripBoardLikeDelete.do?num=${view.num}&userID=${user.userID}&page=${page}">좋아요 삭제</a>
+		</c:when>
+		<c:otherwise>
+			<a href="tripBoardLike.do?num=${view.num }&userID=${user.userID}&page=${page}">좋아요</a>
+		</c:otherwise>
+	</c:choose>
+
+	<!-- boardNum -->
+	${like }
 	<form action="tripCommentUpdate.do">
 		<div id="bg">
 			<div id="updateBox">
@@ -108,6 +117,13 @@
 			</div>
 		</div>
 	</form>
+	
+	<c:if test="${msg ne null }">
+		<script>
+			alert('${msg}');
+		</script>
+		<%session.invalidate(); %>
+	</c:if>
 	
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script>

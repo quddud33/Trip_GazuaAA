@@ -8,4 +8,6 @@ public interface IBoardLikeDao {
 	
 	public void likeDelete(HashMap<String, Object> params);
 	
+	public String likeCheck(HashMap<String, Object> params);
+	
 }

@@ -59,7 +59,17 @@ public class BoardService {
 		return bDao.searchCount(params);
 	}
 
-	//좋아요 개수
+	//좋아요++
+	public int likeCountUp(int num) {
+		return bDao.likeCountUp(num);
+	}
+	
+	//좋아요-- 
+	public int likeCountDown(int num) {
+		return bDao.likeCountDown(num);
+	}
+	
+	//좋아요 개수 출력
 	public int likeCount(int num) {
 		return bDao.likeCount(num);
 	}

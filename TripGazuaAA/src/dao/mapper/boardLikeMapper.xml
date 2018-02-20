@@ -16,5 +16,11 @@
 		delete from tripboardlike
 		where num = #{num} and userID = #{userID}
 	</delete>
+		
+	<select id="likeCheck" parameterType="java.util.HashMap" resultType="String">
+		select userID
+		from tripboardlike
+		where num = #{num} and userID = #{userID}
+	</select>
 
 </mapper>

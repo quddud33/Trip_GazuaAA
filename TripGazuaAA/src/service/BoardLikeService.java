@@ -20,4 +20,7 @@ public class BoardLikeService {
 	public void likeDelete(HashMap<String, Object> params) {
 		dao.likeDelete(params);
 	}
+	public String likeCheck(HashMap<String, Object> params) {
+		return dao.likeCheck(params);
+	}
 }
