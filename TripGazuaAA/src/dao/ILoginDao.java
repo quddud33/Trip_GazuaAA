@@ -9,5 +9,11 @@ public interface ILoginDao {
 	public void createUser(HashMap<String, String> params);
 	
 	public int checkID(String userID);
+	
+	public void createNaverUser(HashMap<String, String> params);
+	
+	public void createGoogleUser(HashMap<String, String> params);
+	
+	public void createFBUser(HashMap<String, String> params);
 
 }

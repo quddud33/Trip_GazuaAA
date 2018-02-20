@@ -3,12 +3,10 @@ package controller;
 
 import java.util.HashMap;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import service.LoginService;
+import service.NaverMemberService;
 import service.ReservationService;
 import service.APIService;
 import service.BoardLikeService;
 import service.BoardService;
 import service.CommentService;
+import service.FBLoginService;
+import service.GoogleLoginService;
 import service.ReviewService;
 
 @Controller
@@ -47,6 +48,15 @@ public class MyController {
 	
 	@Autowired
 	private BoardLikeService blService;
+
+	@Autowired
+	private NaverMemberService nService;
+	
+	@Autowired
+	private GoogleLoginService gService;
+	
+	@Autowired
+	private FBLoginService FBService;
 
 	//=================================여기서부터 로그인단================================//
 	@RequestMapping("createUserForm.do")
@@ -81,6 +91,43 @@ public class MyController {
 		if(params.get("password").equals(params.get("pw_CHECK"))) {
 			lService.createUser(params);
 		}
+		return "redirect:main.do";
+	}
+	
+	@RequestMapping("naverLogin.do")
+	public String naverLogin(@RequestParam String code, HttpSession session) throws Exception {
+
+		session.setAttribute("user", nService.naverLogin(
+				"https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=rXNTEaBc1MiIpkex1vR5&client_secret=VUpmCnOobA&code="
+						+ code + "&state=STATE_STRING"));
+
+		HashMap<String, String> params = (HashMap<String, String>) session.getAttribute("user");
+		if (lService.checkID((String) params.get("userID")) == 0)
+			nService.createNaverUser(params);
+
+		return "redirect:main.do";
+
+	}
+	
+	@RequestMapping("googleLogin.do")
+	public String googleLogin(@RequestParam HashMap<String, String> params, HttpSession session) {
+		
+		session.setAttribute("user", params);
+		
+		if(lService.checkID((String) params.get("userID")) == 0)
+			gService.createGoogleUser(params);
+		
+		return "redirect:main.do";
+	}
+	
+	@RequestMapping("FBLogin.do")
+	public String FBLogin(@RequestParam HashMap<String, String> params, HttpSession session) {
+		
+			session.setAttribute("user", params);
+		
+		if(lService.checkID((String) params.get("userID")) == 0)
+			FBService.createFBUser(params);
+		
 		return "redirect:main.do";
 	}
 	
@@ -274,8 +321,8 @@ public class MyController {
 				session.setAttribute("msg","로그인 후 이용해주세요");
 				return "redirect:tripBoardView.do?num=" + params.get("num") +"&page="+ page;
 			} else {
-					blService.likeInsert(params);
-					bService.likeCountUp(num);
+				blService.likeInsert(params);
+				bService.likeCountUp(num);
 				return "redirect:tripBoardView.do?num=" + params.get("num") +"&page="+ page;
 			}
 		}

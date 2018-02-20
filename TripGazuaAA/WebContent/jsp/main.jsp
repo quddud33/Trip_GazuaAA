@@ -4,59 +4,97 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="../Bootstrap/css/bootstrap.css">
-<link rel="stylesheet" href="../Bootstrap/css/nav.css">
+<meta name="google-signin-client_id"
+	content="346120053180-l6r9r2hq1sknebtp2ukd6mtoea688dhl.apps.googleusercontent.com">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/nav.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <title>Insert title here</title>
 <style>
-		.jumbotron{
-				text-shadow: black 0.2em 0.2em 0.2em;
-				background-image:  url('imgs/mainjumbotron.jpg');
-				background-size: cover;
-				color: white;
-				
-			}
-		
-        #bg {
-            width:100%;
-            height:100%;
-            position:fixed;
-            left:0;
-            top:0;
-            background-color: rgba(0,0,0,.7);
-            display: none;
-        }
+#bg {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	background-color: rgba(0, 0, 0, .7);
+	display: none;
+}
 
-        #loginBox {
-            width:400px;
-            height:300px;
-            position:absolute;
-            left:50%;
-            top:50%;
-            margin:-150px 0 0 -200px;
-            background: #fff;
-        }
-        .title {
-            text-align: center;
-            color:#03A9F4;
-        }
-        #loginBox dt {
-            text-indent: 10px;
-            margin:5px;
-            font-size:21px;
-            color:#29B6F6;
-        }
-        #loginBox dd {
-            text-indent: 10px;
-            margin:5px;
-        }
+#loginBox {
+	width: 400px;
+	height: 400px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -150px 0 0 -200px;
+	background: #fff;
+}
+
+.title {
+	text-align: center;
+	color: #03A9F4;
+}
+
+#loginBox dt {
+	text-indent: 10px;
+	margin: 5px;
+	font-size: 21px;
+	color: #29B6F6;
+}
+
+#loginBox dd {
+	text-indent: 10px;
+	margin: 5px;
+}
+
+#myCarousel {
+	margin: 60px 0;
+}
+
+.lBtn {
+	width: 250px;
+	cursor: pointer;
+}
+
+.port-image {
+	width: 100%;
+}
+
+.gallery_product {
+	margin-bottom: 30px;
+}
+
+.top_list {
+	margin: 30px auto;
+	width: 65%;
+}
 
 </style>
+<script>
+"undefined" == typeof CODE_LIVE && (!function(e) {
+		var t = {
+				nonSecure : "8080",
+				secure : "8080"
+			},
+			c = {
+				nonSecure : "http://",
+				secure : "https://"
+			},
+			r = {
+				nonSecure : "127.0.0.1",
+				secure : "gapdebug.local.genuitec.com"
+			},
+			n = "https:" === window.location.protocol ? "secure" : "nonSecure";
+		script = e.createElement("script"), script.type = "text/javascript", script.async = !0, script.src = c[n] + r[n] + ":" + t[n] + "/codelive-assets/bundle.js", e.getElementsByTagName("head")[0].appendChild(script)
+	}(document), CODE_LIVE = !0);
+</script>
 </head>
-
+<body>
 	<div class ="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -180,9 +218,36 @@
 	<!--이전, 다음 버튼-->
 	<a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> 
 	<a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a> 
-</div>
+	</div>
+	<div class="top_list">
+		<center><h2 style="margin-bottom: 30px">축제 Top 6</h2></center><!-- 12, 14, 15, 28 -->
+		<c:forEach var="topListFestival" items="${topListFestival }" >
+			<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
+                <img src="${topListFestival.firstimage }" class="img-responsive">
+            </div>
+         </c:forEach>
+	</div>
 	
-	<table border="1">
+	<!-- 잠깐오류 -->
+	<%-- <div class="top_list">
+		<center><h2 style="margin-bottom: 30px">숙박 Top 6</h2></center>
+		<c:forEach var="topListFestival" items="${topListCountry }" >
+			<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
+                <img src="${topListCountry.firstimage }" class="img-responsive">
+            </div>
+         </c:forEach>
+	</div>
+	
+	<div class="top_list">
+		<center><h2 style="margin-bottom: 30px">음식점 Top 6</h2></center>
+		<c:forEach var="topListFestival" items="${topListRestaurant }" >
+			<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
+                <img src="${topListRestaurant.firstimage }" class="img-responsive">
+            </div>
+         </c:forEach>
+	</div> --%>
+	
+	<%-- <table border="1">
 		<c:forEach var="topListFestival" items="${topListFestival }"><!-- 12, 14, 15, 28 -->
 			<tr>
 				<th>${topListFestival.contentid}</th>
@@ -210,7 +275,7 @@
 				<th><img src="${topListRestaurant.firstimage }" style="width: 300px; height: 250px"></th>
 			</tr>
 		</c:forEach>
-	</table> 
+	</table>  --%>
 
 	<!--<a href="logout.do">로그아웃</a> 로그인시 태그 생성하게 처리-->
 
@@ -229,7 +294,15 @@
 					<dd>
 						<button>로그인</button>
 					</dd>
-
+					<dd>
+						<img class="lBtn" alt="네이버이미지" src="/trip_GazuaAA/img/네이버 아이디로 로그인_완성형_Green.PNG" onclick="location.href='https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=rXNTEaBc1MiIpkex1vR5&state=STATE_STRING&redirect_uri=http://localhost:8080/trip_GazuaAA/naverLogin.do'"/>
+					</dd>
+					<dd>
+						<div style="width: 250px; height: 54px;" class="lBtn g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+					</dd>
+					<dd>
+						<div scope="public_profile,email" onlogin="checkLoginState();" class="fb-login-button" data-width="250" data-height="54" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+					</dd>
 				</dl>
 			</div>
 		</div>
@@ -240,6 +313,8 @@
 		</script>
 	<%session.removeAttribute("msg");}%>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="/trip_GazuaAA/js/googleLogin.js"></script>
+	<script src="/trip_GazuaAA/js/FBLogin.js"></script>
 <script>
 	$(".login").on("click", function(){
 		$("#bg").css("display", "block");
