@@ -121,7 +121,7 @@
 			 			</ul>
 			 			
 			 		<ul class="nav navbar-nav navbar-right">	
-						<c:if test="${user == null}">
+						<c:if test="${ㄵㄴ == null}">
 						<li class="active"><a href="#" class="login">로그인<span class="sr-only"></span></a></li>
 							<!--javascript써서 로그인폼 띄우기-->
 						<li class="active"><a href="createUserForm.do">회원가입<span class="sr-only"></span></a></li>
@@ -230,6 +230,18 @@
             </div>
          </c:forEach>
 	</div>
+	<!-- 201802021 임현준 스타트 -->
+	
+	<footer style ="background-color: #000000; color: #ffffff">
+		<div class="container">
+			<br>
+			<div class="row">
+				<div class="col-sm-12" style ="text-align: center;"><h5>Copyright &copy; 2018</h5> <h5>강병영 임현준 정민섭 최유강 이한울</h5>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
 	
 	<!-- 잠깐오류 -->
 	<%-- <div class="top_list">
