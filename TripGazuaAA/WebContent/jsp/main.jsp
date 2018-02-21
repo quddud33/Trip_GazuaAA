@@ -116,21 +116,24 @@
 			 			<!--userID,nickName-->
 			 			<li class="active"><a href="contentList.do">컨텐츠 리스트<span class="sr-only"></span></a></li>
 			 			<li class="active"><a href="tripBoard.do">게시판<span class="sr-only"></span></a></li>
-			 			<li class="active"><a href="myPage.do">마이페이지<span class="sr-only"></span></a></li>
+			 			
 			 				<!--로그인 시에만 보이게 처리(userID,nickName)-->
+			 			</ul>
+			 			
+			 		<ul class="nav navbar-nav navbar-right">	
 						<c:if test="${user == null}">
 						<li class="active"><a href="#" class="login">로그인<span class="sr-only"></span></a></li>
 							<!--javascript써서 로그인폼 띄우기-->
 						<li class="active"><a href="createUserForm.do">회원가입<span class="sr-only"></span></a></li>
 						</c:if>
 						<c:if test="${user != null }">
+						<li class="active"><a href="myPage.do">마이페이지<span class="sr-only"></span></a></li>
 						<li class="active"><a href="logout.do">로그아웃<span class="sr-only"></span></a></li>
 							${user.userID }, 
 							${user.nickname }, 
 							${user.regDate }
 						</c:if>
-			 			
-			 		</ul>
+			 		</ul>	
 			 </div>
 		</div>
 	</div>
