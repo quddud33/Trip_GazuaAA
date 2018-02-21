@@ -222,7 +222,7 @@
 	<a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> 
 	<a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a> 
 	</div>
-	<div class="top_list">
+	<div class="top_list container">
 		<center><h2 style="margin-bottom: 30px">축제 Top 6</h2></center><!-- 12, 14, 15, 28 -->
 		<c:forEach var="topListFestival" items="${topListFestival }" >
 			<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
@@ -230,32 +230,21 @@
             </div>
          </c:forEach>
 	</div>
-	<!-- 201802021 임현준 스타트 -->
-	
-	<footer style ="background-color: #000000; color: #ffffff">
-		<div class="container">
-			<br>
-			<div class="row">
-				<div class="col-sm-12" style ="text-align: center;"><h5>Copyright &copy; 2018</h5> <h5>강병영 임현준 정민섭 최유강 이한울</h5>
-				</div>
-			</div>
-		</div>
-	</footer>
 	
 	
 	<!-- 잠깐오류 -->
-	<%-- <div class="top_list">
+	<%-- <div class="top_list container">
 		<center><h2 style="margin-bottom: 30px">숙박 Top 6</h2></center>
-		<c:forEach var="topListFestival" items="${topListCountry }" >
+		<c:forEach var="topListCountry" items="${topListCountry }" >
 			<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
                 <img src="${topListCountry.firstimage }" class="img-responsive">
             </div>
          </c:forEach>
 	</div>
 	
-	<div class="top_list">
+	<div class="top_list container">
 		<center><h2 style="margin-bottom: 30px">음식점 Top 6</h2></center>
-		<c:forEach var="topListFestival" items="${topListRestaurant }" >
+		<c:forEach var="topListRestaurant" items="${topListRestaurant }" >
 			<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
                 <img src="${topListRestaurant.firstimage }" class="img-responsive">
             </div>
@@ -292,6 +281,9 @@
 		</c:forEach>
 	</table>  --%>
 
+<!-- 201802021 임현준 스타트 -->
+	
+	
 	<!--<a href="logout.do">로그아웃</a> 로그인시 태그 생성하게 처리-->
 
 	<form action="login.do">
@@ -327,6 +319,16 @@
 			alert('${msg}');
 		</script>
 	<%session.removeAttribute("msg");}%>
+	
+	<footer style ="background-color: #000000; color: #ffffff">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12" style ="text-align: center;"><h5>Copyright &copy; 2018</h5> <h5>강병영 임현준 정민섭 최유강 이한울</h5>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="/trip_GazuaAA/js/googleLogin.js"></script>
 	<script src="/trip_GazuaAA/js/FBLogin.js"></script>
