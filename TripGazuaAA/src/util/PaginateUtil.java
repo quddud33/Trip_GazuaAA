@@ -10,38 +10,48 @@ public class PaginateUtil {
 
 	public static String getPaginate(int pageNo,
 			                         int total,
-			                         int numPage,
+			                         int numpageNo,
 			                         int numBlock,
 			                         String url,
 			                         String param) {
 		//현재 페이지 : pageNo
 		//전체 게시물수 : total 
-		//한 페이지당 게시물수 : numPage
+		//한 페이지당 게시물수 : numpageNo
 		//한 페이지당 보여질 블록수 : numBlock
 		//주소 : url
 		//파라미터 : param
 		
 		//전체 페이지수
-		int totalPage = (int)Math.ceil((double)total/numPage);
+		int totalpageNo = (int)Math.ceil((double)total/numpageNo);
 		
-		//System.out.println(totalPage);
+		//System.out.println(totalpageNo);
 		
 		//현재 블록
 		int nowBlock = (int)Math.ceil((double)pageNo/numBlock);
 		
 		
 		String paginate = 
-				"<div class='pagination pagination-sm'>";
+				"<ul class=\"pagination\">";
 		
 		if(total!=0) {
 			
 			//이전버튼
 			if(pageNo<=1) {
 				//비활성화
-				paginate += "<span class=\"page-item disabled\" aria-label=\"Previous\"></span> ";
+				paginate += "<li class=\"page-item disabled\">" + 
+						"<a class=\"page-link\" href='"+url+"?"+param+(pageNo-1)+"' aria-label=\"Previous\">" + 
+						"<span aria-hidden=\"true\">&laquo;</span>" + 
+						"<span class=\"sr-only\">Previous</span>" + 
+						"</a>" + 
+						"</li> ";
 			}else {
 				//활성화
-				paginate += "<a class=\"page-link\" href='"+url+"?"+param+(pageNo-1)+"' aria-label=\"Previous\"><span class='screen_out'>이전 페이지</span></a> ";
+				paginate += "<li class=\"page-item\">" + 
+						"<a class=\"page-link\" href='"+url+"?"+param+(pageNo-1)+"' aria-label=\"Previous\">" + 
+						"<span aria-hidden=\"true\">&laquo;</span>" + 
+						"<span class=\"sr-only\">Previous</span>" + 
+						"</a>" + 
+						"</li> ";
 						
 			}//if end
 			
@@ -49,38 +59,49 @@ public class PaginateUtil {
 			for(int i = 1 ; i <= numBlock ; i++) {
 				
 				//실제 출력 페이지
-				int realPage = ((nowBlock-1)*numBlock)+i;
+				int realpageNo = ((nowBlock-1)*numBlock)+i;
 				
 				//현재 페이지냐? 아니냐?
-				if(realPage==pageNo) {
+				if(realpageNo==pageNo) {
 					//현재 페이지
-					paginate += "<strong title='현재 "+pageNo+"페이지'>"+pageNo+"</strong> ";
+					paginate += "<li class=\"page-item\"><a class=\"page-link\" href='#' title='"+realpageNo+"'>"+realpageNo+"</a></li>";
+					
 					
 				}else {
 					//현재 페이지가 아님
-					paginate += "<a href='"+url+"?"+param+realPage+"' title='"+realPage+"'>"+realPage+"</a> ";
+					paginate += "<li class=\"page-item\"><a class=\"page-link\" href='"+url+"?"+param+realpageNo+"' title='"+realpageNo+"'>"+realpageNo+"</a></li>";
 					
 					
 				}//if ~ else end
 				
-				if(realPage==totalPage) {
+				if(realpageNo==totalpageNo) {
 					break;
 				}//if end
 				
 			}//for end(블록 만들기)
 			
 			//다음버튼
-			if(pageNo >= totalPage) {
+			if(pageNo >= totalpageNo) {
 				//비활성화
-				paginate+="<span class=\"page-item disabled\" aria-label=\"Next\"></span> ";
+				paginate+="<li class=\"page-item\">" +
+						"<a class=\"page-link\" href='"+url+"?"+param+(pageNo+1)+"' aria-label=\"Next\">" +
+						"<span aria-hidden=\"true\">&raquo;</span>" +
+						"<span class=\"sr-only\">Next</span>" +
+						"</a>" +
+						"</li> ";
 			}else {
 				//활성화
-				paginate+="<a class=\"page-link\" href='"+url+"?"+param+(pageNo+1)+"' aria-label=\"Next\"><span class='screen_out'>다음 페이지</span></a> ";
+				paginate+="<li class=\"page-item\">" +
+						"<a class=\"page-link\" href='"+url+"?"+param+(pageNo+1)+"' aria-label=\"Next\">" +
+						"<span aria-hidden=\"true\">&raquo;</span>" +
+						"<span class=\"sr-only\">Next</span>" +
+						"</a>" +
+						"</li> ";
 			}//if end
 			
 		}//if end
 		
-		paginate+= "</div>";
+		paginate+= "</ul>";
 		
 		return paginate;
 	}
