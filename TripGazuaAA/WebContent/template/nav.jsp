@@ -26,7 +26,7 @@
 			 			</ul>
 			 			
 			 		<ul class="nav navbar-nav navbar-right">	
-						<c:if test="${ㄵㄴ == null}">
+						<c:if test="${user == null}">
 						<li class="active"><a href="#" class="login">로그인<span class="sr-only"></span></a></li>
 							<!--javascript써서 로그인폼 띄우기-->
 						<li class="active"><a href="createUserForm.do">회원가입<span class="sr-only"></span></a></li>
@@ -34,9 +34,9 @@
 						<c:if test="${user != null }">
 						<li class="active"><a href="myPage.do">마이페이지<span class="sr-only"></span></a></li>
 						<li class="active"><a href="logout.do">로그아웃<span class="sr-only"></span></a></li>
-							${user.userID }, 
+							<%-- ${user.userID }, 
 							${user.nickname }, 
-							${user.regDate }
+							${user.regDate } --%>
 						</c:if>
 			 		</ul>	
 			 </div>

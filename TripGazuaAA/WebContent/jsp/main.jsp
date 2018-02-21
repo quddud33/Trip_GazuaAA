@@ -194,12 +194,16 @@
 	</div>
 	
 	
-	<!-- 잠깐오류 -->
-	<%-- <div class="top_list container">
+	<div class="top_list container">
 		<center><h2 style="margin-bottom: 30px">숙박 Top 6</h2></center>
 		<c:forEach var="topListCountry" items="${topListCountry }" >
 			<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
-                <img src="${topListCountry.firstimage }" class="img-responsive">
+				<c:if test="${topListCountry.firstimage ne null}">
+                	<img src="${topListCountry.firstimage }" class="img-responsive">
+                </c:if>
+                <c:if test="${topListCountry.firstimage eq null}">
+                	<img src="/trip_GazuaAA/img/no.png" class="img-responsive">
+                </c:if>
             </div>
          </c:forEach>
 	</div>
@@ -208,10 +212,16 @@
 		<center><h2 style="margin-bottom: 30px">음식점 Top 6</h2></center>
 		<c:forEach var="topListRestaurant" items="${topListRestaurant }" >
 			<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
-                <img src="${topListRestaurant.firstimage }" class="img-responsive">
+                <c:if test="${topListRestaurant.firstimage ne null}">
+                	<img src="${topListRestaurant.firstimage }" class="img-responsive">
+                </c:if>
+                <c:if test="${topListRestaurant.firstimage eq null}">
+                	<img src="/trip_GazuaAA/img/no.png" class="img-responsive">
+                </c:if>
             </div>
          </c:forEach>
-	</div> --%>
+	</div>
+	
 	
 	<%-- <table border="1">
 		<c:forEach var="topListFestival" items="${topListFestival }"><!-- 12, 14, 15, 28 -->
