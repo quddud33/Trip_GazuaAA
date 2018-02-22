@@ -87,7 +87,7 @@ table, #map {
 						<td><button
 								onclick="location.href='restaurantWish.do?userID=${user.userID}&contentID=${searchTest.contentid }&contentTypeID=${searchTest.contenttypeid }'">찜하기</button></td>
 					</c:if>
-
+<!-- das -->
 				</tr>
 			</c:if>
 			<c:if test="${searchTest.totalCount ne null }">
