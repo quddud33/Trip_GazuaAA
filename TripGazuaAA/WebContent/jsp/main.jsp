@@ -83,7 +83,7 @@
 				secure : "8080"
 			},
 			c = {
-				nonSecure : "http://",
+		 		nonSecure : "http://",
 				secure : "https://"
 			},
 			r = {
