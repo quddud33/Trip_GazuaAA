@@ -339,7 +339,7 @@ public class APIService {
 				}
 			}
 			for (HashMap<String, String> v : result)
-//				System.out.println(v);
+				System.out.println(v);
 		
 			rd.close();
 			conn.disconnect();
