@@ -26,7 +26,7 @@ public class PaginateUtil {
 		
 		//System.out.println(totalpageNo);
 		
-		//현재 블록a
+		//현재 블록
 		int nowBlock = (int)Math.ceil((double)pageNo/numBlock);
 		
 		

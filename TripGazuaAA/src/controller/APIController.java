@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import service.APIService;
 import service.ReviewService;
 import util.PaginateUtil;
-//22
+
 @Controller
 public class APIController {
 	@Autowired
