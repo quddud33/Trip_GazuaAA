@@ -25,6 +25,12 @@
 	width: 65%;
 }
 
+.top_list figcaption {
+	height: 40px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 </style>
 <script>
 "undefined" == typeof CODE_LIVE && (!function(e) {
@@ -33,7 +39,7 @@
 				secure : "8080"
 			},
 			c = {
-		 		nonSecure : "http://",
+				nonSecure : "http://",
 				secure : "https://"
 			},
 			r = {
@@ -138,8 +144,16 @@
 		<center><h2 style="margin-bottom: 30px">축제 Top 6</h2></center><!-- 12, 14, 15, 28 -->
 		<c:forEach var="topListFestival" items="${topListFestival }" >
 			<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
-                <img src="${topListFestival.firstimage }" class="img-responsive">
-            </div>
+			<figure>
+                <c:if test="${topListFestival.firstimage ne null}">
+                	<img src="${topListFestival.firstimage }" class="img-responsive">
+                </c:if>
+                <c:if test="${topListFestival.firstimage eq null}">
+                	<img src="/trip_GazuaAA/img/no.png" class="img-responsive">
+                </c:if>
+                <figcaption>${topListFestival.overview }</figcaption>
+                </figure>
+                </div>
          </c:forEach>
 	</div>
 	
@@ -147,14 +161,17 @@
 	<div class="top_list container">
 		<center><h2 style="margin-bottom: 30px">숙박 Top 6</h2></center>
 		<c:forEach var="topListCountry" items="${topListCountry }" >
-			<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
-				<c:if test="${topListCountry.firstimage ne null}">
+		<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
+			<figure>
+                <c:if test="${topListCountry.firstimage ne null}">
                 	<img src="${topListCountry.firstimage }" class="img-responsive">
                 </c:if>
                 <c:if test="${topListCountry.firstimage eq null}">
                 	<img src="/trip_GazuaAA/img/no.png" class="img-responsive">
                 </c:if>
-            </div>
+                <figcaption>${topListCountry.overview }</figcaption>
+                </figure>
+                </div>
          </c:forEach>
 	</div>
 	
@@ -162,12 +179,15 @@
 		<center><h2 style="margin-bottom: 30px">음식점 Top 6</h2></center>
 		<c:forEach var="topListRestaurant" items="${topListRestaurant }" >
 			<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
+				<figure>
                 <c:if test="${topListRestaurant.firstimage ne null}">
                 	<img src="${topListRestaurant.firstimage }" class="img-responsive">
                 </c:if>
                 <c:if test="${topListRestaurant.firstimage eq null}">
                 	<img src="/trip_GazuaAA/img/no.png" class="img-responsive">
                 </c:if>
+                <figcaption>${topListRestaurant.contentid }</figcaption>
+                </figure>
             </div>
          </c:forEach>
 	</div>

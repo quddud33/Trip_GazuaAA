@@ -103,7 +103,7 @@ table, #map {
 						<td><button
 								onclick="location.href='restaurantWish.do?userID=${user.userID}&contentID=${searchTest.contentid }&contentTypeID=${searchTest.contenttypeid }'">찜하기</button></td>
 					</c:if>
-
+<!-- das -->
 				</tr>
 			</c:if>
 			<c:if test="${searchTest.totalCount ne null }">
@@ -125,6 +125,10 @@ table, #map {
 		<\%})%>
 
 	</script>
+	${paginate} 
+	<%for(int i = 1; i <= 5; i++) {%>
+	<button class="page"><%=i %></button>
+	<%} %>
 	</table>
 	</div>
 	
@@ -139,6 +143,8 @@ table, #map {
 	<script>
 		var touristTable = _.template($('#touristTable').html()), $areaCode = $('[name=areaCodeVal]')
 		var $searchTest = $("#searchTest");
+		var contentTypeId, areaCode;
+		var page = 1;
 
 		// 		var page = new PaginateUtil();
 		function showSearchTest() {
@@ -146,13 +152,36 @@ table, #map {
 			console.log("쇼 성공");
 		}
 		$('[name=contentTypeIdVal], [name=areaCodeVal]').change(function() {
-
+			contentTypeId = $('[name=contentTypeIdVal]:checked').val();
+			areaCode = $areaCode.val();
+			page = 1;
 			$.ajax('ajax/touristInfo.do', {
 				async : false,
 				data : {
-					contentTypeId : $('[name=contentTypeIdVal]:checked').val(),
-					areaCode : $areaCode.val(),
-					page : 1
+					contentTypeId :contentTypeId,
+					areaCode : areaCode,
+					page : page
+				},
+				success : function(json) {
+					$('tbody').html(touristTable({
+						touristInfo : json
+					}));
+					$searchTest.hide();
+				},
+				error : function(err) {
+				}
+			})
+
+		});
+		
+		$('.page').click(function() {
+			page = $(this).text();
+			$.ajax('ajax/touristInfo.do', {
+				async : false,
+				data : {
+					contentTypeId :contentTypeId,
+					areaCode : areaCode,
+					page : page
 				},
 				success : function(json) {
 					$('tbody').html(touristTable({
