@@ -6,6 +6,7 @@
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/nav.css">
+<link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">
 <meta charset="UTF-8">
 <title>채팅프로그램</title>
 <style>
@@ -18,14 +19,14 @@
 		margin-bottom:20px;
 	}
 	
-	ul {
+	.chatul {
 		width:280px;
 		padding:0;
 		margin:0;
 		list-style:none;
 	}
 	
-	li {
+	.chatli {
 		background: #FAFAFA;
 		padding:15px 0;
 		text-indent:10px;
@@ -36,6 +37,7 @@
 	<!-- 네비게이션 -->
 	<%@ include file="../template/nav.jsp" %>
 
+	
 	<p>
 	<button id="openBtn">open</button>
 	<button id="closeBtn">close</button>
@@ -43,7 +45,7 @@
 	
 	<h1>채팅</h1>
 	<div id="listBox">	
-	<ul>
+	<ul class="chatul">
 		<li>채팅내용</li>
 	</ul>
 	</div>
@@ -52,11 +54,11 @@
 	<input id="chatInput" />
 	<button>보내기</button>
 	</form>
-	
-	
-	<!-- footer 시작 -->
+<!-- footer 시작 -->
 <%@ include file="../template/footer.jsp" %>
 	
+
+<script src ="/Trip_GazuaAA//js/login.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 
@@ -94,7 +96,7 @@
 	
 	function displayMsg(msg) {
 		
-		$("<li>").text(msg)
+		$("<li class="chatli">").text(msg)
 		         .appendTo($list);
 		
 		console.log($list.height());

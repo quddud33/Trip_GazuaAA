@@ -4,9 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/nav.css">
 <title>회원가입 페이지</title>
 </head>
 <body>
+		<!-- 네비게이션 -->
+	<%@ include file="../template/nav.jsp" %>
+
 	<form action="createUser.do">
 		<label><b>ID</b></label> 
 		<input type="text" placeholder="아이디 입력"
@@ -27,6 +33,10 @@
 				onclick='$("#_joinsung").css("display", "none")'>취소</button>
 			<button type="submit" class="signupbtn" disabled="disabled">로그인</button>
 	</form>
+	
+		<!-- footer 시작 -->
+	<%@ include file="../template/footer.jsp" %>
+	
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>

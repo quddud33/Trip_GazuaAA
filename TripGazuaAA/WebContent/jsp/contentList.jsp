@@ -9,11 +9,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="google-signin-client_id"
+	content="346120053180-l6r9r2hq1sknebtp2ukd6mtoea688dhl.apps.googleusercontent.com">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <meta charset="UTF-8">
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/nav.css">
+<link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <title>검색</title>
 <style>
 table, #map {
@@ -26,6 +36,11 @@ table, #map {
 </style>
 </head>
 <body>
+	<!-- 네비게이션 -->
+	<%@ include file="../template/nav.jsp" %>
+	
+
+
 	<form action="contentList.do" onsubmit="showSearchTest()">
 		<select name="contentTypeId">
 			<option value="32">숙박</option>
@@ -67,6 +82,7 @@ table, #map {
 		<option value="7">울산</option>
 	</select>
 	<br />
+	<div class="container">
 	<table border="1">
 		<tr>
 			<th>바로가기</th>
@@ -95,6 +111,7 @@ table, #map {
 			</c:if>
 		</c:forEach>
 
+
 		<script id="touristTable" type="text/template">
 				<\%$.each(touristInfo.items, function() {%>
 			<tr>
@@ -106,10 +123,19 @@ table, #map {
 				<td><\%if(this.img != undefined) {%><img width="160" src="<\%=this.img%>"><\%}%></td>
 			</tr>
 		<\%})%>
+
 	</script>
 	</table>
+	</div>
+	
+	<%@ include file="../template/footer.jsp" %>
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="http://underscorejs.org/underscore-min.js"></script>
 	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src= "/trip_GazuaAA/js/login.js"></script>
+	<script src="/trip_GazuaAA/js/googleLogin.js"></script>
+	<script src="/trip_GazuaAA/js/FBLogin.js"></script>
 	<script>
 		var touristTable = _.template($('#touristTable').html()), $areaCode = $('[name=areaCodeVal]')
 		var $searchTest = $("#searchTest");

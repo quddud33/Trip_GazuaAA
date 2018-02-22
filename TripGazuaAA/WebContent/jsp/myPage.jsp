@@ -5,15 +5,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="google-signin-client_id"
+	content="346120053180-l6r9r2hq1sknebtp2ukd6mtoea688dhl.apps.googleusercontent.com">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/nav.css">
+<link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
 <title>Insert title here</title>
 </head>
 <body>
-<a href="chat.jsp">채팅방</a><!--userID,nickName-->
-<a href="serviceCenter.jsp">서비스 센터</a><!--userID,nickName-->
-<a href="locationView.jsp">지도/컨텐츠 리스트</a>
-<a href="myPage.jsp">마이페이지</a><!--로그인 시에만 보이게 처리(userID,nickName)-->
-<a href="#">로그인</a><!--javascript써서 로그인폼 뛰우기-->
-<a href="createUserForm.jsp">회원가입</a>
+	<!-- 네비게이션 -->
+	<%@ include file="../template/nav.jsp" %>
+
+
 
 <!--<a href="logout.do">로그아웃</a> 로그인시 태그 생성하게 처리-->
 <h2>숙박업소</h2>
@@ -55,5 +64,13 @@
 		</tr>
 	</c:forEach>
 </table>
+<!-- footer 시작 -->
+<%@ include file="../template/footer.jsp" %>
+
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="/trip_GazuaAA/js/googleLogin.js"></script>
+	<script src="/trip_GazuaAA/js/FBLogin.js"></script>
+	<script src="/trip_GazuaAA/js/login.js"></script>
 </body>
 </html>

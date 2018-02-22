@@ -162,28 +162,8 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapsed" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					<span class="sr-only"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="http://vpa.danbee.Ai/#/chats?chatbotId=054d0e31-3af2-4e4e-a930-8fa4462da027">고객센터</a>
-				<a class="navbar-brand" href="chat.do">채팅방</a>
-				<a class="navbar-brand" href="contentList.do">지도/컨텐츠 리스트</a>
-				<a class="navbar-brand" href="tripBoard.do">게시판</a>
-				<a class="navbar-brand" href="myPage.do">마이페이지</a>
-				<a class="navbar-brand" href="reservationView.do">예약하기</a>
-				<a class="navbar-brand" href="reviewList.jsp">리뷰 더보기</a><!-- contentID -->
-				<a class="navbar-brand login" href="#">로그인</a> 
-				<a class="navbar-brand" href="createUserForm.do">회원가입</a>
-				<a id="nickname" class="navbar-brand" href=""><small>님 환영합니다.</small></a>
-			</div>
-		</div>
-	</nav>
+	<!-- 네비게이션 -->
+	<%@ include file="../template/nav.jsp" %>
 
 
 
@@ -351,6 +331,10 @@
 			</div>
 		</div>
 	</form>
+	
+		<!-- footer 시작 -->
+	<%@ include file="../template/footer.jsp" %>
+	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 //star rating
