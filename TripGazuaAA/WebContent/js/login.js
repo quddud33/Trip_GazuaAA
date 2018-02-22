@@ -7,4 +7,4 @@
 	  });//click end                                                                                  //함께 발생하는일이 일어나게됨.
 	    $("#bg").on("click",function () {                                                                    //뒷배경 박스 클릭이벤트
 	        $("#bg").css("display","none");                                                                  //상세정보 창을 안보이게 변경
-	 });//click end
+	 });//click end 

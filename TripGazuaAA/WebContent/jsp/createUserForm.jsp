@@ -24,7 +24,7 @@
 		<input type="password"
 			placeholder="비밀번호 입력" name="password" required class="pass"
 			oninput="checkPwd()"/> 
-			<label> <b>Repeat Password</b></label>
+			<label> <b>Repeat Password</b></label> 
 		<input type="password" placeholder="비밀번호 재확인" name="pw_CHECK"
 			required class="pass" id="repwd" oninput="checkPwd()"/> 
 			<input type="checkbox" checked="checked">수락

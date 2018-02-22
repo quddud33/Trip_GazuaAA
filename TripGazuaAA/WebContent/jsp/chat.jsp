@@ -21,7 +21,7 @@
 	
 	.chatul {
 		width:280px;
-		padding:0;
+		padding:0; 
 		margin:0;
 		list-style:none;
 	}

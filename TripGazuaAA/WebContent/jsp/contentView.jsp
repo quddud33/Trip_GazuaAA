@@ -26,7 +26,7 @@
         }
 
         #loginBox {
-            width:400px;
+            width:400px; 
             height:300px;
             position:absolute;
             left:50%;

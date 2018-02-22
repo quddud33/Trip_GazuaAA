@@ -20,7 +20,7 @@
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/nav.css">
-<link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">
+<link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css"> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
