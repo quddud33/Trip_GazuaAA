@@ -3,6 +3,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/nav.css">
 <meta charset="UTF-8">
 <title>채팅프로그램</title>
 <style>
@@ -30,6 +33,9 @@
 </style>
 </head>
 <body>
+	<!-- 네비게이션 -->
+	<%@ include file="../template/nav.jsp" %>
+
 	<p>
 	<button id="openBtn">open</button>
 	<button id="closeBtn">close</button>
@@ -46,6 +52,10 @@
 	<input id="chatInput" />
 	<button>보내기</button>
 	</form>
+	
+	
+	<!-- footer 시작 -->
+<%@ include file="../template/footer.jsp" %>
 	
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
