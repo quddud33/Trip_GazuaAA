@@ -108,12 +108,17 @@ table, #map {
 		<\%})%>
 	</script>
 	${paginate} 
+	<%for(int i = 1; i <= 5; i++) {%>
+	<button class="page"><%=i %></button>
+	<%} %>
 	</table>
 	<script src="http://underscorejs.org/underscore-min.js"></script>
 	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script>
 		var touristTable = _.template($('#touristTable').html()), $areaCode = $('[name=areaCodeVal]')
 		var $searchTest = $("#searchTest");
+		var contentTypeId, areaCode;
+		var page = 1;
 
 		// 		var page = new PaginateUtil();
 		function showSearchTest() {
@@ -121,13 +126,36 @@ table, #map {
 			console.log("쇼 성공");
 		}
 		$('[name=contentTypeIdVal], [name=areaCodeVal]').change(function() {
-
+			contentTypeId = $('[name=contentTypeIdVal]:checked').val();
+			areaCode = $areaCode.val();
+			page = 1;
 			$.ajax('ajax/touristInfo.do', {
 				async : false,
 				data : {
-					contentTypeId : $('[name=contentTypeIdVal]:checked').val(),
-					areaCode : $areaCode.val(),
-					page : 1
+					contentTypeId :contentTypeId,
+					areaCode : areaCode,
+					page : page
+				},
+				success : function(json) {
+					$('tbody').html(touristTable({
+						touristInfo : json
+					}));
+					$searchTest.hide();
+				},
+				error : function(err) {
+				}
+			})
+
+		});
+		
+		$('.page').click(function() {
+			page = $(this).text();
+			$.ajax('ajax/touristInfo.do', {
+				async : false,
+				data : {
+					contentTypeId :contentTypeId,
+					areaCode : areaCode,
+					page : page
 				},
 				success : function(json) {
 					$('tbody').html(touristTable({
