@@ -6,137 +6,133 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+<meta name="google-signin-client_id"
+	content="346120053180-l6r9r2hq1sknebtp2ukd6mtoea688dhl.apps.googleusercontent.com">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/nav.css">
+<link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 <style>
 table{
-	margin-top: 10px; 
+   margin-top: 10px; 
 }
 .table-bordered{
-	width: 1000px;
-	height: 600px;
+   width: 88%;
+   height: 50%;
 }
 .table-bordered th{
-	text-align: center;
+   text-align: center;
 }
-.table-bordered td{
-padding: 20px;
-}
-.roomimg th{
-	text-align: center;
-}
-.btn{
-	position: absolute;
-	margin-left: 70%; 
-	margin-top: 10px;
-}
-#nickname{
-    text-align: right;
-    position:relative;
-    clear: both;
-    display: inline;
-    margin-left: 1000px;
-    margin-top: -50px;
-}
-}
-
+.table-bordered td{ 
+ padding: 20px; 
+ }
+ 
 </style>
 </head>
 <body>
-<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapsed" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					<span class="sr-only"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="http://vpa.danbee.Ai/#/chats?chatbotId=054d0e31-3af2-4e4e-a930-8fa4462da027">고객센터</a>
-				<a class="navbar-brand" href="chat.do">채팅방</a>
-				<a class="navbar-brand" href="contentList.do">지도/컨텐츠 리스트</a>
-				<a class="navbar-brand" href="tripBoard.do">게시판</a>
-				<a class="navbar-brand" href="myPage.do">마이페이지</a>
-				<a id="nickname" class="navbar-brand" href=""><small>님 환영합니다.</small></a>
-			</div>
-		</div>
-	</nav>
-		<form action="reservation.do">
-		<input type="hidden" name="userID" value="${user.userID }"/>
-		<input type="hidden" name="contentID" value="<%=request.getParameter("contentID") %>" />
-		<input type="hidden" name="contentTypeID" value="<%=request.getParameter("contentTypeID") %>" />
-<table border="1" class="roomimg">
-			<tr>
-			<c:forEach var="detail" items="${detail}" >
-				<th>${detail.roomtitle }</th>
-			</c:forEach>
-			</tr>
-			<tr>
-			<c:forEach var="detail" items="${detail}" >
-				<td><img src="${detail.roomimg1}"/ width="300" height="250"></td>
-			</c:forEach>	
-			</tr>	
-</table>
-	<table border="1" class="table-bordered">
-		<thead>
-			<tr>
-				<th>객실명</th>
-				<th>성인</th>
-				<th>아동</th>
-				<th>숙박기간</th>
-				<th>가격</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>
-				<select name="roomName" id="roomName" class="form-control">
-					
-			<c:forEach var="detail" items="${detail}" >
-				<option>${detail.roomtitle }</option> 
-			</c:forEach>
-					
-				</select>
-				</td>
-				<td>
-				<select id="adult" name="adult" class="form-control">
-					
-			<%for(int i = 0; i < 10; i++) {%>
-				<option value="<%=i%>"><%=i %>명</option>
-			<%} %>
-					
-				</select>
-				</td>
-				<td>
-				<select id="kid" name="kid" class="form-control">
-					
-						<%for(int i = 0; i < 10; i++) {%>
-			<option value="<%=i%>"><%=i %>명</option>
-			<%} %>
-					
-			</select>
-			</td>
-				<td>
-					체크인 :<input class="form-control input-xs" type="text" id="datepicker1" name="startDate">
-					체크아웃 :<input class="form-control input-xs" type="text" id="datepicker2" name="endDate">
-				</td>
-				<td>
-					<input class="form-control" type="text" id="price" name="price" value="0" readonly/>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-		<p><button class="btn btn-info btn-lg" >예약하기</button></p>
-	</form>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-	<script>
-	
+   <!-- 네비게이션 -->
+   <%@ include file="../template/nav.jsp" %>
+   <div class="container">
+      <form action="reservation.do">
+      <input type="hidden" name="userID" value="${user.userID }"/>
+      <input type="hidden" name="contentID" value="<%=request.getParameter("contentID") %>" />
+      <input type="hidden" name="contentTypeID" value="<%=request.getParameter("contentTypeID") %>" />
+   <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 80%; margin: auto;"> 
+      
+   <!--페이지-->
+   <div class="carousel-inner">
+      <div class="item active">
+         <img src="https://pbs.twimg.com/media/DR-TdFPUIAEYnKd.jpg" style="width:100%; height:400px;"alt="First slide">
+         <div class="container">
+            <div class="carousel-caption">
+            </div>
+         </div>
+      </div>
+   <c:forEach  var="detail" items="${detail}">
+      <div class="item"> 
+         <img src="${detail.roomimg1 }" style="width:100%; height:400px;" data-src="" alt="Second slide">
+         <div class="container">
+            <div class="carousel-caption">
+               <h1>${detail.roomtitle }</h1>
+               <p>${detail.roomimg1alt }</p>
+            </div>
+         </div>
+      </div>
+      </c:forEach>
+   </div>
+
+   <!--이전, 다음 버튼-->
+   <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> 
+   <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a> 
+   </div>
+   <table border="1" class="table-bordered" style="width: 80%; margin: auto;">
+      <thead>
+         <tr>
+            <th>객실명</th>
+            <th>성인</th>
+            <th>아동</th>
+            <th>숙박기간</th>
+            <th>가격</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+            <td>
+            <select name="roomName" id="roomName" class="form-control">
+               
+         <c:forEach var="detail" items="${detail}" >
+            <option>${detail.roomtitle }</option> 
+         </c:forEach>
+               
+            </select>
+            </td>
+            <td>
+            <select id="adult" name="adult" class="form-control">
+               
+         <%for(int i = 0; i < 10; i++) {%>
+            <option value="<%=i%>"><%=i %>명</option>
+         <%} %>
+               
+            </select>
+            </td>
+            <td>
+            <select id="kid" name="kid" class="form-control">
+               
+                  <%for(int i = 0; i < 10; i++) {%>
+         <option value="<%=i%>"><%=i %>명</option>
+         <%} %>
+               
+         </select>
+         </td>
+            <td>
+               체크인 :<input class="form-control input-xs" type="text" id="datepicker1" name="startDate">
+               체크아웃 :<input class="form-control input-xs" type="text" id="datepicker2" name="endDate">
+            </td>
+            <td>
+               <input class="form-control" type="text" id="price" name="price" value="0" readonly/>
+            </td>
+         </tr>
+      </tbody>
+      <tfoot>
+         <tr>
+         <td colspan="5" style="text-align: right">
+      <button class="btn btn-info btn-lg">예약하기</button>
+         </td>
+         </tr>
+      </tfoot>
+   </table>
+   </form>
+   </div>
+
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+   <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+   <script>
+   
     var minDate = new Date;
     var lodDate;
     var adult = 0;
@@ -184,7 +180,7 @@ padding: 20px;
         minDate : minDate,
         onClose: function(selectedDate) {
             $("#datepicker2").datepicker( "option", "minDate", selectedDate );
-        	lodDate = calDateRange($("#datepicker1").val(), $("#datepicker2").val());
+           lodDate = calDateRange($("#datepicker1").val(), $("#datepicker2").val());
 $("#price").val(((<%=request.getParameter("price")%> * adult) + <%=request.getParameter("price")%> * kid * 0.5) * lodDate);
         }
     });
@@ -202,20 +198,22 @@ $("#price").val(((<%=request.getParameter("price")%> * adult) + <%=request.getPa
         yearSuffix: '년',
         onClose: function(selectedDate) {
             $("#datepicker1").datepicker( "option", "maxDate", selectedDate );
-        	lodDate = calDateRange($("#datepicker1").val(), $("#datepicker2").val());
-        	$("#price").val(((<%=request.getParameter("price")%> * adult) + <%=request.getParameter("price")%> * kid * 0.5) * lodDate);
+           lodDate = calDateRange($("#datepicker1").val(), $("#datepicker2").val());
+           $("#price").val(((<%=request.getParameter("price")%> * adult) + <%=request.getParameter("price")%> * kid * 0.5) * lodDate);
         }
     });
     
     $("select").change(function(){
-    	adult = $("#adult").val();
-    	kid = $("#kid").val();
-    	lodDate = calDateRange($("#datepicker1").val(), $("#datepicker2").val());
-    	
+       adult = $("#adult").val();
+       kid = $("#kid").val();
+       lodDate = calDateRange($("#datepicker1").val(), $("#datepicker2").val());
+       
 $("#price").val(((<%=request.getParameter("price")%> * adult) + <%=request.getParameter("price")%> * kid * 0.5) * lodDate);
     });
-	
-	</script>
+   
+   </script>
+      <!-- footer 시작 -->
+<%@ include file="../template/footer.jsp" %>
 </body>
 </html>
 <!-- contentID,roomName,adult,kid,startDate,day,sumPrice -->
