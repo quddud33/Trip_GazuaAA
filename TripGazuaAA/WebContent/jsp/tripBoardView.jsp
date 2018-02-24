@@ -5,6 +5,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="google-signin-client_id"
+	content="346120053180-l6r9r2hq1sknebtp2ukd6mtoea688dhl.apps.googleusercontent.com">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/nav.css">
+<link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <title>Insert title here</title>
 <style>
 
@@ -45,7 +55,8 @@
 </style>
 </head>
 <body>
-
+<!-- 네비게이션 -->
+	<%@ include file="../template/nav.jsp" %>
 	${view.nickname }<br>
 	${view.title }<br>
 	${view.content }<br>
@@ -124,7 +135,13 @@
 		</script>
 		<%session.invalidate(); %>
 	</c:if>
-	
+	<!-- footer 시작 -->
+<%@ include file="../template/footer.jsp" %>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="/trip_GazuaAA/js/googleLogin.js"></script>
+	<script src="/trip_GazuaAA/js/FBLogin.js"></script>
+	<script src="/trip_GazuaAA/js/login.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script>
 		$('#del').click(function(e) {

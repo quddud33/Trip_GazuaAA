@@ -6,12 +6,31 @@
     <title>Daum 지도 시작하기</title>
     <link rel="stylesheet"
           href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+          <meta name="google-signin-client_id"
+	content="346120053180-l6r9r2hq1sknebtp2ukd6mtoea688dhl.apps.googleusercontent.com">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/nav.css">
+<link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 <body>
+	
+	<!-- 네비게이션 -->
+	<%@ include file="../template/nav.jsp" %>
 <p>조회기간:
     <input type="text" id="datepicker1">
 </p>
 <div id="map" style="width: 1000px; height: 1200px;"></div>
+<!-- footer 시작 -->
+<%@ include file="../template/footer.jsp" %>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="/trip_GazuaAA/js/googleLogin.js"></script>
+	<script src="/trip_GazuaAA/js/FBLogin.js"></script>
+	<script src="/trip_GazuaAA/js/login.js"></script>
 <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=70d78e61bdb96cf13e612f9908e948d0"></script>
 <script type="text/javascript"
