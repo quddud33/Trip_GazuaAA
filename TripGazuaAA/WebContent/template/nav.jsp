@@ -16,7 +16,7 @@
           </div>
           <div class="colapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
                 <ul class="nav navbar-nav">
-                   <li class="active"><a href="chat.do">채팅방<span class="sr-only"></span></a></li>
+                   <li class="active"><a id="chatRoom" href="chat.do">채팅방<span class="sr-only"></span></a></li>
                    <!--userID,nickName-->
                    
                    <li class="active"><a href="http://vpa.danbee.Ai/#/chats?chatbotId=054d0e31-3af2-4e4e-a930-8fa4462da027">서비스 센터<span class="sr-only"></span></a></li>
@@ -44,3 +44,5 @@
           </div>
       </div>
 </div>
+
+<script src="/trip_GazuaAA/js/nav.js"></script>

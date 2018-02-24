@@ -21,7 +21,7 @@
 
 	<insert id="createNaverUser" parameterType="java.util.HashMap">
 		INSERT INTO user
-		VALUES(#{userid}, #{name}, 'naver', now())
+		VALUES(#{userID}, #{nickname}, 'naver', now())
 	</insert>
 	
 	<insert id="createGoogleUser" parameterType="java.util.HashMap">

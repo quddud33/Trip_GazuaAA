@@ -28,6 +28,11 @@ table, #map {
 .mapCursor {
 	cursor: pointer;
 }
+
+li {
+	list-style: none;
+	display: inline;
+}
 </style>
 </head>
 <body>
@@ -77,6 +82,7 @@ table, #map {
 		<option value="7">울산</option>
 	</select>
 	<br />
+	<div id="page"></div>	
 	<div class="container">
 	<table border="1">
 		<tr>
@@ -106,9 +112,8 @@ table, #map {
 			</c:if>
 		</c:forEach>
 
-
-		<script id="touristTable" type="text/template">
-				<\%$.each(touristInfo.items, function() {%>
+	<script id="touristTable" type="text/template">
+		<\%$.each(touristInfo.items, function() {%>
 			<tr>
 				<th scope="row"><a href="contentView.do?contentid=<\%=this.no%>&contenttypeid=<\%=this.contenttypeid%>&price"><\%=this.no%></a></th>
 				<td><\%=this.title%></td>
@@ -118,27 +123,23 @@ table, #map {
 				<td><\%if(this.img != undefined) {%><img width="160" src="<\%=this.img%>"><\%}%></td>
 			</tr>
 		<\%})%>
-
 	</script>
 	${paginate} 
-	<%for(int i = 1; i <= 5; i++) {%>
-	<button class="page"><%=i %></button>
-	<%} %>
-	</table>
-	</div>
+	</table>	
 	
 	<%@ include file="../template/footer.jsp" %>
-	
+
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="http://underscorejs.org/underscore-min.js"></script>
 	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src= "/trip_GazuaAA/js/login.js"></script>
 	<script src="/trip_GazuaAA/js/googleLogin.js"></script>
 	<script src="/trip_GazuaAA/js/FBLogin.js"></script>
+	<script src="/trip_GazuaAA/js/paginate.js"></script>
 	<script>
 		var touristTable = _.template($('#touristTable').html()), $areaCode = $('[name=areaCodeVal]')
 		var $searchTest = $("#searchTest");
-		var contentTypeId, areaCode;
+		var contentTypeId, areaCode, total;
 		var page = 1;
 
 		// 		var page = new PaginateUtil();
@@ -161,6 +162,10 @@ table, #map {
 					$('tbody').html(touristTable({
 						touristInfo : json
 					}));
+					total = json.total;
+					console.log(total);
+					$('#page').html(paginate(page, (total / 10), '?no='));
+					
 					$searchTest.hide();
 				},
 				error : function(err) {
@@ -169,8 +174,8 @@ table, #map {
 
 		});
 		
-		$('.page').click(function() {
-			page = $(this).text();
+		$('#page').on('click', '.page', function() {
+			page = $(this).val();
 			$.ajax('ajax/touristInfo.do', {
 				async : false,
 				data : {
@@ -182,6 +187,7 @@ table, #map {
 					$('tbody').html(touristTable({
 						touristInfo : json
 					}));
+					$('#page').html(paginate(page, (total / 10), '?no='));
 					$searchTest.hide();
 				},
 				error : function(err) {

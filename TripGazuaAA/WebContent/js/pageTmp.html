@@ -1,0 +1,15 @@
+    <ul>
+        <%if(start == 1) {%><li><button class="page" value="<%=start-1%>" style="cursor : not-allowed;" disabled>&lt;</button></li><%}else{%><li><button class="page" value="<%=start-1%>">&lt;</button></li><%}%>
+        <%for(; start <= end; start++) {%>
+        <li>
+            <button class="page" value="<%=start%>">
+            <%if(start == now) {%><bold><%}%>
+            <%=start%>
+            <%if(start == now) {%></bold><%}%>
+            </button>
+        </li>
+        <%}%>
+        <%if(next) {%><li><button class="page" value="<%=start%>">&gt;</button></li><%} else {%>
+        <li><button class="page" value="<%=start%>" style="cursor : not-allowed;">&gt;</button></li>
+        <%}%>
+    </ul>

@@ -79,15 +79,15 @@
 				<td colspan="2"><input type="button" id="save" value="저장" /> 
 		<button type="button" onclick="location.href='tripBoard.do'">뒤로가기</button>
 			</tr>
-		</table><!-- footer 시작 -->
-<%@ include file="../template/footer.jsp" %>
+		</table>
+		<!-- footer 시작 -->
+	<%@ include file="../template/footer.jsp" %>
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="/trip_GazuaAA/js/googleLogin.js"></script>
 	<script src="/trip_GazuaAA/js/FBLogin.js"></script>
 	<script src="/trip_GazuaAA/js/login.js"></script>
 	</form>
-	
 	
 	
 	<script type="text/javascript"
