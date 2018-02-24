@@ -48,7 +48,7 @@
 <body>
 <!-- 네비게이션 -->
 	<%@ include file="../template/nav.jsp" %>
-   <table border="1">
+   <table class="table table-striped">
       <thead>
          <tr>
             <th>번호</th>
