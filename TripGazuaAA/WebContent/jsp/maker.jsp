@@ -6,11 +6,28 @@
 <head>
     <meta charset="utf-8">
     <title>마커 클러스터러 사용하기</title>
+<meta name="google-signin-client_id"
+	content="346120053180-l6r9r2hq1sknebtp2ukd6mtoea688dhl.apps.googleusercontent.com">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/nav.css">
+<link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 </head>
 <body>
-
+	<!-- 네비게이션 -->
+	<%@ include file="../template/nav.jsp" %>
 <div id="map" style="width:100%;height:1200px;"></div>
+<!-- footer 시작 -->
+	<%@ include file="../template/footer.jsp" %>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="/trip_GazuaAA/js/googleLogin.js"></script>
+	<script src="/trip_GazuaAA/js/FBLogin.js"></script>
+	<script src="/trip_GazuaAA/js/login.js"></script>
 <script
         src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
@@ -53,9 +70,9 @@
             for (var i = 0; i < v.length; i++) {
                 locations.push(new daum.maps.LatLng(v[i].lat,v[i].lng ));
                 cok.push(markers[i]);
-                console.log(v[i]);
+
                 infoWindows.push(new daum.maps.InfoWindow({
-                    content: '<div style="padding:5px;"><h4>'+ v[i].title + '</h4><br/> <img src="'+v[i].img +'" onerror="this.src=\'../img/no.png\'" width="350px" height="200px"></p></div>',
+                    content: '<div style="padding:5px;"><h4>'+ v[i].title + '</h4><br/> <img src="'+v[i].img +'" onerror="this.src=\'img/no.png\'" width="350px" height="200px"></p></div>',
                     position: locations[i],
                     removable: true
                 }));
