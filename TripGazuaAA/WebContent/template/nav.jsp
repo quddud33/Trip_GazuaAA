@@ -44,5 +44,11 @@
           </div>
       </div>
 </div>
-
-<script src="/trip_GazuaAA/js/nav.js"></script>
+<script>
+	$("#chatRoom").click(function(e){
+		<%if(session.getAttribute("user") == null) {%>
+			e.preventDefault();
+			alert("로그인 후 입장해주세요.");
+		<%}%>
+	});
+</script>

@@ -357,10 +357,10 @@ public class MyController {
 			return "redirect:main.do";
 		}
 		
-		@RequestMapping("wish.do")
+		/*@RequestMapping("wish.do")
 		public void wish(String contentTypeID, String contentID) {
 			
-		}
+		}*/
 		
 		@RequestMapping("festvalWish.do")
 		public String festvalWish(@RequestParam HashMap<String, String> params) {

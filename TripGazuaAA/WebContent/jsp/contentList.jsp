@@ -19,6 +19,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <title>검색</title>
 <style>
 table, #map {
@@ -33,6 +34,71 @@ li {
 	list-style: none;
 	display: inline;
 }
+
+.contentList{
+	padding: 0 0 0 20px;
+    width:750px;
+    height:175px;
+    background-color: #CFD8DC;
+    border-radius: 20px;
+    margin: 0 0 20px 0;
+    position: relative;
+}
+
+.contentTitle{
+    font-size: 30px;
+    padding-left: 20px;
+}
+
+.contentTitle > p {
+    white-space: nowrap; 
+	height: 40px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.contentImg {
+	float: left;
+}
+
+.textBox {
+	position: relative;
+	padding: 0 0 0 10px;
+	float: left;
+	width: 75%;
+}
+
+.price {
+	font-size: 32px;
+	font-weight: 900;
+	text-align: right;
+}
+
+.addr {
+	position: absolute;
+	top: 15px;
+	left: 10px;
+	font-size: 18px;
+}
+
+.view {
+	background-color: skyblue;
+	float: left;
+	width: 150px;
+	height: 40px;
+	border: 1px solid #424242;
+	line-height: 40px;
+	text-align: center;
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+	cursor: pointer;
+}
+
+.view:hover {
+	color: #AAA;
+}
+
 </style>
 </head>
 <body>
@@ -82,51 +148,66 @@ li {
 		<option value="7">울산</option>
 	</select>
 	<br />
-	<div id="page"></div>	
-	<div class="container">
-	<table border="1">
-		<tr>
-			<th>바로가기</th>
-			<th>이름</th>
-			<th>주소</th>
-			<th>가격</th>
-		</tr>
-
-		<c:forEach var="searchTest" items="${contentList }">
+	<div id="page"></div>
+	<div id="content" class="container">
+		<c:forEach var="searchTest" items="${contentList}">
 			<c:if test="${searchTest.totalCount eq null }">
-				<tr id="searchTest">
-					<td><a
-						href="contentView.do?contentid=${searchTest.contentid }&contenttypeid=${searchTest.contenttypeid}&price=${searchTest.price }">바로가기</a></td>
-					<td>${searchTest.title}</td>
-					<td>${searchTest.addr1 }</td>
-					<td><c:if test="${searchTest.price ne null }">${searchTest.price }</c:if></td>
-					<c:if test="${searchTest.contenttypeid eq '39' }">
-						<td><button
-								onclick="location.href='restaurantWish.do?userID=${user.userID}&contentID=${searchTest.contentid }&contentTypeID=${searchTest.contenttypeid }'">찜하기</button></td>
+	        <div class="contentList">
+	            <div class="contentTitle">
+	                <p><i class="fa fa-search"></i>${searchTest.title }</p>
+	            </div>
+				<img class="contentImg"
+				<c:if test="${searchTest.firstimage ne null }">
+				src = "${searchTest.firstimage }"
+				</c:if>
+				<c:if test="${searchTest.firstimage eq null }">
+				src = "/trip_GazuaAA/img/no.png"
+				</c:if>
+				style="width:160px;height:100px;">
+				<div class="textBox">
+					<c:if test="${searchTest.price ne null}">
+						<div class="price">
+							${searchTest.price }원
+						</div>
 					</c:if>
-<!-- das -->
-				</tr>
-			</c:if>
-			<c:if test="${searchTest.totalCount ne null }">
-				<c:set var="totalCount" value="${searchTest.totalCount }" />
+					<div class="addr">
+	            		${searchTest.addr1 }
+					</div>
+				</div>
+				<c:if test="${searchTest.contenttypeid eq 39 }">
+					<div class="view" onclick="location.href='restaurantWish.do?userID=${user.userID}&contentID=<\%=this.no%>&contentTypeID=<\%=this.contenttypeid%>'">찜하기</div>
+				</c:if>
+				<c:if test="${searchTest.contenttypeid ne 39 }">
+					<div class="view" onclick="location.href='contentView.do?contentid=${searchTest.contentid }&contenttypeid=${searchTest.contenttypeid }&price'">자세히보기</div>
+				</c:if>
+	        </div>
 			</c:if>
 		</c:forEach>
-
 	<script id="touristTable" type="text/template">
 		<\%$.each(touristInfo.items, function() {%>
-			<tr>
-				<th scope="row"><a href="contentView.do?contentid=<\%=this.no%>&contenttypeid=<\%=this.contenttypeid%>&price"><\%=this.no%></a></th>
-				<td><\%=this.title%></td>
-				<td><\%=this.addr%></td>
-				<td><\%if(this.contenttypeid == 39) {%><button onclick="location.href='restaurantWish.do?userID=${user.userID}&contentID=<\%=this.no%>&contentTypeID=<\%=this.contenttypeid%>'">찜하기</button><\%}%></td>
-				<td><\%if(this.price != 0) {%><\%=this.price%><\%}%></td>
-				<td><\%if(this.img != undefined) {%><img width="160" src="<\%=this.img%>"><\%}%></td>
-			</tr>
+        <div class="contentList">
+            <div class="contentTitle">
+                <p><i class="fa fa-search"></i> <\%=this.title%></p>
+            </div>
+			<img class="contentImg" src="<\%if(this.img != undefined) {%><\%=this.img%><\%} else {%>/trip_GazuaAA/img/no.png<\%}%>" style="width:160px;height:100px;">
+			<div class="textBox">
+				<div class="price">
+					<\%if(this.price != null) {%><\%=this.price%>원<\%}%>
+				</div>
+				<div class="addr">
+            		<\%=this.addr%>
+				</div>
+			</div>
+			<\%if(this.contenttypeid == 39) {%>
+				<div class="view" onclick="location.href='restaurantWish.do?userID=${user.userID}&contentID=<\%=this.no%>&contentTypeID=<\%=this.contenttypeid%>'">찜하기</div>
+			<\%} else {%>
+				<div class="view" onclick="location.href='contentView.do?contentid=<\%=this.no%>&contenttypeid=<\%=this.contenttypeid%>&price'">자세히보기</div>
+			<\%}%>
+        </div>
 		<\%})%>
 	</script>
 	${paginate} 
-	</table>	
-	
+	</div>
 	<%@ include file="../template/footer.jsp" %>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -159,7 +240,7 @@ li {
 					page : page
 				},
 				success : function(json) {
-					$('tbody').html(touristTable({
+					$('#content').html(touristTable({
 						touristInfo : json
 					}));
 					total = json.total;
@@ -184,7 +265,7 @@ li {
 					page : page
 				},
 				success : function(json) {
-					$('tbody').html(touristTable({
+					$('#content').html(touristTable({
 						touristInfo : json
 					}));
 					$('#page').html(paginate(page, (total / 10), '?no='));

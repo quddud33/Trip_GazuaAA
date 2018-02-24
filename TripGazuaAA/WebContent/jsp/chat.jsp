@@ -38,6 +38,7 @@
 	<%@ include file="../template/nav.jsp" %>
 
 	
+<div class="container">
 	<p>
 	<button id="openBtn">open</button>
 	<button id="closeBtn">close</button>
@@ -54,11 +55,12 @@
 	<input id="chatInput" />
 	<button>보내기</button>
 	</form>
+</div>
 <!-- footer 시작 -->
 <%@ include file="../template/footer.jsp" %>
 	
 
-<script src ="/Trip_GazuaAA//js/login.js"></script>
+<script src ="/trip_GazuaAA/js/login.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 
@@ -96,7 +98,7 @@
 	
 	function displayMsg(msg) {
 		
-		$("<li class="chatli">").text(msg)
+		$("<li class='chatli'>").text(msg)
 		         .appendTo($list);
 		
 		console.log($list.height());
