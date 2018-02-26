@@ -149,7 +149,7 @@ li {
 	</select>
 	<br />
 	<div id="page"></div>
-	<div id="content" class="container">
+	<div id="content" class="container">	
 		<c:forEach var="searchTest" items="${contentList}">
 			<c:if test="${searchTest.totalCount eq null }">
 	        <div class="contentList">
@@ -183,6 +183,7 @@ li {
 	        </div>
 			</c:if>
 		</c:forEach>
+		
 	<script id="touristTable" type="text/template">
 		<\%$.each(touristInfo.items, function() {%>
         <div class="contentList">

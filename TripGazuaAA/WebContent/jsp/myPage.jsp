@@ -15,7 +15,72 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
+<style>
+.contentList{
+	padding: 0 0 0 20px;
+    width:750px;
+    height:175px;
+    background-color: #CFD8DC;
+    border-radius: 20px;
+    margin: 0 0 20px 0;
+    position: relative;
+}
 
+.contentTitle{
+    font-size: 30px;
+    padding-left: 20px;
+}
+
+.contentTitle > p {
+    white-space: nowrap; 
+	height: 40px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.contentImg {
+	float: left;
+}
+
+.textBox {
+	position: relative;
+	padding: 0 0 0 10px;
+	float: left;
+	width: 75%;
+}
+
+.price {
+	font-size: 32px;
+	font-weight: 900;
+	text-align: right;
+}
+
+.addr {
+	position: absolute;
+	top: 15px;
+	left: 10px;
+	font-size: 18px;
+}
+
+.view {
+	background-color: skyblue;
+	float: left;
+	width: 150px;
+	height: 40px;
+	border: 1px solid #424242;
+	line-height: 40px;
+	text-align: center;
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+	cursor: pointer;
+}
+
+.view:hover {
+	color: #AAA;
+}
+
+</style>
 <title>Insert title here</title>
 </head>
 <body>
@@ -24,24 +89,33 @@
 
 
 
+
+
+
+
+
 <!--<a href="logout.do">로그아웃</a> 로그인시 태그 생성하게 처리-->
 <h2>숙박업소</h2>
-<table border="1">
-	<c:forEach var="res" items="${reservation }">
-		<tr>
-			<td>유저 ID : ${res.userID }</td>
-			<td>컨텐츠 ID : ${res.contentID }</td>
-			<td>컨텐츠 타입 ID : ${res.contentTypeID }</td>
-			<td>예약한 날짜 : ${res.reserveDate }</td>
-			<td>어른 : ${res.adult }</td>
-			<td>아이 : ${res.kid }</td>
-			<td>가격 : ${res.price }</td>
-			<td>체크인 : ${res.startDate }</td>
-			<td>체크아웃 : ${res.endDate }</td>
-			<td>방이름 : ${res.roomName }</td>
-		</tr>
-	</c:forEach>
-</table>
+<div id="content" class="container">	
+		<c:forEach var="res" items="${reservation }">
+	        <div class="contentList">
+	            <div class="contentTitle">
+	                <p><i class="fa fa-search"></i>${res.roomName }</p>
+	            </div>
+				<div class="textBox">
+					<c:if test="${res.price } ne null}">
+						<div class="price">
+							${res.price }원
+						</div>
+					</c:if>
+					<div class="addr">
+	            		${res.startDate } "~"  ${res.endDate }
+					</div>
+				</div>
+					<div class="view" onclick="location.href='contentView.do?contentid=${res.contentID }&contenttypeid= ${res.contentTypeID }&price=${res.price }'">예약한 방 정보 보기</div>
+	        </div>
+		</c:forEach>
+</div>
 <h2>축제</h2>
 <table border="1">
 	<c:forEach var="fes" items="${festval }">

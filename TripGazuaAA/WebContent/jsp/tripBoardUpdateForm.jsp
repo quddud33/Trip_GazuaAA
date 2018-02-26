@@ -20,7 +20,7 @@
 <!-- 네비게이션 -->
 	<%@ include file="../template/nav.jsp" %>
 	<form action="tripBoardUpdate.do" id="frm">
-		<table width="100%">
+		<table width="100%" >
 			<tr>
 				<th>제목</th>
 				<td><input type="text" id="title" name="title" value="${update.title }"/></td>
