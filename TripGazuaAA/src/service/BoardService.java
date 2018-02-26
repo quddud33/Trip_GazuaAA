@@ -15,8 +15,8 @@ public class BoardService {
 	private IBoardDao bDao;
 
 	//전체 글 출력
-	public List<HashMap<String, Object>> selectAll(int start) {
-		return bDao.selectAll(start);
+	public List<HashMap<String, Object>> selectAll(HashMap<String, Object> params) {
+		return bDao.selectAll(params);
 	}
 
 	//글 쓰기

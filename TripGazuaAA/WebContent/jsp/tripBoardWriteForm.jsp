@@ -4,53 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="google-signin-client_id"
-	content="346120053180-l6r9r2hq1sknebtp2ukd6mtoea688dhl.apps.googleusercontent.com">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/bootstrap.css">
-<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/nav.css">
-<link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
 <title>Insert title here</title>
 </head>
 <body>
-<!-- 네비게이션 -->
-	<%@ include file="../template/nav.jsp" %>
-
-
-<%-- 	<form action="tripBoardWrite.do">
-		<table>
-			<tr>
-				<th>제 목</th>
-				<td><input name="title" placeholder="제목을 입력하여주세요" /></td>
-			</tr>
-			<tr>
-				<th>아이디</th>
-				<td><input name="userID" value="${user.userID }"
-					readonly="readonly" /></td>
-			</tr>
-			<tr>
-				<th>닉네임</th>
-				<td><input name="nickname" value="${user.nickname}"
-					readonly="readonly" /></td>
-			</tr>
-			<tr>
-				<th>내 용</th>
-				<td><textarea name="content" cols="70" rows="20"
-						placeholder="내용을 입력해주세요" /></textarea></td>
-			</tr>
-			<tr>
-				<th>파일</th>
-				<td><input type="file" name="image" /></td>
-			</tr>
-		</table>
-		<br>
-		<button>글쓰기</button>
-		<button type="button" onclick="location.href='tripBoard.do'">뒤로가기</button>
-	</form> --%>
 	<form action="tripBoardWrite.do" id="frm">
 		<table width="100%">
 			<tr>
@@ -58,13 +14,9 @@
 				<td><input type="text" id="title" name="title" /></td>
 			</tr>
 			<tr>
-				<th>아이디</th>
-				<td><input name="userID" value="${user.userID }"
+				<td><input type="hidden" name="userID" value="${user.userID }"
 					readonly="readonly" /></td>
-			</tr>
-			<tr>
-				<th>닉네임</th>
-				<td><input name="nickname" value="${user.nickname}"
+				<td><input type="hidden" name="nickname" value="${user.nickname}"
 					readonly="readonly" /></td>
 			</tr>
 			<tr>
@@ -77,19 +29,10 @@
 			</tr>
 			<tr>
 				<td colspan="2"><input type="button" id="save" value="저장" /> 
-		<button type="button" onclick="location.href='tripBoard.do'">뒤로가기</button>
+				<button type="button" onclick="location.href='tripBoard.do'">뒤로가기</button>
 			</tr>
 		</table>
-		<!-- footer 시작 -->
-	<%@ include file="../template/footer.jsp" %>
-	
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="/trip_GazuaAA/js/googleLogin.js"></script>
-	<script src="/trip_GazuaAA/js/FBLogin.js"></script>
-	<script src="/trip_GazuaAA/js/login.js"></script>
 	</form>
-	
-	
 	<script type="text/javascript"
 		src="/trip_GazuaAA/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 	<script type="text/javascript"
@@ -120,9 +63,16 @@
 			fCreator: "createSEditor2"
 			});
 		});
-	$("#save").click(function(){
+	$("#save").click(function(e){
+		e.preventDefault();
 		oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
-		$("#frm").submit();
+		if($('#title').val().length <= 0) {
+			alert('제목을 입력해주세요');
+		} else if($('#ir1').val().replace(/(<([^>]+)>)/ig,"").length <= 0) {
+			alert('내용을 입력해주세요.');
+		} else if($('#ir1').val().length > 0 && $('#title').val().length > 0){
+			$('#frm').submit();
+		}
 	});
 	
 	</script>

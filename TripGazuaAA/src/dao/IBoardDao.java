@@ -18,7 +18,7 @@ public interface IBoardDao {
 	public HashMap<String, Object> selectOne(int num);
 	
 	//글 전체 보기
-	public List<HashMap<String, Object>> selectAll(int start);
+	public List<HashMap<String, Object>> selectAll(HashMap<String, Object> params);
 	
 	//조회수
 	public void views(int num);
@@ -40,6 +40,7 @@ public interface IBoardDao {
 	
 	//좋아요 개수 출력
 	public int likeCount(int num);
+	
 	
 	
 	

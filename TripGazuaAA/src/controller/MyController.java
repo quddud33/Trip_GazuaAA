@@ -202,19 +202,19 @@ public class MyController {
 //==================================게시판=============================================
 		
 
-		//게시판 메인페이지(selectAll)
-		@RequestMapping("tripBoard.do")
-		public ModelAndView tripBoard(@RequestParam(defaultValue="1") int page) {
-			ModelAndView mav = new ModelAndView();
-			int start = (page - 1) * 7;
-			mav.addObject("total", bService.count());
-			mav.addObject("page", page);
-
-			mav.addObject("board", bService.selectAll(start));
-			mav.setViewName("tripBoard");
-			
-			return mav;
-		}
+//		//게시판 메인페이지(selectAll)
+//		@RequestMapping("tripBoard.do")
+//		public ModelAndView tripBoard(@RequestParam(defaultValue="1") int page) {
+//			ModelAndView mav = new ModelAndView();
+//			int start = (page - 1) * 7;
+//			mav.addObject("total", bService.count());
+//			mav.addObject("page", page);
+//
+//			mav.addObject("board", bService.selectAll(start));
+//			mav.setViewName("tripBoard");
+//			
+//			return mav;
+//		}
 		
 		//글 쓰기 폼
 		@RequestMapping("tripBoardWriteForm.do")
@@ -307,10 +307,27 @@ public class MyController {
 			
 			mav.addObject("board", bService.selectSearch(params));
 			mav.addObject("total",bService.searchCount(params));
+			mav.addObject("page",page);
 			mav.setViewName("tripBoard");
 			return mav;
 		}
 		
+		//selectAll
+		@RequestMapping("tripBoard.do")
+		public ModelAndView tripBoard(@RequestParam(defaultValue="1") int page, @RequestParam(defaultValue="new") String sort) {
+			ModelAndView mav = new ModelAndView();
+			int start = (page - 1) * 7;
+			
+			HashMap<String, Object> params = new HashMap<>();
+			params.put("start", start);
+			params.put("sort", sort);
+			
+			mav.addObject("total", bService.count());
+			mav.addObject("page", page);
+			mav.addObject("board", bService.selectAll(params));
+			mav.setViewName("tripBoard");
+			return mav;
+		}
 		
 //================================게시글 좋아요=====================================
 
@@ -389,9 +406,9 @@ public class MyController {
 		
 		//댓글 삭제
 		@RequestMapping("tripCommentDelete.do")
-		public String tripCommentDelete(@RequestParam int commentNum, @RequestParam int num) {
+		public String tripCommentDelete(@RequestParam int commentNum, @RequestParam int num, int page) {
 			cService.deleteComment(commentNum);
-			return "redirect:tripBoardView.do?num=" + num;
+			return "redirect:tripBoardView.do?num=" + num + "&page=" + page;
 		}
 		
 		//댓글 수정
