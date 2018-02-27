@@ -19,7 +19,8 @@
     <div class="chatBox">
         <span class="chatTitle">Trip Gazuaa 채팅방<span id="closeBtn2" class="closeBtnForm"><i class="fa fa-times-circle"></i></span></span>
         <div id="listBox">
-   
+   		<ul class="chatul">
+   		</ul>
         </div>
         <form id="form">
             <input id="chatInput" class="chatInputBox" />
@@ -39,7 +40,8 @@
 <script>
 
 	var $openBtn = $("#openBtn"),
-		$closeBtn = $("#closeBtn"),
+		$closeBtn1 = $("#closeBtn1"),
+		$closeBtn2 = $("#closeBtn2"),
 		$list = $("#listBox>ul"),
 		$form = $("#form"),
 		$input = $("#chatInput"),
@@ -65,14 +67,17 @@
 		
 	});
 	
-	$closeBtn.click(function() {
+	$closeBtn1.click(function() {
+		socket.close();//소켓 닫음
+	});//click() end
+	$closeBtn2.click(function() {
 		socket.close();//소켓 닫음
 	});//click() end
 	
 	
 	function displayMsg(msg) {
 		
-		$("<li>").text(msg)
+		$("<li class='balloon'>").text(msg)
 		         .appendTo($list);
 		
 		console.log($list.height());
@@ -86,8 +91,7 @@
 	
 	
 	$openBtn.click(function() {
-		
-		
+		$openBtn.css("display","none");
 		//웹소켓의 프로토콜은 ws://
 		socket = new WebSocket("ws://localhost/trip_GazuaAA/chat");
 	
