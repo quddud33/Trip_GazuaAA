@@ -75,6 +75,7 @@ public class APIController {
 		ModelAndView mav = new ModelAndView();
 		if(contenttypeid.equals("32") || contenttypeid.equals("12")) {
 			mav.addObject("detail",service.detailInfo(contentid, contenttypeid));
+			mav.addObject("imgInfo",service.imgInfo(contentid, contenttypeid));
 		}
 		else if(contenttypeid.equals("15")){
 			mav.addObject("commonInfo", service.commonInfo(contentid, contenttypeid));
@@ -93,5 +94,7 @@ public class APIController {
 		mav.setViewName("main");
 		return mav;
 	}
+	
+	
 
 }
