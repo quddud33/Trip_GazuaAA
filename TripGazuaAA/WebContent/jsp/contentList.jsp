@@ -11,6 +11,7 @@
 <head>
 <meta name="google-signin-client_id"
 	content="346120053180-l6r9r2hq1sknebtp2ukd6mtoea688dhl.apps.googleusercontent.com">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/bootstrap.css">
@@ -36,17 +37,18 @@ li {
 }
 
 .contentList{
-	padding: 0 0 0 20px;
-    width:750px;
+	padding: 0 0 0 2%;
+	min-width: 300px;
+    max-width:750px;
     height:175px;
     background-color: #CFD8DC;
     border-radius: 20px;
-    margin: 0 0 20px 0;
+    margin: 0 auto 2% auto;
     position: relative;
 }
 
 .contentTitle{
-    font-size: 30px;
+    font-size: 2em;
     padding-left: 20px;
 }
 
@@ -63,22 +65,23 @@ li {
 
 .textBox {
 	position: relative;
-	padding: 0 0 0 10px;
 	float: left;
-	width: 75%;
+	width: 70%;
 }
 
 .price {
-	font-size: 32px;
+	font-size: 2em;
 	font-weight: 900;
 	text-align: right;
+	margin-top: 4.5%;
+	margin-right: 2%;
 }
 
 .addr {
 	position: absolute;
-	top: 15px;
-	left: 10px;
-	font-size: 18px;
+	top: 0;
+	left: 2%;
+	font-size: 1.25em;
 }
 
 .view {
@@ -99,22 +102,43 @@ li {
 	color: #AAA;
 }
 
+#content {
+	position: relative;
+	margin: 1% auto 3% auto;
+}
+
+#page {
+	margin: auto;
+	width: 245px;
+}
+
+#page ul {
+	padding: 0;
+}
+
+#searchForm {
+	max-width: 720px;
+	margin: auto;
+}
+
+.form-control {
+	width: 120px;
+}
+
 </style>
 </head>
 <body>
 	<!-- 네비게이션 -->
 	<%@ include file="../template/nav.jsp" %>
-	
-
-
-	<form action="contentList.do" onsubmit="showSearchTest()">
-		<select name="contentTypeId">
+	<div id="searchForm"><form action="contentList.do" onsubmit="showSearchTest()">
+		<select name="contentTypeId" class="form-control">
 			<option value="32">숙박</option>
 			<option value="12">관광지</option>
 			<option value="15">행사/축제</option>
 			<option value="39">맛집</option>
 			<option value="28">레포츠</option>
-		</select> <select name="areaCode">
+		</select>
+		<select name="areaCode" class="form-control">
 			<option value="">전체</option>
 			<option value="1">서울</option>
 			<option value="2">인천</option>
@@ -123,7 +147,7 @@ li {
 			<option value="5">광주</option>
 			<option value="7">부산</option>
 			<option value="8">울산</option>
-		</select> <input type="text" name="search" /> <input type="submit" value="검색" />
+		</select> <input type="text" class="search_pro" name="search" /> <input type="submit" value="검색" />
 	</form>
 	<label> <input type="radio" name="contentTypeIdVal" value="32"
 		checked> <span>숙박</span>
@@ -137,7 +161,7 @@ li {
 	<label> <input type="radio" name="contentTypeIdVal" value="39">
 		<span>맛집</span>
 	</label>
-	<select name="areaCodeVal">
+	<select name="areaCodeVal" class="form-control">
 		<option value="">전체</option>
 		<option value="1">서울</option>
 		<option value="2">인천</option>
@@ -148,8 +172,9 @@ li {
 		<option value="7">울산</option>
 	</select>
 	<br />
-	<div id="page"></div>
-	<div id="content" class="container">	
+	</div>
+	
+	<div id="content" class="container">
 		<c:forEach var="searchTest" items="${contentList}">
 			<c:if test="${searchTest.totalCount eq null }">
 	        <div class="contentList">
@@ -163,7 +188,7 @@ li {
 				<c:if test="${searchTest.firstimage eq null }">
 				src = "/trip_GazuaAA/img/no.png"
 				</c:if>
-				style="width:160px;height:100px;">
+				style="width: 30%;min-width: 80px;min-height:50px;max-width:160px;max-height:100px;">
 				<div class="textBox">
 					<c:if test="${searchTest.price ne null}">
 						<div class="price">
@@ -178,19 +203,18 @@ li {
 					<div class="view" onclick="location.href='restaurantWish.do?userID=${user.userID}&contentID=<\%=this.no%>&contentTypeID=<\%=this.contenttypeid%>'">찜하기</div>
 				</c:if>
 				<c:if test="${searchTest.contenttypeid ne 39 }">
-					<div class="view" onclick="location.href='contentView.do?contentid=${searchTest.contentid }&contenttypeid=${searchTest.contenttypeid }&price'">자세히보기</div>
+					<div class="view" onclick="location.href='contentView.do?contentid=${searchTest.contentid }&contenttypeid=${searchTest.contenttypeid }&price=${searchTest.price }'">자세히보기</div>
 				</c:if>
 	        </div>
 			</c:if>
 		</c:forEach>
-		
 	<script id="touristTable" type="text/template">
 		<\%$.each(touristInfo.items, function() {%>
         <div class="contentList">
             <div class="contentTitle">
                 <p><i class="fa fa-search"></i> <\%=this.title%></p>
             </div>
-			<img class="contentImg" src="<\%if(this.img != undefined) {%><\%=this.img%><\%} else {%>/trip_GazuaAA/img/no.png<\%}%>" style="width:160px;height:100px;">
+			<img class="contentImg" src="<\%if(this.img != undefined) {%><\%=this.img%><\%} else {%>/trip_GazuaAA/img/no.png<\%}%>" style="width: 30%;min-width: 80px;min-height:50px;max-width:160px;max-height:100px;">
 			<div class="textBox">
 				<div class="price">
 					<\%if(this.price != null) {%><\%=this.price%>원<\%}%>
@@ -202,12 +226,13 @@ li {
 			<\%if(this.contenttypeid == 39) {%>
 				<div class="view" onclick="location.href='restaurantWish.do?userID=${user.userID}&contentID=<\%=this.no%>&contentTypeID=<\%=this.contenttypeid%>'">찜하기</div>
 			<\%} else {%>
-				<div class="view" onclick="location.href='contentView.do?contentid=<\%=this.no%>&contenttypeid=<\%=this.contenttypeid%>&price'">자세히보기</div>
+				<div class="view" onclick="location.href='contentView.do?contentid=<\%=this.no%>&contenttypeid=<\%=this.contenttypeid%>&price=<\%=this.price%>'">자세히보기</div>
 			<\%}%>
         </div>
 		<\%})%>
+			<div id="page"></div>
 	</script>
-	${paginate} 
+		<div id="page">${paginate}</div>
 	</div>
 	<%@ include file="../template/footer.jsp" %>
 
@@ -256,7 +281,7 @@ li {
 
 		});
 		
-		$('#page').on('click', '.page', function() {
+		$('#content').on('click', '.page', function() {
 			page = $(this).val();
 			$.ajax('ajax/touristInfo.do', {
 				async : false,
