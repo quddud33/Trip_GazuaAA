@@ -85,6 +85,7 @@
    	SELECT num FROM userlikereview
    	WHERE userID = #{userID}
   </select>
+ 
   
   
   </mapper>

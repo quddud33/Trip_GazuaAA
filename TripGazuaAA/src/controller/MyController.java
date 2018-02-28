@@ -153,6 +153,7 @@ public class MyController {
 		model.addAttribute("reviewL",rService.reviewList(contentID));
 		model.addAttribute("reviewLikeCheck", rService.userReviewLikeCheck(userID));
 		}
+		
 		return "redirect:contentView?contentid="+contentID;
 	}
 	
