@@ -1,6 +1,7 @@
 package api;
 
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,8 @@ public class TourAPI {
 	private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 	
 	private static final String SERVICE_KEY = "9HZQmtjIkur6iyfPIGo7geVL7zZg%2F4G0sYllDJZH8zTueXqSUtz2Doyj%2BNEAB7Czqo8%2BFub9NIku30J2zVMxFQ%3D%3D";
+	
+    private static final NumberFormat NUMBER_FORMAT = NumberFormat.getNumberInstance(); 
 	
 	public static JsonNode getTouristInformation(int contentTypeId, String areaCode, int page) {
 		
@@ -49,7 +52,7 @@ public class TourAPI {
 				item.put("addr", itemElement.select("addr1").text());
 				
 				if(itemElement.select("contenttypeid").text().equals("32")) {
-					item.put("price", String.valueOf((int) (Math.random() * 1000) * 100));
+					item.put("price", String.valueOf(NUMBER_FORMAT.format((int) (Math.random() * 1000) * 100)));
 				}
 				
 				Elements image;

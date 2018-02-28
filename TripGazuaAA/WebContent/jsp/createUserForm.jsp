@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="google-signin-client_id"
-	content="346120053180-l6r9r2hq1sknebtp2ukd6mtoea688dhl.apps.googleusercontent.com">
+   content="346120053180-l6r9r2hq1sknebtp2ukd6mtoea688dhl.apps.googleusercontent.com">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/bootstrap.css">
@@ -16,38 +16,75 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 <body>
-		<!-- 네비게이션 -->
-	<%@ include file="../template/nav.jsp" %>
+      <!-- 네비게이션 -->
+   <%@ include file="../template/nav.jsp" %>
 
-	<form action="createUser.do">
-		<label><b>ID</b></label> 
-		<input type="text" placeholder="아이디 입력"
-			name="userID" required class="id" oninput="checkID()" id="checkaa"/>
-		<label><b>Nickname</b></label> 
-		<input type="text" placeholder="닉네임 입력"
-			name="nickName" required class="id" id="nickname" oninput="checkID()"/>
-		<label> <b>Password</b></label> 
-		<input type="password"
-			placeholder="비밀번호 입력" name="password" required class="pass"
-			oninput="checkPwd()"/> 
-			<label> <b>Repeat Password</b></label> 
-		<input type="password" placeholder="비밀번호 재확인" name="pw_CHECK"
-			required class="pass" id="repwd" oninput="checkPwd()"/> 
-			<input type="checkbox" checked="checked">수락
-		<div class="clearfix">
-			<button type="button" class="cancelbtn"
-				onclick='$("#_joinsung").css("display", "none")'>취소</button>
-			<button type="submit" class="signupbtn" disabled="disabled">로그인</button>
-	</form>
-	
-		<!-- footer 시작 -->
-	<%@ include file="../template/footer.jsp" %>
-	
+   <!-- <form action="createUser.do">
+      <label><b>ID</b></label> 
+      <input type="text" placeholder="아이디 입력"
+         name="userID" required class="id" oninput="checkID()" id="checkaa"/>
+      <label><b>Nickname</b></label> 
+      <input type="text" placeholder="닉네임 입력"
+         name="nickName" required class="id" id="nickname" oninput="checkID()"/>
+      <label> <b>Password</b></label> 
+      <input type="password"
+         placeholder="비밀번호 입력" name="password" required class="pass"
+         oninput="checkPwd()"/> 
+         <label> <b>Repeat Password</b></label> 
+      <input type="password" placeholder="비밀번호 재확인" name="pw_CHECK"
+         required class="pass" id="repwd" oninput="checkPwd()"/> 
+         <input type="checkbox" checked="checked">수락
+      <div class="clearfix">
+         <button type="button" class="cancelbtn"
+            onclick='$("#_joinsung").css("display", "none")'>취소</button>
+         <button type="submit" class="signupbtn" disabled="disabled">로그인</button>
+   </form>
+    -->
+   
+   
+   
+   <div class="container">
+  <form action ="createUser.do">
+    <div class="form-group">
+    <label for="checkaa">아이디 :</label>
+    <input type="text" placeholder="아이디 입력"
+      name="userID" required class="form-control id" oninput="checkID()" id="checkaa"/>
+    </div>
+    <div class="form-group">
+    <label><b>Nickname</b></label> 
+      <input type="text" placeholder="닉네임 입력"
+         name="nickName" required class="form-control id" id="nickname" oninput="checkID()"/>
+    </div>
+   
+    <div class="form-group">
+      <label for="pwd">비밀번호 :</label>
+      <input type="password"
+         placeholder="비밀번호 입력" id="pwd" name="password" required class="form-control pass"
+         oninput="checkPwd()"/> 
+    </div>
+    
+    <div class="form-group">
+         <label for="pwdCheck">비밀번호 확인:</label>
+      <input type="password" placeholder="비밀번호 재확인" name="pw_CHECK" 
+         required class="form-control pass" id="pwdCheckwd" oninput="checkPwd()"/> 
+    </div>
+    <div class="clearfix">
+    <button type="submit" class="signupbtn" disabled="disabled">로그인</button>   
+    </div>
+  </form>
+</div>
+   
+   
+   
+   
+      <!-- footer 시작 -->
+   <%@ include file="../template/footer.jsp" %>
+   
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="/trip_GazuaAA/js/googleLogin.js"></script>
-	<script src="/trip_GazuaAA/js/FBLogin.js"></script>
-	<script src="/trip_GazuaAA/js/login.js"></script>
+   <script src="/trip_GazuaAA/js/googleLogin.js"></script>
+   <script src="/trip_GazuaAA/js/FBLogin.js"></script>
+   <script src="/trip_GazuaAA/js/login.js"></script>
 <script>
  
 //     아이디와 비밀번호가 맞지 않을 경우 가입버튼 비활성화를 위한 변수설정
@@ -57,12 +94,12 @@
     function checkID() {
         var inputed = $('.id').val();
         $.ajax({
-        	url : "checkID.do",
+           url : "checkID.do",
             data : {
                 userID : inputed
             },
             success : function(data) {
-            	console.log(data);
+               console.log(data);
                 if(inputed=="" && data=='0') {
                     $(".signupbtn").prop("disabled", true);
                     $(".signupbtn").css("background-color", "#aaaaaa");
@@ -87,14 +124,16 @@
     }
     function checkPwd() {
         var inputed = $('.pass').val();
-        var reinputed = $('#repwd').val();
+        var reinputed = $('#pwdCheckwd').val();
+        console.log(inputed);
+        console.log(reinputed);
         if(reinputed=="" && (inputed != reinputed || inputed == reinputed)){
             $(".signupbtn").prop("disabled", true);
             $(".signupbtn").css("background-color", "#aaaaaa");
-            $("#repwd").css("background-color", "#FFCECE");
+            $("#pwdCheckwd").css("background-color", "#FFCECE");
         }
         else if (inputed == reinputed) {
-            $("#repwd").css("background-color", "#B0F6AC");
+            $("#pwdCheckwd").css("background-color", "#B0F6AC");
             pwdCheck = 1;
             if(idCheck==1 && pwdCheck == 1) {
                 $(".signupbtn").prop("disabled", false);
@@ -105,7 +144,7 @@
             pwdCheck = 0;
             $(".signupbtn").prop("disabled", true);
             $(".signupbtn").css("background-color", "#aaaaaa");
-            $("#repwd").css("background-color", "#FFCECE");
+            $("#pwdCheckwd").css("background-color", "#FFCECE");
             
         }
     }

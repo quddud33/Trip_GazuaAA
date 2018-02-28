@@ -75,7 +75,7 @@
     color: #FAFAFA;
     border: none;
     background-color:#000;
-    font-size: 50px;
+    font-size: 3.5em;
     font-weight: bold;
     left:35%;
     top:50%;
@@ -119,7 +119,7 @@
 }
 
 .balloon {
-    display: inline-block;
+    display: block;
     position: relative;
     background: #ccc;
     min-height: 50px;
@@ -150,13 +150,13 @@
     top:15px;
 }
 .myBalloon {
-    display: inline-block;
+    display: block;
     position: relative;
     background: #ccc;
     min-height: 50px;
     min-width: 10%;
     max-width: 30%;
-    margin: 15px 0px 15px 88%;
+    margin: 15px 0px 15px 67%;
     border: 1px solid #999;
     text-indent: 5px;
 }

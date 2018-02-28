@@ -7,11 +7,13 @@
 <link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/nav.css">
 <link rel="stylesheet" href="css/chat.css"/>
+<link rel="stylesheet" href="css/loginBox.css"/>
 <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>채팅프로그램</title>
 </head>
 <body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <%@ include file="../template/nav.jsp" %>
 
@@ -36,7 +38,6 @@
 	<!-- footer 시작 -->
 <%@ include file="../template/footer.jsp" %>
 	
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 
 	var $openBtn = $("#openBtn"),
@@ -77,8 +78,13 @@
 	
 	function displayMsg(msg) {
 		
-		$("<li class='balloon'>").text(msg)
-		         .appendTo($list);
+		if(msg.substr(0, msg.indexOf(':')) == nickName){
+			$("<li class='myBalloon'>").text(msg)
+			         .appendTo($list);	
+		} else {
+			$("<li class='balloon'>").text(msg)
+			         .appendTo($list);	
+		}
 		
 		console.log($list.height());
 		//현재 리스트의 
@@ -93,7 +99,7 @@
 	$openBtn.click(function() {
 		$openBtn.css("display","none");
 		//웹소켓의 프로토콜은 ws://
-		socket = new WebSocket("ws://localhost/trip_GazuaAA/chat");
+		socket = new WebSocket("ws://localhost:8080/trip_GazuaAA/chat");
 	
 		//소켓은 open,close,error,message
 		
@@ -101,7 +107,8 @@
 			displayMsg("서버와 연결되었습니다.");
 		}//onopen() end
 		socket.onclose = function() {
-			displayMsg("서버와 연결이 끊어졌습니다.");
+			displayMsg("서버와 연결이 끊어졌습니다. 3초 후 메인페이지로 이동합니다.");
+			setTimeout(function(){ location.href = "main.do"; }, 3000);
 		}//onclose() end
 		socket.onerror = function() {
 			displayMsg("서버 점검중입니다 ^-^");

@@ -20,7 +20,14 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://underscorejs.org/underscore-min.js"></script>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src= "/trip_GazuaAA/js/login.js"></script>
+<script src="/trip_GazuaAA/js/googleLogin.js"></script>
+<script src="/trip_GazuaAA/js/FBLogin.js"></script>
+<script src="/trip_GazuaAA/js/paginate.js"></script>
 <title>검색</title>
 <style>
 table, #map {
@@ -119,7 +126,22 @@ li {
 #searchForm {
 	max-width: 720px;
 	margin: auto;
+	text-align: center;
 }
+
+#textSearchForm {
+	display: inline-block;
+	margin-bottom: 20px;
+}
+
+#areaSearchForm {
+	position: relative;
+}
+
+#areaCodeForm {
+	position: absolute;
+	right: 0;
+} 
 
 .form-control {
 	width: 120px;
@@ -130,47 +152,50 @@ li {
 <body>
 	<!-- 네비게이션 -->
 	<%@ include file="../template/nav.jsp" %>
-	<div id="searchForm"><form action="contentList.do" onsubmit="showSearchTest()">
-		<select name="contentTypeId" class="form-control">
-			<option value="32">숙박</option>
-			<option value="12">관광지</option>
-			<option value="15">행사/축제</option>
-			<option value="39">맛집</option>
-			<option value="28">레포츠</option>
-		</select>
-		<select name="areaCode" class="form-control">
-			<option value="">전체</option>
-			<option value="1">서울</option>
-			<option value="2">인천</option>
-			<option value="3">대전</option>
-			<option value="4">대구</option>
-			<option value="5">광주</option>
-			<option value="7">부산</option>
-			<option value="8">울산</option>
-		</select> <input type="text" class="search_pro" name="search" /> <input type="submit" value="검색" />
-	</form>
-	<label> <input type="radio" name="contentTypeIdVal" value="32"
-		checked> <span>숙박</span>
-	</label>
-	<label> <input type="radio" name="contentTypeIdVal" value="15">
-		<span>축제</span>
-	</label>
-	<label> <input type="radio" name="contentTypeIdVal" value="12">
-		<span>관광지</span>
-	</label>
-	<label> <input type="radio" name="contentTypeIdVal" value="39">
-		<span>맛집</span>
-	</label>
-	<select name="areaCodeVal" class="form-control">
-		<option value="">전체</option>
-		<option value="1">서울</option>
-		<option value="2">인천</option>
-		<option value="3">대전</option>
-		<option value="4">대구</option>
-		<option value="5">광주</option>
-		<option value="6">부산</option>
-		<option value="7">울산</option>
-	</select>
+	<div id="searchForm">
+		<div id="textSearchForm">
+		<form action="contentList.do" onsubmit="showSearchTest()" class="form-inline md-form form-sm">
+			<select name="contentTypeId" class="form-control">
+				<option value="32">숙박</option>
+				<option value="12">관광지</option>
+				<option value="15">행사/축제</option>
+				<option value="39">맛집</option>
+				<option value="28">레포츠</option>
+			</select>
+			<select name="areaCode" class="form-control">
+				<option value="">전체</option>
+				<option value="1">서울</option>
+				<option value="2">인천</option>
+				<option value="3">대전</option>
+				<option value="4">대구</option>
+				<option value="5">광주</option>
+				<option value="7">부산</option>
+				<option value="8">울산</option>
+			</select>
+			<input type="text" class="form-control form-control-sm mr-3 w-75" name="search" placeholder="Search" aria-label="Search"/>
+			<button class="btn btn-unique btn-rounded btn-sm my-0">검색</button>
+		</form>
+		</div>
+	<div id="areaSearchForm">
+		<ul class="nav nav-tabs">
+		    <li class="active"><a data-toggle="tab" onclick="searchAjax(32, $('.areaCodeVal').val(), 1)">숙박</a></li>
+		    <li><a data-toggle="tab" href="#menu1" onclick="searchAjax(15, $('.areaCodeVal').val(), 1)">축제</a></li>
+		    <li><a data-toggle="tab" href="#menu2" onclick="searchAjax(12, $('.areaCodeVal').val(), 1)">관광지</a></li>
+		    <li><a data-toggle="tab" href="#menu3" onclick="searchAjax(39, $('.areaCodeVal').val(), 1)">맛집</a></li>
+		    <li id="areaCodeForm">
+				<select name="areaCodeVal" class="form-control areaCodeVal">
+					<option value="">전체</option>
+					<option value="1">서울</option>
+					<option value="2">인천</option>
+					<option value="3">대전</option>
+					<option value="4">대구</option>
+					<option value="5">광주</option>
+					<option value="6">부산</option>
+					<option value="7">울산</option>
+				</select>
+			</li>
+		</ul>
+	</div>
 	<br />
 	</div>
 	
@@ -236,13 +261,6 @@ li {
 	</div>
 	<%@ include file="../template/footer.jsp" %>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="http://underscorejs.org/underscore-min.js"></script>
-	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src= "/trip_GazuaAA/js/login.js"></script>
-	<script src="/trip_GazuaAA/js/googleLogin.js"></script>
-	<script src="/trip_GazuaAA/js/FBLogin.js"></script>
-	<script src="/trip_GazuaAA/js/paginate.js"></script>
 	<script>
 		var touristTable = _.template($('#touristTable').html()), $areaCode = $('[name=areaCodeVal]')
 		var $searchTest = $("#searchTest");
@@ -254,10 +272,22 @@ li {
 			$searchTest.show();
 			console.log("쇼 성공");
 		}
-		$('[name=contentTypeIdVal], [name=areaCodeVal]').change(function() {
-			contentTypeId = $('[name=contentTypeIdVal]:checked').val();
+		
+		$('[name=areaCodeVal]').change(function() {
 			areaCode = $areaCode.val();
 			page = 1;
+
+			searchAjax(contentTypeId, areaCode, page);
+		});
+		
+		$('#content').on('click', '.page', function() {
+			searchAjax(contentTypeId, areaCode, $(this).val());
+		});
+		
+		function searchAjax(contentTypeIdVal, areaCodeVal, pageVal) {
+			contentTypeId = contentTypeIdVal;
+			areaCode = areaCodeVal;
+			page = pageVal;
 			$.ajax('ajax/touristInfo.do', {
 				async : false,
 				data : {
@@ -278,30 +308,7 @@ li {
 				error : function(err) {
 				}
 			})
-
-		});
-		
-		$('#content').on('click', '.page', function() {
-			page = $(this).val();
-			$.ajax('ajax/touristInfo.do', {
-				async : false,
-				data : {
-					contentTypeId :contentTypeId,
-					areaCode : areaCode,
-					page : page
-				},
-				success : function(json) {
-					$('#content').html(touristTable({
-						touristInfo : json
-					}));
-					$('#page').html(paginate(page, (total / 10), '?no='));
-					$searchTest.hide();
-				},
-				error : function(err) {
-				}
-			})
-
-		});
+		}
 	</script>
 </body>
 </html>
