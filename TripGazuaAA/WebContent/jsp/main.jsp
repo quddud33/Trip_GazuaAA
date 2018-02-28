@@ -169,8 +169,8 @@
                 	<img src="/trip_GazuaAA/img/no.png" class="img-responsive">
                 </c:if>
                 <figcaption>${topListCountry.overview }</figcaption>
-                </figure>
-                </div>
+           </figure>
+      	 </div>
          </c:forEach>
 	</div> 
 	

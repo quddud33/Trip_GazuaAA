@@ -300,25 +300,28 @@
 					<th>${reviewL.score }</th>
 					<th>${reviewL.likeCount }</th>
 					<th>${reviewL.userID  }</th>
-					<c:if test="${user.userid eq reviewL.userID }">
+					<c:if test="${user.userID eq reviewL.userID }">
 					<th>
 					<a href="reviewDelete.do?num=${reviewL.num }&content=${reviewL.content}&contenttypeid=${param.contenttypeid }&contentid=<%=request.getParameter("contentid")%>">삭제</a>
 					<a href="reviewUpdateForm.do?num=${reviewL.num }&content=${reviewL.content}&contenttypeid=${param.contenttypeid }&contentid=<%=request.getParameter("contentid")%>">수정</a>
 					</th>
 					</c:if>
-					<c:if test="${user ne null}">
-					<c:forEach items="${reviewLikeCheck}" var="reviewLikeCheck">
 					<c:choose>
-					<c:when test="${reviewL.num eq reviewLikeCheck.num}">
-					<th><button onclick="location.href='likeMinus.do?likeCount=${reviewL.likeCount }&num=${reviewL.num }&content=${reviewL.content}&contenttypeid=${param.contenttypeid }&contentid=<%=request.getParameter("contentid")%>'">좋아요취소</button></th>
-					</c:when>
-					<c:otherwise>
-					<th><button onclick="location.href='likeSum.do?likeCount=${reviewL.likeCount }&num=${reviewL.num }&content=${reviewL.content}&contenttypeid=${param.contenttypeid }&contentid=<%=request.getParameter("contentid")%>'">좋아요</button></th>
-					</c:otherwise>
+						<c:when test="${'1' eq reviewL.like }">
+							<td>
+								<button onclick="location.href='likeMinus.do?likeCount=${reviewL.likeCount }&num=${reviewL.num }&content=${reviewL.content}&contenttypeid=${param.contenttypeid }&contentid=<%=request.getParameter("contentid")%>'">
+									좋아요취소
+								</button>
+							</td>
+						</c:when>
+						<c:otherwise>
+							<td>
+								<button onclick="location.href='likeSum.do?likeCount=${reviewL.likeCount }&num=${reviewL.num }&content=${reviewL.content}&contenttypeid=${param.contenttypeid }&contentid=<%=request.getParameter("contentid")%>'">
+									좋아요
+								</button>
+							</td>
+						</c:otherwise>
 					</c:choose>
-					</c:forEach>
-					</c:if>
-				</tr>	
 				</c:forEach>
 			</table>
 			

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,20 +19,20 @@ import org.springframework.web.servlet.ModelAndView;
 import service.APIService;
 import service.ReviewService;
 import util.PaginateUtil;
+
 //aa
 @Controller
 public class APIController {
 	@Autowired
 	private APIService service;
 	@Autowired
-	private ReviewService Rservice; 
+	private ReviewService Rservice;
 
-	//숙소, 맛집, 축제 검색페이지[contentList]
-	@RequestMapping(value="contentList.do", params="search")
-	public ModelAndView getSearch(@RequestParam(defaultValue = "") String search, 
-			@RequestParam(defaultValue="") String contentTypeId, 
-			@RequestParam(defaultValue="") String areaCode,
-			@RequestParam(defaultValue="1") String page) throws Exception {
+	// 숙소, 맛집, 축제 검색페이지[contentList]
+	@RequestMapping(value = "contentList.do", params = "search")
+	public ModelAndView getSearch(@RequestParam(defaultValue = "") String search,
+			@RequestParam(defaultValue = "") String contentTypeId, @RequestParam(defaultValue = "") String areaCode,
+			@RequestParam(defaultValue = "1") String page) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		int pageNo = Integer.parseInt(page);
 		List<HashMap<String, String>> list = service.searchAPIInfo(search, contentTypeId, areaCode, page);
@@ -41,19 +42,18 @@ public class APIController {
 		int numBlock = 5;
 		String url = "contentList.do?";
 		String param = "areaCode=" + areaCode + "&contentTypeId=" + contentTypeId + "&search=" + search + "&page=";
-		mav.addObject("paginate",PaginateUtil.getPaginate(pageNo, total, numPage, numBlock, url, param));
-		mav.addObject("contentList", service.searchAPIInfo(search, contentTypeId, areaCode,page));
-		mav.addObject("page",page);
+		mav.addObject("paginate", PaginateUtil.getPaginate(pageNo, total, numPage, numBlock, url, param));
+		mav.addObject("contentList", service.searchAPIInfo(search, contentTypeId, areaCode, page));
+		mav.addObject("page", page);
 		mav.setViewName("contentList");
 		return mav;
 	}
 
-	//숙소, 맛집, 축제  리스트(검색전) [contentList]
+	// 숙소, 맛집, 축제 리스트(검색전) [contentList]
 	@RequestMapping("contentList.do")
-	public ModelAndView contentList(@RequestParam(defaultValue="1") String areacode, 
-			@RequestParam(defaultValue="") String contentid,
-			@RequestParam(defaultValue="1") String page,
-			@RequestParam(defaultValue="32") String contenttypeid) throws Exception {
+	public ModelAndView contentList(@RequestParam(defaultValue = "1") String areacode,
+			@RequestParam(defaultValue = "") String contentid, @RequestParam(defaultValue = "1") String page,
+			@RequestParam(defaultValue = "32") String contenttypeid) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		int pageNo = Integer.parseInt(page);
 		List<HashMap<String, String>> totalList = service.areaBased(areacode, contentid, page, contenttypeid);
@@ -62,31 +62,63 @@ public class APIController {
 		int numPage = 10;
 		int numBlock = 5;
 		String url = "contentList.do?";
-		String param = "areacode=" + areacode + "&contentid=" + contentid + "&contenttypeid=" + contenttypeid + "&page=";
-		mav.addObject("paginate",PaginateUtil.getPaginate(pageNo, total, numPage, numBlock, url, param));
-		mav.addObject("contentList",service.areaBased(contentid,areacode,page,contenttypeid));
-		mav.addObject("page",page);
+		String param = "areacode=" + areacode + "&contentid=" + contentid + "&contenttypeid=" + contenttypeid
+				+ "&page=";
+		mav.addObject("paginate", PaginateUtil.getPaginate(pageNo, total, numPage, numBlock, url, param));
+		mav.addObject("contentList", service.areaBased(contentid, areacode, page, contenttypeid));
+		mav.addObject("page", page);
 		mav.setViewName("contentList");
 		return mav;
 	}
-	//상세정보(관광지, 숙박, 축제 등) [contentView]
+
+	// 상세정보(관광지, 숙박, 축제 등) [contentView]
 	@RequestMapping("contentView.do")
-	public ModelAndView roomDetail(@RequestParam String contentid, @RequestParam String contenttypeid) throws Exception {
+	public ModelAndView roomDetail(HttpServletRequest request, @RequestParam String contentid,
+			@RequestParam String contenttypeid) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		if(contenttypeid.equals("32") || contenttypeid.equals("12")) {
-			mav.addObject("detail",service.detailInfo(contentid, contenttypeid));
-			mav.addObject("imgInfo",service.imgInfo(contentid, contenttypeid));
-		}
-		else if(contenttypeid.equals("15")){
+		if (contenttypeid.equals("32") || contenttypeid.equals("12")) {
+			mav.addObject("detail", service.detailInfo(contentid, contenttypeid));
+			mav.addObject("imgInfo", service.imgInfo(contentid, contenttypeid));
+		} else if (contenttypeid.equals("15")) {
 			mav.addObject("commonInfo", service.commonInfo(contentid, contenttypeid));
 		}
-		mav.addObject("reviewL",Rservice.reviewList(contentid));
+		HttpSession session = request.getSession();
+		if (session.getAttribute("user") == null) {
+			mav.addObject("reviewL", Rservice.reviewList(contentid));
+		} else {
+			HashMap<String, String> user = (HashMap<String, String>) session.getAttribute("user");
+			String userID = user.get("userID");
+			
+			List<HashMap<String, String>> reviewL = Rservice.reviewList(contentid);
+			List<HashMap<String, String>> reviewLikeCheck = Rservice.userReviewLikeCheck(userID);
+			for(HashMap<String, String> review : reviewL) {
+				review.put("like", "0");
+			}
+			
+			for(HashMap<String, String> reviewLike : reviewLikeCheck) {
+				for(HashMap<String, String> review : reviewL) {
+					if(String.valueOf(review.get("num"))
+							.equals(reviewLike.get("num")))
+						review.put("like", "1");
+					else if(review.get("like").equals("1")) {}
+					else
+						review.put("like", "0");
+				}
+			}
+			
+			mav.addObject("reviewL", reviewL);
+
+//			if (reviewLikeCheck.size() > 0)
+//				mav.addObject("reviewLikeCheck", reviewLikeCheck);
+		}
+
 		mav.setViewName("contentView");
 		return mav;
 	}
-	//추천하기 리스트 api 연동
+
+	// 추천하기 리스트 api 연동
 	@RequestMapping("main.do")
-	public ModelAndView festival() throws Exception{
+	public ModelAndView festival() throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("topListFestival", service.festival("Festival"));
 		mav.addObject("topListCountry", service.festival("Country"));
@@ -94,7 +126,5 @@ public class APIController {
 		mav.setViewName("main");
 		return mav;
 	}
-	
-	
 
 }

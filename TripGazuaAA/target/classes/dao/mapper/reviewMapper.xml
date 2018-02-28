@@ -81,5 +81,11 @@
  	 WHERE userID = #{userID} and num = #{num} 
   </delete>
   
+  <select id="userReviewLikeCheck" parameterType="String" resultType="java.util.HashMap">
+   	SELECT num FROM userlikereview
+   	WHERE userID = #{userID}
+  </select>
+ 
+  
   
   </mapper>

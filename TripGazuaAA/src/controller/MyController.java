@@ -141,22 +141,6 @@ public class MyController {
 		return "redirect:contentView.do?contentid="+params.get("contentID")+"&contenttypeid="+params.get("contentTypeID");
 	}
 	
-	//리뷰리스트
-	@RequestMapping("reviewList.do")
-	public String reviewList(Model model,@RequestParam String contentID,HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		if(session.getAttribute("user") == null) {
-		model.addAttribute("reviewL",rService.reviewList(contentID));
-		}else {
-		HashMap<String, String> user = (HashMap<String, String>)session.getAttribute("user");
-		String userID = user.get("userID");
-		model.addAttribute("reviewL",rService.reviewList(contentID));
-		model.addAttribute("reviewLikeCheck", rService.userReviewLikeCheck(userID));
-		}
-		
-		return "redirect:contentView?contentid="+contentID;
-	}
-	
 	//리뷰업데이트
 	@RequestMapping("reviewUpdateForm.do")
 	public String reivewUpdate(Model model,@RequestParam HashMap<String, String>params, @RequestParam String num) {
