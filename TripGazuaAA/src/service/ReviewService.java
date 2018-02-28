@@ -54,4 +54,7 @@ public class ReviewService {
 	public int userlikeReviewDelete(HashMap<String, String>params) {
 		return rDao.userLikeReviewDelete(params);
 	}
+	public List<HashMap<String, String>> userReviewLikeCheck(String userID){
+		return rDao.userReviewLikeCheck(userID);
+	}
 }

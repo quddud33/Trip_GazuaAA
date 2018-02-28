@@ -143,8 +143,16 @@ public class MyController {
 	
 	//리뷰리스트
 	@RequestMapping("reviewList.do")
-	public String reviewList(Model model,@RequestParam String contentID) {
+	public String reviewList(Model model,@RequestParam String contentID,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("user") == null) {
 		model.addAttribute("reviewL",rService.reviewList(contentID));
+		}else {
+		HashMap<String, String> user = (HashMap<String, String>)session.getAttribute("user");
+		String userID = user.get("userID");
+		model.addAttribute("reviewL",rService.reviewList(contentID));
+		model.addAttribute("reviewLikeCheck", rService.userReviewLikeCheck(userID));
+		}
 		return "redirect:contentView?contentid="+contentID;
 	}
 	

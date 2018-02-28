@@ -36,4 +36,6 @@ public interface IReviewDao {
 	public int userLikeReviewDelete(HashMap<String, String> params);
 	
 	public int userLikeReviewInsert(HashMap<String, String>params);
+	
+	public List<HashMap<String, String>> userReviewLikeCheck(String userID);
 }
