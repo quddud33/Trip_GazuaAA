@@ -14,6 +14,28 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
+<style>
+.btn-custom {
+	margin-bottom:17px;
+	background-color: hsl(145, 62%, 68%) !important;
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#cdf3dd",
+		endColorstr="#7adfa4");
+	background-image: -khtml-gradient(linear, left top, left bottom, from(#cdf3dd),
+		to(#7adfa4));
+	background-image: -moz-linear-gradient(top, #cdf3dd, #7adfa4);
+	background-image: -ms-linear-gradient(top, #cdf3dd, #7adfa4);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cdf3dd),
+		color-stop(100%, #7adfa4));
+	background-image: -webkit-linear-gradient(top, #cdf3dd, #7adfa4);
+	background-image: -o-linear-gradient(top, #cdf3dd, #7adfa4);
+	background-image: linear-gradient(#cdf3dd, #7adfa4);
+	border-color: #7adfa4 #7adfa4 hsl(145, 62%, 63%);
+	color: #333 !important;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.33);
+	-webkit-font-smoothing: antialiased;
+}
+</style>
 </head>
 <body>
       <!-- 네비게이션 -->
@@ -69,7 +91,7 @@
          required class="form-control pass" id="pwdCheckwd" oninput="checkPwd()"/> 
     </div>
     <div class="clearfix">
-    <button type="submit" class="signupbtn" disabled="disabled">로그인</button>   
+    <button type="submit" class="btn btn-custom signupbtn" disabled="disabled">가입하기</button>   
     </div>
   </form>
 </div>

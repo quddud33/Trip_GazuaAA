@@ -51,17 +51,6 @@
             text-indent: 10px;
             margin:5px;
         }
-        
-        
-#nickname{
-    text-align: right;
-    position:relative;
-    clear: both;
-    display: inline;
-    margin-left: 1000px;
-    margin-top: -50px;
-}
-
 .star-input>.input,
 .star-input>.input>label:hover,
 .star-input>.input>input:focus+label,
