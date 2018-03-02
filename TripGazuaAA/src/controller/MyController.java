@@ -425,4 +425,14 @@ public class MyController {
 			return "myPage";
 		}
 		
+
+//===================================지도 맵핑=====================================
+		@RequestMapping("festivalMap.do")
+		public String festivalMap() {
+			return "festivalMap";
+		}
+		@RequestMapping("weatherMap.do")
+		public String weatherMap() {
+			return "weatherMap";
+		}
 }

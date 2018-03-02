@@ -23,7 +23,8 @@
                    <!--userID,nickName-->
                    <li class="active"><a href="contentList.do">컨텐츠 리스트<span class="sr-only"></span></a></li>
                    <li class="active"><a href="tripBoard.do">게시판<span class="sr-only"></span></a></li>
-                   
+                   <li class="active"><a href="festivalMap.do">축체 지도</a><span class="sr-only"></span></li>
+                   <li class="active"><a href="weatherMap.do">날씨 지도</a><span class="sr-only"></span></li>
                       <!--로그인 시에만 보이게 처리(userID,nickName)-->
                    </ul>
                    
