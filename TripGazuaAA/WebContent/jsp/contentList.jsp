@@ -152,6 +152,7 @@ li {
 <body>
 	<!-- 네비게이션 -->
 	<%@ include file="../template/nav.jsp" %>
+	
 	<div id="searchForm">
 		<div id="textSearchForm">
 		<form action="contentList.do" onsubmit="showSearchTest()" class="form-inline md-form form-sm">
@@ -260,7 +261,7 @@ li {
 		<div id="page">${paginate}</div>
 	</div>
 	<%@ include file="../template/footer.jsp" %>
-
+	<script src="/trip_GazuaAA/js/login.js"></script>
 	<script>
 		var touristTable = _.template($('#touristTable').html()), $areaCode = $('[name=areaCodeVal]')
 		var $searchTest = $("#searchTest");

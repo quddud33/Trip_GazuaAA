@@ -133,18 +133,12 @@
     </div>
     <div id="menu1" class="tab-pane fade">
      <div id="content" class="container">   
-      <c:forEach var="res" items="${reservation }">
+      <c:forEach var="fes" items="${festval }">
            <div class="contentList">
                <div class="contentTitle">
-                   <p><i class="fa fa-search"></i>${res.roomName }</p>
+                   <p><i class="fa fa-search"></i>${fes.ContentID }</p>
                </div>
-               
             <div class="textBox">
-               <c:if test="${res.price } ne null}">
-                  <div class="price">
-                     ${res.price }원
-                  </div>
-               </c:if>
                <div class="addr">
                      찜 한 시간 : ${fes.reserveDate }
                </div>
