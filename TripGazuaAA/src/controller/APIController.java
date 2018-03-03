@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import service.APIService;
+import service.ReservationService;
 import service.ReviewService;
 import util.PaginateUtil;
 
@@ -27,6 +28,8 @@ public class APIController {
 	private APIService service;
 	@Autowired
 	private ReviewService Rservice;
+	@Autowired
+	private ReservationService Reserservice;
 
 	// 숙소, 맛집, 축제 검색페이지[contentList]
 	@RequestMapping(value = "contentList.do", params = "search")
@@ -62,6 +65,7 @@ public class APIController {
 		int numPage = 10;
 		int numBlock = 5;
 		String url = "contentList.do?";
+		
 		String param = "areacode=" + areacode + "&contentid=" + contentid + "&contenttypeid=" + contenttypeid
 				+ "&page=";
 		mav.addObject("paginate", PaginateUtil.getPaginate(pageNo, total, numPage, numBlock, url, param));
@@ -74,7 +78,7 @@ public class APIController {
 	// 상세정보(관광지, 숙박, 축제 등) [contentView]
 	@RequestMapping("contentView.do")
 	public ModelAndView roomDetail(HttpServletRequest request, @RequestParam String contentid,
-			@RequestParam String contenttypeid) throws Exception {
+			@RequestParam String contenttypeid, @RequestParam String name) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		if (contenttypeid.equals("32") || contenttypeid.equals("12")) {
 			mav.addObject("detail", service.detailInfo(contentid, contenttypeid));
@@ -126,5 +130,6 @@ public class APIController {
 		mav.setViewName("main");
 		return mav;
 	}
+
 
 }

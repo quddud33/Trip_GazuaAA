@@ -511,6 +511,8 @@ td img {
 				style="text-align: center;"> 
 				<input type="hidden"
 				name="contentID" value="<%=request.getParameter("contentid")%>">
+					<input type="hidden"
+				name="name" value="<%=request.getParameter("name")%>">
 			<input type="hidden" name="contentTypeID"
 				value="${param.contenttypeid }">
 				<input type="hidden" name="userID" value="${user.userID }">

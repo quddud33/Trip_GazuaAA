@@ -381,6 +381,7 @@ public class APIService {
  	        }
  	        rd.close();
  	        conn.disconnect();
+ 	        System.out.println(value);
  			return value;
  		}
  	

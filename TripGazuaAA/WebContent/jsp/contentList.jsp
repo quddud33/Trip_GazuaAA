@@ -226,10 +226,10 @@ li {
 					</div>
 				</div>
 				<c:if test="${searchTest.contenttypeid eq 39 }">
-					<div class="view" onclick="location.href='restaurantWish.do?userID=${user.userID}&contentID=<\%=this.no%>&contentTypeID=<\%=this.contenttypeid%>'">찜하기</div>
+					<div class="view" onclick="location.href='restaurantWish.do?name=${searchTest.title }&userID=${user.userID}&contentID=${searchTest.contentid }&contentTypeID=${searchTest.contenttypeid }'">찜하기</div>
 				</c:if>
 				<c:if test="${searchTest.contenttypeid ne 39 }">
-					<div class="view" onclick="location.href='contentView.do?contentid=${searchTest.contentid }&contenttypeid=${searchTest.contenttypeid }&price=${searchTest.price }'">자세히보기</div>
+					<div class="view" onclick="location.href='contentView.do?name=${searchTest.title }&contentid=${searchTest.contentid }&contenttypeid=${searchTest.contenttypeid }&price=${searchTest.price }'">자세히보기</div>
 				</c:if>
 	        </div>
 			</c:if>
@@ -250,9 +250,9 @@ li {
 				</div>
 			</div>
 			<\%if(this.contenttypeid == 39) {%>
-				<div class="view" onclick="location.href='restaurantWish.do?userID=${user.userID}&contentID=<\%=this.no%>&contentTypeID=<\%=this.contenttypeid%>'">찜하기</div>
+				<div class="view" onclick="location.href='restaurantWish.do?name=<\%=this.title%>&userID=${user.userID}&contentID=<\%=this.no%>&contentTypeID=<\%=this.contenttypeid%>'">찜하기</div>
 			<\%} else {%>
-				<div class="view" onclick="location.href='contentView.do?contentid=<\%=this.no%>&contenttypeid=<\%=this.contenttypeid%>&price=<\%=this.price%>'">자세히보기</div>
+				<div class="view" onclick="location.href='contentView.do?name=<\%=this.title%>&contentid=<\%=this.no%>&contenttypeid=<\%=this.contenttypeid%>&price=<\%=this.price%>'">자세히보기</div>
 			<\%}%>
         </div>
 		<\%})%>
