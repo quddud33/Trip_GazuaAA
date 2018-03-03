@@ -23,6 +23,9 @@ public interface IBoardDao {
 	//조회수
 	public void views(int num);
 	
+	//조회수
+	public int viewsCount(int num);
+	
 	//글 개수
 	public int count();
 	

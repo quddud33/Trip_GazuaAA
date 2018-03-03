@@ -6,169 +6,286 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<style>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<meta name="google-signin-client_id"
+	content="346120053180-l6r9r2hq1sknebtp2ukd6mtoea688dhl.apps.googleusercontent.com">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/nav.css">
+<link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+   <style>
+        #header {
+            height: 100px;
+            border-bottom: 1px solid #a3a3a3;
+        }
+        #body {
+            margin-top: 10px;
+            min-height: 200px;
+        }
+        #footer {
+            height: 65px;
+        }
+        #title {
+            font-weight: bold;
+            margin: 0 0 10px 0px;
+        }
+        #nickname {
+            font-size: 15px;
+            margin: 30px 0 15px 0px;
+        }
+        #viewsLike {
+            font-size: 15px;
+            margin: -35px 15px 15px 0px;
+        }
+        hr {
+            border: .7px solid #a3a3a3;
+            margin-top: 30px;
+        }
+        #content {
+            margin-top: 10px;
+        }
+        #commentForm {
+            width: 938px;
+        }
+        #commentCount {
+            font-size: 15px;
+            font-weight: bold;
+        }
+        button {
+            height: 90px;
+            margin: 0;
+        }
+        #likeBox {
+            width: 60px;
+            height: 75px;
+            border: 1px solid #a3a3a3;
+        }
+        #footer #likeBox{
+            text-align: center;
+            display: inline-block;
+        }
+        #commentBox {
+            min-height: 400px;
+            margin-bottom: 100px;
+        }
+        .comment {
+            min-height: 100px;
+            border-bottom: 1px solid #a3a3a3;
+            /*background: #00AAB4;*/
+        }
+        #comment {
+            margin-top: 30px;
+        }
+        .comment .commentNickname {
+            font-size: 15px;
+            font-weight: bold;
+            display: block;
+            margin-top: 20px;
+        }
+        .comment .commentContent {
+            font-size: 14px;
+            width: 700px;
+        }
+        .comment .date {
+            font-size: 14px;
+        }
+        .comment .commentDU {
+            font-size: 14px;
+            margin-top: -40px;
 
-        #bg {
-            width:100%;
-            height:100%;
-            position:fixed;
-            left:0;
-            top:0;
-            background-color: rgba(0,0,0,.7);
+        }
+
+        .comment .commentCancel {
             display: none;
         }
 
-        #updateBox {
-            width:600px;
-            height:200px;
-            position:absolute;
-            left:50%;
-            top:50%;
-            margin:-150px 0 0 -300px;
-            background: #fff;
+        .comment .commentTextarea {
+            display: none;
         }
-        .title {
-            text-align: center;
-            color:#03A9F4;
+        .like {
+        	font-size: 40px;
         }
-        #updateBox dt {
-            text-indent: 10px;
-            margin:5px;
-            font-size:21px;
-            color:#29B6F6;
+        .deleteLike {
+        	color: #EF5350
         }
-        #updateBox dd {
-            text-indent: 10px;
-            margin:5px;
+        .insertLike {
+        	color: #37474F;
         }
-
-</style>
+        #likeBox .likeCount {
+        	font-size: 15px;
+        	margin-top: -10px;
+        }
+        .backBtn {
+        	margin-top: 60px;
+        }
+        #likeBox a {
+        	text-decoration: none;
+        }
+        #likeBox a:hover {
+        	color: #EF5350;
+        }
+        
+    </style>
 </head>
 <body>
-	${page}<br>
-	${view.nickname }<br>
-	${view.title }<br>
-	${view.content }<br>
-	${view.wDate }<br>
-	
-	<table border="1">
-		<tr>
-			<th>작성자</th>
-			<th>내용</th>
-			<th>날짜</th>
-		</tr>
-		<c:forEach var="comment" items="${comment }">
-			<tr>
-				<td>${comment.nickname }</td>
-				<td class="commentContent">${comment.content }</td>
-				<td>${comment.wDate }</td>
-				<c:if test="${user.userID eq comment.userID}">
-					<td>	
-						<a class="delComment" href="#" commentNum="${comment.commentNum }">삭제하기</a>
-					</td>
-					<td>
-						<a class="updateComment" href="#">수정하기</a>
-					</td>
-				</c:if>
-			</tr>
-		</c:forEach>
-	</table>
-	<br>
-	<form action="tripCommentInsert.do" id="commentInsertForm">
-			<input type="hidden" name="userID" value="${user.userID}"/>
-			<input type="hidden" name="num" value="${view.num }">
-			<input type="hidden" name="nickname" value="${user.nickname }">
-			<input type="hidden" name="page" value="${page }">
-			<textarea rows="5" cols="100" name="content"
-				style="resize: none; overflow: hidden;" placeholder="댓글을 입력해주세요" id="comment"></textarea>
-			<button id="commentSubmit">등록</button>
-	</form>
-	<br>
-	
-	<a href="tripBoard.do?page=${page }">뒤로가기</a>
-
-	<c:if test="${user.userID eq view.userID}">
-		<a href="tripBoardUpdateForm.do?num=${view.num }&page=${page}">수정하기</a>
-		<a id="del" href="#">삭제하기</a><!-- boardNum,userID -->
-	</c:if>
-	<c:choose>
-		<c:when  test="${likeCheck eq 1}">
-		<a href="tripBoardLikeDelete.do?num=${view.num}&userID=${user.userID}&page=${page}">좋아요 삭제</a>
-		</c:when>
-		<c:otherwise>
-			<a href="tripBoardLike.do?num=${view.num }&userID=${user.userID}&page=${page}">좋아요</a>
-		</c:otherwise>
-	</c:choose>
-
-	<!-- boardNum -->
-	${like }
-	<form action="tripCommentUpdate.do" id="commentUpdateForm">
-		<div id="bg">
-			<div id="updateBox">
-				<h2 class="title">수정</h2>
-					<input type="hidden" name="userID" value="${user.userID}"/>
-				<input type="hidden" name="num" value="${view.num }">
-				<input type="hidden" name="commentNum" id="commentNum">
-				<input type="hidden" name="nickname" value="${user.nickname }">
-				<input type="hidden" name="page" value="${page }">
-				<textarea rows="5" cols="80" name="content" id="commentContent"
-					style="resize: none; overflow: hidden;" placeholder="댓글을 입력해주세요"></textarea>
-			<button id="commentUpdate">수정</button>	
-			</div>
-		</div>
-	</form>
-	
-	<c:if test="${msg ne null }">
-		<script>
-			alert('${msg}');
-		</script>
-		<%session.invalidate(); %>
-	</c:if>
-	
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<!-- 네비게이션 -->
+	<%@ include file="../template/nav.jsp" %>
+    <div class="container">
+        <div class="jumbotron">
+            <div class="text-center">
+                <div id="header">
+                    <h2 class="text-left" id="title">${view.title }</h2>
+                    <p class="text-left" id="nickname">by ${view.nickname }(${view.userID })  ${view.wDate }</p>
+                    <p class="text-right" id="viewsLike">조회수 ${viewsCount } 댓글 ${commentCount }</p>
+                </div>
+                <div id="body">
+                    <div class="text-left" id="content">
+						${view.content }
+                    </div>
+                </div>
+                <div id="footer">
+                    <div id="likeBox" class="text-center">
+                        <c:choose>
+							<c:when  test="${likeCheck eq 1}">
+								<a href="tripBoardLikeDelete.do?num=${view.num}&userID=${user.userID}&page=${page}" class="like deleteLike">♥</a>
+							</c:when>
+							<c:otherwise>
+								<a href="tripBoardLike.do?num=${view.num }&userID=${user.userID}&page=${page}" class="like insertLike">♥</a>
+							</c:otherwise>
+						</c:choose>
+						<p class="likeCount">${like}</p>
+                    </div>
+                 </div>
+                    <div class="text-right">
+                    	<c:if test="${user.userID eq view.userID}">
+							<a href="tripBoardUpdateForm.do?num=${view.num }&page=${page}">수정하기</a>
+							<a id="del" href="#">삭제하기</a><!-- boardNum,userID -->
+						</c:if>
+                    </div>
+                <hr>
+                <p class="text-left" id="commentCount">댓글 ${commentCount }개</p>
+                <div class="text-center" id="commentBox">
+					<form action="tripCommentInsert.do" id="commentInsertForm">
+						<input type="hidden" name="userID" value="${user.userID}"/>
+						<input type="hidden" name="num" value="${view.num }">
+						<input type="hidden" name="nickname" value="${user.nickname }">
+						<input type="hidden" name="page" value="${page }">
+						<textarea class="form-control col-sm-5" rows="4"
+									 placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 댓글은 제재를 받을 수 있습니다."
+									 id="commentForm" name="content"></textarea>
+						<button class="btn btn-primary" id="commentSubmit">댓글등록</button>
+					</form>
+                    <div id="comment">
+                    <c:forEach var="comment" items="${comment }">
+                        <div class="comment" >
+                        	<form action="tripCommentUpdate.do" class="commentUpdateForm">
+	                            <p class="text-left commentNickname">${comment.nickname }(${comment.userID })</p>
+	                            <div class="commentContentForm">
+	                                <p class="text-left commentContent">${comment.content }</p>
+	                                <input type="hidden" name="num" value="${view.num}">
+	                                <input type="hidden" name="commentNum" value="${comment.commentNum}">
+	                                <input type="hidden" name="page" value="${page}">
+									<input type="hidden" name="nickname" value="${user.nickname }">
+									<input type="hidden" name="userID" value="${user.userID}"/>
+	                                <textarea name="content" class="commentTextarea"></textarea>
+	                            </div>
+	                            <p class="text-left date">${comment.wDate }</p>
+	                            <p class="text-right commentDU">
+	                                <a class="delComment" href="#" commentNum="${comment.commentNum }">삭제</a>
+	                                <a class="updateComment commentUpdate" href="#">수정</a>
+	                                <a class="check" style="display: none">수정 </a>
+	                                <a href="#" class="commentCancel">취소</a>
+	                            </p>
+                            </form>
+                        </div>
+                    </c:forEach>
+                    </div>
+                    <div class="text-right backBtn">
+                    	<a href="tripBoard.do?page=${page }" class="btn btn-primary">목록</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<c:if test="${msg ne null }">
 	<script>
-		$('#del').click(function(e) {
-			if(confirm("정말로 삭제하시겠습니까?"))
-				location.href = "tripBoardDelete.do?num=${view.num }";
-			else
-				e.preventDefault();
-		});
-		
-		$('.delComment').click(function(e) {
-			if(confirm("정말로 삭제하시겠습니까?"))
-				location.href = "tripCommentDelete.do?num=${view.num }&page=${page}&commentNum=" + $(this).attr("commentNum");
-			else
-				e.preventDefault();
-		});
-		
-		$(".updateComment").on("click", function(){
-			$("#bg").css("display", "block");
-			$("#commentNum").val($(this).parent().prev().children(".delComment").attr("commentNum"));
-			$("#commentContent").val($(this).parent().parent().children(".commentContent").text());
-		});
-		
-	    $("#updateBox").on("click",function (e) {                                                             
-		        e.stopPropagation();                                                                       
-		    });//click end                                                                                
-		    $("#bg").on("click",function () {                                                                 
-		        $("#bg").css("display","none");                                
-		    });//click end
-		    
-		$('#commentSubmit').click(function(e) {
-			e.preventDefault();
-			if ($('#comment').val().length <= 0) {
-				alert('댓글을 입력해주세요');
-			} else
-				$('#commentInsertForm').submit();
-		});
-		    
-		$('#commentUpdate').click(function(e) {
-			e.preventDefault();
-			if ($('#commentContent').val().length <= 0) {
-				alert('댓글을 입력해주세요');
-			} else
-				$('#commentUpdateForm').submit();
-		});
+		alert('${msg}');
 	</script>
+<%session.invalidate(); %>
+	</c:if>
+	
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="/trip_GazuaAA/js/googleLogin.js"></script>
+	<script src="/trip_GazuaAA/js/FBLogin.js"></script>
+	<script src="/trip_GazuaAA/js/login.js"></script>
+<script>
+    var commentContentVal;
+
+    $('.commentUpdate').click(function (e) {
+        e.preventDefault();
+        var commentContent = $(this).parent().siblings('.commentContentForm');
+        $(this).siblings('.commentCancel').css({'display' : 'inline'});
+        $(this).siblings('.delComment').css({'display' : 'none'});
+        $(this).siblings('.check').css({'display' : 'inline'});
+        $(this).css({'display' : 'none'});
+        commentContent.find('.commentTextarea').css({'display' : 'block', 'width' : commentContent.css('width'), 'height' : commentContent.css('height')});
+        commentContent.find('.commentTextarea').val(commentContent.find('.commentContent').text());
+        commentContent.find('.commentContent').css({'display' : 'none'});
+        
+
+        commentContentVal = commentContent.html();
+        // commentContent.html("<textarea style='width: " + commentContent.css('width') + "; height: " + commentContent.css('height') + ";'>" + commentContent.children('.commentContent').text() + "</textarea>");
+
+        
+    });
+
+    $('.commentCancel').click(function (e) {
+       e.preventDefault();
+       $(this).css({'display' : 'none'});
+       $(this).siblings('.delComment').css({'display' : 'inline'});
+       $(this).siblings('.check').css({'display' : 'none'});
+       $(this).siblings('.commentUpdate').css({'display' : 'inline'});
+       var commentContent = $(this).parent().siblings('.commentContentForm');
+
+       commentContent.find('.commentTextarea').css({'display' : 'none'});
+       commentContent.find('.commentContent').css({'display' : 'block'});
+    });
+	
+	$('#del').click(function(e) {
+		if(confirm("정말로 삭제하시겠습니까?"))
+			location.href = "tripBoardDelete.do?num=${view.num }";
+		else
+			e.preventDefault();
+	});
+		
+	$('.delComment').click(function(e) {
+		if(confirm("정말로 삭제하시겠습니까?"))
+			location.href = "tripCommentDelete.do?num=${view.num }&page=${page}&commentNum=" + $(this).attr("commentNum");
+		else
+			e.preventDefault();
+	});
+			
+	$('#commentSubmit').click(function(e) {
+		e.preventDefault();
+		if ($('#commentForm').val().length <= 0) {
+			alert('댓글을 입력해주세요');
+		} else
+			$('#commentInsertForm').submit();
+	});
+	
+	$('.commentUpdateForm').on('click', '.check', function (e) {
+		e.preventDefault();
+		
+		$(this).closest('.commentUpdateForm').submit();
+	});
+		
+</script>
+<!-- footer 시작 -->
+<%@ include file="../template/footer.jsp" %>
 </body>
 </html>

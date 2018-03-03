@@ -138,7 +138,7 @@ public class MyController {
 	@RequestMapping("reviewWrite.do")
 	public String reviewWrite(@RequestParam HashMap<String, String> params) {
 		rService.insertReview(params);
-		return "redirect:contentView.do?contentid="+params.get("contentID")+"&contenttypeid="+params.get("contentTypeID");
+		return "redirect:contentView.do?contentid="+params.get("contentID")+"&contenttypeid="+params.get("contentTypeID") + "&name=" + params.get("name");
 	}
 	
 	//리뷰업데이트
@@ -234,6 +234,8 @@ public class MyController {
 				mav.addObject("view",bService.selectOne(num));
 				mav.addObject("comment",cService.selectAll(num));
 	            mav.addObject("like",bService.likeCount(num));
+	            mav.addObject("viewsCount",bService.viewsCount(num));
+	            mav.addObject("commentCount",cService.commentCount(num));
 				mav.setViewName("tripBoardView");
 				return mav;
 			} else {
@@ -248,6 +250,8 @@ public class MyController {
 				mav.addObject("view",bService.selectOne(num));
 				mav.addObject("comment",cService.selectAll(num));
 	            mav.addObject("like",bService.likeCount(num));
+	            mav.addObject("viewsCount",bService.viewsCount(num));
+	            mav.addObject("commentCount",cService.commentCount(num));
 				mav.setViewName("tripBoardView");
 				bService.views(num);
 				

@@ -15,4 +15,7 @@ public interface ICommentDao {
 	
 	public List<HashMap<String, Object>> selectList(int num);
 	
+	public int commentCount(int num);
+	
+	
 }

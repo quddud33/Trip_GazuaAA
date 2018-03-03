@@ -507,6 +507,7 @@ td img {
 	<c:if test="${user ne null }">
 		<form action="reviewWrite.do"
 			style="text-align: right; width: 80%; margin: auto; margin-top: 10px;">
+				<input type="hidden" name="name" value="<%=request.getParameter("name")%>">
 			<textarea rows="5" cols="30" name="content" class="form-control"
 				placeholder="리뷰를 남겨주세요"></textarea>
 			<input type="submit" value="입력" class="btn btn-defalut btn-custom"

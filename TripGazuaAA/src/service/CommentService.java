@@ -39,4 +39,10 @@ public class CommentService {
 		return dao.selectList(num);
 	}
 	
+	//댓글 개수
+	public int commentCount(int num) {
+		return dao.commentCount(num);
+	}
+	
+	
 }

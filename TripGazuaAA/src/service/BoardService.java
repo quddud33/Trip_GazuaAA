@@ -43,6 +43,11 @@ public class BoardService {
 	public void views(int num) {
 		bDao.views(num);
 	}
+	
+	//조회수
+	public int viewsCount(int num) {
+		return bDao.viewsCount(num);
+	}
 
 	//글 개수
 	public int count() {

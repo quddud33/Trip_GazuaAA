@@ -5,40 +5,58 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<meta name="google-signin-client_id"
+	content="346120053180-l6r9r2hq1sknebtp2ukd6mtoea688dhl.apps.googleusercontent.com">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/nav.css">
+<link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="/trip_GazuaAA/js/googleLogin.js"></script>
+	<script src="/trip_GazuaAA/js/FBLogin.js"></script>
+	<script src="/trip_GazuaAA/js/login.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<style>
+        .container {
+            /*background: #00AAB4;*/
+        }
+        #ir1 {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        #contentForm {
+        	margin: 15px 0 15px 0;
+        }
+    </style>
 </head>
 <body>
-	<form action="tripBoardUpdate.do" id="frm">
-		<table width="100%">
-			<tr>
-				<th>제목</th>
-				<td><input type="text" id="title" name="title" value="${update.title }"/></td>
-			</tr>
-			<tr>
-				<th>아이디</th>
-					<td><input name="userID" value="${update.userID }" readonly="readonly" />
+	<!-- 네비게이션 -->
+	<%@ include file="../template/nav.jsp" %>
+    <div class="container">
+        <div class="jumbotron">
+            <div class="text-center">
+                <form action="tripBoardWrite.do" id="frm">
+					<input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력해주세요.." value="${update.title}"/>
+					<input type="hidden" name="userID" value="${user.userID }" readonly="readonly" />
+                    <input type="hidden" name="nickname" value="${user.nickname}" readonly="readonly" />
 					<input name="num" type="hidden" value="${update.num }">
-					<input type="hidden" name="page" value="${page }"></td>
-			</tr>
-			<tr>
-				<th>닉네임</th>
-				<td>
-					<input name="nickname" value="${update.nickname}" readonly="readonly" />
-				</td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td><textarea rows="10" cols="30" id="ir1" name="content"
-						style="width: 766px; height: 412px;">${update.content }</textarea></td>
-			</tr>
-			<tr>
-				<td><input type="hidden" name="image" /></td>
-			</tr>
-			<tr>
-				<td colspan="2"><button id="save">수정</button> 
-				<button type="button" onclick="location.href='tripBoardView.do?num=${update.num}&page=${page }'">뒤로가기</button>
-			</tr>
-		</table>
-	</form>
+					<input type="hidden" name="page" value="${page }">
+                    <div id="contentForm">
+						<textarea id="ir1" name="content" class="form-control col-sm-5" rows="25" placeholder="내용을 입력해주세요...">${update.content}</textarea>
+					</div>
+					<input type="hidden" name="image" />
+					<input type="button" id="save" value="작성완료"  class="btn btn-primary"/>
+                    <input type="button" onclick="location.href='tripBoardView.do?num=${update.num}&page=${page }'" class="btn btn-primary" value="뒤로가기" id="backBtn"/>
+                </form>
+            </div>
+        </div>
+    </div>
+<!-- footer 시작 -->
+<%@ include file="../template/footer.jsp" %>
 		<script type="text/javascript"
 		src="/trip_GazuaAA/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 	<script type="text/javascript"
@@ -72,6 +90,10 @@
 	$("#save").click(function(){
 		oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
 		$("#frm").submit();
+	});
+	
+	$('#backBtn').click(function(){
+		alert('게시글이 지워질수도 있습니다');	
 	});
 	
 	</script>

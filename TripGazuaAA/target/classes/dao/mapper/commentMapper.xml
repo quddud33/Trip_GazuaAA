@@ -22,15 +22,22 @@
 	</delete>
 	
 	<select id="selectOne" parameterType="int" resultType="java.util.HashMap">
-		select *
+		select commentNum, num, content, userID, nickname, DATE_FORMAT(wDate, '%Y-%m-%d') 'wDate', uDate
 		from tripcomment
 		where commentNum = #{commentNum}
 	</select>
 	
 	<select id="selectList" parameterType="int" resultType="java.util.HashMap">
-		select *
+		select commentNum, num, content, userID, nickname, DATE_FORMAT(wDate, '%Y-%m-%d') 'wDate', uDate
 		from tripcomment
 		where num = #{num}
 	</select>
+	
+	<select id="commentCount" parameterType="int" resultType="int">
+		select count(*)
+		from tripcomment
+		where num = #{num}
+	</select>
+
 	
 </mapper>
