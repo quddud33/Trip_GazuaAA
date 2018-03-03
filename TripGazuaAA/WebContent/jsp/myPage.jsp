@@ -201,7 +201,7 @@
          <td>컨텐츠 타입 ID : ${rest.contentTypeID }</td>
          <td>예약일 : ${rest.reserveDate }</td>
       </tr>
-   </c:forEach>
+   </c:forEach> 
 </table>
 
 -->
