@@ -145,10 +145,10 @@
 			<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
 			<figure>
                 <c:if test="${topListFestival.firstimage ne null}">
-                	<img src="${topListFestival.firstimage }" class="img-responsive">
+                	<img src="${topListFestival.firstimage }" class="img-responsive" style="width: 250px; height: 200px;">
                 </c:if>
                 <c:if test="${topListFestival.firstimage eq null}">
-                	<img src="/trip_GazuaAA/img/no.png" class="img-responsive">
+                	<img src="/trip_GazuaAA/img/no.png" class="img-responsive" style="width: 250px; height: 200px;">
                 </c:if>
                 <figcaption>${topListFestival.overview }</figcaption>
                 </figure>
@@ -163,10 +163,10 @@
 		<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
 			<figure>
                 <c:if test="${topListCountry.firstimage ne null}">
-                	<img src="${topListCountry.firstimage }" class="img-responsive">
+                	<img src="${topListCountry.firstimage }" class="img-responsive" style="width: 250px; height: 200px;">
                 </c:if>
                 <c:if test="${topListCountry.firstimage eq null}">
-                	<img src="/trip_GazuaAA/img/no.png" class="img-responsive">
+                	<img src="/trip_GazuaAA/img/no.png" class="img-responsive" style="width: 250px; height: 200px;">
                 </c:if>
                 <figcaption>${topListCountry.overview }</figcaption>
            </figure>
@@ -180,10 +180,10 @@
 			<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
 				<figure>
                 <c:if test="${topListRestaurant.firstimage ne null}">
-                	<img src="${topListRestaurant.firstimage }" class="img-responsive">
+                	<img src="${topListRestaurant.firstimage }" class="img-responsive" style="width: 250px; height: 200px;">
                 </c:if>
                 <c:if test="${topListRestaurant.firstimage eq null}">
-                	<img src="/trip_GazuaAA/img/no.png" class="img-responsive">
+                	<img src="/trip_GazuaAA/img/no.png" class="img-responsive" style="width: 250px; height: 200px;">
                 </c:if>
                 <figcaption>${topListRestaurant.contentid }</figcaption>
                 </figure>
