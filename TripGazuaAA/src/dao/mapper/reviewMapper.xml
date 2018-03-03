@@ -31,7 +31,7 @@
   
   
   <select id="reviewList" resultType="java.util.HashMap" parameterType="String">
-  SELECT num, nickname, content, writeDate, score, likeCount, userID, contentID, contentTypeID
+  SELECT num, nickname, content, DATE_FORMAT(writeDate, '%Y-%m-%d') 'writeDate', score, likeCount, userID, contentID, contentTypeID
   FROM review WHERE contentID = #{contentID}
   </select>
   

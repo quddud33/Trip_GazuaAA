@@ -1,10 +1,10 @@
 #loginBox {
-	width: 400px;
-	height: 400px;
+	width: 550px;
+	height: 600px;
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	margin: -150px 0 0 -200px;
+	margin: -300px 0 0 -300px;
 	background: #fff;
 }
 
@@ -21,6 +21,7 @@
 .title {
 	text-align: center;
 	color: #03A9F4;
+	padding-bottom: 20px;
 }
 
 #loginBox dt {
@@ -31,8 +32,7 @@
 }
 
 #loginBox dd {
-	text-indent: 10px;
-	margin: 5px;
+	margin: 5px 0 5px 0;
 }
 
 #myCarousel {
@@ -50,4 +50,8 @@
 
 .gallery_product {
 	margin-bottom: 30px;
+}
+.loginBtnBox{
+	margin: auto;
+	width: 250px;
 }
