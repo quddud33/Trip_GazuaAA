@@ -155,8 +155,10 @@
     $.each(markers, function(i, v) { v.setMap(map) });
 
     weaherJson();
+    
     function weaherJson() {
-        $.ajax('../ajax/weather'+gap+'.json' ,{
+    	console.log(gap);
+        $.ajax('ajax/weather'+gap+'.json' ,{
             success: function (json) {
                 weather = json;
                 console.log(weather);
@@ -180,14 +182,11 @@
         if(map.getLevel() == 10){
             // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
             //locations는 daum.maps.LatLng객체들이 담길 배열
-
-
             $.each(locations, function(i, v) {
                 //infoWindow를 설정
                 //content는 구조
                 //position은 위치(daum.maps.LatLng)
-                //removable은 닫기 버튼의 존재여부
-
+                //removable은 닫기 버	튼의 존재여부
                 if(gap >6){
                     var infoWindow = new daum.maps.InfoWindow({
                         content : '<div style="padding:5px;"><p style="font-size:3px;">날씨 : '+weather[i].wf+' 최저 기온 :'+weather[i].taMin+' <br> 최고 기온 : '+weather[i].taMax+'</p></div>',
