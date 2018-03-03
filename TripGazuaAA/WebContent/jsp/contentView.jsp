@@ -335,7 +335,7 @@ td img {
 								<div class="item">
 									<img src="${detail.roomimg1 }"
 										style="width: 100%; height: 400px;" data-src=""
-										alt="Second slide">
+										alt="사진없음">
 									<div class="container">
 										<div class="carousel-caption">
 											<h1>${detail.roomtitle }</h1>
