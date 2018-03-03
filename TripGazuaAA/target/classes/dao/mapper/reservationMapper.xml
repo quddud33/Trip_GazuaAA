@@ -19,7 +19,7 @@
 	
 	<delete id="deleteReservation" parameterType="java.util.HashMap">
 		DELETE FROM lodgingreserveinfo
-		WHERE userid = #{userid} AND contentID = #{contentID}
+		WHERE userid = #{userID} AND contentID = #{contentID} AND reserveDate = #{reserveDate}
 	</delete>
 	
 	<insert id="insertFestval" parameterType="java.util.HashMap">
@@ -35,7 +35,7 @@
 	
 	<delete id="deleteFestval" parameterType="java.util.HashMap">
 		DELETE FROM festvalpickinfo
-		WHERE userID = #{userID} AND contentID = #{contentID}
+		WHERE userID = #{userID} AND contentID = #{contentID} AND reserveDate = #{reserveDate}
 	</delete>
 	
 	<insert id="insertRestaurant" parameterType="java.util.HashMap">
@@ -51,7 +51,7 @@
 	
 	<delete id="deleteRestaurant" parameterType="java.util.HashMap">
 		DELETE FROM restaurantpickinfo
-		WHERE userID = #{userID} AND contentID = #{contentID}
+		WHERE userID = #{userID} AND contentID = #{contentID} AND reserveDate = #{reserveDate}
 	</delete>
 	
 	
