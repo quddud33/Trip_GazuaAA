@@ -7,7 +7,7 @@
 	<insert id="insertReservation" parameterType="java.util.HashMap">
 		INSERT INTO lodgingreserveinfo
 		VALUES (#{userID}, #{contentID}, #{contentTypeID}, now(), #{adult}, #{kid},
-		#{price}, #{startDate}, #{endDate}, #{roomName})
+		#{price}, #{startDate}, #{endDate}, #{roomName}, #{name})
 	</insert>
 
 	<select id="selectReservation" parameterType="String"
@@ -19,12 +19,12 @@
 	
 	<delete id="deleteReservation" parameterType="java.util.HashMap">
 		DELETE FROM lodgingreserveinfo
-		WHERE userid = #{userid} AND contentID = #{contentID}
+		WHERE userid = #{userID} AND contentID = #{contentID} AND reserveDate = #{reserveDate}
 	</delete>
 	
 	<insert id="insertFestval" parameterType="java.util.HashMap">
 		INSERT INTO festvalpickinfo
-		VALUES (#{userID}, #{contentID}, #{contentTypeID}, now())
+		VALUES (#{userID}, #{contentID}, #{contentTypeID}, now(), #{name})
 	</insert>
 	
 	<select id="selectFestval" parameterType="String" resultType="java.util.HashMap">
@@ -35,12 +35,12 @@
 	
 	<delete id="deleteFestval" parameterType="java.util.HashMap">
 		DELETE FROM festvalpickinfo
-		WHERE userID = #{userID} AND contentID = #{contentID}
+		WHERE userID = #{userID} AND contentID = #{contentID} AND reserveDate = #{reserveDate}
 	</delete>
 	
 	<insert id="insertRestaurant" parameterType="java.util.HashMap">
 		INSERT INTO restaurantpickinfo
-		VALUES (#{userID}, #{contentID}, #{contentTypeID}, now())
+		VALUES (#{userID}, #{contentID}, #{contentTypeID}, now(), #{name})
 	</insert>
 	
 	<select id="selectRestaurant" parameterType="String" resultType="java.util.HashMap">
@@ -51,7 +51,8 @@
 	
 	<delete id="deleteRestaurant" parameterType="java.util.HashMap">
 		DELETE FROM restaurantpickinfo
-		WHERE userID = #{userID} AND contentID = #{contentID}
+		WHERE userID = #{userID} AND contentID = #{contentID} AND reserveDate = #{reserveDate}
 	</delete>
-
+	
+	
 </mapper>

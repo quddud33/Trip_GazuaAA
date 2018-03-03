@@ -21,7 +21,7 @@
 <body>
 	<!-- 네비게이션 -->
 	<%@ include file="../template/nav.jsp" %>
-<div id="map" style="width:100%;height:1200px;"></div>
+<div id="map" style="margin: auto; width:80%;height:1200px;"></div>
 <!-- footer 시작 -->
 	<%@ include file="../template/footer.jsp" %>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -53,7 +53,7 @@
 
     // 데이터를 가져오기 위해 jQuery를 사용합니다
     // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
-    $.get("../ajax/tour.json", function (data) {
+    $.get("ajax/tour.json", function (data) {
         // 데이터에서 좌표 값을 가지고 마커를 표시합니다
         // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
         markers = $(data.positions).map(function (i, position) {
@@ -65,7 +65,7 @@
 
     });
 
-    $.get("../ajax/tour.json", function (data) {
+    $.get("ajax/tour.json", function (data) {
         $.each(data, function (i, v) {
             for (var i = 0; i < v.length; i++) {
                 locations.push(new daum.maps.LatLng(v[i].lat,v[i].lng ));

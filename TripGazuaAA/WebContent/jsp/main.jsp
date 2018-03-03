@@ -71,11 +71,11 @@
 	<div class="carousel-inner">
 		<!--슬라이드1-->
 		<div class="item active"> 
-			<img src="http://tong.visitkorea.or.kr/cms/resource/00/2522700_image2_1.jpeg" style="width:100%; height:600px;" alt="First slide">
+			<img src="http://tong.visitkorea.or.kr/cms/resource/10/2531710_image2_1.jpg" style="width:100%; height:600px;" alt="First slide">
 			<div class="container">
 				<div class="carousel-caption">
-					<h1>Slide 1</h1>
-					<p>텍스트 1</p>
+					<h1>가평펜션축제</h1>
+					<p>경기도 가평군 가평읍 북한강변로 360-69</p>
 				</div>
 			</div>
 		</div>
@@ -83,11 +83,11 @@
 
 		<!--슬라이드2-->
 		<div class="item"> 
-			<img src="http://tong.visitkorea.or.kr/cms/resource/10/2531710_image2_1.jpg" style="width:100%; height:600px;" data-src="" alt="Second slide">
+			<img src="http://tong.visitkorea.or.kr/cms/resource/29/2530329_image2_1.jpg" style="width:100%; height:600px;" data-src="" alt="Second slide">
 			<div class="container">
 				<div class="carousel-caption">
-					<h1>Slide 2</h1>
-					<p>텍스트 2</p>
+					<h1>강릉 하트불꽃크루즈 2018</h1>
+					<p>강원도 강릉시 주문진읍 해안로 1730</p>
 				</div>
 			</div>
 		</div>
@@ -95,11 +95,11 @@
 		
 		<!--슬라이드3-->
 		<div class="item"> 
-			<img src="http://tong.visitkorea.or.kr/cms/resource/29/2530329_image2_1.jpg" style="width:100%; height:600px;" data-src="" alt="Third slide">
+			<img src="http://tong.visitkorea.or.kr/cms/resource/20/2536120_image2_1.jpg" style="width:100%; height:600px;" data-src="" alt="Third slide">
 			<div class="container">
 				<div class="carousel-caption">
-					<h1>Slide 3</h1>
-					<p>텍스트 3</p>
+					<h1>강원국제비엔날레 2018</h1>
+					<p>강원도 강릉시 난설헌로 131</p>
 				</div>
 			</div>
 		</div>
@@ -107,11 +107,11 @@
 		
 		<!--슬라이드4-->
 		<div class="item"> 
-			<img src="http://tong.visitkorea.or.kr/cms/resource/52/2535452_image2_1.JPG" style="width:100%; height:600px;" data-src="" alt="Third slide">
+			<img src="http://tong.visitkorea.or.kr/cms/resource/91/2513891_image2_1.JPG" style="width:100%; height:600px;" data-src="" alt="Third slide">
 			<div class="container">
 				<div class="carousel-caption">
-					<h1>Slide 3</h1>
-					<p>텍스트 3</p>
+					<h1>강화도 송어 빙어 축제 2018</h1>
+					<p>인천광역시 강화군 양도면 중앙로787번길 8-2</p>
 				</div>
 			</div>
 		</div>
@@ -121,11 +121,11 @@
 		
 		<!--슬라이드5-->
 		<div class="item"> 
-			<img src="http://tong.visitkorea.or.kr/cms/resource/47/2516847_image2_1.jpg" style="width:100%; height:600px;"  data-src="" alt="Third slide">
+			<img src="http://tong.visitkorea.or.kr/cms/resource/94/2505694_image2_1.jpg" style="width:100%; height:600px;"  data-src="" alt="Third slide">
 			<div class="container">
 				<div class="carousel-caption">
-					<h1>Slide 3</h1>
-					<p>텍스트 3</p>
+					<h1>경주 프리마켓 봉황장터 2018</h1>
+					<p>경상북도 경주시 노동동</p>
 				</div>
 			</div>
 		</div>

@@ -16,73 +16,131 @@
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <style>
+table, #map {
+	float: left;
+}
+
+.mapCursor {
+	cursor: pointer;
+}
+
+li {
+	list-style: none;
+	display: inline;
+}
+
 .contentList{
-   padding: 0 0 0 20px;
-    width:750px;
+	padding: 0 0 0 2%;
+	min-width: 300px;
+    max-width:750px;
     height:175px;
     background-color: #CFD8DC;
     border-radius: 20px;
-    margin: 0 0 20px 0;
+    margin: 0 auto 2% auto;
     position: relative;
 }
 
 .contentTitle{
-    font-size: 30px;
+    font-size: 2em;
     padding-left: 20px;
 }
 
 .contentTitle > p {
     white-space: nowrap; 
-   height: 40px;
-   overflow: hidden;
-   text-overflow: ellipsis;
+	height: 40px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .contentImg {
-   float: left;
+	float: left;
 }
 
 .textBox {
-   position: relative;
-   padding: 0 0 0 10px;
-   float: left;
-   width: 75%;
+	position: relative;
+	float: left;
+	width: 70%;
 }
 
 .price {
-   font-size: 32px;
-   font-weight: 900;
-   text-align: right;
+	font-size: 2em;
+	font-weight: 900;
+	text-align: right;
+	margin-top: 10.5%;
+	margin-right: 2%;
 }
 
-.addr {
-   position: absolute;
-   top: 15px;
-   left: 10px;
-   font-size: 18px;
+.date {
+	position: absolute;
+	top: 0;
+	left: 2%;
+	font-size: 1.25em;
+	font-weight: 700;
 }
 
 .view {
-   background-color: skyblue;
-   float: left;
-   width: 150px;
-   height: 40px;
-   border: 1px solid #424242;
-   line-height: 40px;
-   text-align: center;
-   position: absolute;
-   right: 20px;
-   bottom: 20px;
-   cursor: pointer;
+	background-color: skyblue;
+	float: left;
+	width: 150px;
+	height: 40px;
+	border: 1px solid #424242;
+	line-height: 40px;
+	text-align: center;
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+	cursor: pointer;
 }
 
 .view:hover {
-   color: #AAA;
+	color: #AAA;
 }
 
-#content{
-   margin-top: 25px;
-   margin-bottom: 25px;
+.humans {
+	position: absolute;
+	right: 2%;
+	top: 30%;
+	text-align: right;
+	font-size: 16px;
+}
+
+#content {
+	position: relative;
+	margin: 1% auto 3% auto;
+}
+
+#page {
+	margin: auto;
+	width: 245px;
+}
+
+#page ul {
+	padding: 0;
+}
+
+#searchForm {
+	max-width: 720px;
+	margin: auto;
+	text-align: center;
+}
+
+#textSearchForm {
+	display: inline-block;
+	margin-bottom: 20px;
+}
+
+#listForm {
+	width: 720px;
+	margin: auto;
+}
+
+#areaCodeForm {
+	position: absolute;
+	right: 0;
+} 
+
+.form-control {
+	width: 120px;
 }
 
 </style>
@@ -93,11 +151,13 @@
    <%@ include file="../template/nav.jsp" %>
    
 <div class="container">
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">숙박업소</a></li>
-    <li><a data-toggle="tab" href="#menu1">축제</a></li>
-    <li><a data-toggle="tab" href="#menu2">음식점</a></li>
-  </ul>
+  <div id="listForm">
+	  <ul class="nav nav-tabs">
+	    <li class="active"><a data-toggle="tab" href="#home">숙박업소</a></li>
+	    <li><a data-toggle="tab" href="#menu1">축제</a></li>
+	    <li><a data-toggle="tab" href="#menu2">음식점</a></li>
+	  </ul>
+  </div>
 
   <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
@@ -105,51 +165,55 @@
       <c:forEach var="res" items="${reservation }">
            <div class="contentList">
                <div class="contentTitle">
-                   <p><i class="fa fa-search"></i>${res.roomName }</p>
+                   <p><i class="fa fa-search"></i>${res.name }<button onclick="location.href='reservationDelete.do?userID=${res.userID}&contentID=${res.contentID }&reserveDate=${res.reserveDate }'" class="btn" style="float: right;">삭제</button></p>
                </div>
                 <img class="contentImg"
-            <c:if test="${searchTest.firstimage ne null }">
-            src = "${searchTest.firstimage }"
+            <c:if test="${res.img ne null }">
+            src = "${res.img }"
             </c:if>
-            <c:if test="${searchTest.firstimage eq null }">
+            <c:if test="${res.img eq null }">
             src = "/trip_GazuaAA/img/no.png"
             </c:if>
             style="width:160px;height:100px;">
                 
             <div class="textBox">
-               <c:if test="${res.price } ne null}">
+               <c:if test="${res.price ne null}">
                   <div class="price">
                      ${res.price }원
                   </div>
+                  <div class="humans">
+                  	아이 ${res.kid }명
+                  	어른 ${res.adult }명
+                  </div>
                </c:if>
-               <div class="addr">
-                     ${res.startDate } "~"  ${res.endDate }
+               <div class="date">
+                     ${res.startDate } ~  ${res.endDate }
                </div>
             </div>
-               <div class="view" onclick="location.href='contentView.do?contentid=${res.contentID }&contenttypeid=${res.contentTypeID }&price=${res.price }'">예약한 방 정보 보기</div>
            </div>
       </c:forEach>
 </div>
     </div>
     <div id="menu1" class="tab-pane fade">
      <div id="content" class="container">   
-      <c:forEach var="res" items="${reservation }">
+      <c:forEach var="fes" items="${festval }">
            <div class="contentList">
                <div class="contentTitle">
-                   <p><i class="fa fa-search"></i>${res.roomName }</p>
+                   <p><i class="fa fa-search"></i>${fes.name }<button onclick="location.href='festvalDelete.do?userID=${fes.userID}&contentID=${fes.contentID }&reserveDate=${fes.reserveDate }'" class="btn" style="float: right;">삭제</button></p>
                </div>
-               
+                <img class="contentImg"
+            	<c:if test="${fes.img ne null }">
+	            src = "${fes.img }"
+	            </c:if>
+	            <c:if test="${fes.img eq null }">
+	            src = "/trip_GazuaAA/img/no.png"
+	            </c:if>
+            	style="width:160px;height:100px;">
             <div class="textBox">
-               <c:if test="${res.price } ne null}">
-                  <div class="price">
-                     ${res.price }원
-                  </div>
-               </c:if>
-               <div class="addr">
-                     찜 한 시간 : ${fes.reserveDate }
+               <div class="date">
+                     찜 한 날짜 : ${fes.reserveDate }
                </div>
             </div>
-               <div class="view" onclick="location.href='contentView.do?contentid=${res.contentID }&contenttypeid=${res.contentTypeID }&price=${res.price }'">예약한 방 정보 보기</div>
            </div>
       </c:forEach>
 </div>
@@ -159,23 +223,22 @@
       <c:forEach var="rest" items="${restaurant }">
            <div class="contentList">
                <div class="contentTitle">
-                   <p><i class="fa fa-search"></i>음식점 이름</p>
+                   <p><i class="fa fa-search"></i>${rest.name }<button onclick="location.href='restaurantDelete.do?userID=${rest.userID}&contentID=${rest.contentID }&reserveDate=${rest.reserveDate }'" class="btn" style="float: right;">삭제</button></p>
                </div>
                 <img class="contentImg"
-            <c:if test="${searchTest.firstimage ne null }">
-            src = "${searchTest.firstimage }"
+            <c:if test="${rest.img ne null }">
+            src = "${rest.img }"
             </c:if>
-            <c:if test="${searchTest.firstimage eq null }">
+            <c:if test="${rest.img eq null }">
             src = "/trip_GazuaAA/img/no.png"
             </c:if>
             style="width:160px;height:100px;">
            
             <div class="textBox">
-               <div class="addr">
-                     ${rest.reserveDate } 찜한 날짜
+               <div class="date">
+                     찜 한 날짜 : ${rest.reserveDate }
                </div>
             </div>
-               <div class="view" onclick="location.href='contentView.do?contentid=${res.contentID }&contenttypeid=${res.contentTypeID }&price=${res.price }'">예약한 방 정보 보기</div>
            </div>
       </c:forEach>
 </div>
@@ -207,7 +270,7 @@
          <td>컨텐츠 타입 ID : ${rest.contentTypeID }</td>
          <td>예약일 : ${rest.reserveDate }</td>
       </tr>
-   </c:forEach>
+   </c:forEach> 
 </table>
 
 -->

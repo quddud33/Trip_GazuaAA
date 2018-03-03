@@ -16,6 +16,11 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
+<style type="text/css">
+	p {
+		text-align: center;
+	}
+</style>
 </head>
 <body>
 	
@@ -24,7 +29,7 @@
 <p>조회기간:
     <input type="text" id="datepicker1">
 </p>
-<div id="map" style="width: 1000px; height: 1200px;"></div>
+<div id="map" style="margin: auto; width: 80%; height: 1200px;"></div>
 <!-- footer 시작 -->
 <%@ include file="../template/footer.jsp" %>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

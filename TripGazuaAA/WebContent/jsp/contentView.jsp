@@ -7,16 +7,13 @@
 <meta name="google-signin-client_id"
 	content="346120053180-l6r9r2hq1sknebtp2ukd6mtoea688dhl.apps.googleusercontent.com">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
-	rel="stylesheet" />
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/nav.css">
-<link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script
-	src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">    
+<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <title>Insert title here</title>
 <style>
@@ -303,7 +300,7 @@ td img {
 	<!-- 	<a href="#">로그인</a>javascript써서 로그인폼 띄우기 -->
 	<!-- 	<a href="createUserForm.jsp">회원가입</a> -->
 	<%-- 	<%if(request.getParameter("contenttypeid").equals("32")) {%> --%>
-	<%-- 	<a href="reservationView.do?contentID=<%=request.getParameter("contentid")%>&contentTypeID=<%=request.getParameter("contenttypeid")%>&price=<%=request.getParameter("price")%>">예약하기</a> --%>
+	<%-- 	<a href="reservationView.do?contentID=<%=request.getParameter("contentid")%>&contentTypeID=<%=request.getParameter("contenttypeid")%>&price=price">예약하기</a> --%>
 	<%-- 	<%} else {%> --%>
 	<%-- 	<a href="wish.do?contentID=<%=request.getParameter("contentid")%>&contentTypeID=<%=request.getParameter("contenttypeid")%>">찜하기</a> --%>
 	<%-- 	<%} %> --%>
@@ -316,9 +313,11 @@ td img {
 				<form action="reservation.do">
 					<input type="hidden" name="userID" value="${user.userID }" /> <input
 						type="hidden" name="contentID"
-						value="<%=request.getParameter("contentID")%>" /> <input
+						value="<%=request.getParameter("contentid")%>" /> <input
 						type="hidden" name="contentTypeID"
-						value="<%=request.getParameter("contentTypeID")%>" />
+						value="<%=request.getParameter("contenttypeid")%>" />
+						<input type="hidden"
+						name="name" value="<%=request.getParameter("name")%>">
 					<div id="myCarousel" class="carousel slide" data-ride="carousel"
 						style="width: 90%; margin: auto;">
 
@@ -412,7 +411,7 @@ td img {
 						<tfoot>
 							<tr>
 								<td colspan="5" style="text-align: right">
-									<button class="btn btn-info btn-lg">예약하기</button>
+									<button class="btn btn-info btn-lg btn-custom">예약하기</button>
 								</td>
 							</tr>
 						</tfoot>
@@ -465,7 +464,7 @@ td img {
 							<td>${commonInfo.addr1 },${commonInfo.addr2 }</td>
 						</tr>
 					</tfoot>
-				<button class="btn btn-custom" style="display: block;margin: auto; margin-bottom: 10px;" onclick="location.href='festvalWish.do?userID=${user.userID}&contentID=${commonInfo.contentid }&contentTypeID=15'">찜하기</button>
+				<button class="btn btn-custom" style="display: block;margin: auto; margin-bottom: 10px;" onclick="location.href='festvalWish.do?name=<%=request.getParameter("name") %>&userID=${user.userID}&contentID=${commonInfo.contentid }&contentTypeID=15'">찜하기</button>
 				
 				</c:forEach>
 			</table>
@@ -605,8 +604,9 @@ td img {
 	<!-- footer 시작 -->
 	<%@ include file="../template/footer.jsp"%>
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+        src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 	<script>
 		//star rating
 		var starRating = function() {
@@ -652,6 +652,7 @@ td img {
 	    var lodDate;
 	    var adult = 0;
 	    var kid = 0;
+	    var price = <%=request.getParameter("price").replaceAll(",", "")%>;
 	    
 	    function calDateRange(val1, val2)
 	    {
@@ -696,7 +697,7 @@ td img {
 	        onClose: function(selectedDate) {
 	            $("#datepicker2").datepicker( "option", "minDate", selectedDate );
 	           lodDate = calDateRange($("#datepicker1").val(), $("#datepicker2").val());
-	$("#price").val(((<%=request.getParameter("price")%> * adult) + <%=request.getParameter("price")%> * kid * 0.5) * lodDate);
+				$("#price").val(((price * adult) + price * kid * 0.5) * lodDate);
 	        }
 	    });
 	    
@@ -714,7 +715,7 @@ td img {
 	        onClose: function(selectedDate) {
 	            $("#datepicker1").datepicker( "option", "maxDate", selectedDate );
 	           lodDate = calDateRange($("#datepicker1").val(), $("#datepicker2").val());
-	           $("#price").val(((<%=request.getParameter("price")%> * adult) + <%=request.getParameter("price")%> * kid * 0.5) * lodDate);
+	           $("#price").val(((price * adult) + price * kid * 0.5) * lodDate);
 	        }
 	    });
 	    
@@ -722,8 +723,7 @@ td img {
 	       adult = $("#adult").val();
 	       kid = $("#kid").val();
 	       lodDate = calDateRange($("#datepicker1").val(), $("#datepicker2").val());
-	       
-	$("#price").val(((<%=request.getParameter("price")%> * adult) + <%=request.getParameter("price")%> * kid * 0.5) * lodDate);
+			$("#price").val(((price * adult) + (price * kid * 0.5)) * lodDate);
 	    });
 		
 	</script>

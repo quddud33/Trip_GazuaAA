@@ -2,6 +2,7 @@ package controller;
    
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -356,7 +357,7 @@ public class MyController {
 		@RequestMapping("reservation.do")
 		public String reservation(Model model, @RequestParam HashMap<String, String> params) {
 			resService.insertReservation(params);
-			return "redirect:main.do";
+			return "redirect:myPage.do";
 		}
 		
 		/*@RequestMapping("wish.do")
@@ -406,12 +407,50 @@ public class MyController {
 //====================================마이페이지==================================
 		
 		@RequestMapping("myPage.do")
-		public String myPage(Model model, HttpSession session) {
+		public String myPage(Model model, HttpSession session) throws Exception {
 			String userID = ((HashMap<String, String>)session.getAttribute("user")).get("userID");
-			model.addAttribute("reservation", resService.selectReservation(userID));
-			model.addAttribute("festval", resService.selectFestval(userID));
-			model.addAttribute("restaurant", resService.selectRestaurant(userID));
+			List<HashMap<String, String>> reservation = resService.selectReservation(userID);
+			List<HashMap<String, String>> festval = resService.selectFestval(userID);
+			List<HashMap<String, String>> restaurant = resService.selectRestaurant(userID);
+			
+			for(HashMap<String, String> res : reservation) {
+				res.put("img", aService.imgInfo(res.get("contentID"), res.get("contentTypeID")).get("originimgurl"));
+			}
+			
+			for(HashMap<String, String> fes : festval) {
+				fes.put("img", aService.imgInfo(fes.get("contentID"), fes.get("contentTypeID")).get("originimgurl"));
+			}
+			
+			for(HashMap<String, String> rest : restaurant) {
+				rest.put("img", aService.imgInfo(rest.get("contentID"), rest.get("contentTypeID")).get("originimgurl"));
+			}
+			
+			model.addAttribute("reservation", reservation);
+			model.addAttribute("festval", festval);
+			model.addAttribute("restaurant", restaurant);
+			
 			return "myPage";
+		}
+		
+		@RequestMapping("reservationDelete.do")
+		public String reservationDelete(@RequestParam HashMap<String, String> params) {
+			resService.deleteReservation(params);
+			
+			return "redirect:myPage.do";
+		}
+		
+		@RequestMapping("festvalDelete.do")
+		public String festvalDelete(@RequestParam HashMap<String, String> params) {
+			resService.deleteFestval(params);
+			
+			return "redirect:myPage.do";
+		}
+		
+		@RequestMapping("restaurantDelete.do")
+		public String restaurantDelete(@RequestParam HashMap<String, String> params) {
+			resService.deleteRestaurant(params);
+			
+			return "redirect:myPage.do";
 		}
 		
 
