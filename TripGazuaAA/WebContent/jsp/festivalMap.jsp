@@ -21,7 +21,7 @@
 <body>
 	<!-- 네비게이션 -->
 	<%@ include file="../template/nav.jsp" %>
-<div id="map" style="width:100%;height:1200px;"></div>
+<div id="map" style="margin: auto; width:80%;height:1200px;"></div>
 <!-- footer 시작 -->
 	<%@ include file="../template/footer.jsp" %>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

@@ -7,16 +7,13 @@
 <meta name="google-signin-client_id"
 	content="346120053180-l6r9r2hq1sknebtp2ukd6mtoea688dhl.apps.googleusercontent.com">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
-	rel="stylesheet" />
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/nav.css">
-<link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script
-	src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">    
+<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <title>Insert title here</title>
 <style>
@@ -412,7 +409,7 @@ td img {
 						<tfoot>
 							<tr>
 								<td colspan="5" style="text-align: right">
-									<button class="btn btn-info btn-lg">예약하기</button>
+									<button class="btn btn-info btn-lg btn-custom">예약하기</button>
 								</td>
 							</tr>
 						</tfoot>
@@ -605,8 +602,9 @@ td img {
 	<!-- footer 시작 -->
 	<%@ include file="../template/footer.jsp"%>
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+        src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 	<script>
 		//star rating
 		var starRating = function() {
@@ -696,7 +694,7 @@ td img {
 	        onClose: function(selectedDate) {
 	            $("#datepicker2").datepicker( "option", "minDate", selectedDate );
 	           lodDate = calDateRange($("#datepicker1").val(), $("#datepicker2").val());
-	$("#price").val(((<%=request.getParameter("price")%> * adult) + <%=request.getParameter("price")%> * kid * 0.5) * lodDate);
+				$("#price").val(((<%=request.getParameter("price")%> * adult) + <%=request.getParameter("price")%> * kid * 0.5) * lodDate);
 	        }
 	    });
 	    
@@ -722,8 +720,7 @@ td img {
 	       adult = $("#adult").val();
 	       kid = $("#kid").val();
 	       lodDate = calDateRange($("#datepicker1").val(), $("#datepicker2").val());
-	       
-	$("#price").val(((<%=request.getParameter("price")%> * adult) + <%=request.getParameter("price")%> * kid * 0.5) * lodDate);
+			$("#price").val(((<%=request.getParameter("price")%> * adult) + (<%=request.getParameter("price")%> * kid * 0.5)) * lodDate);
 	    });
 		
 	</script>
