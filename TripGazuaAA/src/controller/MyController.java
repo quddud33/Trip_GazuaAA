@@ -137,7 +137,6 @@ public class MyController {
 	@RequestMapping("reviewWrite.do")
 	public String reviewWrite(@RequestParam HashMap<String, String> params) {
 		rService.insertReview(params);
-		System.out.println("입력 : "+params);
 		return "redirect:contentView.do?contentid="+params.get("contentID")+"&contenttypeid="+params.get("contentTypeID");
 	}
 	
@@ -145,13 +144,10 @@ public class MyController {
 	@RequestMapping("reviewUpdateForm.do")
 	public String reivewUpdate(Model model,@RequestParam HashMap<String, String>params, @RequestParam String num) {
 		model.addAttribute("reviewInfo",rService.reviewNum(num));
-		System.out.println(rService.reviewNum(num));
-		System.out.println("업데이트 : "+params);
 		return "reviewUpdateForm";
 	}
 	@RequestMapping("reviewUpdate.do")
 	public String reviewUpdate(@RequestParam HashMap<String, String> params) {
-		System.out.println(params);
 		rService.updateReview(params);
 		return "redirect:contentView.do?contentid="+params.get("contentID")+"&contenttypeid="+params.get("contentTypeID")+"&num="+params.get("num");
 	}
@@ -160,7 +156,6 @@ public class MyController {
 	@RequestMapping("reviewDelete.do")
 	public String reviewDelete(@RequestParam HashMap<String, String>params) {
 		rService.deleteReview(params);
-		System.out.println("삭제 : "+params);
 		return "redirect:contentView.do?contentid="+params.get("contentid")+"&contenttypeid="+params.get("contenttypeid")+"&num="+params.get("num");
 	}
 	
@@ -179,9 +174,7 @@ public class MyController {
 	public String likeMinus(@RequestParam String num,@RequestParam HashMap<String, String >params,HttpSession session) {
 		rService.likeMinus(num);
 		HashMap map = (HashMap)session.getAttribute("user");
-		System.out.println("saddsa"+map.get("userID"));
 		params.put("userID", (String) map.get("userID"));
-		System.out.println(params);
 		rService.userlikeReviewDelete(params);
 		return "redirect:contentView.do?contentid="+params.get("contentid")+"&contenttypeid="+params.get("contenttypeid")+"&num="+params.get("num");
 	}
@@ -357,7 +350,6 @@ public class MyController {
 		@RequestMapping("reservationView.do")
 		public String reservationView(Model model, @RequestParam HashMap<String, String> params) throws Exception {
 			model.addAttribute("detail", aService.detailInfo(params.get("contentID"), params.get("contentTypeID")));
-			System.out.println( aService.detailInfo(params.get("contentID"), params.get("contentTypeID")));
 			return "reservationView";
 		}
 				
@@ -418,9 +410,6 @@ public class MyController {
 			String userID = ((HashMap<String, String>)session.getAttribute("user")).get("userID");
 			model.addAttribute("reservation", resService.selectReservation(userID));
 			model.addAttribute("festval", resService.selectFestval(userID));
-			System.out.println(resService.selectFestval(userID));
-			System.out.println("=========================");
-			System.out.println(resService.selectRestaurant(userID));
 			model.addAttribute("restaurant", resService.selectRestaurant(userID));
 			return "myPage";
 		}

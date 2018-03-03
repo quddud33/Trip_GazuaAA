@@ -337,12 +337,8 @@ public class APIService {
                      value.put(parser.getName(), parser.nextText());
                }
                result.add(value);
-//               System.out.println();
             }
          }
-         for (HashMap<String, String> v : result)
-            System.out.println(v);
-      
          rd.close();
          conn.disconnect();
       }
