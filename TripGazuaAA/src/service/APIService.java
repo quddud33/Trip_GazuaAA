@@ -88,7 +88,6 @@ public class APIService {
         rd.close();
         conn.disconnect();
 		
-        
 		return result;
 	}
 	
@@ -209,6 +208,7 @@ public class APIService {
 	                  }
 	              }
 	           }
+	           System.out.println("Detail"+result);
 	         return result;
 	   }
 	

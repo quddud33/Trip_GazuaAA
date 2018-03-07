@@ -354,15 +354,19 @@ td img {
 							data-slide="next"><span
 							class="glyphicon glyphicon-chevron-right"></span></a>
 					</div>
+					
+					
+					
 					<table border="1" class="table-bordered"
 						style="width: 90%; margin: auto;">
 						<thead>
 							<tr>
-								<th>객실명</th>
+								<th>객실명, ${mapy }</th>
 								<th>성인</th>
 								<th>아동</th>
 								<th>숙박기간</th>
 								<th>가격</th>
+								<th>위치</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -398,7 +402,9 @@ td img {
 											}
 										%>
 
-								</select></td>
+								</select>
+									
+								</td>
 								<td>체크인 :<input class="form-control input-xs" type="text"
 									id="datepicker1" name="startDate"> 체크아웃 :<input
 									class="form-control input-xs" type="text" id="datepicker2"
@@ -406,6 +412,11 @@ td img {
 								</td>
 								<td><input class="form-control" type="text" id="price"
 									name="price" value="0" readonly /></td>
+								<td>
+								<!-- 지도를 표시할 div 입니다 -->
+									<div id="map" style="width: 200px; height: 200px;"></div>
+								</td>	
+	
 							</tr>
 						</tbody>
 						<tfoot>
@@ -608,7 +619,33 @@ td img {
 <script
         src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=70d78e61bdb96cf13e612f9908e948d0"></script>
 	<script>
+	
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new daum.maps.LatLng(${mapy}, ${mapx}), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+// 마커가 표시될 위치입니다 
+var markerPosition  = new daum.maps.LatLng(${mapy}, ${mapx}); 
+
+// 마커를 생성합니다
+var marker = new daum.maps.Marker({
+    position: markerPosition
+});
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);
+
+// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+// marker.setMap(null);  
+
+	
 		//star rating
 		var starRating = function() {
 			var $star = $(".star-input"), $result = $star.find("output>b");
