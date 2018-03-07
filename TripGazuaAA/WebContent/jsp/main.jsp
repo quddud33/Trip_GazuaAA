@@ -71,7 +71,7 @@
 	<div class="carousel-inner">
 		<!--슬라이드1-->
 		<div class="item active"> 
-			<img src="http://tong.visitkorea.or.kr/cms/resource/10/2531710_image2_1.jpg" style="width:100%; height:600px;" alt="First slide">
+			<a href="contentView.do?name=가평펜션축제%202018&contentid=2531711&contenttypeid=15&price="><img src="http://tong.visitkorea.or.kr/cms/resource/10/2531710_image2_1.jpg" style="width:100%; height:600px;" alt="First slide"></a>
 			<div class="container">
 				<div class="carousel-caption">
 					<h1>가평펜션축제</h1>
@@ -83,7 +83,7 @@
 
 		<!--슬라이드2-->
 		<div class="item"> 
-			<img src="http://tong.visitkorea.or.kr/cms/resource/29/2530329_image2_1.jpg" style="width:100%; height:600px;" data-src="" alt="Second slide">
+			<a href="contentView.do?name=강릉%20하트불꽃크루즈%202018&contentid=2494459&contenttypeid=15&price="><img src="http://tong.visitkorea.or.kr/cms/resource/29/2530329_image2_1.jpg" style="width:100%; height:600px;" data-src="" alt="Second slide"></a>
 			<div class="container">
 				<div class="carousel-caption">
 					<h1>강릉 하트불꽃크루즈 2018</h1>
@@ -95,7 +95,7 @@
 		
 		<!--슬라이드3-->
 		<div class="item"> 
-			<img src="http://tong.visitkorea.or.kr/cms/resource/20/2536120_image2_1.jpg" style="width:100%; height:600px;" data-src="" alt="Third slide">
+			<a href="contentView.do?name=강원국제비엔날레%202018&contentid=2516849&contenttypeid=15&price="><img src="http://tong.visitkorea.or.kr/cms/resource/20/2536120_image2_1.jpg" style="width:100%; height:600px;" data-src="" alt="Third slide"></a>
 			<div class="container">
 				<div class="carousel-caption">
 					<h1>강원국제비엔날레 2018</h1>
@@ -107,7 +107,7 @@
 		
 		<!--슬라이드4-->
 		<div class="item"> 
-			<img src="http://tong.visitkorea.or.kr/cms/resource/91/2513891_image2_1.JPG" style="width:100%; height:600px;" data-src="" alt="Third slide">
+			<a href="contentView.do?name=강화도%20빙어%20송어%20축제%202018&contentid=1964700&contenttypeid=15&price="><img src="http://tong.visitkorea.or.kr/cms/resource/91/2513891_image2_1.JPG" style="width:100%; height:600px;" data-src="" alt="Third slide"></a>
 			<div class="container">
 				<div class="carousel-caption">
 					<h1>강화도 송어 빙어 축제 2018</h1>
@@ -121,7 +121,7 @@
 		
 		<!--슬라이드5-->
 		<div class="item"> 
-			<img src="http://tong.visitkorea.or.kr/cms/resource/94/2505694_image2_1.jpg" style="width:100%; height:600px;"  data-src="" alt="Third slide">
+			<a href="contentView.do?name=경주%20프리마켓%20봉황장터%202018&contentid=2505702&contenttypeid=15&price="><img src="http://tong.visitkorea.or.kr/cms/resource/94/2505694_image2_1.jpg" style="width:100%; height:600px;"  data-src="" alt="Third slide">
 			<div class="container">
 				<div class="carousel-caption">
 					<h1>경주 프리마켓 봉황장터 2018</h1>
@@ -145,13 +145,14 @@
 			<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
 			<figure>
                 <c:if test="${topListFestival.firstimage ne null}">
-                	<img src="${topListFestival.firstimage }" class="img-responsive" style="width: 250px; height: 200px;">
+                	                	<a href="contentView.do?name=${topListFestival.title }&contentid=${topListFestival.contentid}&contenttypeid=${topListFestival.contenttypeid }&price="><img src="${topListFestival.firstimage }" class="img-responsive" style="width: 250px; height: 200px;"></a>
                 </c:if>
                 <c:if test="${topListFestival.firstimage eq null}">
                 	<img src="/trip_GazuaAA/img/no.png" class="img-responsive" style="width: 250px; height: 200px;">
                 </c:if>
                 <figcaption>${topListFestival.overview }</figcaption>
                 </figure>
+                ${topListFestival }
                 </div>
          </c:forEach>
 	</div>
@@ -159,16 +160,18 @@
 	
 	<div class="top_list container">
 		<center><h2 style="margin-bottom: 30px">숙박 Top 6</h2></center>
+	
 		<c:forEach var="topListCountry" items="${topListCountry }" >
+		
 		<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
 			<figure>
                 <c:if test="${topListCountry.firstimage ne null}">
-                	<img src="${topListCountry.firstimage }" class="img-responsive" style="width: 250px; height: 200px;">
+                	<a href="contentView.do?name=${topListCountry.title }&contentid=${topListCountry.contentid}&contenttypeid=${topListCountry.contenttypeid }&price=${topListCountry.price}"><img src="${topListCountry.firstimage }" class="img-responsive" style="width: 250px; height: 200px;"></a>
                 </c:if>
                 <c:if test="${topListCountry.firstimage eq null}">
                 	<img src="/trip_GazuaAA/img/no.png" class="img-responsive" style="width: 250px; height: 200px;">
                 </c:if>
-                <figcaption>${topListCountry.overview }</figcaption>
+                <figcaption> ${topListCountry.overview }</figcaption>
            </figure>
       	 </div>
          </c:forEach>
@@ -180,7 +183,7 @@
 			<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
 				<figure>
                 <c:if test="${topListRestaurant.firstimage ne null}">
-                	<img src="${topListRestaurant.firstimage }" class="img-responsive" style="width: 250px; height: 200px;">
+                	<a href="contentView.do?name=${topListRestaurant.title }&contentid=${topListRestaurant.contentid}&contenttypeid=${topListRestaurant.contenttypeid }&price="><img src="${topListRestaurant.firstimage }" class="img-responsive" style="width: 250px; height: 200px;"></a>
                 </c:if>
                 <c:if test="${topListRestaurant.firstimage eq null}">
                 	<img src="/trip_GazuaAA/img/no.png" class="img-responsive" style="width: 250px; height: 200px;">

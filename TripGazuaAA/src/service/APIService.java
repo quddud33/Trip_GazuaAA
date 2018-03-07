@@ -24,6 +24,8 @@ public class APIService {
 	@Autowired
 	IReviewDao rDao;
 	
+    NumberFormat nf = NumberFormat.getNumberInstance(); 
+	
 	//공공정보조회
 	public List<HashMap<String, String>> commonInfo(String contentid, String contenttypeid) throws Exception{
 		List<HashMap<String, String>> result = new ArrayList<>();
@@ -126,7 +128,6 @@ public class APIService {
 
         parser.setInput(new InputStreamReader(conn.getInputStream()));
 
-        NumberFormat nf = NumberFormat.getNumberInstance(); 
 
         for(int eventType = parser.getEventType(); eventType != XmlPullParser.END_DOCUMENT; eventType = parser.next()) {
 
@@ -247,8 +248,6 @@ public class APIService {
 
 	        parser.setInput(new InputStreamReader(conn.getInputStream()));
 
-	        NumberFormat nf = NumberFormat.getNumberInstance(); 
-
 	        for(int eventType = parser.getEventType(); eventType != XmlPullParser.END_DOCUMENT; eventType = parser.next()) {
 
 	           if(eventType == XmlPullParser.START_TAG && parser.getName().equals("item")) {
@@ -311,6 +310,7 @@ public class APIService {
 	          urlBuilder.append("&" + URLEncoder.encode("addrinfoYN","UTF-8") + "=" + URLEncoder.encode("Y", "UTF-8")); /*주소, 상세주소 조회여부*/
 	          urlBuilder.append("&" + URLEncoder.encode("mapinfoYN","UTF-8") + "=" + URLEncoder.encode("Y", "UTF-8")); /*좌표 X,Y 조회여부*/
 	          urlBuilder.append("&" + URLEncoder.encode("overviewYN","UTF-8") + "=" + URLEncoder.encode("Y", "UTF-8")); /*콘텐츠 개요 조회여부*/
+	          urlBuilder.append("&" + URLEncoder.encode("defaultYN","UTF-8") + "=" + URLEncoder.encode("Y", "UTF-8")); /*콘텐츠 개요 조회여부*/
 	         URL url = new URL(urlBuilder.toString());
 	         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	         conn.setRequestMethod("GET");
@@ -332,6 +332,7 @@ public class APIService {
 	                  if (eventType == XmlPullParser.START_TAG)
 	                     value.put(parser.getName(), parser.nextText());
 	               }
+	               if(str.equals("Country")) { value.put("price", nf.format((int) (Math.random() * 1000) * 100)); }
 	               result.add(value);
 	            }
 	         }
