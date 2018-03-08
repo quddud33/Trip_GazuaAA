@@ -39,7 +39,7 @@
     <div class="container">
         <div class="jumbotron">
             <div class="text-center">
-                <form action="tripBoardWrite.do" id="frm">
+                <form action="tripBoardUpdate.do" id="frm">
 					<input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력해주세요.." value="${update.title}"/>
 					<input type="hidden" name="userID" value="${user.userID }" readonly="readonly" />
                     <input type="hidden" name="nickname" value="${user.nickname}" readonly="readonly" />
@@ -48,7 +48,6 @@
                     <div id="contentForm">
 						<textarea id="ir1" name="content" class="form-control col-sm-5" rows="25" placeholder="내용을 입력해주세요...">${update.content}</textarea>
 					</div>
-					<input type="hidden" name="image" />
 					<input type="button" id="save" value="작성완료"  class="btn btn-primary"/>
                     <input type="button" onclick="location.href='tripBoardView.do?num=${update.num}&page=${page }'" class="btn btn-primary" value="뒤로가기" id="backBtn"/>
                 </form>

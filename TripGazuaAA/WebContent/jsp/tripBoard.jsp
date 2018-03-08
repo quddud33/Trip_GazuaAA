@@ -81,18 +81,10 @@
         <div class="jumbotron">
             <div class="text-right">
 				<form id="sortForm" action="tripBoard.do">
-					<label>
-						<input type="radio" name="sort" value="new" class="select">
-						최신순
-					</label>
-					<label>
-						<input type="radio" name="sort" value="like" class="select">
-						인기순
-					</label>
-					<label>
-						<input type="radio" name="sort" value="views" class="select">
-						조회순
-					</label>
+	               	<button value="new" class="btn btn-default select" id="new">최신순</button>
+	               	<button value="like" class="btn btn-default select" id="like">인기순</button>
+	               	<button value="views" class="btn btn-default select" id="views">조회순</button>
+	               	<input type="hidden" name="sort" id="sort"/>
 				</form>
             </div>
             <table class="table table-board">
@@ -131,17 +123,17 @@
 				<%=paginate%>
             </div>
             <div class="text-center">
-                <form id="searchForm" action="tripBoardSearch.do">
-					<select name="board">
-						<option value="title">제목</option>
-						<option value="content">내용</option>
-						<option value="TC">제목/내용</option>
-						<option value="nickname">작성자</option>
-					</select> 
-					<input type="search" placeholder="Search..." name="search" id="search" />
-					<input type="submit" value="검색" id="searchSubmit" />
-					<input type="hidden" name="page" value="1">
-				</form>
+                   <form id="searchForm" action="tripBoardSearch.do" class="form-inline md-form form-sm">
+		            <select name="board" class="form-control">
+		                <option value="title">제목</option>
+		                <option value="content">내용</option>
+		                <option value="TC">제목/내용</option>
+		                <option value="nickname">작성자</option>
+		            </select>
+		            <input type="search" placeholder="Search..." name="search" id="search" class="form-control"/>
+		            <input type="submit" value="검색" id="searchSubmit" class="btn btn-default"/>
+		            <input type="hidden" name="page" value="1">
+		        </form>
             </div>
             <div class="text-right">
                 <a class="btn btn-primary" href="tripBoardWriteForm.do">글쓰기</a>
@@ -160,11 +152,9 @@
 <%@ include file="../template/footer.jsp" %>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
+
 	
-	$('.select').change(function () {
-		$('#sortForm').submit();
-	});
-	
+		
 	$('#searchSubmit').click(function (e) {
 		e.preventDefault();
 		if($('#search').val().length <= 0){
@@ -172,6 +162,19 @@
 		} else
 		$('#searchForm').submit();
 	});
+	
+    $('.select').click(function () {
+        $('#sort').val($(this).val());
+		$('#sortForm').submit();
+    });
+    
+    
+    <%if(request.getParameter("sort") != null) {%>
+	    $('#<%=request.getParameter("sort")%>').css('background-color', '#BDBDBD');
+	<%}%>
+    
+    
+    
 	
 </script>
 </body>

@@ -28,6 +28,7 @@
         }
         #footer {
             height: 65px;
+            margin-top: 50px;
         }
         #title {
             font-weight: bold;
@@ -179,31 +180,42 @@
 									 id="commentForm" name="content"></textarea>
 						<button class="btn btn-primary" id="commentSubmit">댓글등록</button>
 					</form>
-                    <div id="comment">
-                    <c:forEach var="comment" items="${comment }">
-                        <div class="comment" >
-                        	<form action="tripCommentUpdate.do" class="commentUpdateForm">
-	                            <p class="text-left commentNickname">${comment.nickname }(${comment.userID })</p>
-	                            <div class="commentContentForm">
-	                                <p class="text-left commentContent">${comment.content }</p>
-	                                <input type="hidden" name="num" value="${view.num}">
-	                                <input type="hidden" name="commentNum" value="${comment.commentNum}">
-	                                <input type="hidden" name="page" value="${page}">
-									<input type="hidden" name="nickname" value="${user.nickname }">
-									<input type="hidden" name="userID" value="${user.userID}"/>
-	                                <textarea name="content" class="commentTextarea"></textarea>
-	                            </div>
-	                            <p class="text-left date">${comment.wDate }</p>
-	                            <p class="text-right commentDU">
-	                                <a class="delComment" href="#" commentNum="${comment.commentNum }">삭제</a>
-	                                <a class="updateComment commentUpdate" href="#">수정</a>
-	                                <a class="check" style="display: none">수정 </a>
-	                                <a href="#" class="commentCancel">취소</a>
-	                            </p>
-                            </form>
-                        </div>
-                    </c:forEach>
+
+					<div id="comment">
+						<c:choose>
+							<c:when test="${!empty comment }">
+								<c:forEach var="comment" items="${comment }">
+									<div class="comment" >
+										<form action="tripCommentUpdate.do" class="commentUpdateForm">
+											<p class="text-left commentNickname">${comment.nickname }(${comment.userID })</p>
+											<div class="commentContentForm">
+												<p class="text-left commentContent">${comment.content }</p>
+												<input type="hidden" name="num" value="${view.num}">
+												<input type="hidden" name="commentNum" value="${comment.commentNum}">
+												<input type="hidden" name="page" value="${page}">
+												<input type="hidden" name="nickname" value="${user.nickname }">
+												<input type="hidden" name="userID" value="${user.userID}"/>
+												<textarea name="content" class="commentTextarea"></textarea>
+											</div>
+											<p class="text-left date">${comment.wDate }</p>
+											<p class="text-right commentDU">
+												<c:if test="${user.userID eq comment.userID}">
+													<a class="delComment" href="#" commentNum="${comment.commentNum }">삭제</a>
+													<a class="updateComment commentUpdate" href="#">수정</a>
+													<a class="check" style="display: none">수정 </a>
+													<a href="#" class="commentCancel">취소</a>
+												</c:if>
+											</p>
+										</form>
+									</div>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<h2 class="text-center"><br>댓글이 없습니다.</h2>
+							</c:otherwise>
+						</c:choose>
                     </div>
+
                     <div class="text-right backBtn">
                     	<a href="tripBoard.do?page=${page }" class="btn btn-primary">목록</a>
                     </div>

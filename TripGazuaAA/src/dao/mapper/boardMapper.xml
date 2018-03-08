@@ -7,12 +7,12 @@
 
 	<insert id="insertBoard" parameterType="java.util.HashMap">
 		insert into tripboard
-		values(0, #{userID}, #{nickname}, #{title}, #{content}, #{image}, now(), now(), 1, 0)
+		values(0, #{userID}, #{nickname}, #{title}, #{content}, now(), now(), 1, 0)
 	</insert>
 	
 	<update id="updateBoard" parameterType="java.util.HashMap">
 		update tripboard
-		set title = #{title}, content = #{content}, image = #{image}, uDate = now()
+		set title = #{title}, content = #{content}, uDate = now()
 		where num = #{num}
 	</update>
 	
@@ -22,13 +22,13 @@
 	</delete>
 	
 	<select id="selectOne" parameterType="int" resultType="java.util.HashMap">
-		select num, userID, nickname, title, content, image, DATE_FORMAT(wDate, '%Y-%m-%d') 'wDate', uDate, views, likeCount
+		select num, userID, nickname, title, content, DATE_FORMAT(wDate, '%Y-%m-%d') 'wDate', uDate, views, likeCount
 		from tripboard
 		where num = #{num}
 	</select>
 	
 	<select id="selectAll" resultType="java.util.HashMap" parameterType="java.util.HashMap">
-		select num, userID, nickname, title, content, image, DATE_FORMAT(wDate, '%Y-%m-%d') 'wDate', uDate, views, likeCount
+		select num, userID, nickname, title, content, DATE_FORMAT(wDate, '%Y-%m-%d') 'wDate', uDate, views, likeCount
 		from tripboard
 		<if test="sort == 'new'.toString()">
 			order by num desc
@@ -39,7 +39,7 @@
 		<if test="sort == 'views'.toString()">
 			order by views desc
 		</if>
-		limit #{start}, 7
+  		limit #{start}, 15
 	</select>
 	
 	<!-- 게시글 개수 -->
@@ -64,7 +64,7 @@
 	
 	<!-- 검색 -->
 	<select id="selectSearch" resultType="java.util.HashMap" parameterType="java.util.HashMap">
-		select num, userID, nickname, title, content, image, DATE_FORMAT(wDate, '%Y-%m-%d') 'wDate', uDate, views, likeCount
+		select num, userID, nickname, title, content, DATE_FORMAT(wDate, '%Y-%m-%d') 'wDate', uDate, views, likeCount
 		from tripboard
 		where 1 = 0
 		<if test="board == 'title'.toString()">
@@ -84,7 +84,7 @@
 			title LIKE '%${search}%'||content LIKE '%${search}%'
 		</if>
 		order by num desc 
-  		limit #{start}, 7
+  		limit #{start}, 15
 	</select>
 
 	<!-- 검색 개수 -->
@@ -109,7 +109,7 @@
 			title LIKE '%${search}%'||content LIKE '%${search}%'
 		</if>
 		order by num desc 
-  		limit #{start}, 7
+  		limit #{start}, 15
 	</select>
 
 	<!-- 좋아요 카운트 업 -->

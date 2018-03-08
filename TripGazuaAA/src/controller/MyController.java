@@ -188,21 +188,6 @@ public class MyController {
 		
 //==================================게시판=============================================
 		
-
-//		//게시판 메인페이지(selectAll)
-//		@RequestMapping("tripBoard.do")
-//		public ModelAndView tripBoard(@RequestParam(defaultValue="1") int page) {
-//			ModelAndView mav = new ModelAndView();
-//			int start = (page - 1) * 7;
-//			mav.addObject("total", bService.count());
-//			mav.addObject("page", page);
-//
-//			mav.addObject("board", bService.selectAll(start));
-//			mav.setViewName("tripBoard");
-//			
-//			return mav;
-//		}
-		
 		//글 쓰기 폼
 		@RequestMapping("tripBoardWriteForm.do")
 		public String tripBoardUpdateForm(HttpSession session) {
@@ -289,7 +274,7 @@ public class MyController {
 		@RequestMapping("tripBoardSearch.do")
 		public ModelAndView tripBoardSearch(@RequestParam int page, String search, String board) {
 			ModelAndView mav = new ModelAndView();
-			int start = (page - 1) * 7;
+			int start = (page - 1) * 15;
 			
 			HashMap<String, Object> params = new HashMap<>();
 			params.put("search", search);
@@ -307,7 +292,7 @@ public class MyController {
 		@RequestMapping("tripBoard.do")
 		public ModelAndView tripBoard(@RequestParam(defaultValue="1") int page, @RequestParam(defaultValue="new") String sort) {
 			ModelAndView mav = new ModelAndView();
-			int start = (page - 1) * 7;
+			int start = (page - 1) * 15;
 			
 			HashMap<String, Object> params = new HashMap<>();
 			params.put("start", start);
