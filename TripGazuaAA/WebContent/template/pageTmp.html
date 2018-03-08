@@ -1,5 +1,5 @@
     <ul>
-        <%if(start == 1) {%><li><button class="page" value="<%=start-1%>" style="cursor : not-allowed;" disabled>&lt;</button></li><%}else{%><li><button class="page" value="<%=start-1%>">&lt;</button></li><%}%>
+        <%if(start == 1) {}else{%><li><button class="page" value="<%=start-1%>"><i class='fa fa-chevron-left'></i></button></li><%}%>
         <%for(; start <= end; start++) {%>
         <li>
         	<%if(start == now) {%>
@@ -13,7 +13,5 @@
             <%}%>
         </li>
         <%}%>
-        <%if(next) {%><li><button class="page" value="<%=start%>">&gt;</button></li><%} else {%>
-        <li><button class="page" value="<%=start%>" style="cursor : not-allowed;">&gt;</button></li>
-        <%}%>
+        <%if(next) {%><li><button class="page" value="<%=start%>"><i class='fa fa-chevron-right'></i></button></li><%} else {}%>
     </ul>

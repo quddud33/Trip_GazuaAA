@@ -2,7 +2,7 @@ function paginate(now, total, redirect) {
 	
 	if(this._pageTmp == undefined) {
 		var result;
-		$.ajax('/trip_GazuaAA/js/pageTmp.html', {
+		$.ajax('/trip_GazuaAA/template/pageTmp.html', {
 			async: false,
 			success: function(html) { result = html; }
 		})

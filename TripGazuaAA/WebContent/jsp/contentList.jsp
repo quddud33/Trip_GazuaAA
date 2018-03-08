@@ -115,8 +115,7 @@ li {
 }
 
 #page {
-	margin: auto;
-	width: 245px;
+	text-align: center;
 }
 
 #page ul {
@@ -131,11 +130,11 @@ li {
 
 #textSearchForm {
 	display: inline-block;
-	margin-bottom: 20px;
 }
 
 #areaSearchForm {
 	position: relative;
+	margin-top: -5px;
 }
 
 #areaCodeForm {
@@ -147,6 +146,17 @@ li {
 	width: 120px;
 }
 
+.noData {
+	margin: auto;
+	width: 720px;
+	text-align: center;
+}
+
+.noData img {
+	width: 718px;
+	border: 1px solid #DDD;
+}
+
 </style>
 </head>
 <body>
@@ -154,35 +164,22 @@ li {
 	<%@ include file="../template/nav.jsp" %>
 	
 	<div id="searchForm">
-		<div id="textSearchForm">
-		<form action="contentList.do" onsubmit="showSearchTest()" class="form-inline md-form form-sm">
-			<select name="contentTypeId" class="form-control">
-				<option value="32">숙박</option>
-				<option value="12">관광지</option>
-				<option value="15">행사/축제</option>
-				<option value="39">맛집</option>
-				<option value="28">레포츠</option>
-			</select>
-			<select name="areaCode" class="form-control">
-				<option value="">전체</option>
-				<option value="1">서울</option>
-				<option value="2">인천</option>
-				<option value="3">대전</option>
-				<option value="4">대구</option>
-				<option value="5">광주</option>
-				<option value="7">부산</option>
-				<option value="8">울산</option>
-			</select>
-			<input type="text" class="form-control form-control-sm mr-3 w-75" name="search" placeholder="Search" aria-label="Search"/>
-			<button class="btn btn-unique btn-rounded btn-sm my-0">검색</button>
-		</form>
-		</div>
 	<div id="areaSearchForm">
 		<ul class="nav nav-tabs">
 		    <li class="active"><a data-toggle="tab" onclick="searchAjax(32, $('.areaCodeVal').val(), 1)">숙박</a></li>
 		    <li><a data-toggle="tab" href="#menu1" onclick="searchAjax(15, $('.areaCodeVal').val(), 1)">축제</a></li>
 		    <li><a data-toggle="tab" href="#menu2" onclick="searchAjax(12, $('.areaCodeVal').val(), 1)">관광지</a></li>
 		    <li><a data-toggle="tab" href="#menu3" onclick="searchAjax(39, $('.areaCodeVal').val(), 1)">맛집</a></li>
+		    <li>
+			    <form action="contentList.do" onsubmit="showSearchTest()" class="form-inline md-form form-sm">
+						<div id="textSearchForm">
+							<input type="hidden" name="contentTypeId" id="contentTypeId" value="32"/>
+							<input type="hidden" name="areaCode" id="areaCode"/>
+							<input type="text" class="form-control form-control-sm mr-3 w-75" name="search" placeholder="Search" aria-label="Search"/>
+						</div>
+					<button class="btn btn-unique btn-rounded btn-sm my-0">검색</button>
+				</form>
+			</li>
 		    <li id="areaCodeForm">
 				<select name="areaCodeVal" class="form-control areaCodeVal">
 					<option value="">전체</option>
@@ -201,39 +198,46 @@ li {
 	</div>
 	
 	<div id="content" class="container">
-		<c:forEach var="searchTest" items="${contentList}">
-			<c:if test="${searchTest.totalCount eq null }">
-	        <div class="contentList">
-	            <div class="contentTitle">
-	                <p><i class="fa fa-search"></i>${searchTest.title }</p>
-	            </div>
-				<img class="contentImg"
-				<c:if test="${searchTest.firstimage ne null }">
-				src = "${searchTest.firstimage }"
-				</c:if>
-				<c:if test="${searchTest.firstimage eq null }">
-				src = "/trip_GazuaAA/img/no.png"
-				</c:if>
-				style="width: 30%;min-width: 80px;min-height:50px;max-width:160px;max-height:100px;">
-				<div class="textBox">
-					<c:if test="${searchTest.price ne null}">
-						<div class="price">
-							${searchTest.price }원
-						</div>
+		<c:if test="${!empty contentList }">
+			<c:forEach var="searchTest" items="${contentList}">
+				<c:if test="${searchTest.totalCount eq null }">
+		        <div class="contentList">
+		            <div class="contentTitle">
+		                <p><i class="fa fa-search"></i>${searchTest.title }</p>
+		            </div>
+					<img class="contentImg"
+					<c:if test="${searchTest.firstimage ne null }">
+					src = "${searchTest.firstimage }"
 					</c:if>
-					<div class="addr">
-	            		${searchTest.addr1 }
+					<c:if test="${searchTest.firstimage eq null }">
+					src = "/trip_GazuaAA/img/no.png"
+					</c:if>
+					style="width: 30%;min-width: 80px;min-height:50px;max-width:160px;max-height:100px;">
+					<div class="textBox">
+						<c:if test="${searchTest.price ne null}">
+							<div class="price">
+								${searchTest.price }원
+							</div>
+						</c:if>
+						<div class="addr">
+		            		${searchTest.addr1 }
+						</div>
 					</div>
-				</div>
-				<c:if test="${searchTest.contenttypeid eq 39 }">
-					<div class="view" onclick="location.href='restaurantWish.do?name=${searchTest.title }&userID=${user.userID}&contentID=${searchTest.contentid }&contentTypeID=${searchTest.contenttypeid }'">찜하기</div>
+					<c:if test="${searchTest.contenttypeid eq 39 }">
+						<div class="view" onclick="location.href='restaurantWish.do?name=${searchTest.title }&userID=${user.userID}&contentID=${searchTest.contentid }&contentTypeID=${searchTest.contenttypeid }'">찜하기</div>
+					</c:if>
+					<c:if test="${searchTest.contenttypeid ne 39 }">
+						<div class="view" onclick="location.href='contentView.do?name=${searchTest.title }&contentid=${searchTest.contentid }&contenttypeid=${searchTest.contenttypeid }&price=${searchTest.price }'">자세히보기</div>
+					</c:if>
+		        </div>
 				</c:if>
-				<c:if test="${searchTest.contenttypeid ne 39 }">
-					<div class="view" onclick="location.href='contentView.do?name=${searchTest.title }&contentid=${searchTest.contentid }&contenttypeid=${searchTest.contenttypeid }&price=${searchTest.price }'">자세히보기</div>
+				<c:if test="${searchTest.totalCount eq '0'}">
+					<div class="noData">
+						<img alt="no_data" src="img/no_data.png"/>
+					</div>
 				</c:if>
-	        </div>
-			</c:if>
 		</c:forEach>
+		</c:if>
 	<script id="touristTable" type="text/template">
 		<\%$.each(touristInfo.items, function() {%>
         <div class="contentList">
@@ -289,6 +293,8 @@ li {
 			contentTypeId = contentTypeIdVal;
 			areaCode = areaCodeVal;
 			page = pageVal;
+			$('#contentTypeId').val(contentTypeIdVal);
+			$('#areaCode').val(areaCodeVal);
 			$.ajax('ajax/touristInfo.do', {
 				async : false,
 				data : {

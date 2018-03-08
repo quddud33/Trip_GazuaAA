@@ -1,109 +1,87 @@
 package util;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import service.APIService;
 
 public class PaginateUtil {
-		
-
-
+	
 	public static String getPaginate(int pageNo,
 			                         int total,
-			                         int numpageNo,
+			                         int numPage,
 			                         int numBlock,
 			                         String url,
 			                         String param) {
 		//현재 페이지 : pageNo
 		//전체 게시물수 : total 
-		//한 페이지당 게시물수 : numpageNo
+		//한 페이지당 게시물수 : numPage
 		//한 페이지당 보여질 블록수 : numBlock
 		//주소 : url
 		//파라미터 : param
 		
 		//전체 페이지수
-		int totalpageNo = (int)Math.ceil((double)total/numpageNo);
+		int totalPage = (int)Math.ceil((double)total/numPage);
 		
-		//System.out.println(totalpageNo);
+		int savePage = pageNo;
 		
-		//현재 블록a
+		if(savePage % 5 == 0) {
+			savePage -= 1;
+		}
+		//System.out.println(totalPage);
+		
+		//현재 블록
 		int nowBlock = (int)Math.ceil((double)pageNo/numBlock);
 		
 		
 		String paginate = 
-				"<ul class=\"pagination\">";
+				"<div class='paginate'>";
 		
 		if(total!=0) {
-			
-			//이전버튼
-			if(pageNo<=1) {
+			//이전버튼 & 처음버튼
+			if(pageNo <= numBlock) {
 				//비활성화
-				paginate += "<li class=\"page-item disabled\">" + 
-						"<a class=\"page-link\" href='"+url+"?"+param+(pageNo-1)+"' aria-label=\"Previous\">" + 
-						"<span aria-hidden=\"true\">&laquo;</span>" + 
-						"<span class=\"sr-only\">Previous</span>" + 
-						"</a>" + 
-						"</li> ";
+//				paginate += "<button title=\"이전 페이지 없음\"><i class=\"fa fa-chevron-left\"></i></button>";
 			}else {
 				//활성화
-				paginate += "<li class=\"page-item\">" + 
-						"<a class=\"page-link\" href='"+url+"?"+param+(pageNo-1)+"' aria-label=\"Previous\">" + 
-						"<span aria-hidden=\"true\">&laquo;</span>" + 
-						"<span class=\"sr-only\">Previous</span>" + 
-						"</a>" + 
-						"</li> ";
-						
+				paginate += "<button onclick='location.href = \""+url+param+(int)((Math.floor((savePage-5)/5)+1)*5)+"\"' title='이전 페이지로'><i class='fa fa-chevron-left'></i></button> ";
 			}//if end
 			
 			
 			for(int i = 1 ; i <= numBlock ; i++) {
 				
 				//실제 출력 페이지
-				int realpageNo = ((nowBlock-1)*numBlock)+i;
+				int realPage = ((nowBlock-1)*numBlock)+i;
 				
 				//현재 페이지냐? 아니냐?
-				if(realpageNo==pageNo) {
+				if(realPage==pageNo) {
 					//현재 페이지
-					paginate += "<li class=\"page-item\"><a class=\"page-link\" href='#' title='"+realpageNo+"'>"+realpageNo+"</a></li>";
-					
+					paginate += "<button style='cursor : not-allowed; background-color: #AAA;' title='현재 "+pageNo+"페이지' disabled>"+pageNo+"</button> ";
 					
 				}else {
 					//현재 페이지가 아님
-					paginate += "<li class=\"page-item\"><a class=\"page-link\" href='"+url+"?"+param+realpageNo+"' title='"+realpageNo+"'>"+realpageNo+"</a></li>";
+					paginate += "<button onclick='location.href = \""+url+param+realPage+"\"' title='"+realPage+"'>"+realPage+"</button> ";
 					
 					
 				}//if ~ else end
 				
-				if(realpageNo==totalpageNo) {
+				if(realPage==totalPage) {
 					break;
 				}//if end
 				
 			}//for end(블록 만들기)
 			
-			//다음버튼
-			if(pageNo >= totalpageNo) {
+			//다음버튼 & 마지막버튼
+			if(pageNo > totalPage - ((totalPage % 5 == 0) ? 5 : totalPage % 5)) {
 				//비활성화
-				paginate+="<li class=\"page-item\">" +
-						"<a class=\"page-link\" href='"+url+"?"+param+(pageNo+1)+"' aria-label=\"Next\">" +
-						"<span aria-hidden=\"true\">&raquo;</span>" +
-						"<span class=\"sr-only\">Next</span>" +
-						"</a>" +
-						"</li> ";
+//				paginate+="<button title='다음 페이지 없음'><i class='fa fa-chevron-right'></i></button>";
 			}else {
 				//활성화
-				paginate+="<li class=\"page-item\">" +
-						"<a class=\"page-link\" href='"+url+"?"+param+(pageNo+1)+"' aria-label=\"Next\">" +
-						"<span aria-hidden=\"true\">&raquo;</span>" +
-						"<span class=\"sr-only\">Next</span>" +
-						"</a>" +
-						"</li> ";
+				paginate+="<button onclick='location.href = \""+url+param+(int)(((Math.floor(savePage/5)+1)*5)+1)+"\"' title='다음 페이지로'><i class='fa fa-chevron-right'></i></button> ";
 			}//if end
 			
 		}//if end
 		
-		paginate+= "</ul>";
+		paginate+= "</div>";
 		
 		return paginate;
 	}
+	
 
 }
