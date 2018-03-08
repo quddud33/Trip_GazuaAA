@@ -95,7 +95,19 @@ public class APIController {
 			mav.addObject("mapx", mapx);
 			mav.addObject("mapy", mapy);
 		} else if (contenttypeid.equals("15")) {
+			List<HashMap<String, String>> xy = service.commonInfo(contentid, contenttypeid);
+			String mapx = "";
+			String mapy = "";
+			
+			for(HashMap<String, String > a : xy ) {
+				mapx = a.get("mapx");
+				mapy = a.get("mapy");
+			}
+			
+			mav.addObject("mapx", mapx);
+			mav.addObject("mapy", mapy);
 			mav.addObject("commonInfo", service.commonInfo(contentid, contenttypeid));
+			
 		}
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user") == null) {

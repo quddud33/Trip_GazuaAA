@@ -345,7 +345,6 @@ td img {
 								</div>
 							</c:forEach>
 						</div>
-
 						<!--이전, 다음 버튼-->
 						<a class="left carousel-control" href="#myCarousel"
 							data-slide="prev"><span
@@ -361,7 +360,7 @@ td img {
 						style="width: 90%; margin: auto;">
 						<thead>
 							<tr>
-								<th>객실명, ${mapy }</th>
+								<th>객실명</th>
 								<th>성인</th>
 								<th>아동</th>
 								<th>숙박기간</th>
@@ -445,17 +444,18 @@ td img {
 										<td><img src = "/trip_GazuaAA/img/no.png"></td>
 									</c:if>
 									<c:if test="${imgInfo.originimgurl ne null }">
-									<td><img src="${imgInfo.originimgurl}"></td>
+									<td><img src="${imgInfo.originimgurl}"> </td>
 									</c:if>
 								</tr>
 							</c:forEach>
 						</table>
 		</c:when>
 		<c:when test="${param.contenttypeid == '15' }">
-			<div class="text-center" style="margin-bottom: 10px">
+			<div class="text-center" style=" height : 300px ; position: relative; float:right; margin: auto auto 10px auto; text-align: center; left:-50%">
 				<c:forEach var="commonInfo" items="${commonInfo}">
 					<img src="${commonInfo.firstimage }"
-						style="min-width: 30%; max-width: 50%; " alt="${commonInfo.title }">
+						style="width: 450px; height: 300px; float:left; margin-right: 15px; display: inline-block; position:relative; left:50%" alt="${commonInfo.title }">
+					<div id="map" style="width: 300px; height: 300px; float:left; display: inline-block; postion:relative; left:50%"></div>
 				</c:forEach>
 			</div>
 			<table border="2" class="table table-boarded">
@@ -471,11 +471,11 @@ td img {
 					<tfoot style="text-align: justify;">
 						<tr>
 							<td>${commonInfo.title }</td>
-							<td>${commonInfo.overview }</td>
+							<td>${commonInfo.overview } </td>
 							<td>${commonInfo.addr1 },${commonInfo.addr2 }</td>
 						</tr>
 					</tfoot>
-				<button class="btn btn-custom" style="display: block;margin: auto; margin-bottom: 10px;" onclick="location.href='festvalWish.do?name=<%=request.getParameter("name") %>&userID=${user.userID}&contentID=${commonInfo.contentid }&contentTypeID=15'">찜하기</button>
+				<button class="btn btn-custom" style="display: block;margin: auto; margin-bottom: 10px; clear: both;" onclick="location.href='festvalWish.do?name=<%=request.getParameter("name") %>&userID=${user.userID}&contentID=${commonInfo.contentid }&contentTypeID=15'">찜하기</button>
 				
 				</c:forEach>
 			</table>
@@ -690,7 +690,9 @@ marker.setMap(map);
 	    var lodDate;
 	    var adult = 0;
 	    var kid = 0;
-	    var price = <%=request.getParameter("price").replaceAll(",", "")%>;
+	    <%if(request.getParameter("price").length()!= 0) {%>
+	    	var price = <%=request.getParameter("price").replaceAll(",", "")%>;
+	    <%}%>
 	    
 	    function calDateRange(val1, val2)
 	    {
