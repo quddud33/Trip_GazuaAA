@@ -401,7 +401,8 @@ public class MyController {
 			List<HashMap<String, String>> reservation = resService.selectReservation(userID);
 			List<HashMap<String, String>> festval = resService.selectFestval(userID);
 			List<HashMap<String, String>> restaurant = resService.selectRestaurant(userID);
-			
+			List<HashMap<String,Object>> boardSelect = bService.myPageSelect(userID);
+			List<HashMap<String, String>> myPageReviewSelect = rService.myPageReviewSelect(userID);
 			for(HashMap<String, String> res : reservation) {
 				res.put("img", aService.imgInfo(res.get("contentID"), res.get("contentTypeID")).get("originimgurl"));
 			}
@@ -417,6 +418,8 @@ public class MyController {
 			model.addAttribute("reservation", reservation);
 			model.addAttribute("festval", festval);
 			model.addAttribute("restaurant", restaurant);
+			model.addAttribute("boardSelect",boardSelect);
+			model.addAttribute("myPageReviewSelect",myPageReviewSelect);
 			
 			return "myPage";
 		}

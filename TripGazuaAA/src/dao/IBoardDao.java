@@ -44,7 +44,7 @@ public interface IBoardDao {
 	//좋아요 개수 출력
 	public int likeCount(int num);
 	
-	
-	
+	//마이페이지 작성 글 출력
+	public List<HashMap<String, Object>> myPageSelect(String userID);
 	
 }

@@ -142,6 +142,21 @@ li {
 .form-control {
 	width: 120px;
 }
+.imgBox{
+	width:718px;
+	height:598px;
+	position: relative;
+	border:1px solid #424242;
+	margin: auto;
+	
+}
+.noData{
+   width:718px;
+   height: 598px;
+   position: absolute;
+   margin: auto;
+}
+
 
 </style>
 <title>Insert title here</title>
@@ -156,12 +171,17 @@ li {
 	    <li class="active"><a data-toggle="tab" href="#home">숙박업소</a></li>
 	    <li><a data-toggle="tab" href="#menu1">축제</a></li>
 	    <li><a data-toggle="tab" href="#menu2">음식점</a></li>
+	    <li><a data-toggle="tab" href="#menu3">마이 게시글</a></li>
+	    <li><a data-toggle="tab" href="#menu4">마이 리뷰</a></li>
 	  </ul>
   </div>
 
   <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
-      <div id="content" class="container">   
+      <div id="content" class="container">
+      <c:if test="${empty reservation}">
+      <div class="imgBox"><img class="noData" src="img/no_data.png" alt="no_data"/></div>
+      </c:if>
       <c:forEach var="res" items="${reservation }">
            <div class="contentList">
                <div class="contentTitle">
@@ -195,7 +215,10 @@ li {
 </div>
     </div>
     <div id="menu1" class="tab-pane fade">
-     <div id="content" class="container">   
+     <div id="content" class="container">
+      <c:if test="${empty festval}">
+      <div class="imgBox"><img class="noData" src="img/no_data.png" alt="no_data"/></div>
+      </c:if>   
       <c:forEach var="fes" items="${festval }">
            <div class="contentList">
                <div class="contentTitle">
@@ -219,7 +242,10 @@ li {
 </div>
     </div>
     <div id="menu2" class="tab-pane fade">
-     <div id="content" class="container">   
+     <div id="content" class="container">
+      <c:if test="${empty restaurant}">
+      <div class="imgBox"><img class="noData" src="img/no_data.png" alt="no_data"/></div>
+      </c:if>   
       <c:forEach var="rest" items="${restaurant }">
            <div class="contentList">
                <div class="contentTitle">
@@ -237,12 +263,61 @@ li {
             <div class="textBox">
                <div class="date">
                      찜 한 날짜 : ${rest.reserveDate }
-               </div>
-            </div>
-           </div>
-      </c:forEach>
-</div>
+               		</div>
+            	</div>
+          	</div>
+     	 </c:forEach>
+		</div>
     </div>
+    
+    
+        <div id="menu3" class="tab-pane fade">
+     <div id="content" class="container">
+      <c:if test="${empty boardSelect}">
+      <div class="imgBox"><img class="noData" src="img/no_data.png" alt="no_data"/></div>
+      </c:if>   
+      <c:forEach var="myBoard" items="${boardSelect}">
+           <div class="contentList">
+               <div class="contentTitle">
+                   <p><i class="fa fa-search"></i>${myBoard.title}<button onclick="location.href='restaurantDelete.do?userID=${rest.userID}&contentID=${rest.contentID }&reserveDate=${rest.reserveDate }'" class="btn" style="float: right;">삭제</button></p>
+               </div>
+                <img class="contentImg"
+      			src = "/trip_GazuaAA/img/no.png"
+            	style="width:160px;height:100px;">
+            <div class="textBox">
+               <div class="date">
+                     	글 쓴 날 짜 : ${myBoard.wDate}
+               		</div>
+            	</div>
+          	</div>
+     	 </c:forEach>
+		</div>
+    </div>
+    
+            <div id="menu4" class="tab-pane fade">
+     <div id="content" class="container">
+      <c:if test="${empty myPageReviewSelect}">
+      <div class="imgBox"><img class="noData" src="img/no_data.png" alt="no_data"/></div>
+      </c:if>   
+      <c:forEach var="myPageReviewSelect" items="${myPageReviewSelect}">
+           <div class="contentList">
+               <div class="contentTitle">
+                   <p><i class="fa fa-search"></i>${myPageReviewSelect.nickname}<button onclick="location.href='restaurantDelete.do?userID=${rest.userID}&contentID=${rest.contentID }&reserveDate=${rest.reserveDate }'" class="btn" style="float: right;">삭제</button></p>
+               </div>
+                <img class="contentImg"
+      			src = "/trip_GazuaAA/img/no.png"
+            	style="width:160px;height:100px;">
+            <div class="textBox">
+               <div class="date">
+                     	리뷰 내용 : ${myPageReviewSelect.content}
+               		</div>
+            	</div>
+          	</div>
+     	 </c:forEach>
+		</div>
+    </div>
+    
+   
   </div>
 </div>
 

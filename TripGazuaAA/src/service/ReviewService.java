@@ -57,5 +57,8 @@ public class ReviewService {
 	public List<HashMap<String, String>> userReviewLikeCheck(String userID){
 		return rDao.userReviewLikeCheck(userID);
 	}
+	public List<HashMap<String, String>> myPageReviewSelect(String userID){
+		return rDao.myPageReviewSelect(userID);
+	}
 	
 }

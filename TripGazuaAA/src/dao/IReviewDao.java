@@ -39,4 +39,6 @@ public interface IReviewDao {
 	
 	public List<HashMap<String, String>> userReviewLikeCheck(String userID);
 	
+	public List<HashMap<String, String>> myPageReviewSelect(String userID);
+	
 }

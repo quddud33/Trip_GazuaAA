@@ -132,6 +132,12 @@
 	  from tripboard
 	  where num = #{num}
    </select>
+   
+   <select id="myPageSelect" parameterType="String" resultType="java.util.HashMap">
+		select num, userID, nickname, title, content,  DATE_FORMAT(wDate, '%Y-%m-%d') 'wDate', uDate, views, likeCount
+		from tripboard
+		where userID = #{userID}
+	</select>
 
 
 </mapper>

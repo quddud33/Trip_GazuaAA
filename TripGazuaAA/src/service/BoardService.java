@@ -78,5 +78,10 @@ public class BoardService {
 	public int likeCount(int num) {
 		return bDao.likeCount(num);
 	}
+	
+	//마이페이지에 작성글 출력(서비스)
+	public List<HashMap<String, Object>> myPageSelect(String userID) {
+		return bDao.myPageSelect(userID);
+	}
 
 }
