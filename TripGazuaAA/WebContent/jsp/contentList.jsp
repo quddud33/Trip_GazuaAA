@@ -116,10 +116,29 @@ li {
 
 #page {
 	text-align: center;
+	float: right;
+	position: relative;
+	left: -50%;
 }
 
-#page ul {
-	padding: 0;
+#page button {
+	background-color: #FFF;
+	display: inline-block;
+	float: left;
+	position: relative;
+	left: 50%;
+	width: 33px;
+	height: 33px;
+	border: 1px solid #AAA;
+	border-left: none;
+}
+
+#page button:nth-child(1) {
+	border-left: 1px solid #AAA;
+}
+
+#page button:hover {
+	background-color: #CCC;
 }
 
 #searchForm {

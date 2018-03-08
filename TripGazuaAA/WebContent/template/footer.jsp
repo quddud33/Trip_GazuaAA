@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<%if(session.getAttribute("msg") != null) {%>
+		<script>
+			alert('${msg}');
+		</script>
+<%session.removeAttribute("msg");}%>
+
 <form action="login.do">
 	<div id="bg">
 		<div id="loginBox">

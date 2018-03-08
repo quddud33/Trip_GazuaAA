@@ -64,15 +64,15 @@ public class MyController {
 	public void createUserForm() {}
 	
 	@RequestMapping("login.do")
-	public String login(HttpSession session,String userID,String password) {
+	public String login(HttpServletRequest request, HttpSession session,String userID,String password) {
+		String old_url = request.getHeader("referer");
 		if(lService.login(userID, password)) {
 			session.setAttribute("user", lService.getUserInfo(userID));
-			return "redirect:main.do";
 		}
 		else {
 			session.setAttribute("msg", "아이디 또는 비밀번호가 틀렸습니다.");
-			return "redirect:main.do";
 		}
+		return "redirect:" + old_url;
 		
 	}
 	
