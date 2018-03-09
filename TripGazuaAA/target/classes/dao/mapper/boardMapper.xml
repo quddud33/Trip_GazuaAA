@@ -133,6 +133,7 @@
 	  where num = #{num}
    </select>
    
+   <!-- 마이페이지에 자기가 쓴 게시글 출력 -->
    <select id="myPageSelect" parameterType="String" resultType="java.util.HashMap">
 		select num, userID, nickname, title, content,  DATE_FORMAT(wDate, '%Y-%m-%d') 'wDate', uDate, views, likeCount
 		from tripboard

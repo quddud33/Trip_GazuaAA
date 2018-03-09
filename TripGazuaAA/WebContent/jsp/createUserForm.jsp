@@ -115,6 +115,7 @@
     //아이디 체크하여 가입버튼 비활성화, 중복확인.
     function checkID() {
         var inputed = $('.id').val();
+    	var idwordRules = /^(?=.*[a-z])(?=.*[-_])(?=.*[0-9]).{5,20}$/;
         $.ajax({
            url : "checkID.do",
             data : {
@@ -145,6 +146,7 @@
         });
     }
     function checkPwd() {
+		var id = $('.id').val();
         var inputed = $('.pass').val();
         var reinputed = $('#pwdCheckwd').val();
         console.log(inputed);
@@ -156,7 +158,10 @@
         }
         else if (inputed == reinputed) {
             $("#pwdCheckwd").css("background-color", "#B0F6AC");
-            pwdCheck = 1;
+            var tf = checkPassword(id,inputed);//true false = tf 인싸 변수 
+            if(tf == true){
+            	pwdCheck = 1;	
+            }
             if(idCheck==1 && pwdCheck == 1) {
                 $(".signupbtn").prop("disabled", false);
                 $(".signupbtn").css("background-color", "#4CAF50");
@@ -186,5 +191,42 @@
             $(".signupbtn").prop("disabled", true);
             $(".signupbtn").css("background-color", "#aaaaaa");
     });
+    
+    function checkPassword(id,password){
+    	var passwordRules = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
+    	var checkNumber = password.search(/[0-9]/g);
+    	var checkEnglish = password.search(/[a-z]/ig);
+    	console.log(passwordRules.test(password));
+    	if(passwordRules.test(password) == false){
+
+    	alert('숫자,영문자,특수문자가 섞인 8~16자리로 비밀번호 설정 해주세요');
+
+    	return false;
+
+    	}else if(checkNumber <0 || checkEnglish <0){
+    		
+    		alert("비밀 번호에 숫자와 영문자를 혼용하여야 합니다.");
+
+        	return false;
+    	}else if(/(\w)\1\1\1/.test(password)){
+    		
+    		alert('비밀번호에 444같은 문자를 4번 이상 사용하실 수 없습니다.');
+
+        	return false;
+    		
+    	}else if(password.search(id) > -1){
+    		
+    		alert("비밀번호에 아이디가 포함되었습니다.");
+        	return false;
+    		
+    	}else{
+
+    	return true;
+
+    		}
+    	}
+    
+   
+
 </script>
 </html>
