@@ -137,7 +137,7 @@ public class APIService {
     				
         			if(eventType == XmlPullParser.START_TAG)
 
-        				value.put(parser.getName(), parser.nextText()); //HashMap안에 값을 담아줌
+        				value.put(parser.getName(), parser.nextText().replaceAll(search, "<b>" + search + "</b>")); //HashMap안에 값을 담아줌
 
         			}
         		

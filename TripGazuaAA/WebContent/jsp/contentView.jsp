@@ -285,8 +285,14 @@ td img {
 }
 
 .contentTitleBox{
- 	width: 1026px;
- 	height: 50px;
+ 	width: 100%;
+ 	text-align: center;
+ 	margin-bottom: 20px;
+}
+
+.contentTitle {
+	font-size: 36px;
+	font-weight: 400;
 }
 
 </style>
@@ -315,11 +321,12 @@ td img {
 	<c:choose>
 		<c:when test="${param.contenttypeid == '32' }">
 			<div class="container">
-			<c:forEach var="commonInfo"  items="${commonInfo}">
+				<c:forEach var="commonInfo"  items="${commonInfo}">
+					<c:set var="title" value="${commonInfo.title }"/>
+				</c:forEach>
 			
-			<div class="contentTitleBox"><p class="">${commonInfo.title}</p></div>
+				<div class="contentTitleBox"><p class="contentTitle">${title}</p></div>
 			
-			</c:forEach>
 				<form action="reservation.do">
 					<input type="hidden" name="userID" value="${user.userID }" /> <input
 						type="hidden" name="contentID"
@@ -327,7 +334,7 @@ td img {
 						type="hidden" name="contentTypeID"
 						value="<%=request.getParameter("contenttypeid")%>" />
 						<input type="hidden"
-						name="name" value="<%=request.getParameter("name")%>">
+						name="name" value="${title}">
 					<div id="myCarousel" class="carousel slide" data-ride="carousel"
 						style="width: 90%; margin: auto;">
 
@@ -430,7 +437,7 @@ td img {
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="5" style="text-align: right">
+								<td colspan="6" style="text-align: right">
 									<button class="btn btn-info btn-lg btn-custom">예약하기</button>
 								</td>
 							</tr>
@@ -485,7 +492,7 @@ td img {
 							<td>${commonInfo.addr1 },${commonInfo.addr2 }</td>
 						</tr>
 					</tfoot>
-				<button class="btn btn-custom" style="display: block;margin: auto; margin-bottom: 10px; clear: both;" onclick="location.href='festvalWish.do?name=<%=request.getParameter("name") %>&userID=${user.userID}&contentID=${commonInfo.contentid }&contentTypeID=15'">찜하기</button>
+				<button class="btn btn-custom" style="display: block;margin: auto; margin-bottom: 10px; clear: both;" onclick="location.href='festvalWish.do?name=${commonInfo.title}&userID=${user.userID}&contentID=${commonInfo.contentid }&contentTypeID=15'">찜하기</button>
 				
 				</c:forEach>
 			</table>
@@ -528,7 +535,7 @@ td img {
 	<c:if test="${user ne null }">
 		<form action="reviewWrite.do"
 			style="text-align: right; width: 80%; margin: auto; margin-top: 10px;">
-				<input type="hidden" name="name" value="<%=request.getParameter("name")%>">
+				<input type="hidden" name="name" value="${title}">
 			<textarea rows="5" cols="30" name="content" class="form-control"
 				placeholder="리뷰를 남겨주세요"></textarea>
 			<input type="submit" value="입력" class="btn btn-defalut btn-custom"
@@ -607,7 +614,6 @@ td img {
 			<div id="loginBox">
 				<h2 class="title">Trip GazuaAA</h2>
 				<dl>
-
 					<dd>
 						<input type="text" name="userID" placeholder="아이디" />
 					</dd>
@@ -617,7 +623,6 @@ td img {
 					<dd>
 						<button>로그인</button>
 					</dd>
-
 				</dl>
 			</div>
 		</div>
@@ -700,7 +705,7 @@ marker.setMap(map);
 	    var lodDate;
 	    var adult = 0;
 	    var kid = 0;
-	    <%if(request.getParameter("price").length()!= 0) {%>
+	    <%if(request.getParameter("price") != null && request.getParameter("price").length() != 0) {%>
 	    	var price = <%=request.getParameter("price").replaceAll(",", "")%>;
 	    <%}%>
 	    

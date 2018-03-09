@@ -78,7 +78,7 @@ public class APIController {
 	// 상세정보(관광지, 숙박, 축제 등) [contentView]
 	@RequestMapping("contentView.do")
 	public ModelAndView roomDetail(HttpServletRequest request, @RequestParam String contentid,
-			@RequestParam String contenttypeid, @RequestParam String name) throws Exception {
+			@RequestParam String contenttypeid) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		if (contenttypeid.equals("32") || contenttypeid.equals("12")) {
 			List<HashMap<String, String>> xy = service.commonInfo(contentid, contenttypeid);
