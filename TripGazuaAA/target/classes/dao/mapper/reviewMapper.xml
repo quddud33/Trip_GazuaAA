@@ -85,6 +85,11 @@
    	SELECT num FROM userlikereview
    	WHERE userID = #{userID}
   </select>
+  
+  <select id="myPageReviewSelect" parameterType="String" resultType="java.util.HashMap">
+  	SELECT * FROM review
+  	WHERE userID = #{userID};
+  </select>
  
   
   
