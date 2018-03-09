@@ -284,6 +284,11 @@ td img {
 	padding: 5px;
 }
 
+.contentTitleBox{
+ 	width: 1026px;
+ 	height: 50px;
+}
+
 </style>
 </head>
 <body>
@@ -312,7 +317,7 @@ td img {
 			<div class="container">
 			<c:forEach var="commonInfo"  items="${commonInfo}">
 			
-			<p>${commonInfo.title}</p>
+			<div class="contentTitleBox"><p class="">${commonInfo.title}</p></div>
 			
 			</c:forEach>
 				<form action="reservation.do">
