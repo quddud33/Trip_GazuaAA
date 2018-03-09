@@ -311,7 +311,9 @@ td img {
 		<c:when test="${param.contenttypeid == '32' }">
 			<div class="container">
 			<c:forEach var="commonInfo"  items="${commonInfo}">
+			
 			<p>${commonInfo.title}</p>
+			
 			</c:forEach>
 				<form action="reservation.do">
 					<input type="hidden" name="userID" value="${user.userID }" /> <input

@@ -89,11 +89,13 @@ public class APIController {
 				mapx = a.get("mapx");
 				mapy = a.get("mapy");
 			}
+			
 			mav.addObject("commonInfo", service.commonInfo(contentid, contenttypeid));
 			mav.addObject("detail", service.detailInfo(contentid, contenttypeid));
 			mav.addObject("imgInfo", service.imgInfo(contentid, contenttypeid));      
 			mav.addObject("mapx", mapx);
 			mav.addObject("mapy", mapy);
+			
 		} else if (contenttypeid.equals("15")) {
 			List<HashMap<String, String>> xy = service.commonInfo(contentid, contenttypeid);
 			String mapx = "";
