@@ -12,8 +12,17 @@
 <link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/nav.css">
 <link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">
 <link rel="stylesheet" href="/trip_GazuaAA/css/map.css">
+<link rel="stylesheet" href="/trip_GazuaAA/css/wheatherMap.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+
+
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=70d78e61bdb96cf13e612f9908e948d0&libraries=clusterer"></script>
@@ -357,17 +366,23 @@
 		</c:forEach>
 	</table>  --%>
 
-<div id="mapbg">
-	<div id="map"></div>
-</div>
-
+      	<div id="mapbg">
+			<div id="map"></div>
+		</div>
+		<div id="weatherMapbg">
+			<div id ="map"></div>
+		</div>
+	
 <div id="remocon">
 	<table>
 		<tr>
 			<td><button id="scrollUp">위</button></td>
 		</tr>
 		<tr>
-			<td><button id="mapScroll">지도</button></td>
+			<td><button id="mapScroll">축제 지도</button></td>
+		</tr>
+		<tr>
+			<td><button id="weatherMapScroll">날씨 지도</button></td>
 		</tr>
 	</table>
 </div>
@@ -391,6 +406,7 @@
 	<script src="/trip_GazuaAA/js/FBLogin.js"></script>
 	<script src="/trip_GazuaAA/js/login.js"></script>
 	<script src="/trip_GazuaAA/js/map.js"></script>
+	<script src="/trip_GazuaAA/js/wheatherMap.js"></script>
 	<script type="text/javascript">
 		$("#scrollUp").click(function () {
 	        $('html, body').animate({scrollTop : 0});

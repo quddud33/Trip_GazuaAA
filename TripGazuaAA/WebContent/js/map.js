@@ -2,7 +2,6 @@ $("#mapScroll").on("click", function(){
 		$("#mapbg").css("display", "block");
 });
 
-
 $("#map").on("click",function (e) {                                                              //상세정보를 보여주는 박스 클릭이벤트
     e.stopPropagation();                                                                        //부모로의 이벤트 전파를 중지시킴 (이걸 하지 않을시 박스를 클릭했는데 뒷배경의 이벤트까지
 });//click end    
@@ -10,7 +9,7 @@ $("#mapbg").on("click",function () {                                            
 	   $("#mapbg").css("display","none");                                                        //상세정보 창을 안보이게 변경
 });
 
-                                                            
+                                                          
 var map = new daum.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
     center: new daum.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표
     level: 12 // 지도의 확대 레벨
