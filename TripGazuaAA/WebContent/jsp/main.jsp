@@ -31,7 +31,7 @@
 }
 .weather{
 	display: block;
-	width: 250px;
+	width: 250px; 
 	margin: auto;
 }
 

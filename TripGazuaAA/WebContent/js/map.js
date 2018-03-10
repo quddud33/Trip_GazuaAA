@@ -28,7 +28,7 @@ var locations = [],
     infoWindows = [];
 
 
-// 데이터를 가져오기 위해 jQuery를 사용합니다
+// 데이터를 가져오기 위해 jQuery 를 사용합니다
 // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
 $.get("ajax/tour.json", function (data) {
     // 데이터에서 좌표 값을 가지고 마커를 표시합니다
