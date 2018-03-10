@@ -45,6 +45,10 @@
           </div>
       </div>
 </div>
+
+
+
+
 <script>
 	$("#chatRoom").click(function(e){
 		<%if(session.getAttribute("user") == null) {%>

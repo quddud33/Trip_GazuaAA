@@ -11,9 +11,12 @@
 <link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/nav.css">
 <link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">
+<link rel="stylesheet" href="/trip_GazuaAA/css/map.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
+<script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=70d78e61bdb96cf13e612f9908e948d0&libraries=clusterer"></script>
 <title>Insert title here</title>
 <style>
 .top_list {
@@ -31,6 +34,18 @@
 	width: 250px;
 	margin: auto;
 }
+
+#remocon {
+	position: fixed;
+	top: 80%;
+	right: 2%;
+	width: 30px;
+}
+
+#scrollUp {
+	display: none;
+}
+
 
 </style>
 <script>
@@ -342,7 +357,20 @@
 		</c:forEach>
 	</table>  --%>
 
+<div id="mapbg">
+	<div id="map"></div>
+</div>
 
+<div id="remocon">
+	<table>
+		<tr>
+			<td><button id="scrollUp">위</button></td>
+		</tr>
+		<tr>
+			<td><button id="mapScroll">지도</button></td>
+		</tr>
+	</table>
+</div>
 
 <!-- footer 시작 -->
 <%@ include file="../template/footer.jsp" %>
@@ -362,5 +390,20 @@
 	<script src="/trip_GazuaAA/js/googleLogin.js"></script>
 	<script src="/trip_GazuaAA/js/FBLogin.js"></script>
 	<script src="/trip_GazuaAA/js/login.js"></script>
+	<script src="/trip_GazuaAA/js/map.js"></script>
+	<script type="text/javascript">
+		$("#scrollUp").click(function () {
+	        $('html, body').animate({scrollTop : 0});
+		});
+		$(window).scroll(function () {
+			var height = $(document).scrollTop();
+			
+			if(height >= $('html').height()){
+				$('#scrollUp').css('display', 'block');
+			} else { 
+				$('#scrollUp').css('display', 'none'); 
+			}
+		});
+	</script>
 </body>
 </html>
