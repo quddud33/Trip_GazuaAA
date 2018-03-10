@@ -143,12 +143,17 @@ li {
 
 #searchForm {
 	max-width: 720px;
-	margin: auto;
+	margin: auto auto 15px auto;
 	text-align: center;
 }
 
 #textSearchForm {
 	display: inline-block;
+	width: 100%;
+}
+
+#textSearchForm .form-control {
+	width: 90%;
 }
 
 #areaSearchForm {
@@ -160,10 +165,6 @@ li {
 	position: absolute;
 	right: 0;
 } 
-
-.form-control {
-	width: 120px;
-}
 
 .noData {
 	margin: auto;
@@ -189,23 +190,13 @@ b {
 	<div id="searchForm">
 	<div id="areaSearchForm">
 		<ul class="nav nav-tabs">
-		    <li class="active"><a data-toggle="tab" onclick="searchAjax(32, $('.areaCodeVal').val(), 1)">숙박</a></li>
-		    <li><a data-toggle="tab" href="#menu1" onclick="searchAjax(15, $('.areaCodeVal').val(), 1)">축제</a></li>
-		    <li><a data-toggle="tab" href="#menu2" onclick="searchAjax(12, $('.areaCodeVal').val(), 1)">관광지</a></li>
-		    <li><a data-toggle="tab" href="#menu3" onclick="searchAjax(39, $('.areaCodeVal').val(), 1)">맛집</a></li>
-		    <li>
-			    <form action="contentList.do" onsubmit="showSearchTest()" class="form-inline md-form form-sm">
-						<div id="textSearchForm">
-							<input type="hidden" name="contentTypeId" id="contentTypeId" value="32"/>
-							<input type="hidden" name="areaCode" id="areaCode"/>
-							<input type="text" class="form-control form-control-sm mr-3 w-75" name="search" placeholder="Search" aria-label="Search"/>
-						</div>
-					<button class="btn btn-unique btn-rounded btn-sm my-0">검색</button>
-				</form>
-			</li>
+		    <li class="active"><a data-toggle="tab" category="32" onclick="searchAjax(32, $('.areaCodeVal').val(), 1)">숙박</a></li>
+		    <li><a data-toggle="tab" href="#menu1" category="15" onclick="searchAjax(15, $('.areaCodeVal').val(), 1)">축제</a></li>
+		    <li><a data-toggle="tab" href="#menu2" category="12" onclick="searchAjax(12, $('.areaCodeVal').val(), 1)">관광지</a></li>
+		    <li><a data-toggle="tab" href="#menu3" category="39" onclick="searchAjax(39, $('.areaCodeVal').val(), 1)">맛집</a></li>
 		    <li id="areaCodeForm">
 				<select name="areaCodeVal" class="form-control areaCodeVal">
-					<option value="">전체</option>
+					<option value="">지역(전체)</option>
 					<option value="1">서울</option>
 					<option value="2">인천</option>
 					<option value="3">대전</option>
@@ -218,6 +209,18 @@ b {
 		</ul>
 	</div>
 	<br />
+	<form action="contentList.do" onsubmit="showSearchTest()" class="form-inline md-form form-sm" method="post">
+			<div id="textSearchForm">
+				<input type="hidden" name="contentTypeId" id="contentTypeId" value="32"/>
+				<input type="hidden" name="areaCode" id="areaCode"/>
+				<input type="text" id="searchBox" class="form-control" name="search" placeholder="Search" aria-label="Search" 
+				<%if(request.getParameter("search") != null) {%>
+					value="<%=request.getParameter("search")%>"
+				<%} %>
+				/>
+				<button class="btn">검색</button>
+			</div>
+	</form>
 	</div>
 	
 	<div id="content" class="container">
@@ -226,7 +229,7 @@ b {
 				<c:if test="${searchTest.totalCount eq null }">
 		        <div class="contentList">
 		            <div class="contentTitle">
-		                <p><i class="fa fa-search"></i>${searchTest.title }</p>
+		                <p>${searchTest.title }</p>
 		            </div>
 					<img class="contentImg"
 					<c:if test="${searchTest.firstimage ne null }">
@@ -265,7 +268,7 @@ b {
 		<\%$.each(touristInfo.items, function() {%>
         <div class="contentList">
             <div class="contentTitle">
-                <p><i class="fa fa-search"></i> <\%=this.title%></p>
+                <p><\%=this.title%></p>
             </div>
 			<img class="contentImg" src="<\%if(this.img != undefined) {%><\%=this.img%><\%} else {%>/trip_GazuaAA/img/no.png<\%}%>" style="width: 30%;min-width: 80px;min-height:50px;max-width:160px;max-height:100px;">
 			<div class="textBox">
@@ -292,7 +295,8 @@ b {
 	<script>
 		var touristTable = _.template($('#touristTable').html()), $areaCode = $('[name=areaCodeVal]')
 		var $searchTest = $("#searchTest");
-		var contentTypeId, areaCode, total;
+		var areaCode, total;
+		var contentTypeId = <%if(request.getParameter("contentTypeId") != null) {%><%=request.getParameter("contentTypeId") %><%} else {%>32<%}%>;
 		var page = 1;
 
 		// 		var page = new PaginateUtil();
@@ -313,6 +317,9 @@ b {
 		});
 		
 		function searchAjax(contentTypeIdVal, areaCodeVal, pageVal) {
+			
+			$('#searchBox').val('');
+			
 			contentTypeId = contentTypeIdVal;
 			areaCode = areaCodeVal;
 			page = pageVal;
@@ -339,6 +346,17 @@ b {
 				}
 			})
 		}
+		
+		
+		<%if(request.getParameter("contentTypeId") != null) {%>
+			$('#areaSearchForm li').removeClass('active');
+			
+			$('#areaSearchForm li > a').each(function () {
+					if($(this).attr('category') == <%=request.getParameter("contentTypeId") %>) {
+						$(this).parent().addClass('active');
+					}
+			});
+		<%}%>
 	</script>
 </body>
 </html>
