@@ -209,7 +209,7 @@ b {
 		</ul>
 	</div>
 	<br />
-	<form action="contentList.do" onsubmit="showSearchTest()" class="form-inline md-form form-sm" method="post">
+	<form action="contentList.do" onsubmit="showSearchTest()" class="form-inline md-form form-sm" method="get">
 			<div id="textSearchForm">
 				<input type="hidden" name="contentTypeId" id="contentTypeId" value="32"/>
 				<input type="hidden" name="areaCode" id="areaCode"/>
@@ -298,6 +298,18 @@ b {
 		var areaCode, total;
 		var contentTypeId = <%if(request.getParameter("contentTypeId") != null) {%><%=request.getParameter("contentTypeId") %><%} else {%>32<%}%>;
 		var page = 1;
+		
+
+		window.onpageshow = function(event) {
+		    if (event.persisted) {
+		        document.location.reload();
+		    }
+		};
+		
+		$(window).on('popstate', function(event) {
+			  var data = event.originalEvent.state;
+				searchAjax(data.contentTypeId, data.areaCode, data.page);
+		});
 
 		// 		var page = new PaginateUtil();
 		function showSearchTest() {
@@ -339,15 +351,14 @@ b {
 					total = json.total;
 					console.log(total);
 					$('#page').html(paginate(page, (total / 10), '?no='));
-					
+					history.pushState({contentTypeId : contentTypeId, areaCode : areaCode, page : page}, 'page ' + page,'/trip_GazuaAA/contentList.do?contenttypeid=' + contentTypeId + '&areacode=' + areaCode + '&page=' + page);
 					$searchTest.hide();
 				},
 				error : function(err) {
 				}
 			})
 		}
-		
-		
+				
 		<%if(request.getParameter("contentTypeId") != null) {%>
 			$('#areaSearchForm li').removeClass('active');
 			
@@ -357,6 +368,7 @@ b {
 					}
 			});
 		<%}%>
+		
 	</script>
 </body>
 </html>
