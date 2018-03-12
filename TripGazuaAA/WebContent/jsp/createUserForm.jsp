@@ -35,6 +35,14 @@
 	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.33);
 	-webkit-font-smoothing: antialiased;
 }
+.pwdMsg{
+	color: #FFCECE;
+	font-size: 10px;
+}
+.pwdCkMsg{
+	color: #FFCECE;
+	font-size: 10px;
+}
 </style>
 </head>
 <body>
@@ -83,12 +91,18 @@
       <input type="password"
          placeholder="비밀번호 입력" id="pwd" name="password" required class="form-control pass"
          oninput="checkPwd()"/> 
+      <div id="pwdMsgBox">
+      	<p class='pwdMsg'></p>
+      </div>
     </div>
     
     <div class="form-group">
          <label for="pwdCheck">비밀번호 확인:</label>
       <input type="password" placeholder="비밀번호 재확인" name="pw_CHECK" 
          required class="form-control pass" id="pwdCheckwd" oninput="checkPwd()"/> 
+         <div id="pwdCkMsgBox">
+      	<p class='pwdCkMsg'></p>
+      </div>
     </div>
     <div class="clearfix">
     <button type="submit" class="btn btn-custom signupbtn" disabled="disabled">가입하기</button>   
@@ -130,6 +144,7 @@
                     idCheck = 0;
                 } else if (data == '0') {
                     $("#checkaa").css("background-color", "#B0F6AC");
+                   
                     idCheck = 1;
                     if(idCheck==1 && pwdCheck == 1) {
                         $(".signupbtn").prop("disabled", false);
@@ -149,16 +164,19 @@
 		var id = $('.id').val();
         var inputed = $('.pass').val();
         var reinputed = $('#pwdCheckwd').val();
+        var tf = checkPassword(id,inputed);//true false = tf 인싸 변수 
         console.log(inputed);
         console.log(reinputed);
         if(reinputed=="" && (inputed != reinputed || inputed == reinputed)){
             $(".signupbtn").prop("disabled", true);
             $(".signupbtn").css("background-color", "#aaaaaa");
             $("#pwdCheckwd").css("background-color", "#FFCECE");
+            $(".pwdCkMsg").text("비밀번호 확인을 써주세요.");
+            
         }
         else if (inputed == reinputed) {
             $("#pwdCheckwd").css("background-color", "#B0F6AC");
-            var tf = checkPassword(id,inputed);//true false = tf 인싸 변수 
+            $(".pwdCkMsg").text("");
             if(tf == true){
             	pwdCheck = 1;	
             }
@@ -172,7 +190,7 @@
             $(".signupbtn").prop("disabled", true);
             $(".signupbtn").css("background-color", "#aaaaaa");
             $("#pwdCheckwd").css("background-color", "#FFCECE");
-            
+            $(".pwdCkMsg").text("비밀번호와 비밀번호 확인이 다릅니다.");
         }
     }
     //닉네임 입력하지 않았을 경우 가입버튼 비활성화
@@ -196,34 +214,29 @@
     	var passwordRules = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
     	var checkNumber = password.search(/[0-9]/g);
     	var checkEnglish = password.search(/[a-z]/ig);
-    	console.log(passwordRules.test(password));
     	if(passwordRules.test(password) == false){
-
-    	alert('숫자,영문자,특수문자가 섞인 8~16자리로 비밀번호 설정 해주세요');
-
+    		
+    		$(".pwdMsg").text('숫자,영문자,특수문자가 섞인 8~16자리로 비밀번호 설정 해주세요');
+    	
     	return false;
 
-    	}else if(checkNumber <0 || checkEnglish <0){
-    		
-    		alert("비밀 번호에 숫자와 영문자를 혼용하여야 합니다.");
-
-        	return false;
     	}else if(/(\w)\1\1\1/.test(password)){
-    		
-    		alert('비밀번호에 444같은 문자를 4번 이상 사용하실 수 없습니다.');
-
+    	
+    			$(".pwdMsg").text('비밀번호에 444같은 문자를 4번 이상 사용하실 수 없습니다.');
         	return false;
     		
     	}else if(password.search(id) > -1){
-    		
-    		alert("비밀번호에 아이디가 포함되었습니다.");
+    	
+    			$(".pwdMsg").text('비밀번호에 아이디가 포함되었습니다.');
+    
         	return false;
     		
     	}else{
-
+		$(".pwdMsg").text("");
     	return true;
 
     		}
+
     	}
     
    
