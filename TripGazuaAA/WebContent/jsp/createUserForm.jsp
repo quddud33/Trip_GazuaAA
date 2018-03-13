@@ -37,11 +37,15 @@
 }
 .pwdMsg{
 	color: #FFCECE;
-	font-size: 10px;
+	font-size: 12px;
 }
 .pwdCkMsg{
 	color: #FFCECE;
-	font-size: 10px;
+	font-size: 12px;
+}
+.idMsg{
+	color: #FFCECE;
+	font-size: 12px;
 }
 </style>
 </head>
@@ -79,6 +83,9 @@
     <label for="checkaa">아이디 :</label>
     <input type="text" placeholder="아이디 입력"
       name="userID" required class="form-control id" oninput="checkID()" id="checkaa"/>
+       <div id="idMsgBox">
+      	<p class="idMsg"></p>
+      </div>
     </div>
     <div class="form-group">
     <label><b>Nickname</b></label> 
@@ -92,7 +99,7 @@
          placeholder="비밀번호 입력" id="pwd" name="password" required class="form-control pass"
          oninput="checkPwd()"/> 
       <div id="pwdMsgBox">
-      	<p class='pwdMsg'></p>
+      	<p class="pwdMsg"></p>
       </div>
     </div>
     
@@ -101,7 +108,7 @@
       <input type="password" placeholder="비밀번호 재확인" name="pw_CHECK" 
          required class="form-control pass" id="pwdCheckwd" oninput="checkPwd()"/> 
          <div id="pwdCkMsgBox">
-      	<p class='pwdCkMsg'></p>
+      	<p class="pwdCkMsg"></p>
       </div>
     </div>
     <div class="clearfix">
@@ -129,7 +136,7 @@
     //아이디 체크하여 가입버튼 비활성화, 중복확인.
     function checkID() {
         var inputed = $('.id').val();
-    	var idwordRules = /^(?=.*[a-z])(?=.*[-_])(?=.*[0-9]).{5,20}$/;
+    	var idwordRules = /^(?=.*[a-z])[a-z0-9\-_]{5,20}$/;
         $.ajax({
            url : "checkID.do",
             data : {
@@ -141,20 +148,27 @@
                     $(".signupbtn").prop("disabled", true);
                     $(".signupbtn").css("background-color", "#aaaaaa");
                     $("#checkaa").css("background-color", "#FFCECE");
+                    $(".idMsg").text("아이디를 입력해주세요.");
                     idCheck = 0;
                 } else if (data == '0') {
+                	if(idwordRules.test(inputed)){
                     $("#checkaa").css("background-color", "#B0F6AC");
-                   
+                    $(".idMsg").text("");
                     idCheck = 1;
                     if(idCheck==1 && pwdCheck == 1) {
                         $(".signupbtn").prop("disabled", false);
                         $(".signupbtn").css("background-color", "#4CAF50");
                         signupCheck();
                     } 
+                	}else{
+                		$("#checkaa").css("background-color", "#FFCECE");
+                		 $(".idMsg").text("5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다");
+                	}
                 } else if (data == '1') {
                     $(".signupbtn").prop("disabled", true);
                     $(".signupbtn").css("background-color", "#aaaaaa");
                     $("#checkaa").css("background-color", "#FFCECE");
+                    $(".idMsg").text("이미 가입된 아이디 입니다.");
                     idCheck = 0;
                 } 
             }
