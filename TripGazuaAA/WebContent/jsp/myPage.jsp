@@ -247,6 +247,7 @@ li {
       <div class="imgBox"><img class="noData" src="img/no_data.png" alt="no_data"/></div>
       </c:if>   
       <c:forEach var="rest" items="${restaurant }">
+      
            <div class="contentList">
                <div class="contentTitle">
                    <p><i class="fa fa-search"></i>${rest.name }<button onclick="location.href='restaurantDelete.do?userID=${rest.userID}&contentID=${rest.contentID }&reserveDate=${rest.reserveDate }'" class="btn" style="float: right;">삭제</button></p>
@@ -266,6 +267,7 @@ li {
                		</div>
             	</div>
           	</div>
+          	
      	 </c:forEach>
 		</div>
     </div>
