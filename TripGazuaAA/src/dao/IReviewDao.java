@@ -21,7 +21,7 @@ public interface IReviewDao {
 	public int updateReview(HashMap<String, String> params);
 	
 	
-	public List<HashMap<String, String>> reviewList(String contentID);
+	public List<HashMap<String, String>> reviewList(HashMap<String, String> params);
 
 	public List<HashMap<String, String>> reviewNum(String num);
 	

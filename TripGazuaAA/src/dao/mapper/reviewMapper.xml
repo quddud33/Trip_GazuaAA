@@ -30,9 +30,10 @@
   </select>
   
   
-  <select id="reviewList" resultType="java.util.HashMap" parameterType="String">
+  <select id="reviewList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
   SELECT num, nickname, content, DATE_FORMAT(writeDate, '%Y-%m-%d') 'writeDate', score, likeCount, userID, contentID, contentTypeID
   FROM review WHERE contentID = #{contentID}
+  LIMIT #{start}, 5 
   </select>
   
    <select id="reviewNum" resultType="java.util.HashMap" parameterType="String">

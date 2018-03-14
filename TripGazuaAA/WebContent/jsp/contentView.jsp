@@ -301,21 +301,6 @@ td img {
 	<!-- 네비게이션 -->
 	<%@ include file="../template/nav.jsp"%>
 
-
-
-	<!-- 	<a href="chat.jsp">채팅방</a>userID,nickName -->
-	<!-- 	<a href="serviceCenter.jsp">서비스 센터</a>userID,nickName -->
-	<!-- 	<a href="locationView.jsp">지도/컨텐츠 리스트</a> -->
-	<!-- 	<a href="myPage.jsp">마이페이지</a>로그인 시에만 보이게 처리(userID,nickName) -->
-	<!-- 	<a href="#">로그인</a>javascript써서 로그인폼 띄우기 -->
-	<!-- 	<a href="createUserForm.jsp">회원가입</a> -->
-	<%-- 	<%if(request.getParameter("contenttypeid").equals("32")) {%> --%>
-	<%-- 	<a href="reservationView.do?contentID=<%=request.getParameter("contentid")%>&contentTypeID=<%=request.getParameter("contenttypeid")%>&price=price">예약하기</a> --%>
-	<%-- 	<%} else {%> --%>
-	<%-- 	<a href="wish.do?contentID=<%=request.getParameter("contentid")%>&contentTypeID=<%=request.getParameter("contenttypeid")%>">찜하기</a> --%>
-	<%-- 	<%} %> --%>
-	<!-- 	<a href="reviewList.jsp">리뷰 더보기</a>contentID -->
-	<!--<a href="logout.do">로그아웃</a> 로그인시 태그 생성하게 처리-->
 	<c:set var='param' value='<%=request.getParameter("contenttypeid")%>' />
 	<c:choose>
 		<c:when test="${param.contenttypeid == '32' }">
@@ -495,24 +480,6 @@ td img {
 				
 				</c:forEach>
 			</table>
-			
-			<!-- 			<table border="1" class="table table-boarded"> -->
-			<!-- 				<tr> -->
-			<!-- 					<th>행사명</th> -->
-			<!-- 					<th>내용</th> -->
-			<!-- 					<th>주소</th> -->
-			<!-- 					<th>사진</th> -->
-			<!-- 				</tr> -->
-			<%-- 				<c:forEach var="commonInfo" items="${commonInfo}"> --%>
-			<!-- 					<tr> -->
-			<%-- 						<td>${commonInfo.title }</td> --%>
-			<%-- 						<td>${commonInfo.overview }</td> --%>
-			<%-- 						<td>${commonInfo.addr1 }, ${commonInfo.addr2 }</td> --%>
-			<%-- 						<td><img src="${commonInfo.firstimage }" alt="${commonInfo.title }"/></td> --%>
-			<%-- 						<td><button onclick="location.href='festvalWish.do?userID=${user.userID}&contentID=${commonInfo.contentid }&contentTypeID=15'">찜하기</button></td> --%>
-			<!-- 					</tr> -->
-			<%-- 				</c:forEach> --%>
-			<!-- 			</table> -->
 		</c:when>
 		<c:when test="${param.contenttypeid == '28' }">
 			<table border="1" class="table table-boarded">
@@ -526,10 +493,6 @@ td img {
 				</c:forEach>
 			</table>
 		</c:when>
-		<c:otherwise>
-			<br>
-			안되요
-		</c:otherwise>
 	</c:choose>
 	<c:if test="${user ne null }">
 		<form action="reviewWrite.do"
@@ -630,8 +593,7 @@ td img {
 	<!-- footer 시작 -->
 	<%@ include file="../template/footer.jsp"%>
 
-<script
-        src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=70d78e61bdb96cf13e612f9908e948d0"></script>
@@ -780,6 +742,21 @@ marker.setMap(map);
 			$("#price").val(((price * adult) + (price * kid * 0.5)) * lodDate);
 	    });
 		
+	    $.ajax('ajax/Lookup.do',{
+			data : {
+				contentID :<%=request.getParameter("contentid")%>,
+			},
+	    	success: function(data) {
+				$(data).each(function () {
+					console.log(this.content);
+					
+				});
+	    	},
+	    	error: function(err) {
+			}
+	    });
+	    
+	    
 	</script>
 </body>
 </html>

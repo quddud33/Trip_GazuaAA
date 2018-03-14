@@ -32,8 +32,8 @@ public class ReviewService {
 	public int updateReview(HashMap<String, String>params) {
 		return rDao.updateReview(params);
 	}
-	public List<HashMap<String, String>> reviewList(String contentID){
-		return rDao.reviewList(contentID);
+	public List<HashMap<String, String>> reviewList(HashMap<String, String> params){
+		return rDao.reviewList(params);
 	}
 	public List<HashMap<String, String>> reviewNum(String num){
 		return rDao.reviewNum(num);

@@ -337,6 +337,7 @@ b {
 			page = pageVal;
 			$('#contentTypeId').val(contentTypeIdVal);
 			$('#areaCode').val(areaCodeVal);
+			
 			$.ajax('ajax/touristInfo.do', {
 				async : false,
 				data : {

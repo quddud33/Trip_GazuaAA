@@ -113,12 +113,10 @@ public class APIController {
 		}
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user") == null) {
-			mav.addObject("reviewL", Rservice.reviewList(contentid));
 		} else {
 			HashMap<String, String> user = (HashMap<String, String>) session.getAttribute("user");
 			String userID = user.get("userID");
 			
-			List<HashMap<String, String>> reviewL = Rservice.reviewList(contentid);
 			List<HashMap<String, String>> reviewLikeCheck = Rservice.userReviewLikeCheck(userID);
 			for(HashMap<String, String> review : reviewL) {
 				review.put("like", "0");
@@ -135,7 +133,6 @@ public class APIController {
 				}
 			}
 			
-			mav.addObject("reviewL", reviewL);
 
 //			if (reviewLikeCheck.size() > 0)
 //				mav.addObject("reviewLikeCheck", reviewLikeCheck);
