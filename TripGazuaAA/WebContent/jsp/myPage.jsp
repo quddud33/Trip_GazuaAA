@@ -279,7 +279,7 @@ li {
       <c:forEach var="myBoard" items="${boardSelect}">
            <div class="contentList">
                <div class="contentTitle">
-                   <p><i class="fa fa-search"></i>${myBoard.title}<button onclick="location.href='restaurantDelete.do?userID=${rest.userID}&contentID=${rest.contentID }&reserveDate=${rest.reserveDate }'" class="btn" style="float: right;">삭제</button></p>
+                   <p><i class="fa fa-search"></i><a href="tripBoardView.do?num=${myBoard.num}&page=1">${myBoard.title}</a><button onclick="location.href='myPageBoardDelete.do?num=${myBoard.num}'" class="btn" style="float: right;">삭제</button></p>
                </div>
                 <img class="contentImg"
       			src = "/trip_GazuaAA/img/no.png"
@@ -302,7 +302,7 @@ li {
       <c:forEach var="myPageReviewSelect" items="${myPageReviewSelect}">
            <div class="contentList">
                <div class="contentTitle">
-                   <p><i class="fa fa-search"></i>${myPageReviewSelect.nickname}<button onclick="location.href='restaurantDelete.do?userID=${rest.userID}&contentID=${rest.contentID }&reserveDate=${rest.reserveDate }'" class="btn" style="float: right;">삭제</button></p>
+                   <p><i class="fa fa-search"></i>${myPageReviewSelect.nickname}<button onclick="location.href='myPageReviewDelete.do?num=${myPageReviewSelect.num}'" class="btn" style="float: right;">삭제</button></p>
                </div>
                 <img class="contentImg"
       			src = "/trip_GazuaAA/img/no.png"

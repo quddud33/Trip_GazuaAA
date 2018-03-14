@@ -444,6 +444,16 @@ public class MyController {
 			
 			return "redirect:myPage.do";
 		}
+		@RequestMapping("myPageBoardDelete.do")
+		public String myPageBoardDelete(@RequestParam int num) {
+			bService.deleteBoard(num);
+			return "redirect:myPage.do";
+		}
+		@RequestMapping("myPageReviewDelete.do")
+		public String myPageReviewDelete(@RequestParam HashMap<String, String> params) {
+			rService.deleteReview(params);
+			return "redirect:myPage.do";
+		}
 		
 
 //===================================지도 맵핑=====================================
