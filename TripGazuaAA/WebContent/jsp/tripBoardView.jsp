@@ -175,7 +175,7 @@
 						<input type="hidden" name="num" value="${view.num }">
 						<input type="hidden" name="nickname" value="${user.nickname }">
 						<input type="hidden" name="page" value="${page }">
-						<textarea class="form-control col-sm-5" rows="4"
+						<textarea class="form-control col-sm-5" rows="4" style="resize: none;"
 									 placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 댓글은 제재를 받을 수 있습니다."
 									 id="commentForm" name="content"></textarea>
 						<button class="btn btn-primary" id="commentSubmit">댓글등록</button>

@@ -44,7 +44,7 @@
 					<input type="hidden" name="userID" value="${user.userID }" readonly="readonly" />
                     <input type="hidden" name="nickname" value="${user.nickname}" readonly="readonly" />
                     <div id="contentForm">
-						<textarea id="ir1" name="content" class="form-control col-sm-5" rows="25" placeholder="내용을 입력해주세요..."></textarea>
+						<textarea id="ir1" name="content" class="form-control col-sm-5" rows="25" style="resize: none;" placeholder="내용을 입력해주세요..."></textarea>
 					</div>
 					<input type="hidden" name="image" />
 					<input type="button" id="save" value="작성완료"  class="btn btn-primary"/>

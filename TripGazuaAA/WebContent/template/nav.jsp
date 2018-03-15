@@ -19,7 +19,7 @@
                    <li class="active"><a id="chatRoom" href="chat.do">채팅방<span class="sr-only"></span></a></li>
                    <!--userID,nickName-->
                    
-                   <li class="active"><a href="http://vpa.danbee.Ai/#/chats?chatbotId=054d0e31-3af2-4e4e-a930-8fa4462da027">서비스 센터<span class="sr-only"></span></a></li>
+                   <li class="active"><a href="http://vpa.danbee.Ai/#/chats?chatbotId=054d0e31-3af2-4e4e-a930-8fa4462da027" target="_blank">서비스 센터<span class="sr-only"></span></a></li>
                    <!--userID,nickName-->
                    <li class="active"><a href="contentList.do">컨텐츠 리스트<span class="sr-only"></span></a></li>
                    <li class="active"><a href="tripBoard.do">게시판<span class="sr-only"></span></a></li>     

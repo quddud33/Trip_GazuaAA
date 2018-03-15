@@ -344,9 +344,15 @@ public class MyController {
 		}
 				
 		@RequestMapping("reservation.do")
-		public String reservation(Model model, @RequestParam HashMap<String, String> params) {
-			resService.insertReservation(params);
-			return "redirect:myPage.do";
+		public String reservation(Model model, @RequestParam HashMap<String, String> params, HttpSession session) {
+			System.out.println(params);
+			if(session.getAttribute("user") == null) {
+				session.setAttribute("login", "로그인 안됐자나 시발련드라");
+				return "redirect:contentView.do?contentid="+params.get("contentID")+"&contenttypeid="+params.get("contentTypeID")+"&price="+params.get("datePrice");
+			} else {
+				resService.insertReservation(params);
+				return "redirect:myPage.do";
+			}
 		}
 		
 		/*@RequestMapping("wish.do")
@@ -355,15 +361,25 @@ public class MyController {
 		}*/
 		
 		@RequestMapping("festvalWish.do")
-		public String festvalWish(@RequestParam HashMap<String, String> params) {
-			resService.insertFestval(params);
-			return "redirect:myPage.do";
+		public String festvalWish(@RequestParam HashMap<String, String> params, HttpSession session) {
+			if(session.getAttribute("user") == null) {
+				session.setAttribute("login", "로그인 안됐자나 시발련드라");
+//				return "redirect:contentView.do?contentid="+params.get("contentID")+"&contenttypeid="+params.get("contentTypeID")+"&price="+params.get("datePrice");
+				return "login";
+			} else {
+				resService.insertFestval(params);
+				return "redirect:myPage.do";
+			}
 		}
 		
 		@RequestMapping("restaurantWish.do")
-		public String restaurantWish(@RequestParam HashMap<String, String> params) {
-			resService.insertRestaurant(params);
-			return "redirect:myPage.do";
+		public String restaurantWish(@RequestParam HashMap<String, String> params, HttpSession session) {
+			if(session.getAttribute("user") == null) {
+				return "login";
+			} else {
+				resService.insertRestaurant(params);
+				return "redirect:myPage.do";
+			}
 		}
 		
 	//=================================댓글======================================
