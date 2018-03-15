@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import constant.Constant;
 import dao.IReviewDao;
 
 @Service
@@ -217,22 +218,13 @@ public class APIService {
 	      List<HashMap<String, String>> result = new ArrayList<>();
 	      HashMap<String, String> value = new HashMap<>();
 	      
-	        StringBuilder urlBuilder = new StringBuilder("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList"); /*URL*/
-	        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=" +constant.Constant.TOURKEY); /*Service Key*/
-	        urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + URLEncoder.encode("SERVICE_KEY", "UTF-8")); /*공공데이터포털에서 받은 인증키*/
-	        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과수*/
-	        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode(page, "UTF-8")); /*현재 페이지 번호*/
-	        urlBuilder.append("&" + URLEncoder.encode("MobileOS","UTF-8") + "=" + URLEncoder.encode("ETC", "UTF-8")); /*IOS(아이폰), AND(안드로이드), WIN(원도우폰), ETC*/
-	        urlBuilder.append("&" + URLEncoder.encode("MobileApp","UTF-8") + "=" + URLEncoder.encode("AppTest", "UTF-8")); /*서비스명=어플명*/
-	        urlBuilder.append("&" + URLEncoder.encode("contentTypeId","UTF-8") + "=" + URLEncoder.encode(contenttypeid, "UTF-8")); /*관광타입(관광지, 숙박 등) ID*/
-	        urlBuilder.append("&" + URLEncoder.encode("contentId","UTF-8") + "=" + URLEncoder.encode(contentid, "UTF-8")); /*콘텐츠 ID*/
-	        urlBuilder.append("&" + URLEncoder.encode("areaCode","UTF-8") + "=" + URLEncoder.encode(areacode, "UTF-8")); /*지역코드(areaCode 없을때), 시군구코드(areaCode=1)*/
-	        urlBuilder.append("&" + URLEncoder.encode("sigunguCode","UTF-8") + "=" + URLEncoder.encode("", "UTF-8")); /*지역코드(areaCode 없을때), 시군구코드(areaCode=1)*/
-	        urlBuilder.append("&" + URLEncoder.encode("cat1","UTF-8") + "=" + URLEncoder.encode("", "UTF-8")); /*대분류코드*/
-	        urlBuilder.append("&" + URLEncoder.encode("cat2","UTF-8") + "=" + URLEncoder.encode("", "UTF-8")); /*중분류코드(대분류코드 필수)*/
-	        urlBuilder.append("&" + URLEncoder.encode("cat3","UTF-8") + "=" + URLEncoder.encode("", "UTF-8")); /*소분류코드(중분류,대분류코드 필수)*/
-	        urlBuilder.append("&" + URLEncoder.encode("arrange","UTF-8") + "=" + URLEncoder.encode("A", "UTF-8")); /*A=제목순,B=인기순,C=최근수정순,D=등록순*/
-	        URL url = new URL(urlBuilder.toString());
+	        URL url = new URL("http://api.visitkorea.or.kr"
+					+ "/openapi/service/rest/KorService/areaBasedList"
+					+ "?ServiceKey=" + Constant.TOURKEY
+					+ "&MobileApp=Trip_GazuaAA" + "&MobileOS=ETC" + "&arrange=A"
+					+ "&contentTypeId=" + contenttypeid
+					+ "&areaCode=" + areacode + "&pageNo=" + page);
+	        System.out.println(url);
 	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	        conn.setRequestMethod("GET");
 	        conn.setRequestProperty("Content-type", "application/json");
@@ -258,8 +250,11 @@ public class APIService {
 	                    value.put(parser.getName(), parser.nextText());
 	                 }
 	              
-	                 String formoatPrice = nf.format(((int) (Math.random() * 1000) * 100));
-	                   value.put("price", formoatPrice);
+	              	if(contenttypeid.equals("32")) {
+	              		String formoatPrice = nf.format(((int) (Math.random() * 1000) * 100));
+	              		value.put("price", formoatPrice);
+	              	}
+	              
 	                 
 	                 result.add(value);
 	                 value = new HashMap<String, String>();

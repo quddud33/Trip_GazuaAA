@@ -296,15 +296,14 @@ b {
 		var touristTable = _.template($('#touristTable').html()), $areaCode = $('[name=areaCodeVal]')
 		var $searchTest = $("#searchTest");
 		var areaCode, total;
-		var contentTypeId = <%if(request.getParameter("contentTypeId") != null) {%><%=request.getParameter("contentTypeId") %><%} else {%>32<%}%>;
+		var contentTypeId = <%if(request.getParameter("contenttypeid") != null) {%>
+								<%=request.getParameter("contenttypeid") %>
+							<%} else if (request.getParameter("contentTypeId") != null) {%>
+								<%=request.getParameter("contentTypeId")%>
+							<%} else {%>32<%}%>;
 		var page = 1;
 		
 
-		window.onpageshow = function(event) {
-		    if (event.persisted) {
-		        document.location.reload();
-		    }
-		};
 		
 		$(window).on('popstate', function(event) {
 			  var data = event.originalEvent.state;
@@ -337,22 +336,21 @@ b {
 			page = pageVal;
 			$('#contentTypeId').val(contentTypeIdVal);
 			$('#areaCode').val(areaCodeVal);
-			
 			$.ajax('ajax/touristInfo.do', {
-				async : false,
 				data : {
 					contentTypeId :contentTypeId,
 					areaCode : areaCode,
 					page : page
 				},
 				success : function(json) {
+					console.log('!!!');
 					$('#content').html(touristTable({
 						touristInfo : json
 					}));
 					total = json.total;
 					console.log(total);
 					$('#page').html(paginate(page, (total / 10), '?no='));
-					history.pushState({contentTypeId : contentTypeId, areaCode : areaCode, page : page}, 'page ' + page,'/trip_GazuaAA/contentList.do?contenttypeid=' + contentTypeId + '&areacode=' + areaCode + '&page=' + page);
+					history.pushState({}, 'page ' + page,'/trip_GazuaAA/contentList.do?contenttypeid=' + contentTypeId + '&areacode=' + $('#areaCode').val() + '&page=' + page);
 					$searchTest.hide();
 				},
 				error : function(err) {
@@ -360,13 +358,15 @@ b {
 			})
 		}
 				
-		<%if(request.getParameter("contentTypeId") != null) {%>
-			$('#areaSearchForm li').removeClass('active');
-			
-			$('#areaSearchForm li > a').each(function () {
-					if($(this).attr('category') == <%=request.getParameter("contentTypeId") %>) {
-						$(this).parent().addClass('active');
-					}
+		<%if(request.getParameter("contentTypeId") != null || request.getParameter("contenttypeid") != null) {%>
+			$(window).on('pageshow', function() {
+				$('#areaSearchForm li').removeClass('active');
+				
+				$('#areaSearchForm li > a').each(function () {
+						if($(this).attr('category') == contentTypeId) {
+							$(this).parent().addClass('active');
+						}
+				});
 			});
 		<%}%>
 		

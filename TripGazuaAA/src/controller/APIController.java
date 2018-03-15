@@ -36,6 +36,7 @@ public class APIController {
 	public ModelAndView getSearch(@RequestParam(defaultValue = "") String search,
 			@RequestParam(defaultValue = "") String contentTypeId, @RequestParam(defaultValue = "") String areaCode,
 			@RequestParam(defaultValue = "1") String page) throws Exception {
+		
 		ModelAndView mav = new ModelAndView();
 		int pageNo = Integer.parseInt(page);
 		List<HashMap<String, String>> list = service.searchAPIInfo(search, contentTypeId, areaCode, page);
@@ -57,6 +58,9 @@ public class APIController {
 	public ModelAndView contentList(@RequestParam(defaultValue = "1") String areacode,
 			@RequestParam(defaultValue = "") String contentid, @RequestParam(defaultValue = "1") String page,
 			@RequestParam(defaultValue = "32") String contenttypeid) throws Exception {
+
+		System.out.println("contentList.do, default");
+		
 		ModelAndView mav = new ModelAndView();
 		int pageNo = Integer.parseInt(page);
 		List<HashMap<String, String>> totalList = service.areaBased(areacode, contentid, page, contenttypeid);
@@ -118,21 +122,22 @@ public class APIController {
 			String userID = user.get("userID");
 			
 			List<HashMap<String, String>> reviewLikeCheck = Rservice.userReviewLikeCheck(userID);
-			for(HashMap<String, String> review : reviewL) {
-				review.put("like", "0");
-			}
+//			for(HashMap<String, String> review : reviewL) {
+//				review.put("like", "0");
+//			}
 			
-			for(HashMap<String, String> reviewLike : reviewLikeCheck) {
-				for(HashMap<String, String> review : reviewL) {
-					if(String.valueOf(review.get("num"))
-							.equals(reviewLike.get("num")))
-						review.put("like", "1");
-					else if(review.get("like").equals("1")) {}
-					else
-						review.put("like", "0");
-				}
-			}
-			
+//			for(HashMap<String, String> reviewLike : reviewLikeCheck) {
+//				for(HashMap<String, String> review : reviewL) {
+//					if(String.valueOf(review.get("num"))
+//							.equals(reviewLike.get("num")))
+//						review.put("like", "1");
+//					else if(review.get("like").equals("1")) {}
+//					else
+//						review.put("like", "0");
+//				}
+//			}
+//			
+//			mav.addObject("reviewL", reviewL);
 
 //			if (reviewLikeCheck.size() > 0)
 //				mav.addObject("reviewLikeCheck", reviewLikeCheck);

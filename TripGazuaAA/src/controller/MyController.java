@@ -467,4 +467,10 @@ public class MyController {
 		public String weatherMap() {
 			return "weatherMap";
 		}
+		
+//==================================리뷰 조회=====================================
+	@RequestMapping("ajax/Lookup.do")
+	public @ResponseBody List<HashMap<String, String>> reviewLookup(@RequestParam HashMap<String, String> params) {
+		return rService.reviewList(params);
+	}
 }
