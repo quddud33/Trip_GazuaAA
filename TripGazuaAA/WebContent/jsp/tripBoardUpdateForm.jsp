@@ -46,7 +46,7 @@
 					<input name="num" type="hidden" value="${update.num }">
 					<input type="hidden" name="page" value="${page }">
                     <div id="contentForm">
-						<textarea id="ir1" name="content" class="form-control col-sm-5" rows="25" placeholder="내용을 입력해주세요...">${update.content}</textarea>
+						<textarea id="ir1" style="resize: none;" name="content" class="form-control col-sm-5" rows="25" placeholder="내용을 입력해주세요...">${update.content}</textarea>
 					</div>
 					<input type="button" id="save" value="작성완료"  class="btn btn-primary"/>
                     <input type="button" onclick="location.href='tripBoardView.do?num=${update.num}&page=${page }'" class="btn btn-primary" value="뒤로가기" id="backBtn"/>
