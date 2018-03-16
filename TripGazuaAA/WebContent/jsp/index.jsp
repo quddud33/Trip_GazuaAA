@@ -21,7 +21,7 @@ table, #map {
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="festval" items="${festvalInfo }">
+			 <c:forEach var="festval" items="${festvalInfo }">
 				<tr>
 					<td><a onclick="setMap('${festval.mapy}', '${festval.mapx }', '${festval.title }')">${festval.title }</a></td>
 					<td>${festval.addr1 }</td>

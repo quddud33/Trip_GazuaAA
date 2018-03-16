@@ -13,19 +13,16 @@
 <link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">
 <link rel="stylesheet" href="/trip_GazuaAA/css/map.css">
 <link rel="stylesheet" href="/trip_GazuaAA/css/wheatherMap.css">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
+<script src="http://netdna.bootstrapcdn.com/bootstrap/4.7.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
-
-
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=70d78e61bdb96cf13e612f9908e948d0&libraries=clusterer"></script>
+
 <title>Insert title here</title>
 <style>
 .top_list {
@@ -142,13 +139,13 @@
 				</div>
 			</div>
 		</div>
-		<!--슬라이드4--> 
+		<!--슬라이드4-->  
 		
 		
 		
 		<!--슬라이드5-->
 		<div class="item"> 
-			<a href="contentView.do?name=경주%20프리마켓%20봉황장터%202018&contentid=2505702&contenttypeid=15&price="><img src="http://tong.visitkorea.or.kr/cms/resource/94/2505694_image2_1.jpg" style="width:100%; height:600px;"  data-src="" alt="Third slide"></a>
+			<a href="contentView.do?name=경주%20프리마켓%20봉황장터%202018&contentid=2505702&content  typeid=15&price="><img src="http://tong.visitkorea.or.kr/cms/resource/94/2505694_image2_1.jpg" style="width:100%; height:600px;"  data-src="" alt="Third slide"></a>
 			<div class="container">
 				<div class="carousel-caption">
 					<h1>경주 프리마켓 봉황장터 2018</h1>
@@ -157,7 +154,7 @@
 			</div>
 		</div>
 		<!--슬라이드5-->
-	</div>
+	</div>  
 	
 	
 	<!--이전, 다음 버튼-->
@@ -258,7 +255,7 @@
 		<form action="contentList.do" onsubmit="showSearchTest()" class="form-inline md-form form-sm" style="text-align: center;
     line-height: 70px;">
 			<select name="contentTypeId" class="form-control" title="종류">
-				<option value="32">숙박</option>
+				<option value="32">숙박 </option>
 				<option value="12">관광지</option>
 				<option value="15">행사/축제</option>
 				<option value="39">맛집</option>
@@ -308,6 +305,7 @@
 			<figure>
                 <c:if test="${topListCountry.firstimage ne null}">
                 	<a href="contentView.do?name=${topListCountry.title }&contentid=${topListCountry.contentid}&contenttypeid=${topListCountry.contenttypeid }&price=${topListCountry.price}"><img src="${topListCountry.firstimage }" class="img-responsive" style="width: 250px; height: 200px;"></a>
+           
                 </c:if>
                 <c:if test="${topListCountry.firstimage eq null}">
                 	<img src="/trip_GazuaAA/img/no.png" class="img-responsive" style="width: 250px; height: 200px;">
@@ -365,24 +363,27 @@
 			</tr>
 		</c:forEach>
 	</table>  --%>
+	
 
-      	<div id="mapbg">
-			<div id="map"></div>
+      	<div id="modalBg">
+     			
+				<div id="map"></div>
+				<div id="mapList">
+				<input type="text" id="festivalSearchBox">
+					<ol>
+						
+					</ol>
+				</div>
 		</div>
-		<div id="weatherMapbg">
-			<div id ="map"></div>
-		</div>
+	
 	
 <div id="remocon">
 	<table>
 		<tr>
-			<td><button id="scrollUp">위</button></td>
+			<td><button id="scrollUp" class="btn btn-primary"><i class="fa fa-angle-up"></i></button></td>
 		</tr>
 		<tr>
-			<td><button id="mapScroll">축제 지도</button></td>
-		</tr>
-		<tr>
-			<td><button id="weatherMapScroll">날씨 지도</button></td>
+			<td><button id="mapScroll" class="btn btn-primary"><i class="fa fa-map-marker"></i></button></td>
 		</tr>
 	</table>
 </div>
@@ -400,7 +401,7 @@
 	<%session.removeAttribute("msg");}%>
 	
 
-	
+	<script src="http://underscorejs.org/underscore-min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="/trip_GazuaAA/js/googleLogin.js"></script>
 	<script src="/trip_GazuaAA/js/FBLogin.js"></script>
