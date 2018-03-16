@@ -758,19 +758,19 @@ td img {
 			$("#price").val(((price * adult) + (price * kid * 0.5)) * lodDate);
 	    });
 		
-	    $.ajax('ajax/Lookup.do',{
-			data : {
-				contentID :<%=request.getParameter("contentid")%>,
-				start : page - 1
-			},
-	    	success: function(data) {
-				$(data).each(function () {
-					console.log(this);
-				});
-	    	},
-	    	error: function(err) {
-			}
-	    });
+// 	    $.ajax('ajax/Lookup.do',{
+// 			data : {
+<%-- 				contentID :<%=request.getParameter("contentid")%>, --%>
+// 				start : page - 1
+// 			},
+// 	    	success: function(data) {
+// 				$(data).each(function () {
+// 					console.log(this);
+// 				});
+// 	    	},
+// 	    	error: function(err) {
+// 			}
+// 	    });
 	    
 	    
 	</script>

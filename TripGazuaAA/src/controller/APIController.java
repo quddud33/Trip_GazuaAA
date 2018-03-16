@@ -28,8 +28,6 @@ public class APIController {
 	private APIService service;
 	@Autowired
 	private ReviewService Rservice;
-	@Autowired
-	private ReservationService Reserservice;
 
 	// 숙소, 맛집, 축제 검색페이지[contentList]
 	@RequestMapping(value = "contentList.do", params = "search")
@@ -59,8 +57,6 @@ public class APIController {
 			@RequestParam(defaultValue = "") String contentid, @RequestParam(defaultValue = "1") String page,
 			@RequestParam(defaultValue = "32") String contenttypeid) throws Exception {
 
-		System.out.println("contentList.do, default");
-		
 		ModelAndView mav = new ModelAndView();
 		int pageNo = Integer.parseInt(page);
 		List<HashMap<String, String>> totalList = service.areaBased(areacode, contentid, page, contenttypeid);
@@ -117,30 +113,32 @@ public class APIController {
 		}
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user") == null) {
+			mav.addObject("reviewL", Rservice.reviewList(contentid));
 		} else {
 			HashMap<String, String> user = (HashMap<String, String>) session.getAttribute("user");
 			String userID = user.get("userID");
 			
+			List<HashMap<String, String>> reviewL = Rservice.reviewList(contentid);
 			List<HashMap<String, String>> reviewLikeCheck = Rservice.userReviewLikeCheck(userID);
-//			for(HashMap<String, String> review : reviewL) {
-//				review.put("like", "0");
-//			}
+			for(HashMap<String, String> review : reviewL) {
+				review.put("like", "0");
+			}
 			
-//			for(HashMap<String, String> reviewLike : reviewLikeCheck) {
-//				for(HashMap<String, String> review : reviewL) {
-//					if(String.valueOf(review.get("num"))
-//							.equals(reviewLike.get("num")))
-//						review.put("like", "1");
-//					else if(review.get("like").equals("1")) {}
-//					else
-//						review.put("like", "0");
-//				}
-//			}
-//			
-//			mav.addObject("reviewL", reviewL);
+			for(HashMap<String, String> reviewLike : reviewLikeCheck) {
+				for(HashMap<String, String> review : reviewL) {
+					if(String.valueOf(review.get("num"))
+							.equals(reviewLike.get("num")))
+						review.put("like", "1");
+					else if(review.get("like").equals("1")) {}
+					else
+						review.put("like", "0");
+				}
+			}
+			
+			mav.addObject("reviewL", reviewL);
 
-//			if (reviewLikeCheck.size() > 0)
-//				mav.addObject("reviewLikeCheck", reviewLikeCheck);
+			if (reviewLikeCheck.size() > 0)
+				mav.addObject("reviewLikeCheck", reviewLikeCheck);
 		}
 
 		mav.setViewName("contentView");

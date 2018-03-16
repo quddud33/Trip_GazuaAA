@@ -290,7 +290,6 @@
                 </c:if>
                 <figcaption>${topListFestival.overview }</figcaption>
                 </figure>
-                ${topListFestival }
                 </div>
          </c:forEach>
 	</div>
@@ -327,7 +326,7 @@
                 <c:if test="${topListRestaurant.firstimage eq null}">
                 	<img src="/trip_GazuaAA/img/no.png" class="img-responsive" style="width: 250px; height: 200px;">
                 </c:if>
-                <figcaption>${topListRestaurant.contentid }</figcaption>
+                <figcaption> ${topListRestaurant.overview }</figcaption>
                 </figure>
             </div>
          </c:forEach>
