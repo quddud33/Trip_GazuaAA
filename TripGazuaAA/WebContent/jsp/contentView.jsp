@@ -6,14 +6,22 @@
 <head>
 <meta name="google-signin-client_id"
 	content="346120053180-l6r9r2hq1sknebtp2ukd6mtoea688dhl.apps.googleusercontent.com">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/nav.css">
-<link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">    
-<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://underscorejs.org/underscore-min.js"></script>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src= "/trip_GazuaAA/js/login.js"></script>
+<script src="/trip_GazuaAA/js/googleLogin.js"></script>
+<script src="/trip_GazuaAA/js/FBLogin.js"></script>
 <title>Insert title here</title>
 <style>
 table {
@@ -43,32 +51,6 @@ table {
 	display: none;
 }
 
-#loginBox {
-	width: 400px;
-	height: 300px;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	margin: -150px 0 0 -200px;
-	background: #fff;
-}
-
-.title {
-	text-align: center;
-	color: #03A9F4;
-}
-
-#loginBox dt {
-	text-indent: 10px;
-	margin: 5px;
-	font-size: 21px;
-	color: #29B6F6;
-}
-
-#loginBox dd {
-	text-indent: 10px;
-	margin: 5px;
-}
 
 .star-input>.input, .star-input>.input>label:hover, .star-input>.input>input:focus+label,
 	.star-input>.input>input:checked+label {
@@ -571,24 +553,6 @@ td img {
 				</div>
 				</c:forEach>
 			</div>
-	<form action="login.do">
-		<div id="bg">
-			<div id="loginBox">
-				<h2 class="title">Trip GazuaAA</h2>
-				<dl>
-					<dd>
-						<input type="text" name="userID" placeholder="아이디" />
-					</dd>
-					<dd>
-						<input type="password" name="password" placeholder="비밀번호" />
-					</dd>
-					<dd>
-						<button>로그인</button>
-					</dd>
-				</dl>
-			</div>
-		</div>
-	</form>
 
 	<!-- footer 시작 -->
 	<%@ include file="../template/footer.jsp"%>
