@@ -250,7 +250,7 @@ b {
 						</div>
 					</div>
 					<c:if test="${searchTest.contenttypeid eq 39 }">
-						<div class="view" onclick="location.href='restaurantWish.do?name=${searchTest.title }&userID=${user.userID}&contentID=${searchTest.contentid }&contentTypeID=${searchTest.contenttypeid }'">찜하기</div>
+						<div class="view wish" onclick="location.href='restaurantWish.do?name=${searchTest.title }&userID=${user.userID}&contentID=${searchTest.contentid }&contentTypeID=${searchTest.contenttypeid }'">찜하기</div>
 					</c:if>
 					<c:if test="${searchTest.contenttypeid ne 39 && searchTest.contenttypeid ne 12 }">
 						<div class="view" onclick="location.href='contentView.do?contentid=${searchTest.contentid }&contenttypeid=${searchTest.contenttypeid }&price=${searchTest.price }'">자세히보기</div>
@@ -280,7 +280,7 @@ b {
 				</div>
 			</div>
 			<\%if(this.contenttypeid == 39) {%>
-				<div class="view" onclick="location.href='restaurantWish.do?name=<\%=this.title%>&userID=${user.userID}&contentID=<\%=this.no%>&contentTypeID=<\%=this.contenttypeid%>'">찜하기</div>
+				<div class="view wish" onclick="location.href='restaurantWish.do?name=<\%=this.title%>&userID=${user.userID}&contentID=<\%=this.no%>&contentTypeID=<\%=this.contenttypeid%>'">찜하기</div>
 			<\%} else if(this.contenttypeid == 12) {} else {%>
 				<div class="view" onclick="location.href='contentView.do?contentid=<\%=this.no%>&contenttypeid=<\%=this.contenttypeid%>&price=<\%=this.price%>'">자세히보기</div>
 			<\%}%>
@@ -291,6 +291,14 @@ b {
 		<div id="page">${paginate}</div>
 	</div>
 	<%@ include file="../template/footer.jsp" %>
+	
+	<c:if test="${login ne null }">
+		<%session.invalidate(); %>
+		<script>
+			$("#bg").css("display", "block");
+		</script>
+	</c:if>
+	
 	<script src="/trip_GazuaAA/js/login.js"></script>
 	<script>
 		var touristTable = _.template($('#touristTable').html()), $areaCode = $('[name=areaCodeVal]')
@@ -369,6 +377,10 @@ b {
 				});
 			});
 		<%}%>
+		
+		$('.wish').click(function (e){
+			e.preventDefault();
+		});
 		
 	</script>
 </body>

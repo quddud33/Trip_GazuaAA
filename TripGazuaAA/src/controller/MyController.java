@@ -364,8 +364,8 @@ public class MyController {
 		public String festvalWish(@RequestParam HashMap<String, String> params, HttpSession session) {
 			if(session.getAttribute("user") == null) {
 				session.setAttribute("login", "로그인 안됐자나 시발련드라");
-//				return "redirect:contentView.do?contentid="+params.get("contentID")+"&contenttypeid="+params.get("contentTypeID")+"&price="+params.get("datePrice");
-				return "login";
+				return "redirect:contentView.do?contentid="+params.get("contentID")+"&contenttypeid="+params.get("contentTypeID")+"&price="+params.get("datePrice");
+//				return "login";
 			} else {
 				resService.insertFestval(params);
 				return "redirect:myPage.do";
@@ -373,9 +373,12 @@ public class MyController {
 		}
 		
 		@RequestMapping("restaurantWish.do")
-		public String restaurantWish(@RequestParam HashMap<String, String> params, HttpSession session) {
+		public String restaurantWish(@RequestParam HashMap<String, String> params, HttpSession session, HttpServletRequest request) {
 			if(session.getAttribute("user") == null) {
-				return "login";
+				String old_url = request.getHeader("referer");
+				session.setAttribute("login", "로그인 안됐자나 시발련드라");
+				return "redirect:" + old_url;
+//				return "login";
 			} else {
 				resService.insertRestaurant(params);
 				return "redirect:myPage.do";
