@@ -161,7 +161,7 @@
 		        </form>
             </div>
             <div class="text-right">
-                <a class="btn btn-primary" href="tripBoardWriteForm.do">글쓰기</a>
+                <a class="btn btn-primary" id="createBoard" href="tripBoardWriteForm.do">글쓰기</a>
             </div>
         </div>
     </div>
@@ -201,6 +201,14 @@
     <%if(request.getParameter("sort") != null) {%>
 	    $('#<%=request.getParameter("sort")%>').css('background-color', '#BDBDBD');
 	<%}%>
+	
+
+	<c:if test="${empty user}">
+		$('#createBoard').click(function (e) {
+			alert('로그인 후 이용해주세요.');
+			e.preventDefault();
+		});
+	</c:if>
     
     
     
