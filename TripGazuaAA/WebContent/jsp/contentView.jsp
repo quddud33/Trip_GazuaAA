@@ -756,11 +756,11 @@ marker.setMap(map);
 			$("#price").val(((price * adult) + (price * kid * 0.5)) * lodDate);
 	    });
 		
-		$('.reservation').click(function() {
+		$('.reservation').click(function(e) {
 			e.preventDefault();
-		    if(datepicker1 == null) {
+		    if($('#datepicker1').val().length < 1) {
 		    	alert('체크인 날짜를 정해주세요.');
-		    } else if(datepicker == null) {
+		    } else if($('#datepicker2').val().length < 1) {
 		    	alert('체크아웃 날짜를 정해주세요.');
 		    } else {
 		    	$('#reservationForm').submit();

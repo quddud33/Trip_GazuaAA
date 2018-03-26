@@ -362,7 +362,6 @@ public class MyController {
 			if(session.getAttribute("user") == null) {
 				session.setAttribute("login", "로그인 안됐자나 시발련드라");
 				return "redirect:contentView.do?contentid="+params.get("contentID")+"&contenttypeid="+params.get("contentTypeID")+"&price="+params.get("datePrice");
-//				return "login";
 			} else {
 				resService.insertFestval(params);
 				return "redirect:myPage.do";
