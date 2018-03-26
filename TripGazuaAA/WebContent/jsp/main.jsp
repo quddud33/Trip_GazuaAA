@@ -32,7 +32,7 @@
 }
 
 .top_list figcaption {
-	height: 40px;
+	height: 80px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
@@ -310,7 +310,7 @@
                 <c:if test="${topListCountry.firstimage eq null}">
                 	<img src="/trip_GazuaAA/img/no.png" class="img-responsive" style="width: 250px; height: 200px;">
                 </c:if>
-                <figcaption> ${topListCountry.overview }</figcaption>
+                <figcaption>${topListCountry.title }<br/> ${topListCountry.addr1 }</figcaption>
            </figure>
       	 </div>
          </c:forEach>
@@ -327,7 +327,7 @@
                 <c:if test="${topListRestaurant.firstimage eq null}">
                 	<img src="/trip_GazuaAA/img/no.png" class="img-responsive" style="width: 250px; height: 200px;">
                 </c:if>
-                <figcaption> ${topListRestaurant.overview }</figcaption>
+                <figcaption>${topListRestaurant.title }<br/>${topListRestaurant.addr1 }</figcaption>
                 </figure>
             </div>
          </c:forEach>
