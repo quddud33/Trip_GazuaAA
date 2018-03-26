@@ -284,6 +284,21 @@ td img {
 	<!-- 네비게이션 -->
 	<%@ include file="../template/nav.jsp"%>
 
+
+
+	<!-- 	<a href="chat.jsp">채팅방</a>userID,nickName -->
+	<!-- 	<a href="serviceCenter.jsp">서비스 센터</a>userID,nickName -->
+	<!-- 	<a href="locationView.jsp">지도/컨텐츠 리스트</a> -->
+	<!-- 	<a href="myPage.jsp">마이페이지</a>로그인 시에만 보이게 처리(userID,nickName) -->
+	<!-- 	<a href="#">로그인</a>javascript써서 로그인폼 띄우기 -->
+	<!-- 	<a href="createUserForm.jsp">회원가입</a> -->
+	<%-- 	<%if(request.getParameter("contenttypeid").equals("32")) {%> --%>
+	<%-- 	<a href="reservationView.do?contentID=<%=request.getParameter("contentid")%>&contentTypeID=<%=request.getParameter("contenttypeid")%>&price=price">예약하기</a> --%>
+	<%-- 	<%} else {%> --%>
+	<%-- 	<a href="wish.do?contentID=<%=request.getParameter("contentid")%>&contentTypeID=<%=request.getParameter("contenttypeid")%>">찜하기</a> --%>
+	<%-- 	<%} %> --%>
+	<!-- 	<a href="reviewList.jsp">리뷰 더보기</a>contentID -->
+	<!--<a href="logout.do">로그아웃</a> 로그인시 태그 생성하게 처리-->
 	<c:set var='param' value='<%=request.getParameter("contenttypeid")%>' />
 	<c:choose>
 		<c:when test="${param.contenttypeid == '32' }">
@@ -294,7 +309,7 @@ td img {
 			
 				<div class="contentTitleBox"><p class="contentTitle">${title}</p></div>
 			
-				<form action="reservation.do">
+				<form action="reservation.do" id="reservationForm">
 					<input type="hidden" name="userID" value="${user.userID }" /> <input
 						type="hidden" name="contentID"
 						value="<%=request.getParameter("contentid")%>" /> <input
@@ -358,7 +373,7 @@ td img {
 									class="form-control">
 
 										<c:forEach var="detail" items="${detail}">
-											<option>${detail.roomtitle }</option>
+											<option selected>${detail.roomtitle }</option>
 										</c:forEach>
 
 								</select></td>
@@ -366,6 +381,12 @@ td img {
 
 										<%
 											for (int i = 0; i < 10; i++) {
+												if(i == 1) {
+													%>
+														<option value="<%=i%>" selected><%=i%>명
+														</option>
+													<% 
+												}
 										%>
 										<option value="<%=i%>"><%=i%>명
 										</option>
@@ -378,6 +399,12 @@ td img {
 
 										<%
 											for (int i = 0; i < 10; i++) {
+												if(i == 1) {
+													%>
+														<option value="<%=i%>" selected><%=i%>명
+														</option>
+													<% 
+												}
 										%>
 										<option value="<%=i%>"><%=i%>명
 										</option>
@@ -389,9 +416,10 @@ td img {
 									
 								</td>
 								<td>체크인 :<input class="form-control input-xs" type="text"
-									id="datepicker1" name="startDate"> 체크아웃 :<input
+									id="datepicker1" name="startDate" > 체크아웃 :<input
 									class="form-control input-xs" type="text" id="datepicker2"
 									name="endDate">
+									<input type="hidden" name="datePrice" value="<%=request.getParameter("price")%>"/>
 								</td>
 								<td><input class="form-control" type="text" id="price"
 									name="price" value="0" readonly /></td>
@@ -405,7 +433,7 @@ td img {
 						<tfoot>
 							<tr>
 								<td colspan="6" style="text-align: right">
-									<button class="btn btn-info btn-lg btn-custom">예약하기</button>
+									<button class="btn btn-info btn-lg btn-custom reservation">예약하기</button>
 								</td>
 							</tr>
 						</tfoot>
@@ -476,6 +504,10 @@ td img {
 				</c:forEach>
 			</table>
 		</c:when>
+		<c:otherwise>
+			<br>
+			안되요
+		</c:otherwise>
 	</c:choose>
 	<c:if test="${user ne null }">
 		<form action="reviewWrite.do"
@@ -558,7 +590,7 @@ td img {
 	<!-- footer 시작 -->
 	<%@ include file="../template/footer.jsp"%>
 	
-		<c:if test="${login ne null }">
+	<c:if test="${login ne null }">
 		<%session.invalidate(); %>
 		<script>
 			$("#bg").css("display", "block");
@@ -570,37 +602,38 @@ td img {
 			});//click end
 		</script>
 	</c:if>
+	
+	<!-- footer 시작 -->
+	<%@ include file="../template/footer.jsp"%>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script
+        src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=70d78e61bdb96cf13e612f9908e948d0"></script>
 	<script>
 	
-	var page = 1;
-	
-	//지도
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
         center: new daum.maps.LatLng(${mapy}, ${mapx}), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };
 
-	var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-	
-	// 마커가 표시될 위치입니다 
-	var markerPosition  = new daum.maps.LatLng(${mapy}, ${mapx}); 
-	
-	// 마커를 생성합니다
-	var marker = new daum.maps.Marker({
-	    position: markerPosition
-	});
-	
-	// 마커가 지도 위에 표시되도록 설정합니다
-	marker.setMap(map);
-	
-	// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-	// marker.setMap(null);  
+var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+// 마커가 표시될 위치입니다 
+var markerPosition  = new daum.maps.LatLng(${mapy}, ${mapx}); 
+
+// 마커를 생성합니다
+var marker = new daum.maps.Marker({
+    position: markerPosition
+});
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);
+
+// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+// marker.setMap(null);  
 
 	
 		//star rating
@@ -723,21 +756,16 @@ td img {
 			$("#price").val(((price * adult) + (price * kid * 0.5)) * lodDate);
 	    });
 		
-// 	    $.ajax('ajax/Lookup.do',{
-// 			data : {
-<%-- 				contentID :<%=request.getParameter("contentid")%>, --%>
-// 				start : page - 1
-// 			},
-// 	    	success: function(data) {
-// 				$(data).each(function () {
-// 					console.log(this);
-// 				});
-// 	    	},
-// 	    	error: function(err) {
-// 			}
-// 	    });
-	    
-	    
+		$('.reservation').click(function() {
+			e.preventDefault();
+		    if(datepicker1 == null) {
+		    	alert('체크인 날짜를 정해주세요.');
+		    } else if(datepicker == null) {
+		    	alert('체크아웃 날짜를 정해주세요.');
+		    } else {
+		    	$('#reservationForm').submit();
+		    }
+		});
 	</script>
 </body>
 </html>

@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="/trip_GazuaAA/css/wheatherMap.css">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/4.7.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
@@ -262,7 +263,7 @@
 				<option value="28">레포츠</option>
 			</select>
 			<select name="areaCode" class="form-control" title="지역">
-				<option value="">전체</option>
+				<option value="">지역(전체)</option>
 				<option value="1">서울</option>
 				<option value="2">인천</option>
 				<option value="3">대전</option>
