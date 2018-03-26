@@ -59,14 +59,11 @@
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="/trip_GazuaAA/js/googleLogin.js"></script>
-	<script src="/trip_GazuaAA/js/FBLogin.js"></script>
-	<script src="/trip_GazuaAA/js/login.js"></script>
 <style>
 	    .container {
             /*background: #00AAB4;*/
         }
-        .title {
+        .boardTitle {
             text-align: center;
             color: #424242;
             font-size: 14px;
@@ -126,23 +123,23 @@
                 </colgroup>
                 <thead>
                     <tr>
-                        <th class="title">번호</th>
-                        <th class="title">제목</th>
-                        <th class="title">날짜</th>
-                        <th class="title">작성자</th>
-                        <th class="title">좋아요</th>
-                        <th class="title">조회수</th>
+                        <th class="boardTitle">번호</th>
+                        <th class="boardTitle">제목</th>
+                        <th class="boardTitle">날짜</th>
+                        <th class="boardTitle">작성자</th>
+                        <th class="boardTitle">좋아요</th>
+                        <th class="boardTitle">조회수</th>
                     </tr>
                 </thead>
                 <tbody>
 					<c:forEach var="board" items="${board }">
 						<tr>
-							<th class="title">${board.num }</th>
+							<th class="boardTitle">${board.num }</th>
 							<td><a href="tripBoardView.do?num=${board.num}&page=${page}">${board.title }</a></td>
-							<td class="title">${board.wDate }</td>
-							<td class="title">${board.nickname }(${board.userID })</td>
-							<td class="title">${board.likeCount }</td>
-							<td class="title">${board.views }</td>
+							<td class="boardTitle">${board.wDate }</td>
+							<td class="boardTitle">${board.nickname }(${board.userID })</td>
+							<td class="boardTitle">${board.likeCount }</td>
+							<td class="boardTitle">${board.views }</td>
 						</tr>
 					</c:forEach>
                 </tbody>
@@ -153,7 +150,7 @@
             <div class="text-center">
                    <form id="searchForm" action="tripBoardSearch.do" class="form-inline md-form form-sm">
 		            <select name="board" class="form-control">
-		                <option value="title">제목</option>
+		                <option value="boardTitle">제목</option>
 		                <option value="content">내용</option>
 		                <option value="TC">제목/내용</option>
 		                <option value="nickname">작성자</option>
@@ -164,7 +161,7 @@
 		        </form>
             </div>
             <div class="text-right">
-                <a class="btn btn-primary" href="tripBoardWriteForm.do">글쓰기</a>
+                <a class="btn btn-primary" id="createBoard" href="tripBoardWriteForm.do">글쓰기</a>
             </div>
         </div>
     </div>
@@ -178,7 +175,11 @@
 	
 <!-- footer 시작 -->
 <%@ include file="../template/footer.jsp" %>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://underscorejs.org/underscore-min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="/trip_GazuaAA/js/googleLogin.js"></script>
+	<script src="/trip_GazuaAA/js/FBLogin.js"></script>
+	<script src="/trip_GazuaAA/js/login.js"></script>
 <script>
 
 	
@@ -200,6 +201,14 @@
     <%if(request.getParameter("sort") != null) {%>
 	    $('#<%=request.getParameter("sort")%>').css('background-color', '#BDBDBD');
 	<%}%>
+	
+
+	<c:if test="${empty user}">
+		$('#createBoard').click(function (e) {
+			alert('로그인 후 이용해주세요.');
+			e.preventDefault();
+		});
+	</c:if>
     
     
     

@@ -248,6 +248,7 @@ public class MyController {
 		@RequestMapping("tripBoardDelete.do")
 		public String tripBoardDelete(@RequestParam int num) {
 			bService.deleteBoard(num);
+			cService.deleteComment(num);
 			
 			return "redirect:tripBoard.do";
 		}
@@ -354,18 +355,13 @@ public class MyController {
 				return "redirect:myPage.do";
 			}
 		}
-		
-		/*@RequestMapping("wish.do")
-		public void wish(String contentTypeID, String contentID) {
-			
-		}*/
+
 		
 		@RequestMapping("festvalWish.do")
 		public String festvalWish(@RequestParam HashMap<String, String> params, HttpSession session) {
 			if(session.getAttribute("user") == null) {
 				session.setAttribute("login", "로그인 안됐자나 시발련드라");
-//				return "redirect:contentView.do?contentid="+params.get("contentID")+"&contenttypeid="+params.get("contentTypeID")+"&price="+params.get("datePrice");
-				return "login";
+				return "redirect:contentView.do?contentid="+params.get("contentID")+"&contenttypeid="+params.get("contentTypeID")+"&price="+params.get("datePrice");
 			} else {
 				resService.insertFestval(params);
 				return "redirect:myPage.do";
@@ -373,9 +369,11 @@ public class MyController {
 		}
 		
 		@RequestMapping("restaurantWish.do")
-		public String restaurantWish(@RequestParam HashMap<String, String> params, HttpSession session) {
+		public String restaurantWish(@RequestParam HashMap<String, String> params, HttpSession session, HttpServletRequest request) {
 			if(session.getAttribute("user") == null) {
-				return "login";
+				String old_url = request.getHeader("referer");
+				session.setAttribute("login", "로그인이 되어있지 않습니다.");
+				return "redirect:" + old_url;
 			} else {
 				resService.insertRestaurant(params);
 				return "redirect:myPage.do";
@@ -485,8 +483,8 @@ public class MyController {
 		}
 		
 //==================================리뷰 조회=====================================
-	@RequestMapping("ajax/Lookup.do")
-	public @ResponseBody List<HashMap<String, String>> reviewLookup(@RequestParam HashMap<String, String> params) {
-		return rService.reviewList(params);
-	}
+//	@RequestMapping("ajax/Lookup.do")
+//	public @ResponseBody List<HashMap<String, String>> reviewLookup(@RequestParam HashMap<String, String> params) {
+//		return rService.reviewList(params);
+//	}
 }

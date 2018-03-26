@@ -22,10 +22,10 @@
   
   <select id="topSelectRestaurant" resultType="java.util.HashMap">
   SELECT contentID,contentTypeID
-  FROM review
+  FROM restaurantpickinfo
   WHERE contentTypeID = '39'
   GROUP BY contentID 
-  ORDER BY AVG(score) DESC
+  ORDER BY COUNT(userID) DESC
   LIMIT 6;
   </select>
   
@@ -34,7 +34,7 @@
   SELECT num, nickname, content, DATE_FORMAT(writeDate, '%Y-%m-%d') 'writeDate', score, likeCount, userID, contentID, contentTypeID
   FROM review WHERE contentID = #{contentID}
   ORDER BY writeDate DESC
-  LIMIT ${start}, 5
+<!--   LIMIT ${start}, 5 -->
   </select>
   
    <select id="reviewNum" resultType="java.util.HashMap" parameterType="String">
