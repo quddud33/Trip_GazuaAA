@@ -54,7 +54,7 @@
 
 
 </style>
-<script>
+<!-- script>
 "undefined" == typeof CODE_LIVE && (!function(e) {
 		var t = {
 				nonSecure : "8080",
@@ -71,7 +71,7 @@
 			n = "https:" === window.location.protocol ? "secure" : "nonSecure";
 		script = e.createElement("script"), script.type = "text/javascript", script.async = !0, script.src = c[n] + r[n] + ":" + t[n] + "/codelive-assets/bundle.js", e.getElementsByTagName("head")[0].appendChild(script)
 	}(document), CODE_LIVE = !0);
-</script>
+</script-->
 </head>
 <body>
 	
@@ -363,20 +363,16 @@
 			</tr>
 		</c:forEach>
 	</table>  --%>
-	
-
-      	<div id="modalBg">
-     			
-				<div id="map"></div>
-				<div id="mapList">
-				<input type="text" id="festivalSearchBox">
-					<ol>
-						
-					</ol>
-				</div>
+	<div id="modalBg">
+		<div id="modalPanel">
+			<div id="mapList">
+				<span>금색: <input id="festivalSearchBox"></span>
+				<ol></ol>
+			</div>
+			<div id="map"></div>
 		</div>
-	
-	
+	</div>
+	<script>$(function(){$('#mapScroll').trigger('click')})</script>
 <div id="remocon">
 	<table>
 		<tr>

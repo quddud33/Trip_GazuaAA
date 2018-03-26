@@ -13,7 +13,7 @@ $("#mapScroll").on("click", function(){
 			// 마커 클러스터러를 생성합니다
 			var clusterer = new daum.maps.MarkerClusterer({
 			    map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
-			    averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+			    averageCenter: true, // 클러스터에  포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
 			    minLevel: 10 // 클러스터 할 최소 지도 레벨
 			});
 	
@@ -88,34 +88,21 @@ $("#mapScroll").on("click", function(){
 		}
 });
 
-$("#map").on("click",function (e) {                                                              //상세정보를 보여주는 박스 클릭이벤트
-    e.stopPropagation();                                                                        //부모로의 이벤트 전파를 중지시킴 (이걸 하지 않을시 박스를 클릭했는데 뒷배경의 이벤트까지
-});//click end    
-$("#modalBg").on("click",function () {                                                                    //뒷배경 박스 클릭이벤트
-	   $("#modalBg").css("display","none");                                                        //상세정보 창을 안보이게 변경
-});
-$("#mapList, #mapList a").on("click", function(e) {
-	e.stopPropagation();
-});
-
+//$('#map, #mapList, #mapList a').click(function(e) { e.stopPropagation() });
+$("#modalBg").click(function () { $(this).hide().children().click(function(e) { e.stopPropagation() }) });
+//뒷배경 박스 클릭이벤트
+//상세정보 창을 안보이게 변경
+var json;
 function keyUpDown() {
 	var str = $("#festivalSearchBox").val().trim();
 
 	$('#mapList ol').empty();
-	if(!str.length ){
-		$.get("ajax/tour.json", function(data) {
+	$.get("ajax/tour.json", function(data) {
+		$.each(!str.length?data.positions:_.select(data.positions, function(position) {return position.title.indexOf(str) != -1}), function(i,v) {
 			$("#mapList ol").append("<li><a onclick=\"setMap('"+v.lat+"', '"+v.lng+"', '"+v.title+"')\">"+v.title+"</a></li>");
 		});
-		}else{
-		$.get("ajax/tour.json", function(data) {			
-			$.each(_.select(data.positions, function(position) {			
-				return position.title.indexOf(str) != -1}), function(i,v) {
-				$("#mapList ol").append("<li><a onclick=\"setMap('"+v.lat+"', '"+v.lng+"', '"+v.title+"')\">"+v.title+"</a></li>");
-			});
-		});
-	}
+	});
 }
-
 
 $("#festivalSearchBox").on("keydown",keyUpDown);
 $("#festivalSearchBox").on("keyup",keyUpDown);
@@ -131,12 +118,14 @@ function makeOverListener(map, marker, infowindow) {
 }
 
 function setMap(latitude, longitude, title) {
+	
 	// 마커가 표시될 위치입니다 
 	var markerPosition = new daum.maps.LatLng(latitude, longitude);
 	// 마커를 생성합니다
 	var marker = new daum.maps.Marker({
 		position : markerPosition
 	});
+	
 	// 마커가 지도 위에 표시되도록 설정합니다
 	marker.setMap(map);
 
@@ -152,7 +141,7 @@ function setMap(latitude, longitude, title) {
 	
 	map.setLevel(5);
 	
-	// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+	// 마커 위	에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
 	infowindow.open(map, marker);
 	
 	map.panTo(markerPosition);
