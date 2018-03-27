@@ -372,7 +372,7 @@
 			<div id="map"></div>
 		</div>
 	</div>
-	<script>$(function(){$('#mapScroll').trigger('click')})</script>
+
 <div id="remocon">
 	<table>
 		<tr>
