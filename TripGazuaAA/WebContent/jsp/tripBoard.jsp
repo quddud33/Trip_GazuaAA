@@ -60,9 +60,6 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
-	    .container {
-            /*background: #00AAB4;*/
-        }
         .boardTitle {
             text-align: center;
             color: #424242;
@@ -96,7 +93,9 @@
 		#page button:hover {
 			background-color: #CCC;
 		}
-		
+		.jumbotron {
+			background: #FFF;
+		}
 </style>
 </head>
 <body>

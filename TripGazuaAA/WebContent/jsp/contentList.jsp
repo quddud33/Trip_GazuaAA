@@ -30,156 +30,160 @@
 <script src="/trip_GazuaAA/js/paginate.js"></script>
 <title>검색</title>
 <style>
-table, #map {
-	float: left;
-}
+    table, #map {
+        float: left;
+    }
 
-.mapCursor {
-	cursor: pointer;
-}
+    .mapCursor {
+        cursor: pointer;
+    }
 
-li {
-	list-style: none;
-	display: inline;
-}
+    li {
+        list-style: none;
+        display: inline;
+    }
 
-.contentList{
-	padding: 0 0 0 2%;
-	min-width: 300px;
-    max-width:750px;
-    height:175px;
-    background-color: #CFD8DC;
-    border-radius: 20px;
-    margin: 0 auto 2% auto;
-    position: relative;
-}
+    .contentList{
+        padding: 1% 0 0 1%;
+        min-width: 300px;
+        max-width:750px;
+        height:100px;
+        background-color: #E0E0E0;
+        margin: 0 auto 2% auto;
+        position: relative;
+    }
 
-.contentTitle{
-    font-size: 2em;
-    padding-left: 20px;
-}
+    .contentTitle{
+        font-size: 1.05em;
+        position: absolute;
+        top: 2px;
+        left: 2%;
+        font-weight: bold;
+    }
 
-.contentTitle > p {
-    white-space: nowrap; 
-	height: 40px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
+    .contentTitle > p {
+        white-space: nowrap;
+        height: 40px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 
-.contentImg {
-	float: left;
-}
+    .contentImg {
+        float: left;
+    }
 
-.textBox {
-	position: relative;
-	float: left;
-	width: 70%;
-}
+    .textBox {
+        position: relative;
+        float: left;
+        width: 80%;
+        height: 95%;
+    }
 
-.price {
-	font-size: 2em;
-	font-weight: 900;
-	text-align: right;
-	margin-top: 4.5%;
-	margin-right: 2%;
-}
+    .price {
+        font-size: 1.5em;
+        position: absolute;
+        right: 90px;
+        bottom: 40px;
+    }
 
-.addr {
-	position: absolute;
-	top: 0;
-	left: 2%;
-	font-size: 1.25em;
-}
+    .addr {
+        position: absolute;
+        bottom: 12%;
+        left: 2%;
+        font-size: 1em;
+    }
 
-.view {
-	background-color: skyblue;
-	float: left;
-	width: 150px;
-	height: 40px;
-	border: 1px solid #424242;
-	line-height: 40px;
-	text-align: center;
-	position: absolute;
-	right: 20px;
-	bottom: 20px;
-	cursor: pointer;
-}
+    .view {
+        background-color: #BCAAA4;
+        float: left;
+        width: 200px;
+        height: 30px;
+        border: 1px solid #424242;
+        line-height: 30px;
+        text-align: center;
+        position: absolute;
+        right: 20px;
+        bottom: 8%;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: .2s ease;
+    }
 
-.view:hover {
-	color: #AAA;
-}
+    .view:hover {
+        color: #EEE;
+    }
 
-#content {
-	position: relative;
-	margin: 1% auto 3% auto;
-}
+    #content {
+        position: relative;
+        margin: 1% auto 3% auto;
+    }
 
-#page {
-	text-align: center;
-	float: right;
-	position: relative;
-	left: -50%;
-}
+    #page {
+        text-align: center;
+        float: right;
+        position: relative;
+        left: -50%;
+    }
 
-#page button {
-	background-color: #FFF;
-	display: inline-block;
-	float: left;
-	position: relative;
-	left: 50%;
-	width: 33px;
-	height: 33px;
-	border: 1px solid #AAA;
-	border-left: none;
-}
+    #page button {
+        background-color: #FFF;
+        display: inline-block;
+        float: left;
+        position: relative;
+        left: 50%;
+        width: 33px;
+        height: 33px;
+        border: 1px solid #AAA;
+        border-left: none;
+    }
 
-#page button:nth-child(1) {
-	border-left: 1px solid #AAA;
-}
+    #page button:nth-child(1) {
+        border-left: 1px solid #AAA;
+    }
 
-#page button:hover {
-	background-color: #CCC;
-}
+    #page button:hover {
+        background-color: #CCC;
+    }
 
-#searchForm {
-	max-width: 720px;
-	margin: auto auto 15px auto;
-	text-align: center;
-}
+    #searchForm {
+        max-width: 720px;
+        margin: auto auto 15px auto;
+        text-align: center;
+    }
 
-#textSearchForm {
-	display: inline-block;
-	width: 100%;
-}
+    #textSearchForm {
+        display: inline-block;
+        width: 100%;
+    }
 
-#textSearchForm .form-control {
-	width: 90%;
-}
+    #textSearchForm .form-control {
+        width: 90%;
+    }
 
-#areaSearchForm {
-	position: relative;
-	margin-top: -5px;
-}
+    #areaSearchForm {
+        position: relative;
+        margin-top: -5px;
+    }
 
-#areaCodeForm {
-	position: absolute;
-	right: 0;
-} 
+    #areaCodeForm {
+        position: absolute;
+        right: 0;
+    }
 
-.noData {
-	margin: auto;
-	width: 720px;
-	text-align: center;
-}
+    .noData {
+        margin: auto;
+        width: 720px;
+        text-align: center;
+    }
 
-.noData img {
-	width: 718px;
-	border: 1px solid #DDD;
-}
+    .noData img {
+        width: 718px;
+        border: 1px solid #DDD;
+    }
 
-b {
-	text-decoration: underline;
-}
+    b {
+        text-decoration: underline;
+    }
 
 </style>
 </head>
@@ -228,9 +232,6 @@ b {
 			<c:forEach var="searchTest" items="${contentList}">
 				<c:if test="${searchTest.totalCount eq null }">
 		        <div class="contentList">
-		            <div class="contentTitle">
-		                <p>${searchTest.title }</p>
-		            </div>
 					<img class="contentImg"
 					<c:if test="${searchTest.firstimage ne null }">
 					src = "${searchTest.firstimage }"
@@ -238,8 +239,11 @@ b {
 					<c:if test="${searchTest.firstimage eq null }">
 					src = "/trip_GazuaAA/img/no.png"
 					</c:if>
-					style="width: 30%;min-width: 80px;min-height:50px;max-width:160px;max-height:100px;">
+					style="width: 15%;min-width: 80px;max-width:160px;height: 93%;">
 					<div class="textBox">
+		            <div class="contentTitle">
+		                <p>${searchTest.title }</p>
+		            </div>
 						<c:if test="${searchTest.price ne null}">
 							<div class="price">
 								${searchTest.price }원
@@ -267,11 +271,11 @@ b {
 	<script id="touristTable" type="text/template">
 		<\%$.each(touristInfo.items, function() {%>
         <div class="contentList">
+			<img class="contentImg" src="<\%if(this.img != undefined) {%><\%=this.img%><\%} else {%>/trip_GazuaAA/img/no.png<\%}%>" style="width: 15%;min-width: 80px;max-width:160px;height: 93%;">
+			<div class="textBox">
             <div class="contentTitle">
                 <p><\%=this.title%></p>
             </div>
-			<img class="contentImg" src="<\%if(this.img != undefined) {%><\%=this.img%><\%} else {%>/trip_GazuaAA/img/no.png<\%}%>" style="width: 30%;min-width: 80px;min-height:50px;max-width:160px;max-height:100px;">
-			<div class="textBox">
 				<div class="price">
 					<\%if(this.price != null) {%><\%=this.price%>원<\%}%>
 				</div>
