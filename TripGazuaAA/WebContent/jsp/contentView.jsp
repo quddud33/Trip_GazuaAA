@@ -679,8 +679,8 @@ marker.setMap(map);
 		   
 	    var minDate = new Date;
 	    var lodDate;
-	    var adult = 0;
-	    var kid = 0;
+	    var adult = 1;
+	    var kid = 1;
 	    <%if(request.getParameter("price") != null && request.getParameter("price").length() != 0) {%>
 	    	var price = <%=request.getParameter("price").replaceAll(",", "")%>;
 	    <%}%>

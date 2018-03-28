@@ -46,6 +46,7 @@ li {
 }
 
 .contentTitle > p {
+	width: 92%;
     white-space: nowrap; 
 	height: 40px;
 	overflow: hidden;
@@ -185,7 +186,7 @@ li {
       <c:forEach var="res" items="${reservation }">
            <div class="contentList">
                <div class="contentTitle">
-                   <p><i class="fa fa-search"></i>${res.name }<button onclick="location.href='reservationDelete.do?userID=${res.userID}&contentID=${res.contentID }&reserveDate=${res.reserveDate }'" class="btn" style="float: right;">삭제</button></p>
+                   <p>${res.name }</p><button onclick="location.href='reservationDelete.do?userID=${res.userID}&contentID=${res.contentID }&reserveDate=${res.reserveDate }'" class="btn" style="position: absolute; right: 0; top: 0;">삭제</button>
                </div>
                 <img class="contentImg"
             <c:if test="${res.img ne null }">
