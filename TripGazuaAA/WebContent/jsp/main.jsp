@@ -262,26 +262,7 @@
 		</form>
 		</div>
 	<!-- 검색기능 끝 -->
-
-	<div class="top_list container">
-		<center><h2 style="margin-bottom: 30px">축제 Top 6</h2></center><!-- 12, 14, 15, 28 -->
-		<c:forEach var="topListFestival" items="${topListFestival }" >
-			<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
-			<figure>
-                <c:if test="${topListFestival.firstimage ne null}">
-                	<a href="contentView.do?name=${topListFestival.title }&contentid=${topListFestival.contentid}&contenttypeid=${topListFestival.contenttypeid }&price="><img src="${topListFestival.firstimage }" class="img-responsive" style="width: 100%; height: 200px;"></a>
-                </c:if>
-                <c:if test="${topListFestival.firstimage eq null}">
-                	<img src="/trip_GazuaAA/img/no.png" class="img-responsive" style="width: 100%; height: 200px;">
-                </c:if>
-                <figcaption>${topListFestival.overview }</figcaption>
-                </figure>
-                </div>
-         </c:forEach>
-	</div>
-	
-	
-	<div class="top_list container">
+<div class="top_list container">
 		<center><h2 style="margin-bottom: 30px">숙박 Top 6</h2></center>
 	
 		<c:forEach var="topListCountry" items="${topListCountry }" >
@@ -300,6 +281,25 @@
       	 </div>
          </c:forEach>
 	</div> 
+	<div class="top_list container">
+		<center><h2 style="margin-bottom: 30px">축제 Top 6</h2></center><!-- 12, 14, 15, 28 -->
+		<c:forEach var="topListFestival" items="${topListFestival }" >
+			<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
+			<figure>
+                <c:if test="${topListFestival.firstimage ne null}">
+                	<a href="contentView.do?name=${topListFestival.title }&contentid=${topListFestival.contentid}&contenttypeid=${topListFestival.contenttypeid }&price="><img src="${topListFestival.firstimage }" class="img-responsive" style="width: 100%; height: 200px;"></a>
+                </c:if>
+                <c:if test="${topListFestival.firstimage eq null}">
+                	<img src="/trip_GazuaAA/img/no.png" class="img-responsive" style="width: 100%; height: 200px;">
+                </c:if>
+                <figcaption>${topListFestival.overview }</figcaption>
+                </figure>
+                </div>
+         </c:forEach>
+	</div>
+	
+	
+	
 	
 	<div class="top_list container">
 		<center><h2 style="margin-bottom: 30px">음식점 Top 6</h2></center>
