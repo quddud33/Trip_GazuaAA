@@ -352,7 +352,7 @@ public class MyController {
 				return "redirect:contentView.do?contentid="+params.get("contentID")+"&contenttypeid="+params.get("contentTypeID")+"&price="+params.get("datePrice");
 			} else {
 				resService.insertReservation(params);
-				return "redirect:myPage.do";
+				return "redirect:myPage.do?contenttypeid="+params.get("contentTypeID");
 			}
 		}
 
@@ -364,7 +364,7 @@ public class MyController {
 				return "redirect:contentView.do?contentid="+params.get("contentID")+"&contenttypeid="+params.get("contentTypeID")+"&price="+params.get("datePrice");
 			} else {
 				resService.insertFestval(params);
-				return "redirect:myPage.do";
+				return "redirect:myPage.do?contenttypeid="+params.get("contentTypeID");
 			}
 		}
 		
@@ -376,7 +376,7 @@ public class MyController {
 				return "redirect:" + old_url;
 			} else {
 				resService.insertRestaurant(params);
-				return "redirect:myPage.do";
+				return "redirect:myPage.do?contenttypeid="+params.get("contentTypeID");
 			}
 		}
 		
@@ -442,33 +442,33 @@ public class MyController {
 		public String reservationDelete(@RequestParam HashMap<String, String> params) {
 			resService.deleteReservation(params);
 			
-			return "redirect:myPage.do";
+			return "redirect:myPage.do?contenttypeid=32";
 		}
 		
 		@RequestMapping("festvalDelete.do")
 		public String festvalDelete(@RequestParam HashMap<String, String> params) {
 			resService.deleteFestval(params);
 			
-			return "redirect:myPage.do";
+			return "redirect:myPage.do?contenttypeid=15";
 		}
 		
 		@RequestMapping("restaurantDelete.do")
 		public String restaurantDelete(@RequestParam HashMap<String, String> params) {
 			resService.deleteRestaurant(params);
 			
-			return "redirect:myPage.do";
+			return "redirect:myPage.do?contenttypeid=39";
 		}
 		
 		@RequestMapping("myPageBoardDelete.do")
 		public String myPageBoardDelete(@RequestParam int num) {
 			bService.deleteBoard(num);
-			return "redirect:myPage.do";
+			return "redirect:myPage.do?contenttypeid=board";
 		}
 		
 		@RequestMapping("myPageReviewDelete.do")
 		public String myPageReviewDelete(@RequestParam HashMap<String, String> params) {
 			rService.deleteReview(params);
-			return "redirect:myPage.do";
+			return "redirect:myPage.do?contenttypeid=review";
 		}
 		
 

@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">
 <link rel="stylesheet" href="/trip_GazuaAA/css/map.css">
 <link rel="stylesheet" href="/trip_GazuaAA/css/wheatherMap.css">
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/4.7.0/js/bootstrap.min.js"></script>
@@ -32,9 +31,13 @@
 }
 
 .top_list figcaption {
-	height: 80px;
-	overflow: hidden;
-	text-overflow: ellipsis;
+  height: 80px;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  display: -webkit-box;  
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical; 
+  width:100%;
 }
 .weather{
 	display: block;
@@ -55,24 +58,6 @@
 
 
 </style>
-<!-- script>
-"undefined" == typeof CODE_LIVE && (!function(e) {
-		var t = {
-				nonSecure : "8080",
-				secure : "8080"
-			},
-			c = {
-				nonSecure : "http://",
-				secure : "https://"
-			},
-			r = {
-				nonSecure : "127.0.0.1",
-				secure : "gapdebug.local.genuitec.com"
-			},
-			n = "https:" === window.location.protocol ? "secure" : "nonSecure";
-		script = e.createElement("script"), script.type = "text/javascript", script.async = !0, script.src = c[n] + r[n] + ":" + t[n] + "/codelive-assets/bundle.js", e.getElementsByTagName("head")[0].appendChild(script)
-	}(document), CODE_LIVE = !0);
-</script-->
 </head>
 <body>
 	
@@ -284,10 +269,10 @@
 			<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
 			<figure>
                 <c:if test="${topListFestival.firstimage ne null}">
-                	                	<a href="contentView.do?name=${topListFestival.title }&contentid=${topListFestival.contentid}&contenttypeid=${topListFestival.contenttypeid }&price="><img src="${topListFestival.firstimage }" class="img-responsive" style="width: 250px; height: 200px;"></a>
+                	<a href="contentView.do?name=${topListFestival.title }&contentid=${topListFestival.contentid}&contenttypeid=${topListFestival.contenttypeid }&price="><img src="${topListFestival.firstimage }" class="img-responsive" style="width: 100%; height: 200px;"></a>
                 </c:if>
                 <c:if test="${topListFestival.firstimage eq null}">
-                	<img src="/trip_GazuaAA/img/no.png" class="img-responsive" style="width: 250px; height: 200px;">
+                	<img src="/trip_GazuaAA/img/no.png" class="img-responsive" style="width: 100%; height: 200px;">
                 </c:if>
                 <figcaption>${topListFestival.overview }</figcaption>
                 </figure>
@@ -304,11 +289,11 @@
 		<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
 			<figure>
                 <c:if test="${topListCountry.firstimage ne null}">
-                	<a href="contentView.do?name=${topListCountry.title }&contentid=${topListCountry.contentid}&contenttypeid=${topListCountry.contenttypeid }&price=${topListCountry.price}"><img src="${topListCountry.firstimage }" class="img-responsive" style="width: 250px; height: 200px;"></a>
+                	<a href="contentView.do?name=${topListCountry.title }&contentid=${topListCountry.contentid}&contenttypeid=${topListCountry.contenttypeid }&price=${topListCountry.price}"><img src="${topListCountry.firstimage }" class="img-responsive" style="width: 100%; height: 200px;"></a>
            
                 </c:if>
                 <c:if test="${topListCountry.firstimage eq null}">
-                	<img src="/trip_GazuaAA/img/no.png" class="img-responsive" style="width: 250px; height: 200px;">
+                	<img src="/trip_GazuaAA/img/no.png" class="img-responsive" style="width: 100%; height: 200px;">
                 </c:if>
                 <figcaption>${topListCountry.title }<br/> ${topListCountry.addr1 }</figcaption>
            </figure>
@@ -322,10 +307,10 @@
 			<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter">
 				<figure>
                 <c:if test="${topListRestaurant.firstimage ne null}">
-                	<a href="contentView.do?name=${topListRestaurant.title }&contentid=${topListRestaurant.contentid}&contenttypeid=${topListRestaurant.contenttypeid }&price="><img src="${topListRestaurant.firstimage }" class="img-responsive" style="width: 250px; height: 200px;"></a>
+                	<a href="contentView.do?name=${topListRestaurant.title }&contentid=${topListRestaurant.contentid}&contenttypeid=${topListRestaurant.contenttypeid }&price="><img src="${topListRestaurant.firstimage }" class="img-responsive" style="width: 100%; height: 200px;"></a>
                 </c:if>
                 <c:if test="${topListRestaurant.firstimage eq null}">
-                	<img src="/trip_GazuaAA/img/no.png" class="img-responsive" style="width: 250px; height: 200px;">
+                	<img src="/trip_GazuaAA/img/no.png" class="img-responsive" style="width: 100%; height: 200px;">
                 </c:if>
                 <figcaption>${topListRestaurant.title }<br/>${topListRestaurant.addr1 }</figcaption>
                 </figure>

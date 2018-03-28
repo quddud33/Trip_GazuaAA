@@ -168,16 +168,16 @@ li {
 <div class="container">
   <div id="listForm">
 	  <ul class="nav nav-tabs">
-	    <li class="active"><a data-toggle="tab" href="#home">숙박업소</a></li>
-	    <li><a data-toggle="tab" href="#menu1">축제</a></li>
-	    <li><a data-toggle="tab" href="#menu2">음식점</a></li>
+	    <li class="active"><a category="32" data-toggle="tab" href="#home">숙박업소</a></li>
+	    <li><a data-toggle="tab" category="15" href="#menu1">축제</a></li>
+	    <li><a data-toggle="tab" category="39" href="#menu2">음식점</a></li>
 	    <li><a data-toggle="tab" href="#menu3">마이 게시글</a></li>
 	    <li><a data-toggle="tab" href="#menu4">마이 리뷰</a></li>
 	  </ul>
   </div>
 
   <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
+    <div id="home" category="32" class="tab-pane fade in active">
       <div id="content" class="container">
       <c:if test="${empty reservation}">
       <div class="imgBox"><img class="noData" src="img/no_data.png" alt="no_data"/></div>
@@ -214,7 +214,7 @@ li {
       </c:forEach>
 </div>
     </div>
-    <div id="menu1" class="tab-pane fade">
+    <div id="menu1" category="15" class="tab-pane fade">
      <div id="content" class="container">
       <c:if test="${empty festval}">
       <div class="imgBox"><img class="noData" src="img/no_data.png" alt="no_data"/></div>
@@ -241,7 +241,7 @@ li {
       </c:forEach>
 </div>
     </div>
-    <div id="menu2" class="tab-pane fade">
+    <div id="menu2" category="39" class="tab-pane fade">
      <div id="content" class="container">
       <c:if test="${empty restaurant}">
       <div class="imgBox"><img class="noData" src="img/no_data.png" alt="no_data"/></div>
@@ -273,7 +273,7 @@ li {
     </div>
     
     
-        <div id="menu3" class="tab-pane fade">
+        <div id="menu3" category="board" class="tab-pane fade">
      <div id="content" class="container">
       <c:if test="${empty boardSelect}">
       <div class="imgBox"><img class="noData" src="img/no_data.png" alt="no_data"/></div>
@@ -296,7 +296,7 @@ li {
 		</div>
     </div>
     
-            <div id="menu4" class="tab-pane fade">
+            <div id="menu4" category="review" class="tab-pane fade">
      <div id="content" class="container">
       <c:if test="${empty myPageReviewSelect}">
       <div class="imgBox"><img class="noData" src="img/no_data.png" alt="no_data"/></div>
@@ -359,5 +359,28 @@ li {
    <script src="/trip_GazuaAA/js/googleLogin.js"></script>
    <script src="/trip_GazuaAA/js/FBLogin.js"></script>
    <script src="/trip_GazuaAA/js/login.js"></script>
+   <script>
+	var contentTypeId = '<%if(request.getParameter("contenttypeid") != null) {%><%=request.getParameter("contenttypeid") %><%} else if (request.getParameter("contentTypeId") != null) {%><%=request.getParameter("contentTypeId")%><%} else {%>32<%}%>';
+	
+	<%if(request.getParameter("contentTypeId") != null || request.getParameter("contenttypeid") != null) {%>
+		$(window).on('pageshow', function() {
+			$('#listForm li').removeClass('active');
+			$('.tab-content div').removeClass('active in');
+			
+			$('#listForm li > a').each(function () {
+					if($(this).attr('category') == contentTypeId) {
+						$(this).parent().addClass('active');
+					}
+			});
+			
+			
+			$('.tab-content div').each(function (){
+				if($(this).attr('category') == contentTypeId) {
+					$(this).addClass('active in');
+				}
+			});
+		});
+	<%}%>
+   </script>
 </body>
 </html>

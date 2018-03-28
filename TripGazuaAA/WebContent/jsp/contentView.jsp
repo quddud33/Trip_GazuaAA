@@ -510,13 +510,13 @@ td img {
 		</c:otherwise>
 	</c:choose>
 	<c:if test="${user ne null }">
-		<form action="reviewWrite.do"
+		<form action="reviewWrite.do" id="reviewWriteForm"
 			style="text-align: right; width: 80%; margin: auto; margin-top: 10px;">
 				<input type="hidden" name="name" value="${title}">
 			<textarea rows="5" cols="30" name="content" class="form-control"
-				placeholder="리뷰를 남겨주세요"></textarea>
+				placeholder="리뷰를 남겨주세요" id="reviewContent"></textarea>
 			<input type="submit" value="입력" class="btn btn-defalut btn-custom"
-				style="text-align: center;"> 
+				style="text-align: center;" id="reviewWriteBtn"> 
 				<input type="hidden"
 				name="contentID" value="<%=request.getParameter("contentid")%>">
 			<input type="hidden" name="contentTypeID"
@@ -525,6 +525,7 @@ td img {
 				<input type="hidden" name="nickname" value="${user.nickname }">
 				<span class="star-input">
 				<span class="input">
+				<input type="radio" name="score" value="0" checked/>
 				<input	type="radio" name="score" id="p1" value="1">
 				<label for="p1">1</label>
 				<input type="radio" name="score" id="p2" value="2">
@@ -766,6 +767,13 @@ marker.setMap(map);
 		    	$('#reservationForm').submit();
 		    }
 		});
+		
+		$('#reviewWriteBtn').click(function(e) {
+			e.preventDefault();
+			if($('#reviewContent').val().length < 1) {
+				alert('리뷰를 입력해주세요.');
+			} else { $('#reviewWriteForm').submit(); }
+		})
 	</script>
 </body>
 </html>
