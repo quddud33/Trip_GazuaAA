@@ -386,11 +386,11 @@ td img {
 														<option value="<%=i%>" selected><%=i%>명
 														</option>
 													<% 
-												}
+												} else {
 										%>
 										<option value="<%=i%>"><%=i%>명
 										</option>
-										<%
+										<%}
 											}
 										%>
 
@@ -404,11 +404,11 @@ td img {
 														<option value="<%=i%>" selected><%=i%>명
 														</option>
 													<% 
-												}
+												} else {
 										%>
 										<option value="<%=i%>"><%=i%>명
 										</option>
-										<%
+										<%}
 											}
 										%>
 
