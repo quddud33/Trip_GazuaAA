@@ -34,20 +34,8 @@
 							<dd class="loginBtnBoxdd">
 								<img class="lBtn" alt="네이버이미지" 
 									src="/trip_GazuaAA/img/네이버 아이디로 로그인_완성형_Green.PNG"
-									onclick="location.href='https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=rXNTEaBc1MiIpkex1vR5&state=STATE_STRING&redirect_uri=http://localhost:8080/trip_GazuaAA/naverLogin.do'" />
+									onclick="location.href='https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=rXNTEaBc1MiIpkex1vR5&state=STATE_STRING&redirect_uri=http://192.168.0.58:8080/trip_GazuaAA/naverLogin.do'" />
 							</dd>
-							 <dd class="loginBtnBoxdd">
-								<div style="width: 250px; height: 54px;" class="lBtn g-signin2"
-									data-onsuccess="onSignIn" data-theme="dark"></div>
-							</dd> 
-							<dd class="loginBtnBoxdd">
-								<div scope="public_profile,email" onlogin="checkLoginState();"
-									class="fb-login-button" data-width="250" data-height="54"
-									data-max-rows="1" data-size="large"
-									data-button-type="login_with" data-show-faces="false"
-									data-auto-logout-link="false" data-use-continue-as="false"></div>
-							</dd>
-
 						</dl>
 
 					</div>

@@ -4,6 +4,7 @@ package controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -97,7 +98,7 @@ public class MyController {
 	
 	@RequestMapping("naverLogin.do")
 	public String naverLogin(@RequestParam String code, HttpSession session) throws Exception {
-
+		
 		session.setAttribute("user", nService.naverLogin(
 				"https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=rXNTEaBc1MiIpkex1vR5&client_secret=VUpmCnOobA&code="
 						+ code + "&state=STATE_STRING"));
@@ -112,7 +113,7 @@ public class MyController {
 	
 	@RequestMapping("googleLogin.do")
 	public String googleLogin(@RequestParam HashMap<String, String> params, HttpSession session) {
-		
+
 		session.setAttribute("user", params);
 		
 		if(lService.checkID((String) params.get("userID")) == 0)
@@ -123,8 +124,8 @@ public class MyController {
 	
 	@RequestMapping("FBLogin.do")
 	public String FBLogin(@RequestParam HashMap<String, String> params, HttpSession session) {
-		
-			session.setAttribute("user", params);
+
+		session.setAttribute("user", params);
 		
 		if(lService.checkID((String) params.get("userID")) == 0)
 			FBService.createFBUser(params);
@@ -345,15 +346,9 @@ public class MyController {
 		}
 				
 		@RequestMapping("reservation.do")
-		public String reservation(Model model, @RequestParam HashMap<String, String> params, HttpSession session) {
-			System.out.println(params);
-			if(session.getAttribute("user") == null) {
-				session.setAttribute("login", "로그인 안됐자나 시발련드라");
-				return "redirect:contentView.do?contentid="+params.get("contentID")+"&contenttypeid="+params.get("contentTypeID")+"&price="+params.get("datePrice");
-			} else {
+		public String reservation(Model model, @RequestParam HashMap<String, String> params) {
 				resService.insertReservation(params);
 				return "redirect:myPage.do?contenttypeid="+params.get("contentTypeID");
-			}
 		}
 
 		

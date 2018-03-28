@@ -630,7 +630,7 @@ var marker = new daum.maps.Marker({
     position: markerPosition
 });
 
-// 마커가 지도 위에 표시되도록 설정합니다
+마커가 지도 위에 표시되도록 설정합니다
 marker.setMap(map);
 
 // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
@@ -759,13 +759,19 @@ marker.setMap(map);
 		
 		$('.reservation').click(function(e) {
 			e.preventDefault();
-		    if($('#datepicker1').val().length < 1) {
-		    	alert('체크인 날짜를 정해주세요.');
-		    } else if($('#datepicker2').val().length < 1) {
-		    	alert('체크아웃 날짜를 정해주세요.');
-		    } else {
-		    	$('#reservationForm').submit();
-		    }
+
+		    <c:if test="${empty user}">
+				$("#bg").css("display", "block");
+		    </c:if>
+		    <c:if test="${!empty user}">
+			    if($('#datepicker1').val().length < 1) {
+			    	alert('체크인 날짜를 정해주세요.');
+			    } else if($('#datepicker2').val().length < 1) {
+			    	alert('체크아웃 날짜를 정해주세요.');
+			    } else {
+			    	$('#reservationForm').submit();
+			    }
+		    </c:if>
 		});
 		
 		$('#reviewWriteBtn').click(function(e) {
@@ -773,7 +779,8 @@ marker.setMap(map);
 			if($('#reviewContent').val().length < 1) {
 				alert('리뷰를 입력해주세요.');
 			} else { $('#reviewWriteForm').submit(); }
-		})
+		});
+		
 	</script>
 </body>
 </html>

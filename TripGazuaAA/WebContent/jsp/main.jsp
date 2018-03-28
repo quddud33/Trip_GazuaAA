@@ -12,7 +12,6 @@
 <link rel="stylesheet" href="/trip_GazuaAA/Bootstrap/css/nav.css">
 <link rel="stylesheet" href="/trip_GazuaAA/css/loginBox.css">
 <link rel="stylesheet" href="/trip_GazuaAA/css/map.css">
-<link rel="stylesheet" href="/trip_GazuaAA/css/wheatherMap.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/4.7.0/js/bootstrap.min.js"></script>
