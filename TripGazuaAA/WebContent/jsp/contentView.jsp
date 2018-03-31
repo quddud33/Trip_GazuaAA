@@ -470,27 +470,17 @@ td img {
 					<div id="map" style="width: 300px; height: 300px; float:left; display: inline-block; postion:relative; left:50%"></div>
 				</c:forEach>
 			</div>
-			<table border="2" class="table table-boarded">
-				<c:forEach var="commonInfo" items="${commonInfo}">
-
-					<tbody>
-						<tr>
-							<td>행사명</td>
-							<td>내용</td>
-							<td>주소</td>
-						</tr>
-					</tbody>
-					<tfoot style="text-align: justify;">
-						<tr>
-							<td>${commonInfo.title }</td>
-							<td>${commonInfo.overview } </td>
-							<td>${commonInfo.addr1 },${commonInfo.addr2 }</td>
-						</tr>
-					</tfoot>
-				<button class="btn btn-custom" style="display: block;margin: auto; margin-bottom: 10px; clear: both;" onclick="location.href='festvalWish.do?name=${commonInfo.title}&userID=${user.userID}&contentID=${commonInfo.contentid }&contentTypeID=15'">찜하기</button>
-				
-				</c:forEach>
-			</table>
+			<c:forEach var="commonInfo" items="${commonInfo }">
+			<div style="margin-top: 26%;margin-left: 20%; position: relative; width:750px;">
+				<h3 style="padding-top: 15px;">${commonInfo.title }</h3> <!-- 축제제목 -->
+				<strong>${commonInfo.overview }</strong> <!-- 행사내용 -->
+				</br>
+				</br>
+				<p style="font-size:15px;">${commonInfo.addr1 }<!-- 주소 -->
+				${commonInfo.addr2 }</p><!-- 상세주소 -->
+			</div>
+			<button class="btn btn-custom" style="display: block;margin: auto; margin-top:15px; margin-bottom: 15px;" onclick="location.href='festvalWish.do?name=${commonInfo.title}&userID=${user.userID}&contentID=${commonInfo.contentid }&contentTypeID=15'">찜하기</button>
+			</c:forEach>
 		</c:when>
 		<c:when test="${param.contenttypeid == '28' }">
 			<table border="1" class="table table-boarded">
