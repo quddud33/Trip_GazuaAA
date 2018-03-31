@@ -219,34 +219,59 @@ td img {
 	width: 80%;
 	border: 2px solid #424242;
 	position: relative;
-	margin: 20px auto 0 auto;
+	margin: 30px auto 40px auto;
 	padding: 5px;
 }
 
 .reviewHeader {
+	border-bottom: 2px solid #424242;
 	position: relative;
 	width: 100%;
 	float: left;
 	line-height: 34px;
 	text-align: center;
+	padding-bottom: 5px;
 }
 
 .reviewWriter {
 	float: left;
 	height: 34px;
-	width: 15%;
+	padding: 0 15px;
+	border-right: 2px solid #424242;
 }
 
 .reviewScore {
 	float: left;
 	height: 34px;
-	width: 5%;
+	border-right: 2px solid #424242;
+	padding: 0 15px;
+}
+
+.starScore {
+	background-image: url("img/star.png");
+	background-repeat: no-repeat;
+	background-position: bottom;
+	width: 100px;
+	height: 19px;
+	background-size: 100px;
+	position: relative;
+	margin: 7.5px auto;
+}
+
+.userScore {
+	background-image: url("img/star.png");
+	background-repeat: no-repeat;
+	background-size: 100px;
+	position: absolute;
+	height: 19px;
+	right: 0;
 }
 
 .reviewWriteDate {
 	float: left;
 	height: 34px;
-	width: 23%;
+	border-right: 2px solid #424242;
+	padding: 0 20px;
 }
 
 .reviewLike {
@@ -257,13 +282,21 @@ td img {
 }
 
 .reviewMDForm {
-	float: left;
 	height: 34px;
+	position: absolute;
+	right: 90px;
+	top: -2px;
+}
+
+.reviewMDForm a {
+    display: inline-block;
+    border: 1px solid #424242;
 }
 
 .reviewContent {
 	clear: both;
 	padding: 5px;
+	width: 75%;
 }
 
 .contentTitleBox{
@@ -275,6 +308,10 @@ td img {
 .contentTitle {
 	font-size: 36px;
 	font-weight: 400;
+}
+
+textarea {
+	resize: none;
 }
 
 </style>
@@ -545,8 +582,13 @@ td img {
 			<c:forEach items="${reviewL }" var="reviewL">
 				<div class="review">
 					<div class="reviewHeader">
-						<div class="reviewWriter">${reviewL.nickname }</div>
-						<div class="reviewScore">${reviewL.score }점</div>
+						<div class="reviewWriter"><i class="fa fa-user"></i> ${reviewL.nickname }</div>
+						<div class="reviewScore">
+							<div class="starScore">
+								<div class="userScore" style="width: ${10 - reviewL.score}0px; background-position: -${reviewL.score}0px 0;"></div>
+							</div>
+						</div>
+<%-- 						${reviewL.score }점 --%>
 						<div class="reviewWriteDate">${reviewL.writeDate }</div>
 						<div class="reviewLike">
 							<c:if test="${!empty user}">
@@ -566,14 +608,22 @@ td img {
 						</div>
 						<div class="reviewMDForm">
 							<c:if test="${user.userID eq reviewL.userID}">
-								<a href="reviewDelete.do?num=${reviewL.num }&content=${reviewL.content}&contenttypeid=${param.contenttypeid }&contentid=<%=request.getParameter("contentid")%>">삭제</a>
-								<a href="reviewUpdateForm.do?num=${reviewL.num }&content=${reviewL.content}&contenttypeid=${param.contenttypeid }&contentid=<%=request.getParameter("contentid")%>">수정</a>
+								<a class="btn" href="reviewDelete.do?num=${reviewL.num }&content=${reviewL.content}&contenttypeid=${param.contenttypeid }&contentid=<%=request.getParameter("contentid")%>">삭제</a>
+								<a href="#" class="reviewUpdateBefore btn">수정</a>
+								<a href="#" class="reviewUpdateAfter btn" style="display: none">수정</a>
+								<a href="#" class="reviewUpdateCancel btn" style="display: none">취소</a>
 							</c:if>
 						</div>
 					</div>
-					<div class="reviewContent">
-						${reviewL.content }
-					</div>
+					<form action="reviewUpdate.do" class="reviewUpdate">
+						<div class="reviewContent">
+							<p>${reviewL.content }</p>
+							<textarea name="content" style="display: none;">${reviewL.content }</textarea>
+						</div>
+						<input type="hidden" name="contentID" value="<%=request.getParameter("contentid")%>"></input>
+						<input type="hidden" name="contentTypeID" value="${param.contenttypeid }"></input>
+						<input type="hidden" name="num" value="${reviewL.num }"></input>
+					</form>
 				</div>
 				</c:forEach>
 			</div>
@@ -769,6 +819,36 @@ marker.setMap(map);
 			if($('#reviewContent').val().length < 1) {
 				alert('리뷰를 입력해주세요.');
 			} else { $('#reviewWriteForm').submit(); }
+		});
+		
+		$('.reviewUpdateBefore').click(function(e){
+			e.preventDefault();
+			$(this).css('display', 'none');
+			$(this).siblings('.reviewUpdateAfter').css('display', 'inline-block');
+			$(this).siblings('.reviewUpdateCancel').css('display', 'inline-block');
+			var $reviewUpdateTextarea = $(this).parent().parent().siblings('.reviewUpdate').find('textarea');
+			var $reviewUpdateContent = $(this).parent().parent().siblings('.reviewUpdate').find('.reviewContent');
+	        $reviewUpdateTextarea
+	        	.css({'display' : 'block', 'width' : $reviewUpdateContent.css('width'), 'height' : $reviewUpdateContent.css('height')});
+			$reviewUpdateContent.find('p').css('display', 'none');
+		});
+
+		$('.reviewUpdateAfter').click(function(e){
+			e.preventDefault();
+			$(this).css('display', 'none');
+			$(this).siblings('.reviewUpdateCancel').css('display', 'none');
+			$(this).siblings('.reviewUpdateBefore').css('display', 'inline-block');
+			$(this).parent().parent().siblings('.reviewUpdate').submit();
+		});
+		
+		$('.reviewUpdateCancel').click(function(e){
+			e.preventDefault();
+			$(this).css('display', 'none');
+			$(this).siblings('.reviewUpdateBefore').css('display', 'inline-block');
+			$(this).siblings('.reviewUpdateAfter').css('display', 'none');
+
+			$(this).parent().parent().siblings('.reviewUpdate').find('.reviewContent p').css('display', 'block');
+			var $reviewUpdateTextarea = $(this).parent().parent().siblings('.reviewUpdate').find('textarea').css('display', 'none');
 		});
 		
 	</script>
