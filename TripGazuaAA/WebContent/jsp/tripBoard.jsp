@@ -16,12 +16,12 @@
 	}//if end
 	
 	//한 페이지당 보여질 방명록 갯수
-	int numPage = 7;
+	int numPage = 15;
 	
 	//페이징의 블록갯수
 	int numBlock = 5;
 	//해당 페이지의 주소
-	String url = "tripBoard.do";
+	String url = "tripBoard.do?";
 	String param = "page=";
 	
 	Enumeration params = request.getParameterNames();
@@ -149,7 +149,7 @@
             <div class="text-center">
                    <form id="searchForm" action="tripBoardSearch.do" class="form-inline md-form form-sm">
 		            <select name="board" class="form-control">
-		                <option value="boardTitle">제목</option>
+		                <option value="title">제목</option>
 		                <option value="content">내용</option>
 		                <option value="TC">제목/내용</option>
 		                <option value="nickname">작성자</option>
