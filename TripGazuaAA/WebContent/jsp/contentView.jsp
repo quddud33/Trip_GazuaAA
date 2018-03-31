@@ -219,7 +219,7 @@ td img {
 	width: 80%;
 	border: 2px solid #424242;
 	position: relative;
-	margin: 20px auto 0 auto;
+	margin: 30px auto 40px auto;
 	padding: 5px;
 }
 
@@ -240,7 +240,27 @@ td img {
 .reviewScore {
 	float: left;
 	height: 34px;
-	width: 5%;
+	width: 100px;
+}
+
+.starScore {
+	background-image: url("img/star.png");
+	background-repeat: no-repeat;
+	background-position: bottom;
+	width: 100px;
+	height: 19px;
+	background-size: 100px;
+	position: relative;
+	margin: 7.5px auto;
+}
+
+.userScore {
+	background-image: url("img/star.png");
+	background-repeat: no-repeat;
+	background-size: 100px;
+	position: absolute;
+	height: 19px;
+	right: 0;
 }
 
 .reviewWriteDate {
@@ -546,7 +566,12 @@ td img {
 				<div class="review">
 					<div class="reviewHeader">
 						<div class="reviewWriter">${reviewL.nickname }</div>
-						<div class="reviewScore">${reviewL.score }점</div>
+						<div class="reviewScore">
+							<div class="starScore">
+								<div class="userScore" style="width: ${10 - reviewL.score}0px; background-position: -${reviewL.score}0px 0;"></div>
+							</div>
+						</div>
+<%-- 						${reviewL.score }점 --%>
 						<div class="reviewWriteDate">${reviewL.writeDate }</div>
 						<div class="reviewLike">
 							<c:if test="${!empty user}">
@@ -567,13 +592,21 @@ td img {
 						<div class="reviewMDForm">
 							<c:if test="${user.userID eq reviewL.userID}">
 								<a href="reviewDelete.do?num=${reviewL.num }&content=${reviewL.content}&contenttypeid=${param.contenttypeid }&contentid=<%=request.getParameter("contentid")%>">삭제</a>
-								<a href="reviewUpdateForm.do?num=${reviewL.num }&content=${reviewL.content}&contenttypeid=${param.contenttypeid }&contentid=<%=request.getParameter("contentid")%>">수정</a>
+								<a href="#" class="reviewUpdateBefore">수정</a>
+								<a href="#" class="reviewUpdateAfter" style="display: none">수정</a>
+								<a href="#" class="reviewUpdateCancel" style="display: none">취소</a>
 							</c:if>
 						</div>
 					</div>
-					<div class="reviewContent">
-						${reviewL.content }
-					</div>
+					<form action="reviewUpdate.do" class="reviewUpdate">
+						<div class="reviewContent">
+							<p>${reviewL.content }</p>
+							<textarea name="content" style="display: none;">${reviewL.content }</textarea>
+						</div>
+						<input type="hidden" name="contentID" value="<%=request.getParameter("contentid")%>"></input>
+						<input type="hidden" name="contentTypeID" value="${param.contenttypeid }"></input>
+						<input type="hidden" name="num" value="${reviewL.num }"></input>
+					</form>
 				</div>
 				</c:forEach>
 			</div>
@@ -769,6 +802,36 @@ marker.setMap(map);
 			if($('#reviewContent').val().length < 1) {
 				alert('리뷰를 입력해주세요.');
 			} else { $('#reviewWriteForm').submit(); }
+		});
+		
+		$('.reviewUpdateBefore').click(function(e){
+			e.preventDefault();
+			$(this).css('display', 'none');
+			$(this).siblings('.reviewUpdateAfter').css('display', 'inline');
+			$(this).siblings('.reviewUpdateCancel').css('display', 'inline');
+			var $reviewUpdateTextarea = $(this).parent().parent().siblings('.reviewUpdate').find('textarea');
+			var $reviewUpdateContent = $(this).parent().parent().siblings('.reviewUpdate').find('.reviewContent');
+	        $reviewUpdateTextarea
+	        	.css({'display' : 'block', 'width' : $reviewUpdateContent.css('width'), 'height' : $reviewUpdateContent.css('height')});
+			$reviewUpdateContent.find('p').css('display', 'none');
+		});
+
+		$('.reviewUpdateAfter').click(function(e){
+			e.preventDefault();
+			$(this).css('display', 'none');
+			$(this).siblings('.reviewUpdateCancel').css('display', 'none');
+			$(this).siblings('.reviewUpdateBefore').css('display', 'inline');
+			$(this).parent().parent().siblings('.reviewUpdate').submit();
+		});
+		
+		$('.reviewUpdateCancel').click(function(e){
+			e.preventDefault();
+			$(this).css('display', 'none');
+			$(this).siblings('.reviewUpdateBefore').css('display', 'inline');
+			$(this).siblings('.reviewUpdateAfter').css('display', 'none');
+
+			$(this).parent().parent().siblings('.reviewUpdate').find('.reviewContent p').css('display', 'block');
+			var $reviewUpdateTextarea = $(this).parent().parent().siblings('.reviewUpdate').find('textarea').css('display', 'none');
 		});
 		
 	</script>
