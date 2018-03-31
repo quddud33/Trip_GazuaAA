@@ -272,6 +272,7 @@
 	
 	
 	
+	
 	<div class="top_list container">
 		<center><h2 style="margin-bottom: 30px">음식점 Top 6</h2></center>
 		<c:forEach var="topListRestaurant" items="${topListRestaurant }" >
