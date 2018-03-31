@@ -55,6 +55,61 @@
 	display: none;
 }
 
+.topTitle {
+	display: block;
+	width: 100%;
+	height: 200px;
+	line-height: 200px;
+	border: 1px solid #424242;
+	text-align: center;
+	font-weight: bold;
+	margin: 0;
+	cursor: pointer;
+}
+
+#myCarousel{
+	width:15%;
+	height:200px;
+	margin:0px;
+	position:fixed;
+	top:40%;
+	right:2%;
+	
+}
+
+.slideTitle{
+	font-size: 14px;
+	font-weight:bold;
+	color:#fff; 
+}
+.slideContent{
+	font-size:10px;
+	color:#fff;
+}
+.slidingTitle{
+	width:15%;
+	height:40px;
+	background:#222222;
+	margin:0px;
+	position:fixed;
+	top:35%;
+	right:2%;
+}
+.slidingP{
+	font-size:14px;
+	text-align:center;
+	line-height:40px;
+	color:#fff;
+	
+}
+
+.title_address {
+	text-align: center;
+}
+
+.listTitle {
+	font-weight: bold;
+}
 
 </style>
 </head>
@@ -63,8 +118,8 @@
 	<!-- 네비게이션 -->
 	<%@ include file="../template/nav.jsp" %>
 
-	
-	
+	<div class="slidingTitle"><p class="slidingP">현재 진행중인 축제</p></div>
+
 	<div id="myCarousel" class="carousel slide" data-ride="carousel"> 
 	
 	<!--페이지-->
@@ -80,11 +135,11 @@
 	<div class="carousel-inner">
 		<!--슬라이드1-->
 		<div class="item active"> 
-			<a href="contentView.do?name=가평펜션축제%202018&contentid=2531711&contenttypeid=15&price="><img src="http://tong.visitkorea.or.kr/cms/resource/10/2531710_image2_1.jpg" style="width:100%; height:600px;" alt="First slide"></a>
+			<a href="contentView.do?contentid=825295&contenttypeid=15&price="><img src="http://tong.visitkorea.or.kr/cms/resource/52/2535452_image2_1.JPG" style="width:100%; height:200px;" alt="First slide"></a>
 			<div class="container">
 				<div class="carousel-caption">
-					<h1>가평펜션축제</h1>
-					<p>경기도 가평군 가평읍 북한강변로 360-69</p>
+					<p class="slideTitle">강릉세계겨울커피축제 재즈 프레소 2018</h1>
+					<p class="slideContent">강원도 강릉시 창해로14번길 20-1</p>
 				</div>
 			</div>
 		</div>
@@ -92,11 +147,11 @@
 
 		<!--슬라이드2-->
 		<div class="item"> 
-			<a href="contentView.do?name=강릉%20하트불꽃크루즈%202018&contentid=2494459&contenttypeid=15&price="><img src="http://tong.visitkorea.or.kr/cms/resource/29/2530329_image2_1.jpg" style="width:100%; height:600px;" data-src="" alt="Second slide"></a>
+			<a href="contentView.do?name=강릉%20하트불꽃크루즈%202018&contentid=2494459&contenttypeid=15&price="><img src="http://tong.visitkorea.or.kr/cms/resource/29/2530329_image2_1.jpg" style="width:100%; height:200px;" data-src="" alt="Second slide"></a>
 			<div class="container">
 				<div class="carousel-caption">
-					<h1>강릉 하트불꽃크루즈 2018</h1>
-					<p>강원도 강릉시 주문진읍 해안로 1730</p>
+					<p class="slideTitle">강릉 하트불꽃크루즈 2018</p>
+					<p class="slideContent">강원도 강릉시 주문진읍 해안로 1730</p>
 				</div>
 			</div>
 		</div>
@@ -104,11 +159,11 @@
 		
 		<!--슬라이드3-->
 		<div class="item"> 
-			<a href="contentView.do?name=강원국제비엔날레%202018&contentid=2516849&contenttypeid=15&price="><img src="http://tong.visitkorea.or.kr/cms/resource/20/2536120_image2_1.jpg" style="width:100%; height:600px;" data-src="" alt="Third slide"></a>
+			<a href="contentView.do?name=강원국제비엔날레%202018&contentid=2516849&contenttypeid=15&price="><img src="http://tong.visitkorea.or.kr/cms/resource/20/2536120_image2_1.jpg" style="width:100%; height:200px;" data-src="" alt="Third slide"></a>
 			<div class="container">
 				<div class="carousel-caption">
-					<h1>강원국제비엔날레 2018</h1>
-					<p>강원도 강릉시 난설헌로 131</p>
+					<p class="slideTitle">강원국제비엔날레 2018</p>
+					<p class="slideContent">강원도 강릉시 난설헌로 131</p>
 				</div>
 			</div>
 		</div>
@@ -116,11 +171,11 @@
 		
 		<!--슬라이드4-->
 		<div class="item"> 
-			<a href="contentView.do?name=강화도%20빙어%20송어%20축제%202018&contentid=1964700&contenttypeid=15&price="><img src="http://tong.visitkorea.or.kr/cms/resource/91/2513891_image2_1.JPG" style="width:100%; height:600px;" data-src="" alt="Third slide"></a>
+			<a href="contentView.do?name=강화도%20빙어%20송어%20축제%202018&contentid=1964700&contenttypeid=15&price="><img src="http://tong.visitkorea.or.kr/cms/resource/91/2513891_image2_1.JPG" style="width:100%; height:200px;" data-src="" alt="Third slide"></a>
 			<div class="container">
 				<div class="carousel-caption">
-					<h1>강화도 송어 빙어 축제 2018</h1>
-					<p>인천광역시 강화군 양도면 중앙로787번길 8-2</p>
+					<p class="slideTitle">강화도 송어 빙어 축제 2018</p>
+					<p class="slideContent">인천광역시 강화군 양도면 중앙로787번길 8-2</p>
 				</div>
 			</div>
 		</div>
@@ -130,11 +185,11 @@
 		
 		<!--슬라이드5-->
 		<div class="item"> 
-			<a href="contentView.do?name=경주%20프리마켓%20봉황장터%202018&contentid=2505702&content  typeid=15&price="><img src="http://tong.visitkorea.or.kr/cms/resource/94/2505694_image2_1.jpg" style="width:100%; height:600px;"  data-src="" alt="Third slide"></a>
+			<a href="contentView.do?name=경주%20프리마켓%20봉황장터%202018&contentid=2505702&content  typeid=15&price="><img src="http://tong.visitkorea.or.kr/cms/resource/94/2505694_image2_1.jpg" style="width:100%; height:200px;"  data-src="" alt="Third slide"></a>
 			<div class="container">
 				<div class="carousel-caption">
-					<h1>경주 프리마켓 봉황장터 2018</h1>
-					<p>경상북도 경주시 노동동</p>
+					<p class="slideTitle">경주 프리마켓 봉황장터 2018</p>
+					<p class="slideContent">경상북도 경주시 노동동</p>
 				</div>
 			</div>
 		</div>
@@ -145,7 +200,7 @@
 	<!--이전, 다음 버튼-->
 	<a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> 
 	<a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a> 
-	</div>
+		</div>
 	<!-- 이미지슬라이드 끝~ -->
 	
 		<!-- 날씨시작 -->
@@ -275,7 +330,7 @@
                 <c:if test="${topListCountry.firstimage eq null}">
                 	<img src="/trip_GazuaAA/img/no.png" class="img-responsive" style="width: 100%; height: 200px;">
                 </c:if>
-                <figcaption>${topListCountry.title }<br/> ${topListCountry.addr1 }</figcaption>
+                <figcaption class="title_address"><p class="listTitle">${topListCountry.title }</p>${topListCountry.addr1 }</figcaption>
            </figure>
       	 </div>
          </c:forEach>
@@ -289,7 +344,7 @@
                 	<a href="contentView.do?name=${topListFestival.title }&contentid=${topListFestival.contentid}&contenttypeid=${topListFestival.contenttypeid }&price="><img src="${topListFestival.firstimage }" class="img-responsive" style="width: 100%; height: 200px;"></a>
                 </c:if>
                 <c:if test="${topListFestival.firstimage eq null}">
-                	<img src="/trip_GazuaAA/img/no.png" class="img-responsive" style="width: 100%; height: 200px;">
+                	<div onclick="location.href='contentView.do?name=${topListFestival.title }&contentid=${topListFestival.contentid}&contenttypeid=${topListFestival.contenttypeid }&price='" class="topTitle"><strong>${topListFestival.title }</strong></div>
                 </c:if>
                 <figcaption>${topListFestival.overview }</figcaption>
                 </figure>
@@ -311,7 +366,7 @@
                 <c:if test="${topListRestaurant.firstimage eq null}">
                 	<img src="/trip_GazuaAA/img/no.png" class="img-responsive" style="width: 100%; height: 200px;">
                 </c:if>
-                <figcaption>${topListRestaurant.title }<br/>${topListRestaurant.addr1 }</figcaption>
+                <figcaption class="title_address"><p class="listTitle">${topListRestaurant.title }</p>${topListRestaurant.addr1 }</figcaption>
                 </figure>
             </div>
          </c:forEach>

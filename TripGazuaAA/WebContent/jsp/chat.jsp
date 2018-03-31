@@ -86,12 +86,8 @@
 			         .appendTo($list);	
 		}
 		
-		console.log($list.height());
-		//현재 리스트의 
-		var size = $list.height();
-		
 		//스크롤을 지정
-		$("#listBox").scrollTop(size);
+		$("#listBox").scrollTop($(".chatul").height());
 		
 	}//displayMsg() end
 	
@@ -99,7 +95,7 @@
 	$openBtn.click(function() {
 		$openBtn.css("display","none");
 		//웹소켓의 프로토콜은 ws://
-		socket = new WebSocket("ws://localhost:8080/trip_GazuaAA/chat");
+		socket = new WebSocket("ws://192.168.0.58:8080/trip_GazuaAA/chat");
 	
 		//소켓은 open,close,error,message
 		
