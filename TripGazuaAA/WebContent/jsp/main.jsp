@@ -88,17 +88,18 @@
 }
 .slidingTitle{
 	width:15%;
-	height:40px;
+	height:45px;
 	background:#222222;
 	margin:0px;
 	position:fixed;
-	top:35%;
+	top:33%;
 	right:2%;
 }
 .slidingP{
 	font-size:14px;
 	text-align:center;
-	line-height:40px;
+	line-height:45px;
+	margin:0px;
 	color:#fff;
 	
 }
@@ -204,91 +205,7 @@
 	<!-- 이미지슬라이드 끝~ -->
 	
 		<!-- 날씨시작 -->
-<div class="weather">
-	<div id="m-booked-weather-bl250-23368" >
-		<div class="booked-wzs-250-175 weather-customize"
-			style="background-color: #2b91ff; width: 250px;" id="width1">
-			<div class="booked-wzs-250-175_in">
-				<div class="booked-wzs-250-175-data">
-					<div class="booked-wzs-250-175-left-img wrz-22">
-						<a target="_blank" href="http://www.booked.net/"> <img
-							src="//s.bookcdn.com/images/letter/logo.gif"
-							alt="http://www.booked.net/" />
-						</a>
-					</div>
-					<div class="booked-wzs-250-175-right">
-						<div class="booked-wzs-day-deck">
-							<div class="booked-wzs-day-val">
-								<div class="booked-wzs-day-number">
-									<span class="plus">+</span>8
-								</div>
-								<div class="booked-wzs-day-dergee">
-									<div class="booked-wzs-day-dergee-val">&deg;</div>
-									<div class="booked-wzs-day-dergee-name">C</div>
-								</div>
-							</div>
-							<div class="booked-wzs-day">
-								<div class="booked-wzs-day-d">
-									H: <span class="plus">+</span>8&deg;
-								</div>
-								<div class="booked-wzs-day-n">
-									L: <span class="plus">+</span>1&deg;
-								</div>
-							</div>
-						</div>
-						<div class="booked-wzs-250-175-info">
-							<div class="booked-wzs-250-175-city">서울특별시</div>
-							<div class="booked-wzs-250-175-date">수요일, 07 3월</div>
-							<div class="booked-wzs-left">
-								<span class="booked-wzs-bottom-l">7일 예보 보기</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<a target="_blank" href="http://booked.kr/weather/seoul-18406">
-					<table cellpadding="0" cellspacing="0" class="booked-wzs-table-250">
-						<tr>
-							<td>목</td>
-							<td>금</td>
-							<td>토</td>
-							<td>일</td>
-							<td>월</td>
-							<td>화</td>
-						</tr>
-						<tr>
-							<td class="week-day-ico"><div class="wrz-sml wrzs-22"></div></td>
-							<td class="week-day-ico"><div class="wrz-sml wrzs-01"></div></td>
-							<td class="week-day-ico"><div class="wrz-sml wrzs-01"></div></td>
-							<td class="week-day-ico"><div class="wrz-sml wrzs-22"></div></td>
-							<td class="week-day-ico"><div class="wrz-sml wrzs-22"></div></td>
-							<td class="week-day-ico"><div class="wrz-sml wrzs-18"></div></td>
-						</tr>
-						<tr>
-							<td class="week-day-val"><span class="plus">+</span>8&deg;</td>
-							<td class="week-day-val"><span class="plus">+</span>7&deg;</td>
-							<td class="week-day-val"><span class="plus">+</span>8&deg;</td>
-							<td class="week-day-val"><span class="plus">+</span>7&deg;</td>
-							<td class="week-day-val"><span class="plus">+</span>10&deg;</td>
-							<td class="week-day-val"><span class="plus">+</span>15&deg;</td>
-						</tr>
-						<tr>
-							<td class="week-day-val">-3&deg;</td>
-							<td class="week-day-val">-8&deg;</td>
-							<td class="week-day-val">-9&deg;</td>
-							<td class="week-day-val">-5&deg;</td>
-							<td class="week-day-val"><span class="plus">+</span>1&deg;</td>
-							<td class="week-day-val">0&deg;</td>
-						</tr>
-					</table>
-				</a>
-			</div>
-		</div>
-	</div>
-</div>
-	<script type="text/javascript"> var css_file=document.createElement("link"); css_file.setAttribute("rel","stylesheet"); css_file.setAttribute("type","text/css"); css_file.setAttribute("href",'https://s.bookcdn.com/css/w/booked-wzs-widget-275.css?v=0.0.1'); document.getElementsByTagName("head")[0].appendChild(css_file); function setWidgetData(data) { if(typeof(data) != 'undefined' && data.results.length > 0) { for(var i = 0; i < data.results.length; ++i) { var objMainBlock = document.getElementById('m-booked-weather-bl250-23368'); if(objMainBlock !== null) { var copyBlock = document.getElementById('m-bookew-weather-copy-'+data.results[i].widget_type); objMainBlock.innerHTML = data.results[i].html_code; if(copyBlock !== null) objMainBlock.appendChild(copyBlock); } } } else { alert('data=undefined||data.results is empty'); } } </script>
-	<script type="text/javascript" charset="UTF-8"
-		src="https://widgets.booked.net/weather/info?action=get_weather_info&ver=6&cityID=18406&type=3&scode=124&ltid=3457&domid=593&anc_id=41253&cmetric=1&wlangID=24&color=2b91ff&wwidth=250&header_color=ffffff&text_color=333333&link_color=08488D&border_form=1&footer_color=ffffff&footer_text_color=333333&transparent=0"></script>
-	<!-- 날씨끝 -->
+		<!-- 날씨끝 -->
 	
 	<!-- 검색기능 시작 -->
 	<div id="textSearchForm" style="width:60%;height :70px; margin: auto; margin-top: 10px;background-color: #F5F5F5; border-radius:9px;">
