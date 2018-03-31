@@ -476,7 +476,7 @@ td img {
 				<strong>${commonInfo.overview }</strong> <!-- 행사내용 -->
 				</br>
 				</br>
-				<p style="font-size:15px; display:inline-block">${commonInfo.addr1 }<!-- 주소 -->
+				<p style="font-size:14px; display:inline-block">${commonInfo.addr1 }<!-- 주소 -->
 				${commonInfo.addr2 }</p><!-- 상세주소 -->
 			</div>
 			<button class="btn btn-custom" style="display: block;margin: auto;margin-right: 25%;margin-top: -40px; margin-bottom: 25px; position: relative;" onclick="location.href='festvalWish.do?name=${commonInfo.title}&userID=${user.userID}&contentID=${commonInfo.contentid }&contentTypeID=15'">찜하기</button>
